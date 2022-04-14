@@ -1,8 +1,12 @@
 #pragma once
+#define PORT 1618
+#pragma comment(lib, "Ws2_32.lib")
 #include <thread>
 #include <WinSock2.h>
 #include <map>
 #include "IRequestHandler.h"
+#include <iostream>
+#include <exception>
 class Communicator
 {
 public:
