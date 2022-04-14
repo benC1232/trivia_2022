@@ -18,6 +18,14 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="IRequestHandler.h" />
+    <ClInclude Include="LoginRequestHandler.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="IRequestHandler.cpp" />
+    <ClCompile Include="LoginRequestHandler.cpp" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
