@@ -7,6 +7,7 @@
 #include "IRequestHandler.h"
 #include <iostream>
 #include <exception>
+#include "LoginRequestHandler.h"
 class Communicator
 {
 public:
