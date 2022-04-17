@@ -1,13 +1,13 @@
 #include "Server.h"
 
-Server::~Server()
-{
-	delete this->m_communicator;
-}
-
 Server::Server()
 {
 	this->m_communicator = new Communicator();
+}
+
+Server::~Server()
+{
+	delete this->m_communicator;
 }
 
 void Server::run()

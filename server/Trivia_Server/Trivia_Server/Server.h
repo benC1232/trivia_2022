@@ -4,8 +4,8 @@
 class Server
 {
 public:
-	~Server();
 	Server();
+	~Server();
 	void run();
 private:
 	Communicator* m_communicator;
