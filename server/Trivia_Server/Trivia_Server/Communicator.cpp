@@ -64,13 +64,13 @@ void Communicator::handleNewClient(SOCKET clientSocket)
 {
 	try
 	{
-		std::string s = "Hello ";
+		std::string s = "Hello";
 		send(clientSocket, s.c_str(), s.size(), 0);  // last parameter: flag. for us will be 0.
 
 		char m[6];
 		recv(clientSocket, m, 5, 0);
 		m[5] = 0;
-		std::cout << "Client name is: " << m << std::endl;
+		std::cout << "Client sent: " << m << std::endl;
 
 		// Closing the socket (in the level of the TCP protocol)
 		closesocket(clientSocket);
