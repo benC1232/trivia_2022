@@ -56,6 +56,8 @@ void Communicator::bindAndListen()
 	// the function that handle the conversation with the client
 	std::thread tr(&Communicator::handleNewClient, this, client_socket);
 	tr.detach();
+	LoginRequestHandler* handler;
+	this->m_clients.insert({ client_socket, handler });
 }
 
 void Communicator::handleNewClient(SOCKET clientSocket)
