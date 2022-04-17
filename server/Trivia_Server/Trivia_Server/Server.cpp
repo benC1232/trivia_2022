@@ -12,4 +12,6 @@ Server::Server()
 
 void Server::run()
 {
+	std::thread t_connector(&Communicator::startHandleRequests, m_communicator);
+	t_connector.detach();
 }

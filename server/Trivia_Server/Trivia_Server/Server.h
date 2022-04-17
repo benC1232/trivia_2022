@@ -1,5 +1,6 @@
 #pragma once
 #include "Communicator.h"
+#include <thread>
 class Server
 {
 public:
