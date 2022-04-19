@@ -73,10 +73,12 @@ void Communicator::handleNewClient(SOCKET clientSocket)
 		std::cout << "Client sent: " << m << std::endl;
 
 		// Closing the socket (in the level of the TCP protocol)
+		this->m_clients.erase(clientSocket);
 		closesocket(clientSocket);
 	}
 	catch (...)
 	{
+		this->m_clients.erase(clientSocket);
 		closesocket(clientSocket);
 	}
 }
