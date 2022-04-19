@@ -2,24 +2,24 @@
 #include "json.hpp"
 #include <string>
 #include <vector>
-class JsonRequestPacketDeserializer
-{
-public:
-	static LoginRequest deserializeLoginRequest(std::vector<unsigned int> buffer);
-	static SignupRequest deserializeSignupRequest(std::vector<unsigned int> buffer);
-};
 //structs will be here:
 
 //login request struct
-typedef struct LoginRequest
+struct LoginRequest
 {
 	std::string password;
 	std::string username;
-}LoginRequest;
+};
 //signup request struct
-typedef struct SignupRequest
+struct SignupRequest
 {
 	std::string username;
 	std::string password;
 	std::string email;
-}SignupRequest;
+};
+class JsonRequestPacketDeserializer
+{
+public:
+	static struct LoginRequest deserializeLoginRequest(std::vector<unsigned char> buffer);
+	static struct SignupRequest deserializeSignupRequest(std::vector<unsigned char> buffer);
+};
