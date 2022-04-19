@@ -1,5 +1,10 @@
 #include "JsonRequestPacketDeserializer.h"
 
+/*
+function parses the json part of a packet and returns the content of the fields
+input: vector of unsigned chars (bytes) representing the json string
+output: the content of the fields in the json
+*/
 LoginRequest JsonRequestPacketDeserializer::deserializeLoginRequest(std::vector<unsigned char> buffer)
 {
 	std::string jsonString(buffer.begin(), buffer.end());
@@ -11,7 +16,11 @@ LoginRequest JsonRequestPacketDeserializer::deserializeLoginRequest(std::vector<
 	parsedData.username = username;
 	return parsedData;
 }
-
+/*
+function parses the json part of a packet and returns the content of the fields
+input: vector of unsigned chars (bytes) representing the json string
+output: the content of the fields in the json
+*/
 SignupRequest JsonRequestPacketDeserializer::deserializeSignupRequest(std::vector<unsigned char> buffer)
 {
 	std::string jsonString(buffer.begin(), buffer.end());
