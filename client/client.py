@@ -1,20 +1,16 @@
-#client v1.0.1
+#client v1.0.2
 import socket
-IP = "127.0.0.1"
-PORT = 1618
-#connect to server
-sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-server_address = (IP, PORT)
-sock.connect(server_address)
-#receive message
-data = sock.recv(1024).decode()
-print("content recieved from server is: "+data)
-if data == 'Hello':
-    sock.send('Hello'.encode())
-    data = sock.recv(1024)
-    print("conversation successful!")
-else:
-    print("something went wrong")
+
+server_address = ('127.0.0.1', 1618)
+choice = 0
+
+while choice != 3:
+    choice = int(input("1.login\n2.register\n3.exit\n"))
+    if choice == 1:
+        json = '{"type":"login","username":"' + input("username:") + '","password":"' + input("password:") + '"}'
+        
+    elif choice == 2:
+        json = '{"type":"register","username":"' + input("username:") + '","password":"' + input("password:") + '","mail":"' + input("mail:") + '"}'
+    else:
+        print("invalid choice")
     
-#close connection
-sock.close()
