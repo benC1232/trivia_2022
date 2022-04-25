@@ -3,6 +3,9 @@
 #include <string>
 #include <vector>
 #include<bitset>
+#include <iomanip>
+#include <sstream>
+#define START_OF_JSON_SECTION 5
 
 struct LoginResponse {
 	unsigned int status;
