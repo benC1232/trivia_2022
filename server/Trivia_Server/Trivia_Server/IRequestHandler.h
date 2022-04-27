@@ -1,5 +1,8 @@
 #pragma once
 #include "HandlerStructs.h"
+//הכלה מעגלית שלקחה לי 4 שעות מהחיים
+struct RequestResult;
+struct requestInfo;
 class IRequestHandler
 {
 public:
