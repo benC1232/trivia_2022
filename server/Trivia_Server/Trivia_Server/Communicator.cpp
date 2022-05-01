@@ -64,6 +64,8 @@ void Communicator::handleNewClient(SOCKET clientSocket)
 	this->m_clients.insert({ clientSocket, handler });
 	try
 	{
+
+		/* old code:
 		std::string s = "Hello";
 		send(clientSocket, s.c_str(), s.size(), 0);  // last parameter: flag. for us will be 0.
 
@@ -74,7 +76,7 @@ void Communicator::handleNewClient(SOCKET clientSocket)
 
 		// Closing the socket (in the level of the TCP protocol)
 		this->m_clients.erase(clientSocket);
-		closesocket(clientSocket);
+		closesocket(clientSocket);*/
 	}
 	catch (...)
 	{

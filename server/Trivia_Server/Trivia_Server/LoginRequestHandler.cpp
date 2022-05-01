@@ -25,5 +25,12 @@ RequestResult LoginRequestHandler::handleRequest(RequestInfo request)
 		result.Buffer = JsonResponsePacketSerializer::serializeSignupResponse(num);
 		result.newHandler = nullptr;
 	}
+	else
+	{
+		ErrorResponse num;
+		num.message = 3;
+		result.Buffer = JsonResponsePacketSerializer::serializeErrorResponse(num);
+		result.newHandler = nullptr;
+	}
 	return result;
 }
