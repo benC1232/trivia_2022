@@ -1,5 +1,6 @@
 #include "Communicator.h"
-
+#define MESSAGE_SIZE 1024
+#define JSON_OFFSET 5
 Communicator::Communicator()
 {
 	//copied this code from week 13
@@ -11,11 +12,8 @@ Communicator::Communicator()
 Communicator::~Communicator()
 {
 	//this code is also copied from week 13
-	try
-	{
-		closesocket(this->m_serverSocket);
-	}
-	catch (...) {}
+
+	closesocket(this->m_serverSocket);
 }
 
 void Communicator::startHandleRequests()
@@ -64,23 +62,54 @@ void Communicator::handleNewClient(SOCKET clientSocket)
 	this->m_clients.insert({ clientSocket, handler });
 	try
 	{
-
-		/* old code:
-		std::string s = "Hello";
-		send(clientSocket, s.c_str(), s.size(), 0);  // last parameter: flag. for us will be 0.
-
-		char m[6];
-		recv(clientSocket, m, 5, 0);
-		m[5] = 0;
-		std::cout << "Client sent: " << m << std::endl;
-
-		// Closing the socket (in the level of the TCP protocol)
-		this->m_clients.erase(clientSocket);
-		closesocket(clientSocket);*/
-	}
-	catch (...)
-	{
+		char clientMessage[MESSAGE_SIZE];
+		recv(clientSocket, clientMessage, MESSAGE_SIZE, 0);
+		int jsonSize = getJsonSize(clientMessage);
+		std::vector<unsigned char> buffer = msgToBuffer(clientMessage, jsonSize + JSON_OFFSET);
+		RequestInfo request;
+		request.id = int(buffer[1]);
+		request.receivalTime = std::time(0);
+		request.buffer = buffer;
+		RequestResult result = handler->handleRequest(request);
+		char* response = bufferToMsg(result.Buffer);
+		int responseSize = result.Buffer.size();
+		send(clientSocket, response, responseSize, 0);
+		delete response;
 		this->m_clients.erase(clientSocket);
 		closesocket(clientSocket);
 	}
+	catch (const std::exception& e)
+	{
+		std::cout << e.what() << std::endl;
+		this->m_clients.erase(clientSocket);
+		closesocket(clientSocket);
+	}
+}
+
+int Communicator::getJsonSize(char buffer[])
+{
+	int size = (int)(buffer[1] << 24 | buffer[2] << 16 | buffer[3] << 8 | buffer[4]);
+	return size;
+}
+
+std::vector<unsigned char> Communicator::msgToBuffer(char msg[], int size)
+{
+	std::vector<unsigned char> buffer;
+	buffer.resize(size);
+	for (int i = 0; i < size; i++)
+	{
+		buffer[i] = msg[i];
+	}
+	return buffer;
+}
+
+char* Communicator::bufferToMsg(std::vector<unsigned char> buffer)
+{
+	//convert vector to array
+	char* msg = new char[buffer.size()];
+	for (int i = 0; i < buffer.size(); i++)
+	{
+		msg[i] = buffer[i];
+	}
+	return msg;
 }

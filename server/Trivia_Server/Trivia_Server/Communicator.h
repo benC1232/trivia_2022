@@ -19,4 +19,7 @@ private:
 	std::map<SOCKET, IRequestHandler*> m_clients;
 	void bindAndListen();
 	void handleNewClient(SOCKET clientSocket);
+	int getJsonSize(char buffer[]);
+	std::vector<unsigned char> msgToBuffer(char msg[], int size);
+	char* bufferToMsg(std::vector<unsigned char> buffer);
 };
