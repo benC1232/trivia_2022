@@ -58,8 +58,8 @@ def server_commuinication() -> None:
     client side communication with server
     """
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
-        s.connect(server_address)
         while True:
+            s.connect(server_address)
             data, choice = menu()
             if choice == 3:
                 break
