@@ -53,20 +53,20 @@ def unpack_response(data: str) -> Tuple[dict, int]:
     return json_data, msg_code
 
     
+    
 def server_commuinication() -> None:
     """
     client side communication with server
     """
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+        s.connect(server_address)
         while True:
-            s.connect(server_address)
             data, choice = menu()
             if choice == 3:
                 break
             s.sendall(build_request((data,choice)).encode())
             data = s.recv(1024)
             print(data.decode())
-
 
 
 if __name__ == '__main__':
