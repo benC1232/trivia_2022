@@ -1,5 +1,6 @@
-#include "IDatabase.h"
-IDatabase::IDatabase()
+#include "SqliteDataBase.h"
+
+SqliteDataBase::SqliteDataBase()
 {
 	std::string dbFileName = "Trivia.sqlite";
 	int file_exist = _access(dbFileName.c_str(), 0);
@@ -13,7 +14,7 @@ IDatabase::IDatabase()
 	}
 }
 
-IDatabase::~IDatabase()
+SqliteDataBase::~SqliteDataBase()
 {
 	delete this->_db;
 }
@@ -45,7 +46,8 @@ int passwordMatchCallback(void* data, int argc, char** argv, char** azColName)
 	}
 	return 0;
 }
-bool IDatabase::doesUserExist(std::string username)
+
+bool SqliteDataBase::doesUserExist(std::string username)
 {
 	bool exists;
 	char* errMessage = nullptr;
@@ -57,7 +59,7 @@ bool IDatabase::doesUserExist(std::string username)
 	return exists;
 }
 
-bool IDatabase::doesPasswordMatch(std::string username, std::string password)
+bool SqliteDataBase::doesPasswordMatch(std::string username, std::string password)
 {
 	bool exists;
 	char* errMessage = nullptr;
@@ -69,7 +71,7 @@ bool IDatabase::doesPasswordMatch(std::string username, std::string password)
 	return exists;
 }
 
-void IDatabase::addNewUser(std::string username, std::string password, std::string email)
+void SqliteDataBase::addNewUser(std::string username, std::string password, std::string email)
 {
 	char* errMessage = nullptr;
 	std::string query = "INSERT INTO Users (username, password, email) VALUES ('" + username + "', '" + password + "', '" + email + "')";
@@ -80,7 +82,7 @@ void IDatabase::addNewUser(std::string username, std::string password, std::stri
 	}
 }
 
-void IDatabase::createTables()
+void SqliteDataBase::createTables()
 {
 	std::cout << "creating tables" << std::endl;
 	char* errMessage = nullptr;
