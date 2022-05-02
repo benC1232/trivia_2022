@@ -17,9 +17,9 @@ int main()
 		}
 		delete server;
 	}
-	catch (...)
+	catch (const std::exception& e)
 	{
-		std::cout << "an exception has been thrown" << std::endl;
+		std::cout << "an exception has been thrown: " << e.what() << std::endl;
 		delete server;
 		exit(1);
 	}
