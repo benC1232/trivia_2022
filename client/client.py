@@ -17,7 +17,7 @@ server_address: tuple= ('127.0.0.1', 1618)
 
 def sizeOfJson(size: int)->str:
     #returns a string four chars long with the size of the json, if the size is less than 4 chars long it will be padded with 0's
-    return str(size).zfill(4)
+    return size.to_bytes(4, byteorder='big').decode()
 
 def menu() -> tuple:
     choice:int = 0
