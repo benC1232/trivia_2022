@@ -31,7 +31,7 @@ def menu() -> tuple:
         else:
             print("invalid choice")
 
-    return json.dumps(output), choice
+    return (json.dumps(output), choice)
 
 
 def build_request(data: Tuple[str, str]) -> str:
@@ -63,7 +63,7 @@ def server_commuinication() -> None:
             data, choice = menu()
             if choice == 3:
                 break
-            s.sendall(build_request(data).encode())
+            s.sendall(build_request((data,choice)).encode())
             data = s.recv(1024)
             print(data.decode())
 
