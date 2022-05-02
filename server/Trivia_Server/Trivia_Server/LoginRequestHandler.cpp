@@ -1,6 +1,12 @@
 #include "LoginRequestHandler.h"
 #define LOGIN_CODE 1
 #define SIGN_IN_CODE 2
+
+LoginRequestHandler::LoginRequestHandler()
+{
+}LoginRequestHandler::~LoginRequestHandler()
+{
+}
 bool LoginRequestHandler::isRequestRelevant(RequestInfo request)
 {
 	return request.id == LOGIN_CODE || request.id == SIGN_IN_CODE;

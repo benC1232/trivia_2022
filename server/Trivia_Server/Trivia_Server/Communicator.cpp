@@ -58,7 +58,7 @@ void Communicator::bindAndListen()
 
 void Communicator::handleNewClient(SOCKET clientSocket)
 {
-	LoginRequestHandler* handler;
+	LoginRequestHandler* handler = new LoginRequestHandler();
 	this->m_clients.insert({ clientSocket, handler });
 	try
 	{
@@ -77,6 +77,7 @@ void Communicator::handleNewClient(SOCKET clientSocket)
 		delete response;
 		this->m_clients.erase(clientSocket);
 		closesocket(clientSocket);
+		std::cout << "socket closed successfully" << std::endl;
 	}
 	catch (const std::exception& e)
 	{
