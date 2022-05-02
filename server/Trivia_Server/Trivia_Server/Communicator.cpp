@@ -67,7 +67,7 @@ void Communicator::handleNewClient(SOCKET clientSocket)
 		int jsonSize = getJsonSize(clientMessage);
 		std::vector<unsigned char> buffer = msgToBuffer(clientMessage, jsonSize + JSON_OFFSET);
 		RequestInfo request;
-		request.id = int(buffer[1]);
+		request.id = int(buffer[0]);
 		request.receivalTime = std::time(0);
 		request.buffer = buffer;
 		RequestResult result = handler->handleRequest(request);
@@ -105,7 +105,6 @@ std::vector<unsigned char> Communicator::msgToBuffer(char msg[], int size)
 
 char* Communicator::bufferToMsg(std::vector<unsigned char> buffer)
 {
-	//convert vector to array
 	char* msg = new char[buffer.size()];
 	for (int i = 0; i < buffer.size(); i++)
 	{
