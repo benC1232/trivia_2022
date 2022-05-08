@@ -1,6 +1,6 @@
 #include "LoginManager.h"
 
-LoginManager::LoginManager(SqliteDataBase db)
+LoginManager::LoginManager(IDatabase* db)
 {
 	this->db = db;
 }
@@ -11,7 +11,7 @@ LoginManager::~LoginManager()
 
 bool LoginManager::login(std::string username, std::string password)
 {
-	if (db.doesUserExist(username) && db.doesPasswordMatch(username, password))
+	if (db->doesUserExist(username) && db->doesPasswordMatch(username, password))
 	{
 		LoggedUser user = LoggedUser(username);
 		this->m_loggedUsers.push_back(user);
@@ -25,13 +25,13 @@ bool LoginManager::login(std::string username, std::string password)
 
 bool LoginManager::signup(std::string username, std::string password, std::string email)
 {
-	if (db.doesUserExist(username))
+	if (db->doesUserExist(username))
 	{
 		return false;
 	}
 	else
 	{
-		db.addNewUser(username, password, email);
+		db->addNewUser(username, password, email);
 		LoggedUser user = LoggedUser(username);
 		this->m_loggedUsers.push_back(user);
 		return true;
