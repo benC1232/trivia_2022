@@ -7,7 +7,7 @@ output: the content of the fields in the json
 */
 LoginRequest JsonRequestPacketDeserializer::deserializeLoginRequest(std::vector<unsigned char> buffer)
 {
-	std::string jsonString(buffer.begin(), buffer.end());
+	std::string jsonString(buffer.begin() + 5, buffer.end());
 	nlohmann::json jsonObject = nlohmann::json::parse(jsonString);
 	std::string username = jsonObject["username"];
 	std::string password = jsonObject["password"];
@@ -23,7 +23,7 @@ output: the content of the fields in the json
 */
 SignupRequest JsonRequestPacketDeserializer::deserializeSignupRequest(std::vector<unsigned char> buffer)
 {
-	std::string jsonString(buffer.begin(), buffer.end());
+	std::string jsonString(buffer.begin() + 5, buffer.end());
 	nlohmann::json jsonObject = nlohmann::json::parse(jsonString);
 	std::string username = jsonObject["username"];
 	std::string password = jsonObject["password"];
