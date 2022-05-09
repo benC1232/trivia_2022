@@ -5,18 +5,20 @@
 #include "JsonRequestPacketDeserializer.h"
 #include "JsonResponsePacketSerializer.h"
 #include "MenuRequestHandler.h"
+
+class RequestHandlerFactory;
+
 class LoginRequestHandler :
 	public IRequestHandler
 {
-private:
-	LoginManager& m_loginManager;
-	RequestHandlerFactory& m_requestHandlerFactory;
-	
 public:
-	LoginRequestHandler(LoginManager& lm, RequestHandlerFactory& rhf);
+	LoginRequestHandler() = default;
+	LoginRequestHandler(RequestHandlerFactory* rhf);
 	~LoginRequestHandler();
 	bool isRequestRelevant(RequestInfo request) override;
 	RequestResult handleRequest(RequestInfo request) override;
+private:
+	RequestHandlerFactory* m_requestHandlerFactory;
 	RequestResult login(RequestInfo ri);
 	RequestResult signup(RequestInfo ri);
 };

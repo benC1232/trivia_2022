@@ -5,6 +5,7 @@
 class LoginManager
 {
 public:
+	LoginManager() = default;
 	LoginManager(IDatabase* db);
 	~LoginManager();
 	bool login(std::string username, std::string password);

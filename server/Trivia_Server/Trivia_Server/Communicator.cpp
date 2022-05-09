@@ -1,9 +1,10 @@
 #include "Communicator.h"
 #define MESSAGE_SIZE 1024
 #define JSON_OFFSET 5
-Communicator::Communicator()
+Communicator::Communicator(RequestHandlerFactory* factory)
 {
 	//copied this code from week 13
+	this->m_handlerFactory = factory;
 	this->m_serverSocket = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
 	if (this->m_serverSocket == INVALID_SOCKET)
 		throw std::exception(__FUNCTION__ " - socket");
@@ -71,8 +72,8 @@ void Communicator::handleNewClient(SOCKET clientSocket)
 		request.receivalTime = std::time(0);
 		request.buffer = buffer;
 		RequestResult result = handler->handleRequest(request);
-		char* response = bufferToMsg(result.Buffer);
-		int responseSize = result.Buffer.size();
+		char* response = bufferToMsg(result.buffer);
+		int responseSize = result.buffer.size();
 		send(clientSocket, response, responseSize, 0);
 		delete response;
 		this->m_clients.erase(clientSocket);

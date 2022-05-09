@@ -12,7 +12,7 @@ import ast
 
 
 
-server_address: tuple= ('127.0.0.1', 1618)
+server_address: tuple= ('127.0.0.1', 9999)
 
 
 def sizeOfJson(size: int)->str:

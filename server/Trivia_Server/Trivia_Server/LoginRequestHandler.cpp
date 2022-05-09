@@ -3,7 +3,7 @@
 #define LOGIN_CODE 1
 #define SIGN_IN_CODE 2
 
-LoginRequestHandler::LoginRequestHandler(LoginManager& lm, RequestHandlerFactory& rhf): m_loginManager(lm), m_requestHandlerFactory(rhf) {}
+LoginRequestHandler::LoginRequestHandler(RequestHandlerFactory* rhf) : m_requestHandlerFactory(rhf) {}
 LoginRequestHandler::~LoginRequestHandler()
 {}
 
@@ -29,7 +29,7 @@ RequestResult LoginRequestHandler::handleRequest(RequestInfo request)
 	{
 		ErrorResponse num;
 		num.message = "error while handling request [login request handler has recived a wrong code]";
-		result.Buffer = JsonResponsePacketSerializer::serializeErrorResponse(num);
+		result.buffer = JsonResponsePacketSerializer::serializeErrorResponse(num);
 		result.newHandler = nullptr;
 	}
 	return result;
@@ -41,20 +41,18 @@ RequestResult LoginRequestHandler::login(RequestInfo ri)
 	LoginResponse num;
 	num.status = 1;
 	LoginRequest lr = JsonRequestPacketDeserializer::deserializeLoginRequest(ri.buffer);
-	if (this->m_loginManager.login(lr.username, lr.password)) {
+	if (this->m_requestHandlerFactory->getLoginManager()->login(lr.username, lr.password)) {
 		result.newHandler = new MenuRequestHandler();
-		result.Buffer = JsonResponsePacketSerializer::serializeLoginResponse(num);
+		result.buffer = JsonResponsePacketSerializer::serializeLoginResponse(num);
 	}
 	else {
 		result.newHandler = nullptr;
 		num.status = 3;
 		ErrorResponse err;
 		err.message = "Login failed";
-		result.Buffer = JsonResponsePacketSerializer::serializeErrorResponse(err);
+		result.buffer = JsonResponsePacketSerializer::serializeErrorResponse(err);
 	}
 	return result;
-
-	
 }
 
 RequestResult LoginRequestHandler::signup(RequestInfo ri)
@@ -63,17 +61,16 @@ RequestResult LoginRequestHandler::signup(RequestInfo ri)
 	SignupResponse num;
 	num.status = 2;
 	SignupRequest sr = JsonRequestPacketDeserializer::deserializeSignupRequest(ri.buffer);
-	if (this->m_loginManager.signup(sr.username, sr.password, sr.email)) {
+	if (this->m_requestHandlerFactory->getLoginManager()->signup(sr.username, sr.password, sr.email)) {
 		result.newHandler = new MenuRequestHandler();
-		result.Buffer = JsonResponsePacketSerializer::serializeSignupResponse(num);
+		result.buffer = JsonResponsePacketSerializer::serializeSignupResponse(num);
 	}
 	else {
 		result.newHandler = nullptr;
 		num.status = 3;
 		ErrorResponse err;
 		err.message = "Signup failed";
-		result.Buffer = JsonResponsePacketSerializer::serializeErrorResponse(err);
+		result.buffer = JsonResponsePacketSerializer::serializeErrorResponse(err);
 	}
 	return result;
-		
 }
