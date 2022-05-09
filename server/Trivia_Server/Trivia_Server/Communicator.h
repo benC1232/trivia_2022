@@ -5,6 +5,7 @@
 #include <WinSock2.h>
 #include <map>
 #include "IRequestHandler.h"
+#include "RequestHandlerFactory.h"
 #include <iostream>
 #include <exception>
 #include "LoginRequestHandler.h"
@@ -15,6 +16,7 @@ public:
 	~Communicator();
 	void startHandleRequests();
 private:
+	RequestHandlerFactory& m_handlerFactory;
 	SOCKET m_serverSocket;
 	std::map<SOCKET, IRequestHandler*> m_clients;
 	void bindAndListen();
@@ -22,4 +24,5 @@ private:
 	int getJsonSize(char buffer[]);
 	std::vector<unsigned char> msgToBuffer(char msg[], int size);
 	char* bufferToMsg(std::vector<unsigned char> buffer);
+	
 };
