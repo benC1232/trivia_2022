@@ -5,12 +5,12 @@
 class LoginManager
 {
 public:
-	LoginManager(SqliteDataBase db);
+	LoginManager(IDatabase* db);
 	~LoginManager();
 	bool login(std::string username, std::string password);
 	bool signup(std::string username, std::string password, std::string email);
 	bool logout(std::string username);
 private:
 	std::vector<LoggedUser> m_loggedUsers;
-	SqliteDataBase db;
+	IDatabase* db;
 };
