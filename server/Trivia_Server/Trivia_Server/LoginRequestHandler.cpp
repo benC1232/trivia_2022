@@ -4,7 +4,7 @@
 #define SIGN_IN_CODE 2
 #define ERROR_CODE 3
 
-LoginRequestHandler::LoginRequestHandler(RequestHandlerFactory* rhf) : m_requestHandlerFactory(rhf) {}
+LoginRequestHandler::LoginRequestHandler(RequestHandlerFactory* requestHandlerFactory) : m_requestHandlerFactory(requestHandlerFactory) {}
 LoginRequestHandler::~LoginRequestHandler()
 {}
 
@@ -41,8 +41,8 @@ RequestResult LoginRequestHandler::login(RequestInfo requestInfo)
 	RequestResult result;
 	LoginResponse num;
 	num.status = LOGIN_CODE;
-	LoginRequest lr = JsonRequestPacketDeserializer::deserializeLoginRequest(requestInfo.buffer);
-	if (this->m_requestHandlerFactory->getLoginManager()->login(lr.username, lr.password)) {
+	LoginRequest loginRequest = JsonRequestPacketDeserializer::deserializeLoginRequest(requestInfo.buffer);
+	if (this->m_requestHandlerFactory->getLoginManager()->login(loginRequest.username, loginRequest.password)) {
 		result.newHandler = new MenuRequestHandler();
 		result.buffer = JsonResponsePacketSerializer::serializeLoginResponse(num);
 	}
@@ -61,8 +61,8 @@ RequestResult LoginRequestHandler::signup(RequestInfo requestInfo)
 	RequestResult result;
 	SignupResponse num;
 	num.status = SIGN_IN_CODE;
-	SignupRequest sr = JsonRequestPacketDeserializer::deserializeSignupRequest(requestInfo.buffer);
-	if (this->m_requestHandlerFactory->getLoginManager()->signup(sr.username, sr.password, sr.email)) {
+	SignupRequest signupRequest = JsonRequestPacketDeserializer::deserializeSignupRequest(requestInfo.buffer);
+	if (this->m_requestHandlerFactory->getLoginManager()->signup(signupRequest.username, signupRequest.password, signupRequest.email)) {
 		result.newHandler = new MenuRequestHandler();
 		result.buffer = JsonResponsePacketSerializer::serializeSignupResponse(num);
 	}
