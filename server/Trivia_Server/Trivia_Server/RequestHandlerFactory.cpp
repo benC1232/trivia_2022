@@ -2,13 +2,16 @@
 
 RequestHandlerFactory::RequestHandlerFactory(IDatabase* db)
 {
-	this->m_database = db;
-	this->m_loginManager = new LoginManager(db);
+	m_database = db;
+	m_loginManager = new LoginManager();
+}
+
+RequestHandlerFactory::RequestHandlerFactory()
+{
 }
 
 RequestHandlerFactory::~RequestHandlerFactory()
 {
-	delete this->m_loginManager;
 }
 
 LoginRequestHandler* RequestHandlerFactory::createLoginRequestHandler()
@@ -18,5 +21,5 @@ LoginRequestHandler* RequestHandlerFactory::createLoginRequestHandler()
 
 LoginManager* RequestHandlerFactory::getLoginManager()
 {
-	return this->m_loginManager;
+	return m_loginManager;
 }
