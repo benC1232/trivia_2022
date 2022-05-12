@@ -2,6 +2,7 @@
 
 #define LOGIN_CODE 1
 #define SIGN_IN_CODE 2
+#define ERROR_CODE 3
 
 LoginRequestHandler::LoginRequestHandler(RequestHandlerFactory* rhf) : m_requestHandlerFactory(rhf) {}
 LoginRequestHandler::~LoginRequestHandler()
@@ -35,19 +36,19 @@ RequestResult LoginRequestHandler::handleRequest(RequestInfo request)
 	return result;
 }
 
-RequestResult LoginRequestHandler::login(RequestInfo ri)
+RequestResult LoginRequestHandler::login(RequestInfo requestInfo)
 {
 	RequestResult result;
 	LoginResponse num;
-	num.status = 1;
-	LoginRequest lr = JsonRequestPacketDeserializer::deserializeLoginRequest(ri.buffer);
+	num.status = LOGIN_CODE;
+	LoginRequest lr = JsonRequestPacketDeserializer::deserializeLoginRequest(requestInfo.buffer);
 	if (this->m_requestHandlerFactory->getLoginManager()->login(lr.username, lr.password)) {
 		result.newHandler = new MenuRequestHandler();
 		result.buffer = JsonResponsePacketSerializer::serializeLoginResponse(num);
 	}
 	else {
 		result.newHandler = nullptr;
-		num.status = 3;
+		num.status = ERROR_CODE;
 		ErrorResponse err;
 		err.message = "Login failed";
 		result.buffer = JsonResponsePacketSerializer::serializeErrorResponse(err);
@@ -55,19 +56,19 @@ RequestResult LoginRequestHandler::login(RequestInfo ri)
 	return result;
 }
 
-RequestResult LoginRequestHandler::signup(RequestInfo ri)
+RequestResult LoginRequestHandler::signup(RequestInfo requestInfo)
 {
 	RequestResult result;
 	SignupResponse num;
-	num.status = 2;
-	SignupRequest sr = JsonRequestPacketDeserializer::deserializeSignupRequest(ri.buffer);
+	num.status = SIGN_IN_CODE;
+	SignupRequest sr = JsonRequestPacketDeserializer::deserializeSignupRequest(requestInfo.buffer);
 	if (this->m_requestHandlerFactory->getLoginManager()->signup(sr.username, sr.password, sr.email)) {
 		result.newHandler = new MenuRequestHandler();
 		result.buffer = JsonResponsePacketSerializer::serializeSignupResponse(num);
 	}
 	else {
 		result.newHandler = nullptr;
-		num.status = 3;
+		num.status = ERROR_CODE;
 		ErrorResponse err;
 		err.message = "Signup failed";
 		result.buffer = JsonResponsePacketSerializer::serializeErrorResponse(err);

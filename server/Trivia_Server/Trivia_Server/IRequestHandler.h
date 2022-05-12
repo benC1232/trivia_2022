@@ -2,7 +2,7 @@
 #include "HandlerStructs.h"
 //הכלה מעגלית שלקחה לי 4 שעות מהחיים
 struct RequestResult;
-struct requestInfo;
+struct RequestInfo;
 class IRequestHandler
 {
 public:
