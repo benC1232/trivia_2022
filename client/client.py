@@ -53,6 +53,7 @@ def unpack_response(data: str) -> Tuple[dict, int]:
     return json_data, msg_code
 
     
+    
 def server_commuinication() -> None:
     """
     client side communication with server
@@ -66,7 +67,6 @@ def server_commuinication() -> None:
             s.sendall(build_request((data,choice)).encode())
             data = s.recv(1024)
             print(data.decode())
-
 
 
 if __name__ == '__main__':
