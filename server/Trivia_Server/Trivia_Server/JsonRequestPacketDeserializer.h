@@ -2,6 +2,7 @@
 #include "json.hpp"
 #include <string>
 #include <vector>
+#define JSON_OFFSET 5
 //structs will be here:
 
 //login request struct

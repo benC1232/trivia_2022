@@ -12,7 +12,7 @@ import ast
 
 
 
-server_address: tuple= ('127.0.0.1', 1618)
+server_address: tuple= ('127.0.0.1', 9999)
 
 
 def sizeOfJson(size: int)->str:
@@ -58,9 +58,9 @@ def server_commuinication() -> None:
     """
     client side communication with server
     """
-    with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
-        s.connect(server_address)
-        while True:
+    while 1:
+        with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+            s.connect(server_address)
             data, choice = menu()
             if choice == 3:
                 break

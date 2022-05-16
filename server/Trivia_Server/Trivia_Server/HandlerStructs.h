@@ -6,7 +6,7 @@
 class IRequestHandler;
 struct RequestResult
 {
-	std::vector<unsigned char> Buffer;
+	std::vector<unsigned char> buffer;
 	IRequestHandler* newHandler;
 };
 struct RequestInfo
