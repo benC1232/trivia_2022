@@ -20,6 +20,8 @@ public:
 	void addUser(LoggedUser user);
 	void removeUser(LoggedUser user);
 	std::vector<std::string> getAllUsers();
+	unsigned int getIsActive();
+	RoomData getData();
 private:
 	RoomData m_metadata;
 	std::vector<LoggedUser> m_users;
