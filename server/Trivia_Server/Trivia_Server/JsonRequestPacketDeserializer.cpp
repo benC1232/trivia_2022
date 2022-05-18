@@ -79,7 +79,7 @@ CreateRoomRequest JsonRequestPacketDeserializer::deserializeCreateRoomRequest(st
 	nlohmann::json jsonObject = nlohmann::json::parse(jsonString);
 	std::string roomName = jsonObject["roomName"];
 	std::string maxUsers = jsonObject["maxUsers"];
-	std::string questionNumber = jsonObject["questionNumber"];
+	std::string questionCount = jsonObject["questionCount"];
 	std::string answerTimeout = jsonObject["answerTimeout"];
 	CreateRoomRequest parsedData;
 	try
