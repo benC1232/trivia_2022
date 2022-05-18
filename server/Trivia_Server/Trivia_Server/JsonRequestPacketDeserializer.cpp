@@ -34,3 +34,18 @@ SignupRequest JsonRequestPacketDeserializer::deserializeSignupRequest(std::vecto
 	parsedData.username = username;
 	return parsedData;
 }
+
+GetPlayersInRoomRequest JsonRequestPacketDeserializer::deserializeGetPlayersRequest(std::vector<unsigned char> buffer)
+{
+	return GetPlayersInRoomRequest();
+}
+
+JoinRoomRequest JsonRequestPacketDeserializer::deserializeJoinRoomRequest(std::vector<unsigned char> buffer)
+{
+	return JoinRoomRequest();
+}
+
+CreateRoomRequest JsonRequestPacketDeserializer::deserializeCreateRoomRequest(std::vector<unsigned char> buffer)
+{
+	return CreateRoomRequest();
+}
