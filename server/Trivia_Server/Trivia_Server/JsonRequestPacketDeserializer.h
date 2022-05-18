@@ -18,6 +18,24 @@ struct SignupRequest
 	std::string password;
 	std::string email;
 };
+//get players in room request struct
+struct GetPlayersInRoomRequest
+{
+	unsigned int roomId;
+};
+//join room request struct
+struct JoinRoomRequest
+{
+	unsigned int roomId;
+};
+//create room request struct
+struct CreateRoomRequest
+{
+	std::string roomName;
+	unsigned int maxUsers;
+	unsigned int answerTimeout;
+	unsigned int questionCount;
+};
 class JsonRequestPacketDeserializer
 {
 public:
