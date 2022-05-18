@@ -41,4 +41,7 @@ class JsonRequestPacketDeserializer
 public:
 	static struct LoginRequest deserializeLoginRequest(std::vector<unsigned char> buffer);
 	static struct SignupRequest deserializeSignupRequest(std::vector<unsigned char> buffer);
+	static struct GetPlayersInRoomRequest deserializeGetPlayersRequest(std::vector<unsigned char> buffer);
+	static struct JoinRoomRequest deserializeJoinRoomRequest(std::vector<unsigned char> buffer);
+	static struct CreateRoomRequest deserializeCreateRoomRequest(std::vector<unsigned char> buffer);
 };
