@@ -86,7 +86,7 @@ CreateRoomRequest JsonRequestPacketDeserializer::deserializeCreateRoomRequest(st
 	{
 		parsedData.answerTimeout = atoi(answerTimeout.c_str());
 		parsedData.maxUsers = atoi(maxUsers.c_str());
-		parsedData.questionCount = atoi(questionNumber.c_str());
+		parsedData.questionCount = atoi(questionCount.c_str());
 		parsedData.roomName = roomName;
 	}
 	catch (...)
