@@ -1,5 +1,7 @@
 #pragma once
 #include "IDatabase.h"
+//I dont know why this works, but dont remove one of the maps
+#include <map>
 #include <map>
 class SqliteDataBase :
 	public IDatabase
