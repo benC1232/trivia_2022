@@ -8,9 +8,9 @@ void RoomManager::createRoom(LoggedUser user, RoomData data)
 	this->rooms[data.id] = room;
 }
 
-void RoomManager::deleteRoom(int ID)
+void RoomManager::deleteRoom(int id)
 {
-	this->rooms.erase(ID);
+	this->rooms.erase(id);
 }
 
 unsigned int RoomManager::getRoomState(int id)
