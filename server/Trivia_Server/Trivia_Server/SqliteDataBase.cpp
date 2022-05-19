@@ -202,7 +202,7 @@ int highScoreCallback(void* data, int argc, char** argv, char** azColName)
 	for (int i = 0; i < argc; i++)
 	{
 		if (azColName[i] == std::string("username")) {
-			((std::map<std::string, int>*)data)->insert(std::pair<std::string, int>(argv[i], atoi(argv[i + 1])));
+			((std::map<std::string, int>*)data)->insert(std::pair<std::string, int>(argv[i], atoi(argv[i + 1]) * 5));
 		}
 	}
 	return 0;
