@@ -1,5 +1,6 @@
 #pragma once
 #include "IDatabase.h"
+#include <map>
 class SqliteDataBase :
 	public IDatabase
 {
@@ -14,6 +15,7 @@ public:
 	int getNumOfCorrectAnswers(std::string username);
 	int getNumOfTotalAnswers(std::string username);
 	int getNumOfPlayerGames(std::string username);
+	std::map<std::string, int> getHighScore();
 private:
 	sqlite3* _db;
 	void createTables();

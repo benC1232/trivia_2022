@@ -1,5 +1,5 @@
 #include "SqliteDataBase.h"
-
+#define TOP_PLAYER_AMOUNT 5
 SqliteDataBase::SqliteDataBase()
 {
 	std::string dbFileName = "Trivia.sqlite";
@@ -195,6 +195,11 @@ int SqliteDataBase::getNumOfPlayerGames(std::string username)
 		throw std::exception(errMessage);
 	}
 	return result;
+}
+
+std::map<std::string, int> SqliteDataBase::getHighScore()
+{
+	return std::map<std::string, int>();
 }
 
 void SqliteDataBase::createTables()
