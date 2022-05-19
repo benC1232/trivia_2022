@@ -87,24 +87,102 @@ std::vector<Question> SqliteDataBase::getQuestions(int numOfQuestions)
 	return std::vector<Question>();
 }
 
+int averageTimeCallback(void* data, int argc, char** argv, char** azColName)
+{
+	data = (float*)data;
+	if (argc == 0)
+	{
+		*(float*)data = 0;
+	}
+	else
+	{
+		*(float*)data = atof(argv[0]);
+	}
+	return 0;
+}
+
 float SqliteDataBase::getPlayerAverageAnswerTime(std::string username)
 {
 	std::string query = "SELECT averagetime FROM statistics WHERE username = '" + username + "';";
+	char* errMessage = nullptr;
+	float* result;
+	int result = sqlite3_exec(this->_db, query.c_str(), averageTimeCallback, nullptr, &errMessage);
+	if (result != SQLITE_OK) {
+		throw std::exception(errMessage);
+	}
+	return *result;
 }
-
+int correctAnswersCallback(void* data, int argc, char** argv, char** azColName)
+{
+	data = (int*)data;
+	if (argc == 0)
+	{
+		*(int*)data = 0;
+	}
+	else
+	{
+		*(int*)data = atoi(argv[0]);
+	}
+	return 0;
+}
 int SqliteDataBase::getNumOfCorrectAnswers(std::string username)
 {
 	std::string query = "SELECT correctanswers FROM statistics WHERE username = '" + username + "';";
+	char* errMessage = nullptr;
+	int* result;
+	int result = sqlite3_exec(this->_db, query.c_str(), correctAnswersCallback, nullptr, &errMessage);
+	if (result != SQLITE_OK) {
+		throw std::exception(errMessage);
+	}
+	return *result;
 }
-
+int totalAnswersCallback(void* data, int argc, char** argv, char** azColName)
+{
+	data = (int*)data;
+	if (argc == 0)
+	{
+		*(int*)data = 0;
+	}
+	else
+	{
+		*(int*)data = atoi(argv[0]);
+	}
+	return 0;
+}
 int SqliteDataBase::getNumOfTotalAnswers(std::string username)
 {
-	std::string query = "SELECT username, correctanswers+incorrectanswers FROM statistics WHERE username = '" + username + "';";
+	std::string query = "SELECT correctanswers+incorrectanswers FROM statistics WHERE username = '" + username + "';";
+	char* errMessage = nullptr;
+	int* result;
+	int result = sqlite3_exec(this->_db, query.c_str(), totalAnswersCallback, nullptr, &errMessage);
+	if (result != SQLITE_OK) {
+		throw std::exception(errMessage);
+	}
+	return *result;
 }
-
+int gameAmountCallback(void* data, int argc, char** argv, char** azColName)
+{
+	data = (int*)data;
+	if (argc == 0)
+	{
+		*(int*)data = 0;
+	}
+	else
+	{
+		*(int*)data = atoi(argv[0]);
+	}
+	return 0;
+}
 int SqliteDataBase::getNumOfPlayerGames(std::string username)
 {
-	std::string query = "SELECT username, gamesnum FROM statistics WHERE username = '" + username + "';";
+	std::string query = "SELECT gamesnum FROM statistics WHERE username = '" + username + "';";
+	char* errMessage = nullptr;
+	int* result;
+	int result = sqlite3_exec(this->_db, query.c_str(), gameAmountCallback, nullptr, &errMessage);
+	if (result != SQLITE_OK) {
+		throw std::exception(errMessage);
+	}
+	return *result;
 }
 
 void SqliteDataBase::createTables()
@@ -122,7 +200,7 @@ void SqliteDataBase::createTables()
 		throw std::exception(errMessage);
 	}
 	//creating question table
-	const char* sqlStatement = "CREATE TABLE IF NOT EXISTS questions"
+	sqlStatement = "CREATE TABLE IF NOT EXISTS questions"
 		"("
 		"questionid    INTEGER PRIMARY KEY, "
 		"question      TEXT NOT NULL,"
@@ -136,7 +214,7 @@ void SqliteDataBase::createTables()
 		throw std::exception(errMessage);
 	}
 	//creating statistics table
-	const char* sqlStatement = "CREATE TABLE IF NOT EXISTS statistics"
+	sqlStatement = "CREATE TABLE IF NOT EXISTS statistics"
 		"("
 		"username       TEXT PRIMARY KEY, "
 		"averagetime    FLOAT NOT NULL,"
