@@ -196,10 +196,28 @@ int SqliteDataBase::getNumOfPlayerGames(std::string username)
 	}
 	return result;
 }
-
+int highScoreCallback(void* data, int argc, char** argv, char** azColName)
+{
+	data = (std::map<std::string, int>*)data;
+	for (int i = 0; i < argc; i++)
+	{
+		if (azColName[i] == std::string("username")) {
+			((std::map<std::string, int>*)data)->insert(std::pair<std::string, int>(argv[i], atoi(argv[i + 1])));
+		}
+	}
+	return 0;
+}
 std::map<std::string, int> SqliteDataBase::getHighScore()
 {
-	return std::map<std::string, int>();
+	std::map<std::string, int> highScore;
+	char* errMessage = nullptr;
+	std::string query = "SELECT username, correctanswers FROM statistics ORDER BY correctanswers DESC LIMIT 5;";
+	const char* sqlStatement = query.c_str();
+	int result = sqlite3_exec(this->_db, sqlStatement, highScoreCallback, &highScore, &errMessage);
+	if (result != SQLITE_OK) {
+		throw std::exception(errMessage);
+	}
+	return highScore;
 }
 
 void SqliteDataBase::createTables()
