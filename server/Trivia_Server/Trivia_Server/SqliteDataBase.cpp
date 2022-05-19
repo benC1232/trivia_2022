@@ -85,16 +85,18 @@ int questionsCallback(void* data, int argc, char** argv, char** azColName)
 {
 	data = (std::vector<Question>*)data;
 }
+//
 std::vector<Question> SqliteDataBase::getQuestions(int numOfQuestions)
 {
 	char* errMessage = nullptr;
 	std::string query = "SELECT * FROM Questions ORDER BY RANDOM() LIMIT " + std::to_string(numOfQuestions) + ";";
 	const char* sqlStatement = query.c_str();
 	std::vector<Question> questions;
-	int result = sqlite3_exec(this->_db, sqlStatement, questionsCallback, nullptr, &errMessage);
+	int result = sqlite3_exec(this->_db, sqlStatement, questionsCallback, questions, &errMessage);
 	if (result != SQLITE_OK) {
 		throw std::exception(errMessage);
 	}
+	return questions;
 }
 
 int averageTimeCallback(void* data, int argc, char** argv, char** azColName)
