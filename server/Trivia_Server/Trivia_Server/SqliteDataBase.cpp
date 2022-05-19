@@ -82,6 +82,31 @@ void SqliteDataBase::addNewUser(std::string username, std::string password, std:
 	}
 }
 
+std::vector<Question> SqliteDataBase::getQuestions(int numOfQuestions)
+{
+	return std::vector<Question>();
+}
+
+float SqliteDataBase::getPlayerAverageAnswerTime(std::string username)
+{
+	return 0.0f;
+}
+
+int SqliteDataBase::getNumOfCorrectAnswers(std::string username)
+{
+	return 0;
+}
+
+int SqliteDataBase::getNumOfIncorrectAnswers(std::string username)
+{
+	return 0;
+}
+
+int SqliteDataBase::getNumOfPlayerGames(std::string username)
+{
+	return 0;
+}
+
 void SqliteDataBase::createTables()
 {
 	std::cout << "creating tables" << std::endl;
