@@ -20,30 +20,14 @@ SqliteDataBase::~SqliteDataBase()
 }
 int userExistCallback(void* data, int argc, char** argv, char** azColName)
 {
-	//cast data to bool
 	data = (bool*)data;
-	if (argc == 0)
-	{
-		*(bool*)data = false;
-	}
-	else
-	{
-		*(bool*)data = true;
-	}
+	data = (bool*)(argv[0] != nullptr);
 	return 0;
 }
 int passwordMatchCallback(void* data, int argc, char** argv, char** azColName)
 {
-	//cast data to bool
 	data = (bool*)data;
-	if (argc == 0)
-	{
-		*(bool*)data = false;
-	}
-	else
-	{
-		*(bool*)data = true;
-	}
+	data = (bool*)(argv[0] != nullptr);
 	return 0;
 }
 
@@ -84,15 +68,31 @@ void SqliteDataBase::addNewUser(std::string username, std::string password, std:
 int questionsCallback(void* data, int argc, char** argv, char** azColName)
 {
 	data = (std::vector<Question>*)data;
+	Question question;
+	std::vector<std::string> incorrectanswers;
+	for (int i = 0; i < argc; i++)
+	{
+		if (azColName[i] == std::string("question")) {
+			question.setQuestion(argv[i]);
+		}
+		else if (azColName[i] == std::string("correctanswer")) {
+			question.setCorrectAnswer(argv[i]);
+		}
+		else if (azColName[i] == std::string("wronganswer1") || azColName[i] == std::string("wronganswer2") || azColName[i] == std::string("wronganswer3")) {
+			incorrectanswers.push_back(argv[i]);
+		}
+	}
+	question.setIncorrectAnswers(incorrectanswers);
+	((std::vector<Question>*)data)->push_back(question);
+	return 0;
 }
-//
 std::vector<Question> SqliteDataBase::getQuestions(int numOfQuestions)
 {
 	char* errMessage = nullptr;
 	std::string query = "SELECT * FROM Questions ORDER BY RANDOM() LIMIT " + std::to_string(numOfQuestions) + ";";
 	const char* sqlStatement = query.c_str();
 	std::vector<Question> questions;
-	int result = sqlite3_exec(this->_db, sqlStatement, questionsCallback, questions, &errMessage);
+	int result = sqlite3_exec(this->_db, sqlStatement, questionsCallback, &questions, &errMessage);
 	if (result != SQLITE_OK) {
 		throw std::exception(errMessage);
 	}
