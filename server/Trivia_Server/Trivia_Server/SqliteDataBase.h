@@ -1,5 +1,8 @@
 #pragma once
 #include "IDatabase.h"
+//I dont know why this works, but dont remove one of the maps
+#include <map>
+#include <map>
 class SqliteDataBase :
 	public IDatabase
 {
@@ -14,6 +17,8 @@ public:
 	int getNumOfCorrectAnswers(std::string username);
 	int getNumOfTotalAnswers(std::string username);
 	int getNumOfPlayerGames(std::string username);
+	//why wasnt this in the uml?!?!?!?!?!
+	std::map<std::string, int> getHighScore();
 private:
 	sqlite3* _db;
 	void createTables();
