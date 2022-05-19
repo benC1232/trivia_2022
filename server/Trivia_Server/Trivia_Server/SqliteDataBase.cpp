@@ -86,11 +86,26 @@ void SqliteDataBase::createTables()
 {
 	std::cout << "creating tables" << std::endl;
 	char* errMessage = nullptr;
+	//creating users table
 	const char* sqlStatement = "CREATE TABLE IF NOT EXISTS USERS ( "
 		"username TEXT PRIMARY KEY,"
 		"password TEXT NOT NULL,"
 		"email TEXT NOT NULL UNIQUE"
 		"); ";
+	int res = sqlite3_exec(this->_db, sqlStatement, nullptr, nullptr, &errMessage);
+	if (res != SQLITE_OK) {
+		throw std::exception(errMessage);
+	}
+	//creating question table
+	const char* sqlStatement = "CREATE TABLE IF NOT EXISTS questions"
+		"("
+		"questionid    INTEGER PRIMARY KEY, "
+		"question      TEXT NOT NULL,"
+		"correctanswer TEXT NOT NULL, "
+		"wronganswer1  TEXT NOT NULL,"
+		"wronganswer2  TEXT NOT NULL,"
+		"wronganswer3  TEXT NOT NULL"
+		");";
 	int res = sqlite3_exec(this->_db, sqlStatement, nullptr, nullptr, &errMessage);
 	if (res != SQLITE_OK) {
 		throw std::exception(errMessage);
