@@ -149,18 +149,13 @@ std::vector<unsigned char> JsonResponsePacketSerializer::serializeCreateRoomResp
 	return buffer;
 }
 
-std::vector<unsigned char> JsonResponsePacketSerializer::serializeGetStatisticsResponse(GetPresonalStatsResponse getPresonalStatsResponse)
-{
-	return std::vector<unsigned char>();
-}
-
-std::vector<unsigned char> serializeGetStatisticsResponse(struct GetPresonalStatsResponse getPresonalStatsResponse)
+std::vector<unsigned char> JsonResponsePacketSerializer::serializeGetStatisticsResponse( GetPresonalStatsResponse getPresonalStatsResponse)
 {
 	std::vector<unsigned char> buffer;
 	buffer.push_back(GET_STATISTICS_RESPONSE_CODE);
 	nlohmann::json jsonResponse = {
 		{"status", "" + getPresonalStatsResponse.status},
-		{"highscores", "" + stringVecToString(getPresonalStatsResponse.statistics)}
+		{"stats", "" + stringVecToString(getPresonalStatsResponse.statistics)}
 	};
 	std::string jsonString = nlohmann::to_string(jsonResponse);
 	std::vector<unsigned char> lenBuff = intToByteVector(jsonString.length());
@@ -171,5 +166,18 @@ std::vector<unsigned char> serializeGetStatisticsResponse(struct GetPresonalStat
 	
 }
 
+std::vector<unsigned char> JsonResponsePacketSerializer::serializeGetHighScoreResponse(GetHighScoreRespnse getHighScoreResponse){
+	std::vector<unsigned char> buffer;
+	buffer.push_back(GET_STATISTICS_RESPONSE_CODE);
+	nlohmann::json jsonResponse = {
+		{"status", "" + getHighScoreResponse.status},
+		{"highscores", "" + stringVecToString(getHighScoreResponse.statistics)}
+	};
+	std::string jsonString = nlohmann::to_string(jsonResponse);
+	std::vector<unsigned char> lenBuff = intToByteVector(jsonString.length());
+	buffer.insert(buffer.end(), lenBuff.begin(), lenBuff.end());
+	for (unsigned char c : jsonString) buffer.push_back(c);
+	return buffer;
+}
 
 
