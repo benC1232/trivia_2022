@@ -89,22 +89,22 @@ std::vector<Question> SqliteDataBase::getQuestions(int numOfQuestions)
 
 float SqliteDataBase::getPlayerAverageAnswerTime(std::string username)
 {
-	return 0.0f;
+	std::string query = "SELECT averagetime FROM statistics WHERE username = '" + username + "';";
 }
 
 int SqliteDataBase::getNumOfCorrectAnswers(std::string username)
 {
-	return 0;
+	std::string query = "SELECT correctanswers FROM statistics WHERE username = '" + username + "';";
 }
 
-int SqliteDataBase::getNumOfIncorrectAnswers(std::string username)
+int SqliteDataBase::getNumOfTotalAnswers(std::string username)
 {
-	return 0;
+	std::string query = "SELECT username, correctanswers+incorrectanswers FROM statistics WHERE username = '" + username + "';";
 }
 
 int SqliteDataBase::getNumOfPlayerGames(std::string username)
 {
-	return 0;
+	std::string query = "SELECT username, gamesnum FROM statistics WHERE username = '" + username + "';";
 }
 
 void SqliteDataBase::createTables()

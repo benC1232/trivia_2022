@@ -18,7 +18,7 @@ public:
 	//statistics function
 	virtual float getPlayerAverageAnswerTime(std::string username) = 0;
 	virtual int getNumOfCorrectAnswers(std::string username) = 0;
-	virtual int getNumOfIncorrectAnswers(std::string username) = 0;
+	virtual int getNumOfTotalAnswers(std::string username) = 0;
 	virtual int getNumOfPlayerGames(std::string username) = 0;
 private:
 	virtual void createTables() = 0;
