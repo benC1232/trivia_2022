@@ -110,4 +110,17 @@ void SqliteDataBase::createTables()
 	if (res != SQLITE_OK) {
 		throw std::exception(errMessage);
 	}
+	//creating statistics table
+	const char* sqlStatement = "CREATE TABLE IF NOT EXISTS statistics"
+		"("
+		"username       TEXT PRIMARY KEY, "
+		"averagetime    FLOAT NOT NULL,"
+		"correctanswers INTEGER NOT NULL, "
+		"wronganswers   INTEGER NOT NULL,"
+		"gamesnum     INTEGER NOT NULL"
+		"); ";
+	int res = sqlite3_exec(this->_db, sqlStatement, nullptr, nullptr, &errMessage);
+	if (res != SQLITE_OK) {
+		throw std::exception(errMessage);
+	}
 }
