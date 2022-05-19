@@ -2,15 +2,15 @@
 
 std::string Question::getQuestion()
 {
-	return std::string();
+	return this->m_question;
 }
 
 std::string Question::getCorrectAnswer()
 {
-	return std::string();
+	return this->m_answers[0];
 }
 
 std::vector<std::string> Question::getIncorrectAnswers()
 {
-	return std::vector<std::string>();
+	return std::vector<std::string>(this->m_answers.begin() + 1, this->m_answers.end());
 }
