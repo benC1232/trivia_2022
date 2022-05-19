@@ -81,10 +81,20 @@ void SqliteDataBase::addNewUser(std::string username, std::string password, std:
 		throw std::exception(errMessage);
 	}
 }
-
+int questionsCallback(void* data, int argc, char** argv, char** azColName)
+{
+	data = (std::vector<Question>*)data;
+}
 std::vector<Question> SqliteDataBase::getQuestions(int numOfQuestions)
 {
-	return std::vector<Question>();
+	char* errMessage = nullptr;
+	std::string query = "SELECT * FROM Questions ORDER BY RANDOM() LIMIT " + std::to_string(numOfQuestions) + ";";
+	const char* sqlStatement = query.c_str();
+	std::vector<Question> questions;
+	int result = sqlite3_exec(this->_db, sqlStatement, questionsCallback, nullptr, &errMessage);
+	if (result != SQLITE_OK) {
+		throw std::exception(errMessage);
+	}
 }
 
 int averageTimeCallback(void* data, int argc, char** argv, char** azColName)
@@ -105,12 +115,12 @@ float SqliteDataBase::getPlayerAverageAnswerTime(std::string username)
 {
 	std::string query = "SELECT averagetime FROM statistics WHERE username = '" + username + "';";
 	char* errMessage = nullptr;
-	float* result;
-	int result = sqlite3_exec(this->_db, query.c_str(), averageTimeCallback, nullptr, &errMessage);
-	if (result != SQLITE_OK) {
+	float result = 0;
+	int res = sqlite3_exec(this->_db, query.c_str(), averageTimeCallback, &result, &errMessage);
+	if (res != SQLITE_OK) {
 		throw std::exception(errMessage);
 	}
-	return *result;
+	return result;
 }
 int correctAnswersCallback(void* data, int argc, char** argv, char** azColName)
 {
@@ -129,12 +139,12 @@ int SqliteDataBase::getNumOfCorrectAnswers(std::string username)
 {
 	std::string query = "SELECT correctanswers FROM statistics WHERE username = '" + username + "';";
 	char* errMessage = nullptr;
-	int* result;
-	int result = sqlite3_exec(this->_db, query.c_str(), correctAnswersCallback, nullptr, &errMessage);
-	if (result != SQLITE_OK) {
+	int result = 0;
+	int res = sqlite3_exec(this->_db, query.c_str(), correctAnswersCallback, &result, &errMessage);
+	if (res != SQLITE_OK) {
 		throw std::exception(errMessage);
 	}
-	return *result;
+	return result;
 }
 int totalAnswersCallback(void* data, int argc, char** argv, char** azColName)
 {
@@ -153,12 +163,12 @@ int SqliteDataBase::getNumOfTotalAnswers(std::string username)
 {
 	std::string query = "SELECT correctanswers+incorrectanswers FROM statistics WHERE username = '" + username + "';";
 	char* errMessage = nullptr;
-	int* result;
-	int result = sqlite3_exec(this->_db, query.c_str(), totalAnswersCallback, nullptr, &errMessage);
-	if (result != SQLITE_OK) {
+	int result = 0;
+	int res = sqlite3_exec(this->_db, query.c_str(), totalAnswersCallback, &result, &errMessage);
+	if (res != SQLITE_OK) {
 		throw std::exception(errMessage);
 	}
-	return *result;
+	return result;
 }
 int gameAmountCallback(void* data, int argc, char** argv, char** azColName)
 {
@@ -177,12 +187,12 @@ int SqliteDataBase::getNumOfPlayerGames(std::string username)
 {
 	std::string query = "SELECT gamesnum FROM statistics WHERE username = '" + username + "';";
 	char* errMessage = nullptr;
-	int* result;
-	int result = sqlite3_exec(this->_db, query.c_str(), gameAmountCallback, nullptr, &errMessage);
-	if (result != SQLITE_OK) {
+	int result = 0;
+	int res = sqlite3_exec(this->_db, query.c_str(), gameAmountCallback, &result, &errMessage);
+	if (res != SQLITE_OK) {
 		throw std::exception(errMessage);
 	}
-	return *result;
+	return result;
 }
 
 void SqliteDataBase::createTables()
@@ -202,14 +212,14 @@ void SqliteDataBase::createTables()
 	//creating question table
 	sqlStatement = "CREATE TABLE IF NOT EXISTS questions"
 		"("
-		"questionid    INTEGER PRIMARY KEY, "
+		"questionid    INTEGER PRIMARY KEY AUTOINCREMENT, "
 		"question      TEXT NOT NULL,"
 		"correctanswer TEXT NOT NULL, "
 		"wronganswer1  TEXT NOT NULL,"
 		"wronganswer2  TEXT NOT NULL,"
 		"wronganswer3  TEXT NOT NULL"
 		");";
-	int res = sqlite3_exec(this->_db, sqlStatement, nullptr, nullptr, &errMessage);
+	res = sqlite3_exec(this->_db, sqlStatement, nullptr, nullptr, &errMessage);
 	if (res != SQLITE_OK) {
 		throw std::exception(errMessage);
 	}
@@ -222,7 +232,7 @@ void SqliteDataBase::createTables()
 		"wronganswers   INTEGER NOT NULL,"
 		"gamesnum     INTEGER NOT NULL"
 		"); ";
-	int res = sqlite3_exec(this->_db, sqlStatement, nullptr, nullptr, &errMessage);
+	res = sqlite3_exec(this->_db, sqlStatement, nullptr, nullptr, &errMessage);
 	if (res != SQLITE_OK) {
 		throw std::exception(errMessage);
 	}
