@@ -49,6 +49,34 @@ namespace TriviaClient
 
         private void SubmitBtn_Click(object sender, RoutedEventArgs e)
         {
+            if (this.login)
+            {
+                if (this.UsernameTxt.Text == "" || this.PasswordTxt.Text == "")
+                {
+                    this.errorLbl.Visibility = Visibility.Visible;
+                    this.errorLbl.Text = "Please fill in all fields";
+                }
+                else
+                {
+                    this.errorLbl.Visibility = Visibility.Hidden;
+                    this.errorLbl.Text = "";
+                    this.Close();
+                }
+            }
+            else
+            {
+                if (this.UsernameTxt.Text == "" || this.PasswordTxt.Text == "" || this.EmailTxt.Text == "")
+                {
+                    this.errorLbl.Visibility = Visibility.Visible;
+                    this.errorLbl.Text = "Please fill in all fields";
+                }
+                else
+                {
+                    this.errorLbl.Visibility = Visibility.Hidden;
+                    this.errorLbl.Text = "";
+                    this.Close();
+                }
+            }
         }
     }
 }
