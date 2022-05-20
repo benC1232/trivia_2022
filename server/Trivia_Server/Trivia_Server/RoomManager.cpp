@@ -18,9 +18,9 @@ unsigned int RoomManager::getRoomState(int id)
 	return this->rooms[id].getIsActive();
 }
 
-std::vector<RoomData> RoomManager::getRooms()
+std::vector<Room> RoomManager::getRooms()
 {
-	std::vector<RoomData> rooms;
+	std::vector<Room> rooms;
 	for (auto it = this->rooms.begin(); it != this->rooms.end(); it++)
 	{
 		rooms.push_back(it->second.getData());

@@ -8,7 +8,7 @@ public:
 	void createRoom(LoggedUser user, RoomData data);
 	void deleteRoom(int id);
 	unsigned int getRoomState(int id);
-	std::vector<RoomData> getRooms();
+	std::vector<Room> getRooms();
 
 private:
 	std::map<int, Room> rooms;

@@ -63,7 +63,7 @@ RequestResult LoginRequestHandler::signup(RequestInfo requestInfo)
 	num.status = SIGN_IN_CODE;
 	SignupRequest signupRequest = JsonRequestPacketDeserializer::deserializeSignupRequest(requestInfo.buffer);
 	if (this->m_requestHandlerFactory->getLoginManager()->signup(signupRequest.username, signupRequest.password, signupRequest.email)) {
-		result.newHandler = new MenuRequestHandler();
+		result.newHandler = this->m_requestHandlerFactory->createLoginRequestHandler();
 		result.buffer = JsonResponsePacketSerializer::serializeSignupResponse(num);
 	}
 	else {
