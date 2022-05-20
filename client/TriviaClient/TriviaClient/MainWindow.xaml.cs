@@ -58,8 +58,6 @@ namespace TriviaClient
                 }
                 else
                 {
-                    this.errorLbl.Visibility = Visibility.Hidden;
-                    this.errorLbl.Text = "";
                     this.Close();
                 }
             }
@@ -72,8 +70,6 @@ namespace TriviaClient
                 }
                 else
                 {
-                    this.errorLbl.Visibility = Visibility.Hidden;
-                    this.errorLbl.Text = "";
                     this.Close();
                 }
             }
