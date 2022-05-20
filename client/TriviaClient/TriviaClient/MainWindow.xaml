@@ -11,45 +11,71 @@
         <ImageBrush ImageSource="/Resources/bg.png" Stretch="Fill" />
     </Window.Background>
     <StackPanel>
-        <Label x:Name="aboutLbl" Padding="45" HorizontalAlignment="Center" Foreground="White" 
-               Content="Welcome To The Trivia Game inspired by the hit game amongus" 
-               FontSize="50" FontFamily="{StaticResource AmaticSC}"/>
+        <Label x:Name="aboutLbl" Padding="45" HorizontalAlignment="Center" Foreground="White"
+               Content="Welcome To The Trivia Game inspired by the hit game amongus"
+               FontSize="50" FontFamily="{StaticResource AmaticSC}" />
         <StackPanel HorizontalAlignment="Center" Margin="1">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                 <Button x:Name="LogInBtn" Click="LogInBtn_Click" FontSize="50" FontFamily="{StaticResource AmaticSC}" Background="black" BorderBrush="white" Foreground="White" FontWeight="Bold" BorderThickness="6" Content="Log In" Height="80"  Width="200">
-                    <Button.Resources><Style TargetType="Border"><Setter Property="CornerRadius" Value="15"/></Style></Button.Resources></Button>
-                <Label Width="30"/>
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="15" />
+                        </Style>
+                    </Button.Resources>
+                </Button>
+                <Label Width="30" />
                 <Button x:Name="SignUpBtn" Click="SignUpBtn_Click" FontSize="50" FontFamily="{StaticResource AmaticSC}" Background="black" BorderBrush="white" Foreground="White" FontWeight="Bold" BorderThickness="6" Content="Sign Up" Height="80"  Width="200">
-                    <Button.Resources><Style TargetType="Border"><Setter Property="CornerRadius" Value="15"/></Style></Button.Resources></Button>
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="15" />
+                        </Style>
+                    </Button.Resources>
+                </Button>
             </StackPanel>
-            <Label Height="25"/>
+            <Label Height="25" />
             <StackPanel x:Name="UsernamePanel" Orientation="Horizontal" Margin="0">
-                <Label Margin="10" Content="Username:" Foreground="White" FontSize="30" FontFamily="{StaticResource AmaticSC}" FontWeight="Bold" HorizontalContentAlignment="Left"/>
+                <Label Margin="10" Content="Username:" Foreground="White" FontSize="30" FontFamily="{StaticResource AmaticSC}" FontWeight="Bold" HorizontalContentAlignment="Left" />
                 <TextBox x:Name="usernameTxt" Margin="10" Background="Black" Foreground="White" BorderBrush="White" BorderThickness="5" FontSize="30" FontFamily="{StaticResource AmaticSC}" FontWeight="Bold" HorizontalContentAlignment="Left" Width="298">
-                    <TextBox.Resources><Style TargetType="Border"><Setter Property="CornerRadius" Value="15"/></Style></TextBox.Resources>
+                    <TextBox.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="15" />
+                        </Style>
+                    </TextBox.Resources>
                 </TextBox>
             </StackPanel>
 
             <StackPanel x:Name="PasswordPanel" Orientation="Horizontal" Margin="0">
-                <Label Margin="10" Content="Password:" Foreground="White" FontSize="30" FontFamily="{StaticResource AmaticSC}" FontWeight="Bold" HorizontalContentAlignment="Left" Width="102"/>
+                <Label Margin="10" Content="Password:" Foreground="White" FontSize="30" FontFamily="{StaticResource AmaticSC}" FontWeight="Bold" HorizontalContentAlignment="Left" Width="102" />
                 <TextBox x:Name="passwordTxt" Margin="10" Background="Black" Foreground="White" BorderBrush="White" BorderThickness="5" FontSize="30" FontFamily="{StaticResource AmaticSC}" FontWeight="Bold" HorizontalContentAlignment="Left" Width="300">
-                    <TextBox.Resources><Style TargetType="Border"><Setter Property="CornerRadius" Value="15"></Setter></Style></TextBox.Resources>
-                </TextBox>
-            </StackPanel>
-            
-            <StackPanel x:Name="EmailPanel" Visibility="Visible" Orientation="Horizontal" Margin="0">
-                <Label Margin="10" Content="Email:" Foreground="White" FontSize="30" FontFamily="{StaticResource AmaticSC}" FontWeight="Bold" HorizontalContentAlignment="Left" Width="102"/>
-                <TextBox x:Name="EmailTxt" Margin="10" Background="Black" Foreground="White" BorderBrush="White" BorderThickness="5" FontSize="30" FontFamily="{StaticResource AmaticSC}" FontWeight="Bold" HorizontalContentAlignment="Left" Width="300">
-                    <TextBox.Resources><Style TargetType="Border"><Setter Property="CornerRadius" Value="15"></Setter></Style></TextBox.Resources>
+                    <TextBox.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="15"></Setter>
+                        </Style>
+                    </TextBox.Resources>
                 </TextBox>
             </StackPanel>
 
-            <Label Height="70"/>
+            <StackPanel x:Name="EmailPanel" Visibility="Visible" Orientation="Horizontal" Margin="0">
+                <Label Margin="10" Content="Email:" Foreground="White" FontSize="30" FontFamily="{StaticResource AmaticSC}" FontWeight="Bold" HorizontalContentAlignment="Left" Width="102" />
+                <TextBox x:Name="EmailTxt" Margin="10" Background="Black" Foreground="White" BorderBrush="White" BorderThickness="5" FontSize="30" FontFamily="{StaticResource AmaticSC}" FontWeight="Bold" HorizontalContentAlignment="Left" Width="300">
+                    <TextBox.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="15"></Setter>
+                        </Style>
+                    </TextBox.Resources>
+                </TextBox>
+            </StackPanel>
+
+            <Label Height="70" />
 
             <Button x:Name="SubmitBtn" Click="SubmitBtn_Click"  FontSize="50" FontFamily="{StaticResource AmaticSC}" Background="black" BorderBrush="white" Foreground="White" FontWeight="Bold" BorderThickness="6" Content="Submit" Height="80"  Width="200" RenderTransformOrigin="0.518,2.362">
-                    <Button.Resources><Style TargetType="Border"><Setter Property="CornerRadius" Value="15"/></Style></Button.Resources></Button>
-            
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="15" />
+                    </Style>
+                </Button.Resources>
+            </Button>
+            <TextBlock x:Name="errorLbl" HorizontalAlignment="Center" Text ="there has been an error!" FontSize="55" FontFamily="{StaticResource AmaticSC}" Background="Transparent" Foreground="DarkRed" />
         </StackPanel>
     </StackPanel>
-    
 </Window>

@@ -25,33 +25,30 @@ namespace TriviaClient
         public MainWindow()
         {
             InitializeComponent();
-            UsernamePanel.Visibility = Visibility.Hidden;
-            PasswordPanel.Visibility = Visibility.Hidden;
-            EmailPanel.Visibility = Visibility.Hidden;
+            this.UsernamePanel.Visibility = Visibility.Hidden;
+            this.PasswordPanel.Visibility = Visibility.Hidden;
+            this.EmailPanel.Visibility = Visibility.Hidden;
+            this.errorLbl.Visibility = Visibility.Hidden;
         }
 
         private void LogInBtn_Click(object sender, RoutedEventArgs e)
         {
             this.login = true;
-            UsernamePanel.Visibility = Visibility.Visible;
-            PasswordPanel.Visibility = Visibility.Visible;
-            EmailPanel.Visibility = Visibility.Hidden;
-
-
+            this.UsernamePanel.Visibility = Visibility.Visible;
+            this.PasswordPanel.Visibility = Visibility.Visible;
+            this.EmailPanel.Visibility = Visibility.Hidden;
         }
 
         private void SignUpBtn_Click(object sender, RoutedEventArgs e)
         {
             this.login = false;
-            UsernamePanel.Visibility = Visibility.Visible;
-            PasswordPanel.Visibility = Visibility.Visible;
-            EmailPanel.Visibility = Visibility.Visible;
-
+            this.UsernamePanel.Visibility = Visibility.Visible;
+            this.PasswordPanel.Visibility = Visibility.Visible;
+            this.EmailPanel.Visibility = Visibility.Visible;
         }
 
         private void SubmitBtn_Click(object sender, RoutedEventArgs e)
         {
-
         }
     }
 }
