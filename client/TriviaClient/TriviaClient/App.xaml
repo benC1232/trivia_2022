@@ -4,6 +4,6 @@
              xmlns:local="clr-namespace:TriviaClient"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <FontFamily x:Key="AmaticSC">pack://application:,,,/Fonts/#Amatic SC</FontFamily>
     </Application.Resources>
 </Application>
