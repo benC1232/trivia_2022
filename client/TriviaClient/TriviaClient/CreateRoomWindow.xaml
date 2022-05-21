@@ -13,6 +13,8 @@
         <Label Height="64"/>
         <StackPanel Orientation="Horizontal" >
             <Label Margin="10" Content="Room Name:" Foreground="White" FontSize="30" FontFamily="{StaticResource AmaticSC}" FontWeight="Bold" HorizontalContentAlignment="Left" />
+            <Label Width="68"/>
+
             <TextBox x:Name="RoomName" Margin="10" Background="Black" Foreground="White" BorderBrush="White" BorderThickness="5" FontSize="30" FontFamily="{StaticResource AmaticSC}" FontWeight="Bold" HorizontalContentAlignment="Left" Width="298">
                 <TextBox.Resources>
                     <Style TargetType="Border">
@@ -24,16 +26,41 @@
         <Label Height="20"/>
         <StackPanel Orientation="Horizontal" >
             <Label Margin="10" Content="Max Players:" Foreground="White" FontSize="30" FontFamily="{StaticResource AmaticSC}" FontWeight="Bold" HorizontalContentAlignment="Left" />
-            <Slider x:Name="MaxPlayers" Value="2" Margin="10" ValueChanged="MaxPlayers_ValueChanged"  Background="Black" Foreground="White" BorderBrush="White" BorderThickness="5" FontSize="30" FontFamily="{StaticResource AmaticSC}" FontWeight="Bold" VerticalAlignment="Center" Width="262" Minimum="2" Maximum="10">
+            <Label Width="86"/>
+            <Slider x:Name="MaxPlayers" Value="2" Margin="10"  Background="Black" Foreground="White" BorderBrush="White" BorderThickness="5" FontSize="30" FontFamily="{StaticResource AmaticSC}" FontWeight="Bold" VerticalAlignment="Center" Width="262" Minimum="2" Maximum="20" SmallChange="1" >
                 <Slider.Resources>
                     <Style TargetType="Border">
                         <Setter Property="CornerRadius" Value="15" />
                     </Style>
                 </Slider.Resources>
             </Slider>
-            <Label x:Name="maxPlayersLabel"  Content="0" Foreground="White" FontSize="50" FontFamily="{StaticResource AmaticSC}" FontWeight="Bold" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"/>
+            <Label   x:Name="maxPlayersLbl" Content="{Binding ElementName=MaxPlayers, Path=Value}" ContentStringFormat="{}{0:#}" Foreground="White" FontSize="50" FontFamily="{StaticResource AmaticSC}" FontWeight="Bold" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Width="65"/>
         </StackPanel>
-
+        <Label Height="20"/>
+        <StackPanel Orientation="Horizontal" >
+            <Label Margin="10" Content="Number of Questions:" Foreground="White" FontSize="30" FontFamily="{StaticResource AmaticSC}" FontWeight="Bold" HorizontalContentAlignment="Left" />
+            <Slider x:Name="numOfQuestions" Value="1" Margin="10"  Background="Black" Foreground="White" BorderBrush="White" BorderThickness="5" FontSize="30" FontFamily="{StaticResource AmaticSC}" FontWeight="Bold" VerticalAlignment="Center" Width="262" Minimum="1" Maximum="15" SmallChange="1" >
+                <Slider.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="15" />
+                    </Style>
+                </Slider.Resources>
+            </Slider>
+            <Label x:Name="numOfQuestionsLbl"  Content="{Binding ElementName=numOfQuestions, Path=Value}" ContentStringFormat="{}{0:#}" Foreground="White" FontSize="50" FontFamily="{StaticResource AmaticSC}" FontWeight="Bold" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Width="65"/>
+        </StackPanel>
+        <Label Height="20"/>
+        <StackPanel Orientation="Horizontal" >
+            <Label Margin="10" Content="Time per Question:" Foreground="White" FontSize="30" FontFamily="{StaticResource AmaticSC}" FontWeight="Bold" HorizontalContentAlignment="Left" />
+            <Label Width="24"/>
+            <Slider x:Name="TimeQuestions" Value="1" Margin="10"  Background="Black" Foreground="White" BorderBrush="White" BorderThickness="5" FontSize="30" FontFamily="{StaticResource AmaticSC}" FontWeight="Bold" VerticalAlignment="Center" Width="262" Minimum="5" Maximum="60" SmallChange="1" >
+                <Slider.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="15" />
+                    </Style>
+                </Slider.Resources>
+            </Slider>
+            <Label x:Name="TimeQuestionsLbl"  Content="{Binding ElementName=TimeQuestions, Path=Value}" ContentStringFormat="{}{0:#}" Foreground="White" FontSize="50" FontFamily="{StaticResource AmaticSC}" FontWeight="Bold" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Width="65"/>
+        </StackPanel>
 
     </StackPanel>
 </Window>

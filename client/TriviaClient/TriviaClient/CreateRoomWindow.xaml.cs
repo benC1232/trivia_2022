@@ -22,12 +22,8 @@ namespace TriviaClient
         public CreateRoomWindow()
         {
             InitializeComponent();
+             
         }
 
-        private void MaxPlayers_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
-        {
-            this.maxPlayersLabel.Content = this.MaxPlayers.Value.ToString();
-
-        }
     }
 }
