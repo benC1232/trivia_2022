@@ -29,7 +29,6 @@ namespace TriviaClient
             //Log Out Handling
             //...
             Application.Current.Shutdown();
-
         }
 
         private void CreateRoomBtn_Click(object sender, RoutedEventArgs e)
@@ -37,7 +36,6 @@ namespace TriviaClient
             CreateRoomWindow createRoomWindow = new CreateRoomWindow();
             this.Close();
             createRoomWindow.Show();
-
         }
     }
 }
