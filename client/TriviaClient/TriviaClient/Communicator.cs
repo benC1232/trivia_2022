@@ -15,7 +15,7 @@ namespace TriviaClient
         private IPEndPoint endPoint;
         private int port;
         private string host;
-        private bool connected;
+        public bool connected;
 
         public Communicator()
         {
@@ -26,11 +26,18 @@ namespace TriviaClient
 
         public void Connect()
         {
-            this.client = new TcpClient();
-            this.endPoint = new IPEndPoint(IPAddress.Parse(this.host), this.port);
-            this.client.Connect(this.endPoint);
-            this.stream = this.client.GetStream();
-            this.connected = true;
+            if (!this.connected)
+            {
+                this.client = new TcpClient();
+                this.endPoint = new IPEndPoint(IPAddress.Parse(this.host), this.port);
+                this.client.Connect(this.endPoint);
+                this.stream = this.client.GetStream();
+                this.connected = true;
+            }
+            else
+            {
+                throw new Exception("the connect function was called when the user was Already connected");
+            }
         }
 
         public void Disconnect()

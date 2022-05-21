@@ -21,9 +21,22 @@ namespace TriviaClient
     public partial class MainWindow : Window
     {
         private bool login;
+        private Communicator comm;
 
         public MainWindow()
         {
+            this.comm = new Communicator();
+            try
+            {
+                comm.Connect();
+            }
+            catch (Exception e)
+            {
+                this.errorLbl.Visibility = Visibility.Visible;
+                this.errorLbl.Text = e.Message;
+                return;
+            }
+
             InitializeComponent();
             this.UsernamePanel.Visibility = Visibility.Hidden;
             this.PasswordPanel.Visibility = Visibility.Hidden;
@@ -49,6 +62,19 @@ namespace TriviaClient
 
         private void SubmitBtn_Click(object sender, RoutedEventArgs e)
         {
+            if (!comm.connected)
+            {
+                try
+                {
+                    comm.Connect();
+                }
+                catch (Exception ex)
+                {
+                    this.errorLbl.Visibility = Visibility.Visible;
+                    this.errorLbl.Text = ex.Message;
+                    return;
+                }
+            }
             if (this.login)
             {
                 if (this.UsernameTxt.Text == "" || this.PasswordTxt.Text == "")
@@ -61,8 +87,6 @@ namespace TriviaClient
                     MenuWindow menu = new MenuWindow();
                     this.Close();
                     menu.ShowDialog();
-                    
-
                 }
             }
             else
