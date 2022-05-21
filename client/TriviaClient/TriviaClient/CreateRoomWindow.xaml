@@ -10,7 +10,7 @@
         <ImageBrush ImageSource="/Resources/bg.png" Stretch="Fill" />
     </Window.Background>
     <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
-        <Label Height="64"/>
+        <Label Height="112"/>
         <StackPanel Orientation="Horizontal" >
             <Label Margin="10" Content="Room Name:" Foreground="White" FontSize="30" FontFamily="{StaticResource AmaticSC}" FontWeight="Bold" HorizontalContentAlignment="Left" />
             <Label Width="68"/>
@@ -61,6 +61,14 @@
             </Slider>
             <Label x:Name="TimeQuestionsLbl"  Content="{Binding ElementName=TimeQuestions, Path=Value}" ContentStringFormat="{}{0:#}" Foreground="White" FontSize="50" FontFamily="{StaticResource AmaticSC}" FontWeight="Bold" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Width="65"/>
         </StackPanel>
+        <Label Height="51"/>
+        <Button x:Name="CreateBtn" Content="Create" Click="CreateBtn_Click" FontSize="65" FontFamily="{StaticResource AmaticSC}" Background="black" BorderBrush="white" Foreground="White" FontWeight="Bold" BorderThickness="6" Height="96"  Width="242">
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="15" />
+                </Style>
+            </Button.Resources>
+        </Button>
 
     </StackPanel>
 </Window>
