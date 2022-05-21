@@ -7,6 +7,8 @@
 #include "JsonResponsePacketSerializer.h"
 #include "RequestHandlerFactory.h"
 
+class RequestHandlerFactory;
+
 #define LOGIN_CODE 1
 #define SIGN_IN_CODE 2
 #define ERROR_CODE 3
@@ -21,8 +23,7 @@
 class MenuRequestHandler : public IRequestHandler
 {
 public:
-	MenuRequestHandler() = default;
-	MenuRequestHandler(LoggedUser loggedUser, RoomManager& roomManager, StatisticsManager& statisticsManager, RequestHandlerFactory* requestHandlerFactory);
+	MenuRequestHandler(LoggedUser loggedUser, RoomManager* roomManager, StatisticsManager* statisticsManager, RequestHandlerFactory* requestHandlerFactory);
 	~MenuRequestHandler();
 	bool isRequestRelevant(RequestInfo requestInfo);
 	RequestResult handleRequest(RequestInfo requestInfo);
@@ -36,8 +37,8 @@ public:
 	
 private:
 	LoggedUser m_user;
-	RoomManager& m_roomManager;
-	StatisticsManager& m_statisticsManager;
+	RoomManager* m_roomManager;
+	StatisticsManager* m_statisticsManager;
 	RequestHandlerFactory* m_requestHandlerFactory;
 
 	

@@ -58,10 +58,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="connectionErrWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="CreateRoomWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -75,9 +71,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Communicator.cs" />
-    <Compile Include="connectionErrWindow.xaml.cs">
-      <DependentUpon>connectionErrWindow.xaml</DependentUpon>
-    </Compile>
     <Compile Include="CreateRoomWindow.xaml.cs">
       <DependentUpon>CreateRoomWindow.xaml</DependentUpon>
     </Compile>

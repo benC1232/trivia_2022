@@ -20,7 +20,7 @@ namespace TriviaClient
         public Communicator()
         {
             this.host = "127.0.0.1";
-            this.port = 9999;
+            this.port = 6969;
             this.connected = false;
         }
 

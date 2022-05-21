@@ -25,6 +25,7 @@ namespace TriviaClient
 
         public MainWindow()
         {
+            InitializeComponent();
             this.comm = new Communicator();
             try
             {
@@ -37,7 +38,7 @@ namespace TriviaClient
                 return;
             }
 
-            InitializeComponent();
+            
             this.UsernamePanel.Visibility = Visibility.Hidden;
             this.PasswordPanel.Visibility = Visibility.Hidden;
             this.EmailPanel.Visibility = Visibility.Hidden;

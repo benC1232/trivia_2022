@@ -43,7 +43,7 @@ RequestResult LoginRequestHandler::login(RequestInfo requestInfo)
 	num.status = LOGIN_CODE;
 	LoginRequest loginRequest = JsonRequestPacketDeserializer::deserializeLoginRequest(requestInfo.buffer);
 	if (this->m_requestHandlerFactory->getLoginManager()->login(loginRequest.username, loginRequest.password)) {
-		result.newHandler = new MenuRequestHandler();
+		result.newHandler = this->m_requestHandlerFactory->createMenuRequestHandler(LoggedUser(loginRequest.username));
 		result.buffer = JsonResponsePacketSerializer::serializeLoginResponse(num);
 	}
 	else {
@@ -63,7 +63,7 @@ RequestResult LoginRequestHandler::signup(RequestInfo requestInfo)
 	num.status = SIGN_IN_CODE;
 	SignupRequest signupRequest = JsonRequestPacketDeserializer::deserializeSignupRequest(requestInfo.buffer);
 	if (this->m_requestHandlerFactory->getLoginManager()->signup(signupRequest.username, signupRequest.password, signupRequest.email)) {
-		result.newHandler = this->m_requestHandlerFactory->createLoginRequestHandler();
+		result.newHandler = this->m_requestHandlerFactory->createMenuRequestHandler(LoggedUser(signupRequest.username));
 		result.buffer = JsonResponsePacketSerializer::serializeSignupResponse(num);
 	}
 	else {
