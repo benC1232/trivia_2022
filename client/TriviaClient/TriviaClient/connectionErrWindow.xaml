@@ -11,7 +11,7 @@
     </Window.Background>
     <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
         <TextBlock Text="Connection Error" FontSize="72" FontFamily="Segoe UI"
-            Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" />
+            Foreground="Red" HorizontalAlignment="Center" VerticalAlignment="Center" />
         <TextBlock Text="Please check your internet connection and try again."
             FontSize="36" FontFamily="Segoe UI" Foreground="White"
             HorizontalAlignment="Center" VerticalAlignment="Center" />

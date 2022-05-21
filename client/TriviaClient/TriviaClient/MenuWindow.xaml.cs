@@ -31,5 +31,13 @@ namespace TriviaClient
             Application.Current.Shutdown();
 
         }
+
+        private void CreateRoomBtn_Click(object sender, RoutedEventArgs e)
+        {
+            CreateRoomWindow createRoomWindow = new CreateRoomWindow();
+            this.Close();
+            createRoomWindow.Show();
+
+        }
     }
 }
