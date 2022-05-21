@@ -58,7 +58,11 @@ namespace TriviaClient
                 }
                 else
                 {
+                    MenuWindow menu = new MenuWindow();
                     this.Close();
+                    menu.ShowDialog();
+                    
+
                 }
             }
             else
@@ -70,7 +74,9 @@ namespace TriviaClient
                 }
                 else
                 {
+                    MenuWindow menu = new MenuWindow();
                     this.Close();
+                    menu.ShowDialog();
                 }
             }
         }
