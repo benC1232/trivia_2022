@@ -27,7 +27,7 @@ namespace TriviaClient
         public void Connect()
         {
             this.client = new TcpClient();
-            this.endPoint = new IPEndPoint(IPAddress.Parse(this.host), port);
+            this.endPoint = new IPEndPoint(IPAddress.Parse(this.host), this.port);
             this.client.Connect(this.endPoint);
             this.stream = this.client.GetStream();
             this.connected = true;

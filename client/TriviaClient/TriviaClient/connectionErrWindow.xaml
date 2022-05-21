@@ -5,8 +5,32 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TriviaClient"
         mc:Ignorable="d"
-        Title="connectionErrWindow" Height="450" Width="800">
-    <Grid>
-        
-    </Grid>
+        Title="connectionErrWindow" Height="720" Width="1280">
+    <Window.Background>
+        <ImageBrush ImageSource="/Resources/bg.png" Stretch="Fill" />
+    </Window.Background>
+    <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
+        <TextBlock Text="Connection Error" FontSize="72" FontFamily="Segoe UI"
+            Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" />
+        <TextBlock Text="Please check your internet connection and try again."
+            FontSize="36" FontFamily="Segoe UI" Foreground="White"
+            HorizontalAlignment="Center" VerticalAlignment="Center" />
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Height="525">
+            <Button x:Name="retryBtn"  FontSize="100" FontFamily="{StaticResource AmaticSC}" Background="black" BorderBrush="white" Foreground="White" FontWeight="Bold" BorderThickness="6" Content="retry" Height="180"  Width="300">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="15" />
+                    </Style>
+                </Button.Resources>
+            </Button>
+            <Label Width="12" />
+            <Button x:Name="exitBtn" FontSize="100" FontFamily="{StaticResource AmaticSC}" Background="black" BorderBrush="white" Foreground="White" FontWeight="Bold" BorderThickness="6" Content="exit" Height="180"  Width="300">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="15" />
+                    </Style>
+                </Button.Resources>
+            </Button>
+        </StackPanel>
+    </StackPanel>
 </Window>
