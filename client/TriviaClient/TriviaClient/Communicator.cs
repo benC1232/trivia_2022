@@ -26,34 +26,20 @@ namespace TriviaClient
 
         public void Connect()
         {
-            try
-            {
-                this.client = new TcpClient();
-                this.endPoint = new IPEndPoint(IPAddress.Parse(this.host), port);
-                this.client.Connect(this.endPoint);
-                this.stream = this.client.GetStream();
-                this.connected = true;
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-            }
+            this.client = new TcpClient();
+            this.endPoint = new IPEndPoint(IPAddress.Parse(this.host), port);
+            this.client.Connect(this.endPoint);
+            this.stream = this.client.GetStream();
+            this.connected = true;
         }
 
         public void Disconnect()
         {
             if (this.connected)
             {
-                try
-                {
-                    this.stream.Close();
-                    this.client.Close();
-                    this.connected = false;
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine(e.Message);
-                }
+                this.stream.Close();
+                this.client.Close();
+                this.connected = false;
             }
             else
             {
@@ -63,28 +49,21 @@ namespace TriviaClient
 
         public void Send(int code, byte[] message)
         {
-            try
+            byte codeByte = (byte)code;
+            byte[] messageLengthBytes = intToFourByteArr(message.Length);
+            byte[] messageBytes = message;
+            byte[] messageToSend = new byte[messageLengthBytes.Length + messageBytes.Length + 1];
+            messageToSend[0] = codeByte;
+            for (int i = 0; i < messageLengthBytes.Length; i++)
             {
-                byte codeByte = (byte)code;
-                byte[] messageLengthBytes = intToFourByteArr(message.Length);
-                byte[] messageBytes = message;
-                byte[] messageToSend = new byte[messageLengthBytes.Length + messageBytes.Length + 1];
-                messageToSend[0] = codeByte;
-                for (int i = 0; i < messageLengthBytes.Length; i++)
-                {
-                    messageToSend[i + 1] = messageLengthBytes[i];
-                }
-                for (int i = 0; i < messageBytes.Length; i++)
-                {
-                    messageToSend[i + messageLengthBytes.Length + 1] = messageBytes[i];
-                }
-                this.stream.Write(messageToSend, 0, messageToSend.Length);
-                this.stream.Flush();
+                messageToSend[i + 1] = messageLengthBytes[i];
             }
-            catch (Exception e)
+            for (int i = 0; i < messageBytes.Length; i++)
             {
-                Console.WriteLine(e.Message);
+                messageToSend[i + messageLengthBytes.Length + 1] = messageBytes[i];
             }
+            this.stream.Write(messageToSend, 0, messageToSend.Length);
+            this.stream.Flush();
         }
 
         public Tuple<int, byte[]> Recieve()
@@ -97,8 +76,7 @@ namespace TriviaClient
             }
             catch (Exception e)
             {
-                Console.WriteLine(e.Message);
-                return null;
+                throw e;
             }
         }
 
