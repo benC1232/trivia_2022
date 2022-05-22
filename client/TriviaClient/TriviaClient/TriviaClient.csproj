@@ -58,6 +58,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="requestStructs\loginRequest.cs" />
+    <Compile Include="requestStructs\signinRequest.cs" />
     <Page Include="CreateRoomWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -117,6 +119,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\bg.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="responseStructs\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

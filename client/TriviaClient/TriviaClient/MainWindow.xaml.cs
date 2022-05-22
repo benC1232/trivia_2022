@@ -13,6 +13,9 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+//json library do not delete!!!
+using Newtonsoft.Json;
+
 namespace TriviaClient
 {
     /// <summary>
@@ -38,7 +41,6 @@ namespace TriviaClient
                 return;
             }
 
-            
             this.UsernamePanel.Visibility = Visibility.Hidden;
             this.PasswordPanel.Visibility = Visibility.Hidden;
             this.EmailPanel.Visibility = Visibility.Hidden;
@@ -63,45 +65,44 @@ namespace TriviaClient
 
         private void SubmitBtn_Click(object sender, RoutedEventArgs e)
         {
+            //checking for errors
             if (!comm.connected)
             {
-                try
-                {
-                    comm.Connect();
-                }
-                catch (Exception ex)
-                {
-                    this.errorLbl.Visibility = Visibility.Visible;
-                    this.errorLbl.Text = ex.Message;
-                    return;
-                }
-            }
-            if (this.login)
-            {
-                if (this.UsernameTxt.Text == "" || this.PasswordTxt.Text == "")
-                {
-                    this.errorLbl.Visibility = Visibility.Visible;
-                    this.errorLbl.Text = "Please fill in all fields";
-                }
-                else
-                {
-                    MenuWindow menu = new MenuWindow();
-                    this.Close();
-                    menu.ShowDialog();
-                }
+                this.errorLbl.Visibility = Visibility.Visible;
+                this.errorLbl.Text = "cant submit, you are not connected";
             }
             else
             {
-                if (this.UsernameTxt.Text == "" || this.PasswordTxt.Text == "" || this.EmailTxt.Text == "")
+                if (this.login)
                 {
-                    this.errorLbl.Visibility = Visibility.Visible;
-                    this.errorLbl.Text = "Please fill in all fields";
+                    if (this.UsernameTxt.Text == "" || this.PasswordTxt.Text == "")
+                    {
+                        this.errorLbl.Visibility = Visibility.Visible;
+                        this.errorLbl.Text = "Please fill in all fields";
+                    }
+                    else
+                    {
+                        //login handling
+                        MenuWindow menu = new MenuWindow();
+                        this.Close();
+                        menu.ShowDialog();
+                    }
                 }
                 else
                 {
-                    MenuWindow menu = new MenuWindow();
-                    this.Close();
-                    menu.ShowDialog();
+                    if (this.UsernameTxt.Text == "" || this.PasswordTxt.Text == "" || this.EmailTxt.Text == "")
+                    {
+                        this.errorLbl.Visibility = Visibility.Visible;
+                        this.errorLbl.Text = "Please fill in all fields";
+                    }
+                    else
+                    {
+                        //signup handling
+
+                        MenuWindow menu = new MenuWindow();
+                        this.Close();
+                        menu.ShowDialog();
+                    }
                 }
             }
         }
