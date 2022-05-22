@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TriviaClient.requestStructs
 {
-    internal struct signinRequest
+    internal struct SignUpRequest
     {
         public string username;
         public string password;

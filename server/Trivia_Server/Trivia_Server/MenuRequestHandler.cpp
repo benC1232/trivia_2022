@@ -1,11 +1,6 @@
 #include "MenuRequestHandler.h"
 
-
-
-
-
 MenuRequestHandler::MenuRequestHandler(LoggedUser loggedUser, RoomManager* roomManager, StatisticsManager* statisticsManager, RequestHandlerFactory* requestHandlerFactory) : m_user(loggedUser), m_roomManager(m_roomManager), m_statisticsManager(statisticsManager), m_requestHandlerFactory(requestHandlerFactory) {}
-
 
 MenuRequestHandler::~MenuRequestHandler()
 {
@@ -22,18 +17,18 @@ bool MenuRequestHandler::isRequestRelevant(RequestInfo requestInfo)
 		requestInfo.id == HIGH_SCORE_GET;
 }
 
-
-
 RequestResult MenuRequestHandler::signout(RequestInfo requestInfo)
 {
 	RequestResult result;
 	LogoutResponse num;
+	LoginManager* manager = this->m_requestHandlerFactory->getLoginManager();
+	manager->logout(this->m_user.getUsername());
+
 	num.status = LOGOUT_REQUEST;
 	result.newHandler = nullptr;
 	result.buffer = JsonResponsePacketSerializer::serializeLogoutResponse(num);
 	return result;
 }
-	
 
 RequestResult MenuRequestHandler::getRooms(RequestInfo requestInfo)
 {
@@ -50,7 +45,6 @@ RequestResult MenuRequestHandler::getRooms(RequestInfo requestInfo)
 	result.buffer = JsonResponsePacketSerializer::serializeGetRoomResponse(num);
 	return result;
 }
-	
 
 RequestResult MenuRequestHandler::getPlayersInRoom(RequestInfo requestInfo)
 {
@@ -64,7 +58,6 @@ RequestResult MenuRequestHandler::getPlayersInRoom(RequestInfo requestInfo)
 	result.buffer = JsonResponsePacketSerializer::serializeGetPlayersInRoomsResponse(num);
 	result.newHandler = m_requestHandlerFactory->createMenuRequestHandler(this->m_user);
 	return result;
-	
 }
 
 RequestResult MenuRequestHandler::getPersonStats(RequestInfo requestInfo)
@@ -76,7 +69,6 @@ RequestResult MenuRequestHandler::getPersonStats(RequestInfo requestInfo)
 	result.buffer = JsonResponsePacketSerializer::serializeGetStatisticsResponse(num);
 	result.newHandler = m_requestHandlerFactory->createMenuRequestHandler(this->m_user);
 	return result;
-	
 }
 
 RequestResult MenuRequestHandler::getHighScore(RequestInfo requestInfo)
@@ -105,7 +97,6 @@ RequestResult MenuRequestHandler::joinRoom(RequestInfo requestInfo)
 	result.buffer = JsonResponsePacketSerializer::serializeJoinRoomResponse(num);
 	result.newHandler = nullptr;
 	return result;
-	
 }
 
 RequestResult MenuRequestHandler::createRoom(RequestInfo requestInfo)
@@ -124,9 +115,7 @@ RequestResult MenuRequestHandler::createRoom(RequestInfo requestInfo)
 	result.buffer = JsonResponsePacketSerializer::serializeCreateRoomResponse(num);
 	result.newHandler = nullptr;
 	return result;
-	
 }
-
 
 RequestResult MenuRequestHandler::handleRequest(RequestInfo requestInfo)
 {
@@ -135,7 +124,7 @@ RequestResult MenuRequestHandler::handleRequest(RequestInfo requestInfo)
 	{
 		result = signout(requestInfo);
 	}
-	else if(requestInfo.id == GET_ROOMS_REQUEST)
+	else if (requestInfo.id == GET_ROOMS_REQUEST)
 	{
 		result = getRooms(requestInfo);
 	}

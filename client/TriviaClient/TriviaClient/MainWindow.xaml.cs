@@ -83,9 +83,34 @@ namespace TriviaClient
                     else
                     {
                         //login handling
-                        MenuWindow menu = new MenuWindow();
-                        this.Close();
-                        menu.ShowDialog();
+                        requestStructs.LoginRequest loginRequest = new requestStructs.LoginRequest();
+                        loginRequest.username = this.UsernameTxt.Text;
+                        loginRequest.password = this.PasswordTxt.Text;
+                        string json = JsonConvert.SerializeObject(loginRequest);
+                        byte[] data = Encoding.ASCII.GetBytes(json);
+                        comm.Send(1, data);
+                        Tuple<int, byte[]> response = comm.Recieve();
+                        if (response.Item1 == 1)
+                        {
+                            //login success
+                            this.errorLbl.Visibility = Visibility.Hidden;
+                            this.UsernamePanel.Visibility = Visibility.Hidden;
+                            this.PasswordPanel.Visibility = Visibility.Hidden;
+                            this.EmailPanel.Visibility = Visibility.Hidden;
+                            this.UsernameTxt.Text = "";
+                            this.PasswordTxt.Text = "";
+                            this.EmailTxt.Text = "";
+
+                            MenuWindow menu = new MenuWindow();
+                            this.Close();
+                            menu.ShowDialog();
+                        }
+                        else
+                        {
+                            //login failed
+                            this.errorLbl.Visibility = Visibility.Visible;
+                            this.errorLbl.Text = "Login failed";
+                        }
                     }
                 }
                 else
@@ -98,10 +123,35 @@ namespace TriviaClient
                     else
                     {
                         //signup handling
+                        requestStructs.SignUpRequest signUpRequest = new requestStructs.SignUpRequest();
+                        signUpRequest.username = this.UsernameTxt.Text;
+                        signUpRequest.password = this.PasswordTxt.Text;
+                        signUpRequest.email = this.EmailTxt.Text;
+                        string json = JsonConvert.SerializeObject(signUpRequest);
+                        byte[] data = Encoding.ASCII.GetBytes(json);
+                        comm.Send(2, data);
+                        Tuple<int, byte[]> response = comm.Recieve();
+                        if (response.Item1 == 2)
+                        {
+                            //signup success
+                            this.errorLbl.Visibility = Visibility.Hidden;
+                            this.UsernamePanel.Visibility = Visibility.Hidden;
+                            this.PasswordPanel.Visibility = Visibility.Hidden;
+                            this.EmailPanel.Visibility = Visibility.Hidden;
+                            this.UsernameTxt.Text = "";
+                            this.PasswordTxt.Text = "";
+                            this.EmailTxt.Text = "";
 
-                        MenuWindow menu = new MenuWindow();
-                        this.Close();
-                        menu.ShowDialog();
+                            MenuWindow menu = new MenuWindow();
+                            this.Close();
+                            menu.ShowDialog();
+                        }
+                        else
+                        {
+                            //signup failed
+                            this.errorLbl.Visibility = Visibility.Visible;
+                            this.errorLbl.Text = "Signup failed";
+                        }
                     }
                 }
             }

@@ -58,8 +58,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="requestStructs\loginRequest.cs" />
-    <Compile Include="requestStructs\signinRequest.cs" />
+    <Compile Include="requestStructs\LoginRequest.cs" />
+    <Compile Include="requestStructs\SignUpRequest.cs" />
     <Page Include="CreateRoomWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

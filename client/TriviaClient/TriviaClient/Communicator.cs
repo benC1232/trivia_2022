@@ -16,6 +16,7 @@ namespace TriviaClient
         private int port;
         private string host;
         public bool connected;
+        public bool signoutFlag;
 
         public Communicator()
         {
@@ -44,6 +45,12 @@ namespace TriviaClient
         {
             if (this.connected)
             {
+                if (this.signoutFlag)
+                {
+                    byte[] arr = new byte[1];
+                    arr[0] = 0;
+                    this.Send(8, arr);
+                }
                 this.stream.Close();
                 this.client.Close();
                 this.connected = false;

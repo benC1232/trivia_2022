@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace TriviaClient.requestStructs
 {
-    internal struct loginRequest
+    internal struct LoginRequest
     {
-        public string name;
+        public string username;
         public string password;
     }
 }
