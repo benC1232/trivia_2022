@@ -22,7 +22,7 @@
                 </Button.Resources>
             </Button>
             <Label Width="20"/>
-            <Button x:Name="JoinRoomBtn" Content="Join Room" FontSize="60" FontFamily="{StaticResource AmaticSC}" Background="black" BorderBrush="white" Foreground="White" FontWeight="Bold" BorderThickness="6" Height="96"  Width="242">
+            <Button x:Name="JoinRoomBtn" Click="JoinRoomBtn_Click" Content="Join Room" FontSize="60" FontFamily="{StaticResource AmaticSC}" Background="black" BorderBrush="white" Foreground="White" FontWeight="Bold" BorderThickness="6" Height="96"  Width="242">
                 <Button.Resources>
                     <Style TargetType="Border">
                         <Setter Property="CornerRadius" Value="15" />
@@ -32,7 +32,7 @@
         </StackPanel>
         <Label Height="24"/>
         <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
-            <Button x:Name="personalRoomBtn" Content="Personal Stats" FontSize="50" FontFamily="{StaticResource AmaticSC}" Background="black" BorderBrush="white" Foreground="White" FontWeight="Bold" BorderThickness="6" Height="76"  Width="242">
+            <Button x:Name="personalRoomBtn" Click="personalRoomBtn_Click" Content="Personal Stats" FontSize="50" FontFamily="{StaticResource AmaticSC}" Background="black" BorderBrush="white" Foreground="White" FontWeight="Bold" BorderThickness="6" Height="76"  Width="242">
                 <Button.Resources>
                     <Style TargetType="Border">
                         <Setter Property="CornerRadius" Value="15" />
