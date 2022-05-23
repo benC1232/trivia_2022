@@ -19,8 +19,11 @@ namespace TriviaClient
     /// </summary>
     public partial class CreateRoomWindow : Window
     {
-        public CreateRoomWindow()
+        private Communicator comm;
+
+        public CreateRoomWindow(Communicator c)
         {
+            this.comm = c;
             InitializeComponent();
         }
 

@@ -19,24 +19,23 @@ namespace TriviaClient
     /// </summary>
     public partial class MenuWindow : Window
     {
-        private Communicator comms;
+        private Communicator comm;
 
         public MenuWindow(Communicator c)
         {
-            this.comms = c;
+            this.comm = c;
             InitializeComponent();
         }
 
         private void QuitBtn_Click(object sender, RoutedEventArgs e)
         {
-            //Log Out Handling
-            //...
+            this.comm.Disconnect();
             Application.Current.Shutdown();
         }
 
         private void CreateRoomBtn_Click(object sender, RoutedEventArgs e)
         {
-            CreateRoomWindow createRoomWindow = new CreateRoomWindow();
+            CreateRoomWindow createRoomWindow = new CreateRoomWindow(this.comm);
             this.Close();
             createRoomWindow.Show();
         }
