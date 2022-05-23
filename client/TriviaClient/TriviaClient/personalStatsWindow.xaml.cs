@@ -19,9 +19,17 @@ namespace TriviaClient
     /// </summary>
     public partial class personalStatsWindow : Window
     {
+
         public personalStatsWindow()
         {
             InitializeComponent();
+        }
+
+        private void backToMenuBtn_Click(object sender, RoutedEventArgs e)
+        {
+            //MenuWindow menuWindow = new MenuWindow();
+            //to ben: add the menu window
+
         }
     }
 }

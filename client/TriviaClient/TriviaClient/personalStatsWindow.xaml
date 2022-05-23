@@ -13,7 +13,7 @@
         <Label Height="56"/>
         <Label HorizontalContentAlignment="Center" Content="Personal Statistics" FontSize="80" FontFamily="{StaticResource AmaticSC}" VerticalContentAlignment="Center" Foreground="White" FontWeight="ExtraBold" Height="103" />
         <Label Height="41"/>
-        <StackPanel>
+        <StackPanel Width="408">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
                 <Label Content="Average Time Per Answer: " FontSize="40" FontFamily="{StaticResource AmaticSC}" VerticalContentAlignment="Center" Foreground="White" FontWeight="ExtraBold" Height="103" />
                 <Label Width="24"/>
@@ -36,9 +36,15 @@
                 <Label HorizontalAlignment="Right" HorizontalContentAlignment="Right" Content="0" FontSize="40" FontFamily="{StaticResource AmaticSC}" VerticalContentAlignment="Center" Foreground="White" FontWeight="ExtraBold" Height="103" Width="59" />
             </StackPanel>
         </StackPanel>
-        <Label Height="41"/>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
-            
+            <Button  x:Name="backToMenuBtn" Click="backToMenuBtn_Click"  Content="return" FontSize="40" FontFamily="{StaticResource AmaticSC}" Background="black" BorderBrush="white" Foreground="White" FontWeight="Bold" BorderThickness="6" Height="68"  Width="103">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="15" />
+                    </Style>
+                </Button.Resources>
+            </Button>
+            <Label Width="1152" Height="89" />
         </StackPanel>
     </StackPanel>
 </Window>
