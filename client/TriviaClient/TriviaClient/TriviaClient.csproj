@@ -58,9 +58,16 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="JoinRoomWindow.xaml.cs">
+      <DependentUpon>JoinRoomWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="requestStructs\LoginRequest.cs" />
     <Compile Include="requestStructs\SignUpRequest.cs" />
     <Page Include="CreateRoomWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="JoinRoomWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
