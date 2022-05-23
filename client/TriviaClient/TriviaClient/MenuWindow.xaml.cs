@@ -39,5 +39,21 @@ namespace TriviaClient
             this.Close();
             createRoomWindow.Show();
         }
+
+        private void JoinRoomBtn_Click(object sender, RoutedEventArgs e)
+        {
+            JoinRoomWindow joinRoomWindow = new JoinRoomWindow();
+            this.Close();
+            joinRoomWindow.Show();
+
+        }
+
+        private void personalRoomBtn_Click(object sender, RoutedEventArgs e)
+        {
+            personalStatsWindow personalStatsWindow = new personalStatsWindow();
+            this.Close();
+            personalStatsWindow.Show();
+
+        }
     }
 }

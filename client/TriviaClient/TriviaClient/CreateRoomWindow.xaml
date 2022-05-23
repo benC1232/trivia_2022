@@ -69,6 +69,9 @@
                 </Style>
             </Button.Resources>
         </Button>
+        <Label Height="10"/>
+        <TextBlock x:Name="errorLbl" HorizontalAlignment="Center" Text ="there has been an error!" FontSize="40" FontFamily="{StaticResource AmaticSC}" Background="Transparent" Foreground="DarkRed" />
+
 
     </StackPanel>
 </Window>

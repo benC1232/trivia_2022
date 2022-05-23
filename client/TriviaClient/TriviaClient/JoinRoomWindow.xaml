@@ -14,7 +14,7 @@
         <!--room list label-->
         <Label HorizontalContentAlignment="Center" Content="Rooms List:" FontSize="80" FontFamily="{StaticResource AmaticSC}" VerticalContentAlignment="Center" Foreground="White" FontWeight="ExtraBold" Height="103" />
         <Label Height="35"/>
-        <TextBlock ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto" TextWrapping="Wrap" Text="rooms" FontSize="40" FontFamily="{StaticResource AmaticSC}" Foreground="White" Background="Black" FontWeight="ExtraBold" Height="355" Width="800" />
+        <TextBlock ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto" TextWrapping="Wrap" Text="rooms" FontSize="40" FontFamily="{StaticResource AmaticSC}" Foreground="White" Background="Black" FontWeight="ExtraBold" Height="290" Width="800" />
         <Label Height="27"/>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
             <Label HorizontalContentAlignment="Center" Content="Room's Name: " FontSize="40" FontFamily="{StaticResource AmaticSC}" VerticalContentAlignment="Center" Foreground="White" FontWeight="ExtraBold" Height="103" />
@@ -34,5 +34,8 @@
                 </Button.Resources>
             </Button>
         </StackPanel>
+        <Label Height="10"/>
+        <TextBlock x:Name="errorLbl" HorizontalAlignment="Center" Text ="there has been an error!" FontSize="40" FontFamily="{StaticResource AmaticSC}" Background="Transparent" Foreground="DarkRed" />
+
     </StackPanel>
 </Window>
