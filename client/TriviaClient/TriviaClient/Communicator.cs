@@ -8,7 +8,7 @@ using System.Net;
 
 namespace TriviaClient
 {
-    internal class Communicator
+    public class Communicator
     {
         private TcpClient client;
         private NetworkStream stream;

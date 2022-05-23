@@ -19,8 +19,11 @@ namespace TriviaClient
     /// </summary>
     public partial class MenuWindow : Window
     {
-        public MenuWindow()
+        private Communicator comms;
+
+        public MenuWindow(Communicator c)
         {
+            this.comms = c;
             InitializeComponent();
         }
 
