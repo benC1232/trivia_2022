@@ -22,12 +22,10 @@ namespace TriviaClient
         public CreateRoomWindow()
         {
             InitializeComponent();
-             
         }
 
         private void CreateBtn_Click(object sender, RoutedEventArgs e)
         {
-
         }
     }
 }

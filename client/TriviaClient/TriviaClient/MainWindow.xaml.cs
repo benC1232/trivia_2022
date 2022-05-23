@@ -66,7 +66,7 @@ namespace TriviaClient
         private void SubmitBtn_Click(object sender, RoutedEventArgs e)
         {
             //checking for errors
-            if (!comm.connected)
+            if (!this.comm.connected)
             {
                 this.errorLbl.Visibility = Visibility.Visible;
                 this.errorLbl.Text = "cant submit, you are not connected";
@@ -101,7 +101,7 @@ namespace TriviaClient
                             this.PasswordTxt.Text = "";
                             this.EmailTxt.Text = "";
 
-                            MenuWindow menu = new MenuWindow();
+                            MenuWindow menu = new MenuWindow(this.comm);
                             this.Close();
                             menu.ShowDialog();
                         }
@@ -142,7 +142,7 @@ namespace TriviaClient
                             this.PasswordTxt.Text = "";
                             this.EmailTxt.Text = "";
 
-                            MenuWindow menu = new MenuWindow();
+                            MenuWindow menu = new MenuWindow(this.comm);
                             this.Close();
                             menu.ShowDialog();
                         }
