@@ -103,7 +103,7 @@ namespace TriviaClient
 
                             MenuWindow menu = new MenuWindow(this.comm);
                             this.Close();
-                            menu.ShowDialog();
+                            menu.Show();
                         }
                         else
                         {
@@ -144,7 +144,7 @@ namespace TriviaClient
 
                             MenuWindow menu = new MenuWindow(this.comm);
                             this.Close();
-                            menu.ShowDialog();
+                            menu.Show();
                         }
                         else
                         {
