@@ -19,14 +19,16 @@ namespace TriviaClient
     /// </summary>
     public partial class leaderBoardWindow : Window
     {
-        public leaderBoardWindow()
+        private Communicator comm;
+        public leaderBoardWindow(Communicator c)
         {
+            this.comm = c;
             InitializeComponent();
         }
 
         private void backToMenuBtn_Click(object sender, RoutedEventArgs e)
         {
-            //return to menu
+            
         }
     }
 }

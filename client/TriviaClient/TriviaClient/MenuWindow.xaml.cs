@@ -53,5 +53,13 @@ namespace TriviaClient
             this.Close();
             personalStatsWindow.Show();
         }
+
+        private void leaderBoardRoomBtn_Click(object sender, RoutedEventArgs e)
+        {
+            leaderBoardWindow leaderBoardWindow = new leaderBoardWindow(this.comm);
+            this.Close();
+            leaderBoardWindow.Show();
+
+        }
     }
 }
