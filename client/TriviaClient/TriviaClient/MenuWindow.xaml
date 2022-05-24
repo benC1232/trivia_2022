@@ -40,7 +40,7 @@
                 </Button.Resources>
             </Button>
             <Label Width="20"/>
-            <Button x:Name="leaderBoardRoomBtn" Content="Leader Board" FontSize="50" FontFamily="{StaticResource AmaticSC}" Background="black" BorderBrush="white" Foreground="White" FontWeight="Bold" BorderThickness="6" Height="76"  Width="242">
+            <Button x:Name="leaderBoardRoomBtn" Click="leaderBoardRoomBtn_Click" Content="Leader Board" FontSize="50" FontFamily="{StaticResource AmaticSC}" Background="black" BorderBrush="white" Foreground="White" FontWeight="Bold" BorderThickness="6" Height="76"  Width="242">
                 <Button.Resources>
                     <Style TargetType="Border">
                         <Setter Property="CornerRadius" Value="15" />

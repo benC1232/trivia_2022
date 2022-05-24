@@ -61,6 +61,9 @@
     <Compile Include="JoinRoomWindow.xaml.cs">
       <DependentUpon>JoinRoomWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="leaderBoardWindow.xaml.cs">
+      <DependentUpon>leaderBoardWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="personalStatsWindow.xaml.cs">
       <DependentUpon>personalStatsWindow.xaml</DependentUpon>
     </Compile>
@@ -73,6 +76,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="JoinRoomWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="leaderBoardWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
