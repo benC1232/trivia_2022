@@ -64,8 +64,10 @@
     <Compile Include="personalStatsWindow.xaml.cs">
       <DependentUpon>personalStatsWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="requestStructs\CreateRoomRequest.cs" />
     <Compile Include="requestStructs\LoginRequest.cs" />
     <Compile Include="requestStructs\SignUpRequest.cs" />
+    <Compile Include="responseStructs\ErrorResponse.cs" />
     <Page Include="CreateRoomWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -134,8 +136,6 @@
   <ItemGroup>
     <Resource Include="Resources\bg.png" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="responseStructs\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

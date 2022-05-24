@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Newtonsoft.Json;
 
 namespace TriviaClient
 {
@@ -25,10 +26,37 @@ namespace TriviaClient
         {
             this.comm = c;
             InitializeComponent();
+            this.errorLbl.Visibility = Visibility.Hidden;
         }
 
         private void CreateBtn_Click(object sender, RoutedEventArgs e)
         {
+            if (this.RoomName.Text == "")
+            {
+                this.errorLbl.Visibility = Visibility.Visible;
+                this.errorLbl.Text = "Please enter a room name";
+                return;
+            }
+            requestStructs.CreateRoomRequest request;
+            request.roomName = this.RoomName.Text;
+            request.maxUsers = (int)this.MaxPlayers.Value;
+            request.questionCount = (int)this.numOfQuestions.Value;
+            request.answerTimeout = (int)this.TimeQuestions.Value;
+            string json = JsonConvert.SerializeObject(request);
+            byte[] data = Encoding.ASCII.GetBytes(json);
+            this.comm.Send(3, data);
+            Tuple<int, byte[]> response = comm.Recieve();
+            string strResponse = Encoding.ASCII.GetString(response.Item2);
+            if (response.Item1 == 8)
+            {
+                this.errorLbl.Text = "actually joining the room hast been implemented yet";
+            }
+            if (response.Item1 == 3)
+            {
+                responseStructs.ErrorResponse errResponse = JsonConvert.DeserializeObject<responseStructs.ErrorResponse>(Encoding.ASCII.GetString(response.Item2));
+                this.errorLbl.Visibility = Visibility.Visible;
+                this.errorLbl.Text = errResponse.message;
+            }
         }
     }
 }

@@ -90,6 +90,12 @@ namespace TriviaClient
                         byte[] data = Encoding.ASCII.GetBytes(json);
                         comm.Send(1, data);
                         Tuple<int, byte[]> response = comm.Recieve();
+                        if (response.Item1 == 3)
+                        {
+                            responseStructs.ErrorResponse errResponse = JsonConvert.DeserializeObject<responseStructs.ErrorResponse>(Encoding.ASCII.GetString(response.Item2));
+                            this.errorLbl.Visibility = Visibility.Visible;
+                            this.errorLbl.Text = errResponse.message;
+                        }
                         if (response.Item1 == 1)
                         {
                             //login success
@@ -131,7 +137,13 @@ namespace TriviaClient
                         byte[] data = Encoding.ASCII.GetBytes(json);
                         comm.Send(2, data);
                         Tuple<int, byte[]> response = comm.Recieve();
-                        if (response.Item1 == 2)
+                        if (response.Item1 == 3)
+                        {
+                            responseStructs.ErrorResponse errResponse = JsonConvert.DeserializeObject<responseStructs.ErrorResponse>(Encoding.ASCII.GetString(response.Item2));
+                            this.errorLbl.Visibility = Visibility.Visible;
+                            this.errorLbl.Text = errResponse.message;
+                        }
+                        else if (response.Item1 == 2)
                         {
                             //signup success
                             this.errorLbl.Visibility = Visibility.Hidden;
