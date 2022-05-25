@@ -71,6 +71,7 @@
     <Compile Include="requestStructs\LoginRequest.cs" />
     <Compile Include="requestStructs\SignUpRequest.cs" />
     <Compile Include="responseStructs\ErrorResponse.cs" />
+    <Compile Include="responseStructs\HighScoreResponse.cs" />
     <Page Include="CreateRoomWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

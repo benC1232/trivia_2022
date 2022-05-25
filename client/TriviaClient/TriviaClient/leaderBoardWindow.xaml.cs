@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Newtonsoft.Json;
 
 namespace TriviaClient
 {
@@ -29,9 +30,36 @@ namespace TriviaClient
             data[0] = 0;
             comm.Send(10, data);
             Tuple<int, byte[]> response = this.comm.Recieve();
+            string strResponse = Encoding.ASCII.GetString(response.Item2);
             if (response.Item1 == 10)
             {
-                //need to parse this but idk how the json looks
+                responseStructs.HighScoreResponse highScoresResponse = JsonConvert.DeserializeObject<responseStructs.HighScoreResponse>(strResponse);
+                string[] splitted = highScoresResponse.highscores.Split(',');
+                for (int i = 0; i < splitted.Length; i++)
+                {
+                    switch (i)
+                    {
+                        case 0:
+                            this.first.Content = this.first.Content += splitted[i];
+                            break;
+
+                        case 1:
+                            this.second.Content = this.second.Content += splitted[i];
+                            break;
+
+                        case 2:
+                            this.third.Content = this.third.Content += splitted[i];
+                            break;
+
+                        case 3:
+                            this.fourth.Content = this.fourth.Content += splitted[i];
+                            break;
+
+                        case 4:
+                            this.fifth.Content = this.fifth.Content += splitted[i];
+                            break;
+                    }
+                }
             }
             if (response.Item1 == 3)
             {

@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Newtonsoft.Json;
 
 namespace TriviaClient
 {
@@ -59,7 +60,6 @@ namespace TriviaClient
             leaderBoardWindow leaderBoardWindow = new leaderBoardWindow(this.comm);
             this.Close();
             leaderBoardWindow.Show();
-
         }
     }
 }
