@@ -20,6 +20,7 @@ namespace TriviaClient
     public partial class leaderBoardWindow : Window
     {
         private Communicator comm;
+
         public leaderBoardWindow(Communicator c)
         {
             this.comm = c;
@@ -28,7 +29,9 @@ namespace TriviaClient
 
         private void backToMenuBtn_Click(object sender, RoutedEventArgs e)
         {
-            
+            MenuWindow menuWindow = new MenuWindow(comm);
+            this.Close();
+            menuWindow.Show();
         }
     }
 }

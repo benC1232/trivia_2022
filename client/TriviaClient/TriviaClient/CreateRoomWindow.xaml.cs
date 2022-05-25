@@ -49,6 +49,7 @@ namespace TriviaClient
             string strResponse = Encoding.ASCII.GetString(response.Item2);
             if (response.Item1 == 8)
             {
+                this.errorLbl.Visibility = Visibility.Visible;
                 this.errorLbl.Text = "actually joining the room hast been implemented yet";
             }
             if (response.Item1 == 3)
