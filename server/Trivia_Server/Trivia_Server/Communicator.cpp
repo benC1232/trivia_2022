@@ -1,6 +1,7 @@
 #include "Communicator.h"
 #define MESSAGE_SIZE 1024
 #define JSON_OFFSET 5
+#define SIGNOUT 8
 Communicator::Communicator(RequestHandlerFactory* factory)
 {
 	//copied this code from week 13
@@ -59,10 +60,39 @@ void Communicator::bindAndListen()
 
 void Communicator::handleNewClient(SOCKET clientSocket)
 {
-	LoginRequestHandler* handler = new LoginRequestHandler();
-	this->m_clients.insert({ clientSocket, handler });
+	IRequestHandler* curr = nullptr;
+	this->m_clients.insert({ clientSocket, nullptr });
 	try
 	{
+		RequestInfo request;
+		RequestResult result;
+		char clientMessage[MESSAGE_SIZE];
+		int jsonSize = 0;
+		std::vector<unsigned char> buffer;
+		char* response;
+		int responseSize;
+		curr = this->m_handlerFactory->createLoginRequestHandler();
+		while (request.id != SIGNOUT)
+		{
+			recv(clientSocket, clientMessage, MESSAGE_SIZE, 0);
+			jsonSize = getJsonSize(clientMessage);
+			buffer = msgToBuffer(clientMessage, jsonSize + JSON_OFFSET);
+			request.id = int(buffer[0]);
+			request.receivalTime = std::time(0);
+			request.buffer = buffer;
+			result = curr->handleRequest(request);
+			if (request.id != SIGNOUT)
+			{
+				response = bufferToMsg(result.buffer);
+				responseSize = result.buffer.size();
+				send(clientSocket, response, responseSize, 0);
+				delete response;
+			}
+		}
+		this->m_clients.erase(clientSocket);
+		closesocket(clientSocket);
+		std::cout << "socket closed successfully" << std::endl;
+		/*
 		char clientMessage[MESSAGE_SIZE];
 		recv(clientSocket, clientMessage, MESSAGE_SIZE, 0);
 		int jsonSize = getJsonSize(clientMessage);
@@ -79,6 +109,7 @@ void Communicator::handleNewClient(SOCKET clientSocket)
 		this->m_clients.erase(clientSocket);
 		closesocket(clientSocket);
 		std::cout << "socket closed successfully" << std::endl;
+		*/
 	}
 	catch (const std::exception& e)
 	{
