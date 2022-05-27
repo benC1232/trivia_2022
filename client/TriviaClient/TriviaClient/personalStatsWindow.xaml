@@ -11,30 +11,29 @@
     </Window.Background>
     <StackPanel>
         <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
-            <Label Height="56"/>
+            <Label Height="56" />
             <Label HorizontalContentAlignment="Center" Content="Personal Statistics" FontSize="80" FontFamily="{StaticResource AmaticSC}" VerticalContentAlignment="Center" Foreground="White" FontWeight="ExtraBold" Height="103" />
-            <Label Height="41"/>
+            <Label Height="41" />
             <StackPanel Width="408">
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
                     <Label Content="Average Time Per Answer: " FontSize="40" FontFamily="{StaticResource AmaticSC}" VerticalContentAlignment="Center" Foreground="White" FontWeight="ExtraBold" Height="103" />
-                    <Label Width="24"/>
-                    <Label  HorizontalAlignment="Right" HorizontalContentAlignment="Right" Content="0" FontSize="40" FontFamily="{StaticResource AmaticSC}" VerticalContentAlignment="Center" Foreground="White" FontWeight="ExtraBold" Height="103" Width="59" />
-
+                    <Label Width="24" />
+                    <Label  x:Name ="avgTimePerAnswerLbl"  HorizontalAlignment="Right" HorizontalContentAlignment="Right" Content="0" FontSize="40" FontFamily="{StaticResource AmaticSC}" VerticalContentAlignment="Center" Foreground="White" FontWeight="ExtraBold" Height="103" Width="59" />
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
                     <Label Content="Number of corect answers: " FontSize="40" FontFamily="{StaticResource AmaticSC}" VerticalContentAlignment="Center" Foreground="White" FontWeight="ExtraBold" Height="103" />
-                    <Label Width="11"/>
-                    <Label HorizontalAlignment="Right" HorizontalContentAlignment="Right" Content="0" FontSize="40" FontFamily="{StaticResource AmaticSC}" VerticalContentAlignment="Center" Foreground="White" FontWeight="ExtraBold" Height="103" Width="59" />
+                    <Label Width="11" />
+                    <Label x:Name ="NumOfCorrectAnswersLbl" HorizontalAlignment="Right" HorizontalContentAlignment="Right" Content="0" FontSize="40" FontFamily="{StaticResource AmaticSC}" VerticalContentAlignment="Center" Foreground="White" FontWeight="ExtraBold" Height="103" Width="59" />
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
                     <Label Content="Number of answers: " FontSize="40" FontFamily="{StaticResource AmaticSC}" VerticalContentAlignment="Center" Foreground="White" FontWeight="ExtraBold" Height="103" />
-                    <Label Width="90"/>
-                    <Label HorizontalAlignment="Right" HorizontalContentAlignment="Right" Content="0" FontSize="40" FontFamily="{StaticResource AmaticSC}" VerticalContentAlignment="Center" Foreground="White" FontWeight="ExtraBold" Height="103" Width="59" />
+                    <Label Width="90" />
+                    <Label x:Name ="NumOfAnswersLbl" HorizontalAlignment="Right" HorizontalContentAlignment="Right" Content="0" FontSize="40" FontFamily="{StaticResource AmaticSC}" VerticalContentAlignment="Center" Foreground="White" FontWeight="ExtraBold" Height="103" Width="59" />
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
                     <Label Content="Number of played Games: " FontSize="40" FontFamily="{StaticResource AmaticSC}" VerticalContentAlignment="Center" Foreground="White" FontWeight="ExtraBold" Height="103" />
-                    <Label Width="36"/>
-                    <Label HorizontalAlignment="Right" HorizontalContentAlignment="Right" Content="0" FontSize="40" FontFamily="{StaticResource AmaticSC}" VerticalContentAlignment="Center" Foreground="White" FontWeight="ExtraBold" Height="103" Width="59" />
+                    <Label Width="36" />
+                    <Label x:Name ="NumOfGamesLbl" HorizontalAlignment="Right" HorizontalContentAlignment="Right" Content="0" FontSize="40" FontFamily="{StaticResource AmaticSC}" VerticalContentAlignment="Center" Foreground="White" FontWeight="ExtraBold" Height="103" Width="59" />
                 </StackPanel>
             </StackPanel>
         </StackPanel>

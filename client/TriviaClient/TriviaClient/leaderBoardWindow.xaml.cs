@@ -26,6 +26,7 @@ namespace TriviaClient
         {
             this.comm = c;
             InitializeComponent();
+            this.errorLbl.Visibility = Visibility.Hidden;
             byte[] data = new byte[1];
             data[0] = 0;
             comm.Send(10, data);
@@ -63,7 +64,9 @@ namespace TriviaClient
             }
             if (response.Item1 == 3)
             {
-                //need to add a error message box
+                responseStructs.ErrorResponse errorResponse = JsonConvert.DeserializeObject<responseStructs.ErrorResponse>(strResponse);
+                this.errorLbl.Visibility = Visibility.Visible;
+                this.errorLbl.Text = errorResponse.message;
             }
         }
 

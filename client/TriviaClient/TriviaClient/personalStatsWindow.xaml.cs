@@ -25,6 +25,28 @@ namespace TriviaClient
         {
             this.comm = c;
             InitializeComponent();
+            byte[] data = new byte[1];
+            data[0] = 0;
+            comm.Send(7, data);
+            Tuple<int, byte[]> response = this.comm.Recieve();
+            string strResponse = Encoding.ASCII.GetString(response.Item2);
+            if (response.Item1 == 9)
+            {
+                string[] parsedResponse = strResponse.Split(',');
+                string avgTime = parsedResponse[0].Split(':')[1];
+                this.avgTimePerAnswerLbl.Content = avgTime;
+                string correctAnswers = parsedResponse[1].Split(':')[1];
+                this.NumOfCorrectAnswersLbl.Content = correctAnswers;
+                string totalAnswers = parsedResponse[2].Split(':')[1];
+                this.NumOfAnswersLbl.Content = totalAnswers;
+                string gameNum = parsedResponse[3].Split(':')[1];
+                this.NumOfGamesLbl.Content = gameNum;
+            }
+            if (response.Item1 == 3)
+            {
+                this.errorLbl.Visibility = Visibility.Visible;
+                this.errorLbl.Text = strResponse;
+            }
         }
 
         private void backToMenuBtn_Click(object sender, RoutedEventArgs e)
