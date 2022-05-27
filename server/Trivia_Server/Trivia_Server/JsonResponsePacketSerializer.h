@@ -38,7 +38,7 @@ struct GetHighScoreRespnse {
 	std::vector<std::string> statistics;
 };
 
-struct GetPresonalStatsResponse {
+struct GetPersonalStatsResponse {
 	unsigned int status;
 	std::vector<std::string> statistics;
 };
@@ -61,6 +61,6 @@ public:
 	static std::vector<unsigned char> serializeGetPlayersInRoomsResponse(struct GetPlayersInRoomsResponse getPlayersInRoomsResponse);
 	static std::vector<unsigned char>  serializeJoinRoomResponse(struct JoinRoomResponse joinRoomResponse);
 	static std::vector<unsigned char>  serializeCreateRoomResponse(struct CreateRoomResponse createRoomResponse);
-	static std::vector<unsigned char> serializeGetStatisticsResponse(struct GetPresonalStatsResponse getPresonalStatsResponse);
+	static std::vector<unsigned char> serializeGetStatisticsResponse(struct GetPersonalStatsResponse getPresonalStatsResponse);
 	static std::vector<unsigned char> serializeGetHighScoreResponse(struct GetHighScoreRespnse getHighScoreResponse);
 };

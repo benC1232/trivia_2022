@@ -116,8 +116,6 @@ std::vector<unsigned char> JsonResponsePacketSerializer::serializeGetPlayersInRo
 	buffer.insert(buffer.end(), lenBuff.begin(), lenBuff.end());
 	for (unsigned char c : jsonString) buffer.push_back(c);
 	return buffer;
-	
-	
 }
 
 std::vector<unsigned char> JsonResponsePacketSerializer::serializeJoinRoomResponse(JoinRoomResponse joinRoomResponse)
@@ -132,7 +130,6 @@ std::vector<unsigned char> JsonResponsePacketSerializer::serializeJoinRoomRespon
 	buffer.insert(buffer.end(), lenBuff.begin(), lenBuff.end());
 	for (unsigned char c : jsonString) buffer.push_back(c);
 	return buffer;
-	
 }
 
 std::vector<unsigned char> JsonResponsePacketSerializer::serializeCreateRoomResponse(CreateRoomResponse createRoomResponse)
@@ -149,7 +146,7 @@ std::vector<unsigned char> JsonResponsePacketSerializer::serializeCreateRoomResp
 	return buffer;
 }
 
-std::vector<unsigned char> JsonResponsePacketSerializer::serializeGetStatisticsResponse( GetPresonalStatsResponse getPresonalStatsResponse)
+std::vector<unsigned char> JsonResponsePacketSerializer::serializeGetStatisticsResponse(GetPersonalStatsResponse getPresonalStatsResponse)
 {
 	std::vector<unsigned char> buffer;
 	buffer.push_back(GET_STATISTICS_RESPONSE_CODE);
@@ -162,11 +159,9 @@ std::vector<unsigned char> JsonResponsePacketSerializer::serializeGetStatisticsR
 	buffer.insert(buffer.end(), lenBuff.begin(), lenBuff.end());
 	for (unsigned char c : jsonString) buffer.push_back(c);
 	return buffer;
-	
-	
 }
 
-std::vector<unsigned char> JsonResponsePacketSerializer::serializeGetHighScoreResponse(GetHighScoreRespnse getHighScoreResponse){
+std::vector<unsigned char> JsonResponsePacketSerializer::serializeGetHighScoreResponse(GetHighScoreRespnse getHighScoreResponse) {
 	std::vector<unsigned char> buffer;
 	buffer.push_back(GET_STATISTICS_RESPONSE_CODE);
 	nlohmann::json jsonResponse = {
@@ -179,5 +174,3 @@ std::vector<unsigned char> JsonResponsePacketSerializer::serializeGetHighScoreRe
 	for (unsigned char c : jsonString) buffer.push_back(c);
 	return buffer;
 }
-
-

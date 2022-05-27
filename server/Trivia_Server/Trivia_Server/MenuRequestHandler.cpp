@@ -63,7 +63,7 @@ RequestResult MenuRequestHandler::getPlayersInRoom(RequestInfo requestInfo)
 RequestResult MenuRequestHandler::getPersonStats(RequestInfo requestInfo)
 {
 	RequestResult result;
-	GetPresonalStatsResponse num;
+	GetPersonalStatsResponse num;
 	num.status = GET_STATISITCS_REQUEST;
 	num.statistics = this->m_statisticsManager->getUserStatistics(m_user.getUsername());
 	result.buffer = JsonResponsePacketSerializer::serializeGetStatisticsResponse(num);
