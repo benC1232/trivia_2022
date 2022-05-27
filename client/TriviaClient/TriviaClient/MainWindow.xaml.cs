@@ -30,6 +30,10 @@ namespace TriviaClient
         {
             InitializeComponent();
             this.comm = new Communicator();
+            this.UsernamePanel.Visibility = Visibility.Hidden;
+            this.PasswordPanel.Visibility = Visibility.Hidden;
+            this.EmailPanel.Visibility = Visibility.Hidden;
+            this.errorLbl.Visibility = Visibility.Hidden;
             try
             {
                 comm.Connect();
@@ -40,11 +44,6 @@ namespace TriviaClient
                 this.errorLbl.Text = e.Message;
                 return;
             }
-
-            this.UsernamePanel.Visibility = Visibility.Hidden;
-            this.PasswordPanel.Visibility = Visibility.Hidden;
-            this.EmailPanel.Visibility = Visibility.Hidden;
-            this.errorLbl.Visibility = Visibility.Hidden;
         }
 
         private void LogInBtn_Click(object sender, RoutedEventArgs e)
