@@ -81,6 +81,10 @@ void Communicator::handleNewClient(SOCKET clientSocket)
 			request.receivalTime = std::time(0);
 			request.buffer = buffer;
 			result = curr->handleRequest(request);
+			if (this->m_clients[clientSocket] == nullptr)
+			{
+				throw std::exception("request hander is null!!!");
+			}
 			if (request.id != SIGNOUT)
 			{
 				response = bufferToMsg(result.buffer);
@@ -92,6 +96,7 @@ void Communicator::handleNewClient(SOCKET clientSocket)
 		this->m_clients.erase(clientSocket);
 		closesocket(clientSocket);
 		std::cout << "socket closed successfully" << std::endl;
+		//old code
 		/*
 		char clientMessage[MESSAGE_SIZE];
 		recv(clientSocket, clientMessage, MESSAGE_SIZE, 0);
