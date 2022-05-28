@@ -35,5 +35,10 @@ namespace TriviaClient
         {
             String selectedRoomName = this.roomsListLstBx.SelectedItem.ToString();
         }
+
+        private void roomsListLstBx_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            this.JoinRoomBtn.Content = "Join " + this.roomsListLstBx.SelectedItem.ToString();
+        }
     }
 }
