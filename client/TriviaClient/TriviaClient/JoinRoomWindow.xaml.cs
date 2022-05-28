@@ -22,11 +22,18 @@ namespace TriviaClient
     {
         public JoinRoomWindow()
         {
+            List<String> items = new List<String>();
+            items.Add("Room 1");
+            items.Add("Room 2");
+            items.Add("Room 3");
+
+            this.roomsListLstBx.ItemsSource = items;
             InitializeComponent();
         }
 
         private void JoinRoomBtn_Click(object sender, RoutedEventArgs e)
         {
+            String selectedRoomName = this.roomsListLstBx.SelectedItem.ToString();
         }
     }
 }
