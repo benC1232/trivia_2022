@@ -179,7 +179,7 @@ int totalAnswersCallback(void* data, int argc, char** argv, char** azColName)
 }
 int SqliteDataBase::getNumOfTotalAnswers(std::string username)
 {
-	std::string query = "SELECT correctanswers+incorrectanswers FROM statistics WHERE username = '" + username + "';";
+	std::string query = "SELECT correctanswers+wronganswers FROM statistics WHERE username = '" + username + "';";
 	char* errMessage = nullptr;
 	int result = 0;
 	int res = sqlite3_exec(this->_db, query.c_str(), totalAnswersCallback, &result, &errMessage);
