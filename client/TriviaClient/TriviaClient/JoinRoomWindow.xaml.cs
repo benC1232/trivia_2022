@@ -20,15 +20,44 @@ namespace TriviaClient
     /// </summary>
     public partial class JoinRoomWindow : Window
     {
-        public JoinRoomWindow()
-        {
-            List<String> items = new List<String>();
-            items.Add("Room 1");
-            items.Add("Room 2");
-            items.Add("Room 3");
+        private Communicator comm;
 
-            this.roomsListLstBx.ItemsSource = items;
+        public JoinRoomWindow(Communicator c)
+        {
+            this.comm = c;
             InitializeComponent();
+            refresh();
+        }
+
+        private void refresh()
+        {
+            byte[] data = new byte[1];
+            data[0] = 0;
+            this.comm.Send(4, data);
+            Tuple<int, byte[]> response = this.comm.Recieve();
+
+            string strResponse = Encoding.ASCII.GetString(response.Item2);
+            if (response.Item1 == 5)
+            {
+                responseStructs.GetRoomResponse getRoomResponse = JsonConvert.DeserializeObject<responseStructs.GetRoomResponse>(strResponse);
+
+                List<string> items = new List<string>(getRoomResponse.rooms.Split(','));
+                if (items[1] == "no rooms available")
+                {
+                    this.errorLbl.Visibility = Visibility.Visible;
+                    this.errorLbl.Text = "no rooms available";
+                }
+                else
+                {
+                    this.roomsListLstBx.ItemsSource = items;
+                }
+            }
+            if (response.Item1 == 3)
+            {
+                responseStructs.ErrorResponse errorResponse = JsonConvert.DeserializeObject<responseStructs.ErrorResponse>(strResponse);
+                this.errorLbl.Visibility = Visibility.Visible;
+                this.errorLbl.Text = errorResponse.message;
+            }
         }
 
         private void JoinRoomBtn_Click(object sender, RoutedEventArgs e)

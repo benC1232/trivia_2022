@@ -43,7 +43,7 @@ namespace TriviaClient
 
         private void JoinRoomBtn_Click(object sender, RoutedEventArgs e)
         {
-            JoinRoomWindow joinRoomWindow = new JoinRoomWindow();
+            JoinRoomWindow joinRoomWindow = new JoinRoomWindow(this.comm);
             this.Close();
             joinRoomWindow.Show();
         }

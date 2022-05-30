@@ -20,7 +20,7 @@ std::vector<unsigned char> intToByteVector(int num) {
 std::string RoomDataVecToString(std::vector<RoomData> roomData) {
 	std::string output = "";
 	for (auto room : roomData) {
-		output += room.name + ", ";
+		output += room.name + ",";
 	}
 	return output;
 }
@@ -28,7 +28,7 @@ std::string RoomDataVecToString(std::vector<RoomData> roomData) {
 std::string stringVecToString(std::vector<std::string> strings) {
 	std::string output = "";
 	for (auto string : strings) {
-		output += string + ", ";
+		output += string + ",";
 	}
 	return output;
 }
@@ -36,7 +36,7 @@ std::string stringVecToString(std::vector<std::string> strings) {
 std::string intVecToString(std::vector<unsigned int> ints) {
 	std::string output = "";
 	for (auto int_ : ints) {
-		output += std::to_string(int_) + ", ";
+		output += std::to_string(int_) + ",";
 	}
 	return output;
 }
@@ -93,10 +93,21 @@ std::vector<unsigned char> JsonResponsePacketSerializer::serializeGetRoomRespons
 {
 	std::vector<unsigned char> buffer;
 	buffer.push_back(GET_ROOM_RESPONSE_CODE);
-	nlohmann::json jsonResponse = {
-		{"status", "" + getRoomResponse.status},
-		{"rooms", "" + RoomDataVecToString(getRoomResponse.rooms)}
-	};
+	nlohmann::json jsonResponse;
+	if (getRoomResponse.rooms.size() == 0)
+	{
+		jsonResponse = {
+		   {"status",  getRoomResponse.status},
+		   {"rooms", "no rooms available"}
+		};
+	}
+	else
+	{
+		jsonResponse = {
+			{"status", getRoomResponse.status},
+			{"rooms",  RoomDataVecToString(getRoomResponse.rooms)}
+		};
+	}
 	std::string jsonString = nlohmann::to_string(jsonResponse);
 	std::vector<unsigned char> lenBuff = intToByteVector(jsonString.length());
 	buffer.insert(buffer.end(), lenBuff.begin(), lenBuff.end());

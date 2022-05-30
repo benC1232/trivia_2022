@@ -72,6 +72,7 @@
     <Compile Include="requestStructs\SignUpRequest.cs" />
     <Compile Include="responseStructs\ErrorResponse.cs" />
     <Compile Include="responseStructs\GetPersonalStatsResponse.cs" />
+    <Compile Include="responseStructs\GetRoomResponse.cs" />
     <Compile Include="responseStructs\HighScoreResponse.cs" />
     <Page Include="CreateRoomWindow.xaml">
       <SubType>Designer</SubType>

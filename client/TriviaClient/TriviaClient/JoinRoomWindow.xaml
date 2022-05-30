@@ -10,16 +10,21 @@
         <ImageBrush ImageSource="/Resources/bg.png" Stretch="Fill" />
     </Window.Background>
     <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Width="722">
-        <Label Height="40"/>
+        <Label Height="40" />
         <!--room list label-->
         <Label HorizontalContentAlignment="Center" Content="Rooms List:" FontSize="80" FontFamily="{StaticResource AmaticSC}" VerticalContentAlignment="Center" Foreground="White" FontWeight="ExtraBold" Height="103" />
-        <Label Height="35"/>
-        <ListBox x:Name="roomsListLstBx" FontFamily="{StaticResource AmaticSC}" Background="Black" BorderBrush="White" BorderThickness="5" Height="297" HorizontalContentAlignment="Left" SelectionChanged="roomsListLstBx_SelectionChanged">
-            <ListBox.ItemTemplate Height="57">
-                <DataTemplate >
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                        <Label  Content="{Binding Name}" FontSize="40" FontFamily="{StaticResource AmaticSC}" VerticalContentAlignment="Center" Foreground="White" FontWeight="ExtraBold" Height="103" />
-                    </StackPanel>
+        <Label Height="35" />
+        <ListBox  x:Name="roomsListLstBx" FontFamily="{StaticResource AmaticSC}" Background="Black" BorderBrush="White" BorderThickness="5" Height="297" HorizontalContentAlignment="Left" SelectionChanged="roomsListLstBx_SelectionChanged">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Grid Margin="0,2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="100" />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="{Binding Title}" />
+                        <ProgressBar Grid.Column="1" Minimum="0" Maximum="100" Value="{Binding Completion}" />
+                    </Grid>
                 </DataTemplate>
             </ListBox.ItemTemplate>
             <ListBox.Resources>
@@ -28,7 +33,7 @@
                 </Style>
             </ListBox.Resources>
         </ListBox>
-        <Label Height="27"/>
+        <Label Height="27" />
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
             <Button x:Name="JoinRoomBtn" Content="Join Room" FontSize="50" Click="JoinRoomBtn_Click" FontFamily="{StaticResource AmaticSC}" Background="black" BorderBrush="white" Foreground="White" FontWeight="Bold" BorderThickness="6" Height="77"  Width="224">
                 <Button.Resources>
@@ -38,8 +43,7 @@
                 </Button.Resources>
             </Button>
         </StackPanel>
-        <Label Height="10"/>
+        <Label Height="10" />
         <TextBlock x:Name="errorLbl" HorizontalAlignment="Center" Text ="there has been an error!" FontSize="40" FontFamily="{StaticResource AmaticSC}" Background="Transparent" Foreground="DarkRed" />
-
     </StackPanel>
 </Window>
