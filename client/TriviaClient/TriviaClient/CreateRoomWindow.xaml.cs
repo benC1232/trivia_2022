@@ -67,7 +67,9 @@ namespace TriviaClient
 
         private void backToMenuBtn_Click(object sender, RoutedEventArgs e)
         {
-
+            MenuWindow menuWindow = new MenuWindow(comm);
+            this.Close();
+            menuWindow.Show();
         }
     }
 }
