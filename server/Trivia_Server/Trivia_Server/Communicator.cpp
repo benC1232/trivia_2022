@@ -60,8 +60,8 @@ void Communicator::bindAndListen()
 
 void Communicator::handleNewClient(SOCKET clientSocket)
 {
-	IRequestHandler* curr = nullptr;
-	this->m_clients.insert({ clientSocket, nullptr });
+	IRequestHandler* handler = this->m_handlerFactory->createLoginRequestHandler();
+	this->m_clients.insert({ clientSocket, handler });
 	try
 	{
 		RequestInfo request;
@@ -71,20 +71,20 @@ void Communicator::handleNewClient(SOCKET clientSocket)
 		std::vector<unsigned char> buffer;
 		char* response;
 		int responseSize;
-		curr = this->m_handlerFactory->createLoginRequestHandler();
 		while (request.id != SIGNOUT)
 		{
+			if (this->m_clients[clientSocket] == nullptr)
+			{
+				throw std::exception("request hander is null!!!");
+			}
 			recv(clientSocket, clientMessage, MESSAGE_SIZE, 0);
 			jsonSize = getJsonSize(clientMessage);
 			buffer = msgToBuffer(clientMessage, jsonSize + JSON_OFFSET);
 			request.id = int(buffer[0]);
 			request.receivalTime = std::time(0);
 			request.buffer = buffer;
-			result = curr->handleRequest(request);
-			if (this->m_clients[clientSocket] == nullptr)
-			{
-				throw std::exception("request hander is null!!!");
-			}
+			result = handler->handleRequest(request);
+			handler = result.newHandler;
 			if (request.id != SIGNOUT)
 			{
 				response = bufferToMsg(result.buffer);
@@ -126,6 +126,7 @@ void Communicator::handleNewClient(SOCKET clientSocket)
 
 int Communicator::getJsonSize(char buffer[])
 {
+	//dont change!!!!!!!! it works!!!!!!!!
 	int size = (int)(buffer[1] << 24 | buffer[2] << 16 | buffer[3] << 8 | buffer[4]);
 	return size;
 }
@@ -133,10 +134,9 @@ int Communicator::getJsonSize(char buffer[])
 std::vector<unsigned char> Communicator::msgToBuffer(char msg[], int size)
 {
 	std::vector<unsigned char> buffer;
-	buffer.resize(size);
 	for (int i = 0; i < size; i++)
 	{
-		buffer[i] = msg[i];
+		buffer.push_back(msg[i]);
 	}
 	return buffer;
 }

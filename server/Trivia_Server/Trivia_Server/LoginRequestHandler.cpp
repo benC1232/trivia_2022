@@ -47,7 +47,7 @@ RequestResult LoginRequestHandler::login(RequestInfo requestInfo)
 		result.buffer = JsonResponsePacketSerializer::serializeLoginResponse(num);
 	}
 	else {
-		result.newHandler = nullptr;
+		result.newHandler = this->m_requestHandlerFactory->createLoginRequestHandler();
 		num.status = ERROR_CODE;
 		ErrorResponse err;
 		err.message = "Login failed";
@@ -67,7 +67,7 @@ RequestResult LoginRequestHandler::signup(RequestInfo requestInfo)
 		result.buffer = JsonResponsePacketSerializer::serializeSignupResponse(num);
 	}
 	else {
-		result.newHandler = nullptr;
+		result.newHandler = this->m_requestHandlerFactory->createLoginRequestHandler();
 		num.status = ERROR_CODE;
 		ErrorResponse err;
 		err.message = "Signup failed";

@@ -8,20 +8,18 @@ RequestHandlerFactory::RequestHandlerFactory(IDatabase* db)
 	m_roomManager = new RoomManager();
 }
 
-
-
 RequestHandlerFactory::~RequestHandlerFactory()
 {
 }
 
 LoginRequestHandler* RequestHandlerFactory::createLoginRequestHandler()
 {
-	return new LoginRequestHandler();
+	return new LoginRequestHandler(this);
 }
 
 LoginManager* RequestHandlerFactory::getLoginManager()
 {
-	return m_loginManager;
+	return this->m_loginManager;
 }
 
 MenuRequestHandler* RequestHandlerFactory::createMenuRequestHandler(LoggedUser user)

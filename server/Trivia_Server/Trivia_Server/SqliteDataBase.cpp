@@ -20,39 +20,55 @@ SqliteDataBase::~SqliteDataBase()
 }
 int userExistCallback(void* data, int argc, char** argv, char** azColName)
 {
-	data = (bool*)data;
-	data = (bool*)(argv[0] != nullptr);
+	data = (int*)data;
+	for (int i = 0; i < argc; i++)
+	{
+		if (azColName[i] == std::string("username"))
+		{
+			*(int*)data = 1;
+		}
+	}
 	return 0;
 }
 int passwordMatchCallback(void* data, int argc, char** argv, char** azColName)
 {
-	data = (bool*)data;
-	data = (bool*)(argv[0] != nullptr);
+	data = (int*)data;
+	for (int i = 0; i < argc; i++)
+	{
+		if (azColName[i] == std::string("username"))
+		{
+			*(int*)data = 1;
+		}
+		else if (azColName[i] == std::string("password"))
+		{
+			*(int*)data = 1;
+		}
+	}
 	return 0;
 }
 
 bool SqliteDataBase::doesUserExist(std::string username)
 {
-	bool exists;
+	int exists = 0;
 	char* errMessage = nullptr;
 	std::string query = "SELECT * FROM USERS WHERE username = '" + username + "';";
 	int result = sqlite3_exec(this->_db, query.c_str(), userExistCallback, &exists, &errMessage);
 	if (result != SQLITE_OK) {
 		throw std::exception(errMessage);
 	}
-	return exists;
+	return exists == 1;
 }
 
 bool SqliteDataBase::doesPasswordMatch(std::string username, std::string password)
 {
-	bool exists;
+	int exists = 0;
 	char* errMessage = nullptr;
 	std::string query = "SELECT * FROM USERS WHERE username = '" + username + "' AND password = '" + password + "';";
 	int result = sqlite3_exec(this->_db, query.c_str(), passwordMatchCallback, &exists, &errMessage);
 	if (result != SQLITE_OK) {
 		throw std::exception(errMessage);
 	}
-	return exists;
+	return exists == 1;
 }
 
 void SqliteDataBase::addNewUser(std::string username, std::string password, std::string email)

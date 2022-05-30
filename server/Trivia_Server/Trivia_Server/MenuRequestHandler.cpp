@@ -111,7 +111,7 @@ RequestResult MenuRequestHandler::createRoom(RequestInfo requestInfo)
 	roomData.name = createRoomRequest.roomName;
 	roomData.numOfQuestionsInGame = createRoomRequest.questionCount;
 	roomData.id = 0;
-	this->m_roomManager->createRoom(m_user, roomData);
+	this->m_requestHandlerFactory->getRoomManager().createRoom(m_user, roomData);
 	result.buffer = JsonResponsePacketSerializer::serializeCreateRoomResponse(num);
 	result.newHandler = nullptr;
 	return result;
@@ -120,7 +120,7 @@ RequestResult MenuRequestHandler::createRoom(RequestInfo requestInfo)
 RequestResult MenuRequestHandler::handleRequest(RequestInfo requestInfo)
 {
 	RequestResult result;
-	if (requestInfo.id = LOGOUT_REQUEST)
+	if (requestInfo.id == LOGOUT_REQUEST)
 	{
 		result = signout(requestInfo);
 	}

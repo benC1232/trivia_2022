@@ -52,11 +52,16 @@ namespace TriviaClient
                 this.errorLbl.Visibility = Visibility.Visible;
                 this.errorLbl.Text = "actually joining the room hast been implemented yet";
             }
-            if (response.Item1 == 3)
+            else if (response.Item1 == 3)
             {
                 responseStructs.ErrorResponse errResponse = JsonConvert.DeserializeObject<responseStructs.ErrorResponse>(Encoding.ASCII.GetString(response.Item2));
                 this.errorLbl.Visibility = Visibility.Visible;
                 this.errorLbl.Text = errResponse.message;
+            }
+            else
+            {
+                this.errorLbl.Visibility = Visibility.Visible;
+                this.errorLbl.Text = "" + response.Item1;
             }
         }
     }

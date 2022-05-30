@@ -82,16 +82,9 @@ namespace TriviaClient
 
         public Tuple<int, byte[]> Recieve()
         {
-            try
-            {
-                byte[] recieveBytes = new byte[4096];
-                this.stream.Read(recieveBytes, 0, 4096);
-                return parseResponse(recieveBytes);
-            }
-            catch (Exception e)
-            {
-                throw e;
-            }
+            byte[] recieveBytes = new byte[4096];
+            this.stream.Read(recieveBytes, 0, 4096);
+            return parseResponse(recieveBytes);
         }
 
         public Tuple<int, byte[]> parseResponse(byte[] arr)
@@ -99,6 +92,9 @@ namespace TriviaClient
             int code = arr[0];
             int messageLength = fourByteArrToInt(arr, 1);
             byte[] message = new byte[messageLength];
+            string messageString = Encoding.ASCII.GetString(message);
+            Console.WriteLine(messageString);
+
             for (int i = 0; i < messageLength; i++)
             {
                 message[i] = arr[i + 5];
@@ -109,9 +105,16 @@ namespace TriviaClient
         private int fourByteArrToInt(byte[] arr, int startIndex)
         {
             int result = 0;
+            //old loop that might not work
+            /*
             for (int i = 0; i < 4; i++)
             {
                 result += arr[startIndex + i] << (8 * i);
+            }*/
+            //reverse the loop
+            for (int i = 3; i > 0; i--)
+            {
+                result += arr[startIndex + i] << (8 * (3-i));
             }
             return result;
         }

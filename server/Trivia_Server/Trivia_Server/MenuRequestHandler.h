@@ -34,14 +34,10 @@ public:
 	RequestResult getHighScore(RequestInfo requestInfo);
 	RequestResult joinRoom(RequestInfo requestInfo);
 	RequestResult createRoom(RequestInfo requestInfo);
-	
+
 private:
 	LoggedUser m_user;
 	RoomManager* m_roomManager;
 	StatisticsManager* m_statisticsManager;
 	RequestHandlerFactory* m_requestHandlerFactory;
-
-	
-	
 };
-
