@@ -64,5 +64,10 @@ namespace TriviaClient
                 this.errorLbl.Text = "" + response.Item1;
             }
         }
+
+        private void backToMenuBtn_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
