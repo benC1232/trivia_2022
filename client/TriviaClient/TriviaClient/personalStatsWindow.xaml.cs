@@ -25,6 +25,7 @@ namespace TriviaClient
         {
             this.comm = c;
             InitializeComponent();
+            this.errorLbl.Visibility = Visibility.Hidden;
             byte[] data = new byte[1];
             data[0] = 0;
             comm.Send(7, data);
