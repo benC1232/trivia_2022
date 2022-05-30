@@ -26,11 +26,13 @@ namespace TriviaClient
         {
             this.comm = c;
             InitializeComponent();
+            this.errorLbl.Visibility = Visibility.Hidden;
             refresh();
         }
 
         private void refresh()
         {
+            this.errorLbl.Visibility = Visibility.Hidden;
             byte[] data = new byte[1];
             data[0] = 0;
             this.comm.Send(4, data);
@@ -63,6 +65,8 @@ namespace TriviaClient
         private void JoinRoomBtn_Click(object sender, RoutedEventArgs e)
         {
             String selectedRoomName = this.roomsListLstBx.SelectedItem.ToString();
+            this.errorLbl.Visibility = Visibility.Visible;
+            this.errorLbl.Text = "joining rooms hasnt been implemented yet";
         }
 
         private void roomsListLstBx_SelectionChanged(object sender, SelectionChangedEventArgs e)
