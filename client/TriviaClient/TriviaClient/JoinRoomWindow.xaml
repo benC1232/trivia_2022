@@ -35,7 +35,7 @@
         </ListBox>
         <Label Height="27" />
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-            <Button x:Name="JoinRoomBtn" Content="Join Room" FontSize="50" Click="JoinRoomBtn_Click" FontFamily="{StaticResource AmaticSC}" Background="black" BorderBrush="white" Foreground="White" FontWeight="Bold" BorderThickness="6" Height="77"  Width="224">
+            <Button x:Name="JoinRoomBtn" Content="Join Room" FontSize="50" Click="JoinRoomBtn_Click" FontFamily="{StaticResource AmaticSC}" Background="black" BorderBrush="white" Foreground="White" FontWeight="Bold" BorderThickness="6" Height="77"  Width="710">
                 <Button.Resources>
                     <Style TargetType="Border">
                         <Setter Property="CornerRadius" Value="15" />
