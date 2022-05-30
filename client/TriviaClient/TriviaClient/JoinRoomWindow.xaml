@@ -9,23 +9,27 @@
     <Window.Background>
         <ImageBrush ImageSource="/Resources/bg.png" Stretch="Fill" />
     </Window.Background>
-    <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
+    <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Width="722">
         <Label Height="40"/>
         <!--room list label-->
         <Label HorizontalContentAlignment="Center" Content="Rooms List:" FontSize="80" FontFamily="{StaticResource AmaticSC}" VerticalContentAlignment="Center" Foreground="White" FontWeight="ExtraBold" Height="103" />
         <Label Height="35"/>
-        <TextBlock ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto" TextWrapping="Wrap" Text="rooms" FontSize="40" FontFamily="{StaticResource AmaticSC}" Foreground="White" Background="Black" FontWeight="ExtraBold" Height="290" Width="800" />
+        <ListBox x:Name="roomsListLstBx" FontFamily="{StaticResource AmaticSC}" Background="Black" BorderBrush="White" BorderThickness="5" Height="297" HorizontalContentAlignment="Left" SelectionChanged="roomsListLstBx_SelectionChanged">
+            <ListBox.ItemTemplate Height="57">
+                <DataTemplate >
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                        <Label  Content="{Binding Name}" FontSize="40" FontFamily="{StaticResource AmaticSC}" VerticalContentAlignment="Center" Foreground="White" FontWeight="ExtraBold" Height="103" />
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+            <ListBox.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="15" />
+                </Style>
+            </ListBox.Resources>
+        </ListBox>
         <Label Height="27"/>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-            <Label HorizontalContentAlignment="Center" Content="Room's Name: " FontSize="40" FontFamily="{StaticResource AmaticSC}" VerticalContentAlignment="Center" Foreground="White" FontWeight="ExtraBold" Height="103" />
-            <TextBox x:Name="RoomName" Margin="10" Background="Black" Foreground="White" BorderBrush="White" BorderThickness="5" FontSize="30" FontFamily="{StaticResource AmaticSC}" FontWeight="Bold" HorizontalContentAlignment="Left" Width="278" Height="70">
-                <TextBox.Resources>
-                    <Style TargetType="Border">
-                        <Setter Property="CornerRadius" Value="15" />
-                    </Style>
-                </TextBox.Resources>
-            </TextBox>
-            <Label Width="34"/>
             <Button x:Name="JoinRoomBtn" Content="Join Room" FontSize="50" Click="JoinRoomBtn_Click" FontFamily="{StaticResource AmaticSC}" Background="black" BorderBrush="white" Foreground="White" FontWeight="Bold" BorderThickness="6" Height="77"  Width="224">
                 <Button.Resources>
                     <Style TargetType="Border">
