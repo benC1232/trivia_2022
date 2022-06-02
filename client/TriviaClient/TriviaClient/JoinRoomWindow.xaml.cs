@@ -80,6 +80,7 @@ namespace TriviaClient
         {
             String selectedRoomName = this.roomsListLstBx.SelectedItem.ToString();
             this.errorLbl.Visibility = Visibility.Visible;
+            timer.Stop();
             this.errorLbl.Text = "joining rooms hasnt been implemented yet";
         }
 

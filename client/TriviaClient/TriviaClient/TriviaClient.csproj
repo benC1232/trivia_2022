@@ -74,6 +74,9 @@
     <Compile Include="responseStructs\GetPersonalStatsResponse.cs" />
     <Compile Include="responseStructs\GetRoomResponse.cs" />
     <Compile Include="responseStructs\HighScoreResponse.cs" />
+    <Compile Include="waitingRoom.xaml.cs">
+      <DependentUpon>waitingRoom.xaml</DependentUpon>
+    </Compile>
     <Page Include="CreateRoomWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -107,6 +110,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="personalStatsWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="waitingRoom.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
