@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Threading;
+
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -21,6 +23,7 @@ namespace TriviaClient
     public partial class JoinRoomWindow : Window
     {
         private Communicator comm;
+        private DispatcherTimer timer;
 
         public JoinRoomWindow(Communicator c)
         {
@@ -28,6 +31,11 @@ namespace TriviaClient
             InitializeComponent();
             this.errorLbl.Visibility = Visibility.Hidden;
             refresh();
+            timer = new System.Windows.Threading.DispatcherTimer();
+            timer.Tick += new EventHandler(dispatcherTimer_Tick);
+            timer.Interval = new TimeSpan(0, 0, 3);
+            timer.Start();
+            
         }
 
         private void refresh()
@@ -61,6 +69,12 @@ namespace TriviaClient
                 this.errorLbl.Text = errorResponse.message;
             }
         }
+
+        private void dispatcherTimer_Tick(object sender, EventArgs e)
+        {
+            refresh();
+        }
+
 
         private void JoinRoomBtn_Click(object sender, RoutedEventArgs e)
         {
