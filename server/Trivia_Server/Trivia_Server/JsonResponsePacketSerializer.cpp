@@ -20,7 +20,7 @@ std::vector<unsigned char> intToByteVector(int num) {
 std::string RoomDataVecToString(std::vector<RoomData> roomData) {
 	std::string output = "";
 	for (auto room : roomData) {
-		output += room.name + ", ";
+		output += room.name + ",";
 	}
 	return output;
 }
@@ -28,7 +28,7 @@ std::string RoomDataVecToString(std::vector<RoomData> roomData) {
 std::string stringVecToString(std::vector<std::string> strings) {
 	std::string output = "";
 	for (auto string : strings) {
-		output += string + ", ";
+		output += string + ",";
 	}
 	return output;
 }
@@ -36,7 +36,7 @@ std::string stringVecToString(std::vector<std::string> strings) {
 std::string intVecToString(std::vector<unsigned int> ints) {
 	std::string output = "";
 	for (auto int_ : ints) {
-		output += std::to_string(int_) + ", ";
+		output += std::to_string(int_) + ",";
 	}
 	return output;
 }
@@ -93,10 +93,21 @@ std::vector<unsigned char> JsonResponsePacketSerializer::serializeGetRoomRespons
 {
 	std::vector<unsigned char> buffer;
 	buffer.push_back(GET_ROOM_RESPONSE_CODE);
-	nlohmann::json jsonResponse = {
-		{"status", "" + getRoomResponse.status},
-		{"rooms", "" + RoomDataVecToString(getRoomResponse.rooms)}
-	};
+	nlohmann::json jsonResponse;
+	if (getRoomResponse.rooms.size() == 0)
+	{
+		jsonResponse = {
+		   {"status",  getRoomResponse.status},
+		   {"rooms", "no rooms available"}
+		};
+	}
+	else
+	{
+		jsonResponse = {
+			{"status", getRoomResponse.status},
+			{"rooms",  RoomDataVecToString(getRoomResponse.rooms)}
+		};
+	}
 	std::string jsonString = nlohmann::to_string(jsonResponse);
 	std::vector<unsigned char> lenBuff = intToByteVector(jsonString.length());
 	buffer.insert(buffer.end(), lenBuff.begin(), lenBuff.end());
@@ -109,15 +120,13 @@ std::vector<unsigned char> JsonResponsePacketSerializer::serializeGetPlayersInRo
 	std::vector<unsigned char> buffer;
 	buffer.push_back(GET_PLAYERS_IN_ROOMS_RESPONSE_CODE);
 	nlohmann::json jsonResponse = {
-		{"rooms", "" + stringVecToString(getPlayersInRoomsResponse.players)}
+		{"rooms",stringVecToString(getPlayersInRoomsResponse.players)}
 	};
 	std::string jsonString = nlohmann::to_string(jsonResponse);
 	std::vector<unsigned char> lenBuff = intToByteVector(jsonString.length());
 	buffer.insert(buffer.end(), lenBuff.begin(), lenBuff.end());
 	for (unsigned char c : jsonString) buffer.push_back(c);
 	return buffer;
-	
-	
 }
 
 std::vector<unsigned char> JsonResponsePacketSerializer::serializeJoinRoomResponse(JoinRoomResponse joinRoomResponse)
@@ -125,14 +134,13 @@ std::vector<unsigned char> JsonResponsePacketSerializer::serializeJoinRoomRespon
 	std::vector<unsigned char> buffer;
 	buffer.push_back(JOIN_ROOM_RESPONSE_CODE);
 	nlohmann::json jsonResponse = {
-		{"status", "" + joinRoomResponse.status}
+		{"status",joinRoomResponse.status}
 	};
 	std::string jsonString = nlohmann::to_string(jsonResponse);
 	std::vector<unsigned char> lenBuff = intToByteVector(jsonString.length());
 	buffer.insert(buffer.end(), lenBuff.begin(), lenBuff.end());
 	for (unsigned char c : jsonString) buffer.push_back(c);
 	return buffer;
-	
 }
 
 std::vector<unsigned char> JsonResponsePacketSerializer::serializeCreateRoomResponse(CreateRoomResponse createRoomResponse)
@@ -140,7 +148,7 @@ std::vector<unsigned char> JsonResponsePacketSerializer::serializeCreateRoomResp
 	std::vector<unsigned char> buffer;
 	buffer.push_back(CREATE_ROOM_RESPONSE_CODE);
 	nlohmann::json jsonResponse = {
-		{"status", "" + createRoomResponse.status}
+		{"status",createRoomResponse.status}
 	};
 	std::string jsonString = nlohmann::to_string(jsonResponse);
 	std::vector<unsigned char> lenBuff = intToByteVector(jsonString.length());
@@ -149,29 +157,27 @@ std::vector<unsigned char> JsonResponsePacketSerializer::serializeCreateRoomResp
 	return buffer;
 }
 
-std::vector<unsigned char> JsonResponsePacketSerializer::serializeGetStatisticsResponse( GetPresonalStatsResponse getPresonalStatsResponse)
+std::vector<unsigned char> JsonResponsePacketSerializer::serializeGetStatisticsResponse(struct GetPersonalStatsResponse getPresonalStatsResponse)
 {
 	std::vector<unsigned char> buffer;
 	buffer.push_back(GET_STATISTICS_RESPONSE_CODE);
 	nlohmann::json jsonResponse = {
-		{"status", "" + getPresonalStatsResponse.status},
-		{"stats", "" + stringVecToString(getPresonalStatsResponse.statistics)}
+		{"status",getPresonalStatsResponse.status},
+		{"stats",stringVecToString(getPresonalStatsResponse.statistics)}
 	};
 	std::string jsonString = nlohmann::to_string(jsonResponse);
 	std::vector<unsigned char> lenBuff = intToByteVector(jsonString.length());
 	buffer.insert(buffer.end(), lenBuff.begin(), lenBuff.end());
 	for (unsigned char c : jsonString) buffer.push_back(c);
 	return buffer;
-	
-	
 }
 
-std::vector<unsigned char> JsonResponsePacketSerializer::serializeGetHighScoreResponse(GetHighScoreRespnse getHighScoreResponse){
+std::vector<unsigned char> JsonResponsePacketSerializer::serializeGetHighScoreResponse(GetHighScoreRespnse getHighScoreResponse) {
 	std::vector<unsigned char> buffer;
 	buffer.push_back(GET_STATISTICS_RESPONSE_CODE);
 	nlohmann::json jsonResponse = {
-		{"status", "" + getHighScoreResponse.status},
-		{"highscores", "" + stringVecToString(getHighScoreResponse.statistics)}
+		{"status",getHighScoreResponse.status},
+		{"highscores",stringVecToString(getHighScoreResponse.statistics)}
 	};
 	std::string jsonString = nlohmann::to_string(jsonResponse);
 	std::vector<unsigned char> lenBuff = intToByteVector(jsonString.length());
@@ -179,5 +185,3 @@ std::vector<unsigned char> JsonResponsePacketSerializer::serializeGetHighScoreRe
 	for (unsigned char c : jsonString) buffer.push_back(c);
 	return buffer;
 }
-
-

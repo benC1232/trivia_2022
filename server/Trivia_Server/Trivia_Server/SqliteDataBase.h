@@ -3,6 +3,8 @@
 //I dont know why this works, but dont remove one of the maps
 #include <map>
 #include <map>
+#include <list>
+#include <string>
 class SqliteDataBase :
 	public IDatabase
 {

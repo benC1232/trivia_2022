@@ -3,11 +3,6 @@
 #include "LoggedUser.h"
 #include "RoomManager.h"
 #include "StatisticsManager.h"
-#include "JsonRequestPacketDeserializer.h"
-#include "JsonResponsePacketSerializer.h"
-#include "RequestHandlerFactory.h"
-
-class RequestHandlerFactory;
 
 #define LOGIN_CODE 1
 #define SIGN_IN_CODE 2
@@ -18,13 +13,12 @@ class RequestHandlerFactory;
 #define JOIN_ROOM_REQUEST 6
 #define GET_STATISITCS_REQUEST 7
 #define LOGOUT_REQUEST 8
-#define HIGH_SCORE_GET 10
 
-class MenuRequestHandler : public IRequestHandler
+class MenuRequestHandle : public IRequestHandler
 {
 public:
-	MenuRequestHandler(LoggedUser loggedUser, RoomManager* roomManager, StatisticsManager* statisticsManager, RequestHandlerFactory* requestHandlerFactory);
-	~MenuRequestHandler();
+	MenuRequestHandle(LoggedUser loggedUser, RoomManager& roomManager, StatisticsManager& statisticsManager);
+	~MenuRequestHandle();
 	bool isRequestRelevant(RequestInfo requestInfo);
 	RequestResult handleRequest(RequestInfo requestInfo);
 	RequestResult signout(RequestInfo requestInfo);
@@ -34,10 +28,12 @@ public:
 	RequestResult getHighScore(RequestInfo requestInfo);
 	RequestResult joinRoom(RequestInfo requestInfo);
 	RequestResult createRoom(RequestInfo requestInfo);
-
+	
 private:
 	LoggedUser m_user;
-	RoomManager* m_roomManager;
-	StatisticsManager* m_statisticsManager;
-	RequestHandlerFactory* m_requestHandlerFactory;
+	RoomManager& m_roomManager;
+	StatisticsManager& m_statisticsManager;
+	
+	
 };
+

@@ -1,6 +1,7 @@
 #include "Communicator.h"
 #define MESSAGE_SIZE 1024
 #define JSON_OFFSET 5
+#define SIGNOUT 8
 Communicator::Communicator(RequestHandlerFactory* factory)
 {
 	//copied this code from week 13
@@ -59,10 +60,44 @@ void Communicator::bindAndListen()
 
 void Communicator::handleNewClient(SOCKET clientSocket)
 {
-	LoginRequestHandler* handler = new LoginRequestHandler();
+	IRequestHandler* handler = this->m_handlerFactory->createLoginRequestHandler();
 	this->m_clients.insert({ clientSocket, handler });
 	try
 	{
+		RequestInfo request;
+		RequestResult result;
+		char clientMessage[MESSAGE_SIZE];
+		int jsonSize = 0;
+		std::vector<unsigned char> buffer;
+		char* response;
+		int responseSize;
+		while (request.id != SIGNOUT)
+		{
+			if (this->m_clients[clientSocket] == nullptr)
+			{
+				throw std::exception("request hander is null!!!");
+			}
+			recv(clientSocket, clientMessage, MESSAGE_SIZE, 0);
+			jsonSize = getJsonSize(clientMessage);
+			buffer = msgToBuffer(clientMessage, jsonSize + JSON_OFFSET);
+			request.id = int(buffer[0]);
+			request.receivalTime = std::time(0);
+			request.buffer = buffer;
+			result = handler->handleRequest(request);
+			handler = result.newHandler;
+			if (request.id != SIGNOUT)
+			{
+				response = bufferToMsg(result.buffer);
+				responseSize = result.buffer.size();
+				send(clientSocket, response, responseSize, 0);
+				delete response;
+			}
+		}
+		this->m_clients.erase(clientSocket);
+		closesocket(clientSocket);
+		std::cout << "socket closed successfully" << std::endl;
+		//old code
+		/*
 		char clientMessage[MESSAGE_SIZE];
 		recv(clientSocket, clientMessage, MESSAGE_SIZE, 0);
 		int jsonSize = getJsonSize(clientMessage);
@@ -79,6 +114,7 @@ void Communicator::handleNewClient(SOCKET clientSocket)
 		this->m_clients.erase(clientSocket);
 		closesocket(clientSocket);
 		std::cout << "socket closed successfully" << std::endl;
+		*/
 	}
 	catch (const std::exception& e)
 	{
@@ -90,6 +126,7 @@ void Communicator::handleNewClient(SOCKET clientSocket)
 
 int Communicator::getJsonSize(char buffer[])
 {
+	//dont change!!!!!!!! it works!!!!!!!!
 	int size = (int)(buffer[1] << 24 | buffer[2] << 16 | buffer[3] << 8 | buffer[4]);
 	return size;
 }
@@ -97,10 +134,9 @@ int Communicator::getJsonSize(char buffer[])
 std::vector<unsigned char> Communicator::msgToBuffer(char msg[], int size)
 {
 	std::vector<unsigned char> buffer;
-	buffer.resize(size);
 	for (int i = 0; i < size; i++)
 	{
-		buffer[i] = msg[i];
+		buffer.push_back(msg[i]);
 	}
 	return buffer;
 }

@@ -1,0 +1,91 @@
+﻿<Window x:Class="TriviaClient.CreateRoomWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TriviaClient"
+        mc:Ignorable="d"
+        Title="Create Room" Height="720" Width="1280">
+    <Window.Background>
+        <ImageBrush ImageSource="/Resources/bg.png" Stretch="Fill" />
+    </Window.Background>
+    <StackPanel Orientation="Vertical" HorizontalAlignment="Center" >
+        <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
+            <Label Height="112"/>
+        <StackPanel Orientation="Horizontal" >
+            <Label Margin="10" Content="Room Name:" Foreground="White" FontSize="30" FontFamily="{StaticResource AmaticSC}" FontWeight="Bold" HorizontalContentAlignment="Left" />
+            <Label Width="68"/>
+
+            <TextBox x:Name="RoomName" Margin="10" Background="Black" Foreground="White" BorderBrush="White" BorderThickness="5" FontSize="30" FontFamily="{StaticResource AmaticSC}" FontWeight="Bold" HorizontalContentAlignment="Left" Width="298">
+                <TextBox.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="15" />
+                    </Style>
+                </TextBox.Resources>
+            </TextBox>
+        </StackPanel>
+        <Label Height="20"/>
+        <StackPanel Orientation="Horizontal" >
+            <Label Margin="10" Content="Max Players:" Foreground="White" FontSize="30" FontFamily="{StaticResource AmaticSC}" FontWeight="Bold" HorizontalContentAlignment="Left" />
+            <Label Width="86"/>
+            <Slider x:Name="MaxPlayers" Value="2" Margin="10"  Background="Black" Foreground="White" BorderBrush="White" BorderThickness="5" FontSize="30" FontFamily="{StaticResource AmaticSC}" FontWeight="Bold" VerticalAlignment="Center" Width="262" Minimum="2" Maximum="20" SmallChange="1" >
+                <Slider.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="15" />
+                    </Style>
+                </Slider.Resources>
+            </Slider>
+            <Label   x:Name="maxPlayersLbl" Content="{Binding ElementName=MaxPlayers, Path=Value}" ContentStringFormat="{}{0:#}" Foreground="White" FontSize="50" FontFamily="{StaticResource AmaticSC}" FontWeight="Bold" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Width="65"/>
+        </StackPanel>
+        <Label Height="20"/>
+        <StackPanel Orientation="Horizontal" >
+            <Label Margin="10" Content="Number of Questions:" Foreground="White" FontSize="30" FontFamily="{StaticResource AmaticSC}" FontWeight="Bold" HorizontalContentAlignment="Left" />
+            <Slider x:Name="numOfQuestions" Value="1" Margin="10"  Background="Black" Foreground="White" BorderBrush="White" BorderThickness="5" FontSize="30" FontFamily="{StaticResource AmaticSC}" FontWeight="Bold" VerticalAlignment="Center" Width="262" Minimum="1" Maximum="15" SmallChange="1" >
+                <Slider.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="15" />
+                    </Style>
+                </Slider.Resources>
+            </Slider>
+            <Label x:Name="numOfQuestionsLbl"  Content="{Binding ElementName=numOfQuestions, Path=Value}" ContentStringFormat="{}{0:#}" Foreground="White" FontSize="50" FontFamily="{StaticResource AmaticSC}" FontWeight="Bold" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Width="65"/>
+        </StackPanel>
+        <Label Height="20"/>
+        <StackPanel Orientation="Horizontal" >
+            <Label Margin="10" Content="Time per Question:" Foreground="White" FontSize="30" FontFamily="{StaticResource AmaticSC}" FontWeight="Bold" HorizontalContentAlignment="Left" />
+            <Label Width="24"/>
+            <Slider x:Name="TimeQuestions" Value="1" Margin="10"  Background="Black" Foreground="White" BorderBrush="White" BorderThickness="5" FontSize="30" FontFamily="{StaticResource AmaticSC}" FontWeight="Bold" VerticalAlignment="Center" Width="262" Minimum="5" Maximum="60" SmallChange="1" >
+                <Slider.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="15" />
+                    </Style>
+                </Slider.Resources>
+            </Slider>
+            <Label x:Name="TimeQuestionsLbl"  Content="{Binding ElementName=TimeQuestions, Path=Value}" ContentStringFormat="{}{0:#}" Foreground="White" FontSize="50" FontFamily="{StaticResource AmaticSC}" FontWeight="Bold" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Width="65"/>
+        </StackPanel>
+        <Label Height="51"/>
+        <Button x:Name="CreateBtn" Content="Create" Click="CreateBtn_Click" FontSize="65" FontFamily="{StaticResource AmaticSC}" Background="black" BorderBrush="white" Foreground="White" FontWeight="Bold" BorderThickness="6" Height="96"  Width="242">
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="15" />
+                </Style>
+            </Button.Resources>
+        </Button>
+    </StackPanel>
+    <StackPanel Orientation="Horizontal" Width="1312">
+        <Label Width="29" Height="89" />
+
+        <Button  x:Name="backToMenuBtn" Click="backToMenuBtn_Click"  Content="return" FontSize="40" FontFamily="{StaticResource AmaticSC}" Background="black" BorderBrush="white" Foreground="White" FontWeight="Bold" BorderThickness="6" Height="68"  Width="103">
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="15" />
+                </Style>
+            </Button.Resources>
+        </Button>
+        <Label Width="374" Height="84" />
+        <Label Height="10"/>
+        <TextBlock x:Name="errorLbl" HorizontalAlignment="Center" Text ="there has been an error!" FontSize="40" FontFamily="{StaticResource AmaticSC}" Background="Transparent" Foreground="DarkRed" />
+
+
+    </StackPanel>
+    </StackPanel>
+</Window>
