@@ -3,14 +3,16 @@
 #include "LoggedUser.h"
 #include "RoomManager.h"
 #include "RequestHandlerFactory.h"
+class RequestHandlerFactory;
 class RoomMemberRequestHandler
 {
 public:
+	RoomMemberRequestHandler(Room* room, LoggedUser user, RoomManager* roomManager, RequestHandlerFactory* requestHandlerFactory);
 	bool isRequestRelevant(RequestInfo requestInfo);
 	RequestResult handleRequest(RequestInfo requestInfo);
 private:
 
-	Room m_room;
+	Room* m_room;
 	LoggedUser m_user;
 	RoomManager* m_roomManager;
 	RequestHandlerFactory* m_requestHandlerFactory;

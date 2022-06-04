@@ -2,6 +2,13 @@
 #define CLOSE_ROOM_CODE 10
 #define START_GAME_CODE 11
 #define GET_ROOM_STATE_CODE 12
+RoomAdminRequestHandler::RoomAdminRequestHandler(Room* room, LoggedUser user, RoomManager* roomManager, RequestHandlerFactory* requestHandlerFactory)
+{
+	this->m_room = room;
+	this->m_user = user;
+	this->m_roomManager = roomManager;
+	this->m_requestHandlerFactory = requestHandlerFactory;
+}
 bool RoomAdminRequestHandler::isRequestRelevant(RequestInfo requestInfo)
 {
 	return requestInfo.id == CLOSE_ROOM_CODE || requestInfo.id == START_GAME_CODE || requestInfo.id == GET_ROOM_STATE_CODE;
@@ -34,7 +41,7 @@ RequestResult RoomAdminRequestHandler::handleRequest(RequestInfo requestInfo)
 
 RequestResult RoomAdminRequestHandler::closeRoom(RequestInfo requestInfo)
 {
-	this->m_requestHandlerFactory->getRoomManager().deleteRoom(this->m_room.getData().id);
+	this->m_requestHandlerFactory->getRoomManager().deleteRoom(this->m_room->getData().id);
 	RequestResult result;
 	CloseRoomResponse closeRoomResponse;
 	closeRoomResponse.status = CLOSE_ROOM_CODE;
@@ -46,6 +53,7 @@ RequestResult RoomAdminRequestHandler::closeRoom(RequestInfo requestInfo)
 RequestResult RoomAdminRequestHandler::startGame(RequestInfo requestInfo)
 {
 	//this is for 4.0.0
+	return RequestResult();
 }
 
 RequestResult RoomAdminRequestHandler::getRoomState(RequestInfo requestInfo)
@@ -53,9 +61,9 @@ RequestResult RoomAdminRequestHandler::getRoomState(RequestInfo requestInfo)
 	RequestResult result;
 	GetRoomStateResponse getRoomStateResponse;
 	getRoomStateResponse.status = GET_ROOM_STATE_CODE;
-	getRoomStateResponse.hasGameBegun = this->m_room.getData().isActive;
-	getRoomStateResponse.players = this->m_room.getAllUsers();
-	getRoomStateResponse.questionCount = this->m_room.getData().numOfQuestionsInGame;
+	getRoomStateResponse.hasGameBegun = this->m_room->getData().isActive;
+	getRoomStateResponse.players = this->m_room->getAllUsers();
+	getRoomStateResponse.questionCount = this->m_room->getData().numOfQuestionsInGame;
 	result.buffer = JsonResponsePacketSerializer::serializeGetRoomStateResponse(getRoomStateResponse);
 	//create a roomadminrequesthandler request here!!!
 	return result;
