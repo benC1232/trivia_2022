@@ -31,7 +31,7 @@ RequestResult LoginRequestHandler::handleRequest(RequestInfo request)
 		ErrorResponse num;
 		num.message = "error while handling request [login request handler has recived a wrong code]";
 		result.buffer = JsonResponsePacketSerializer::serializeErrorResponse(num);
-		result.newHandler = nullptr;
+		result.newHandler = this;
 	}
 	return result;
 }
