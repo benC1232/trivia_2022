@@ -1,6 +1,5 @@
 #include "JsonResponsePacketSerializer.h"
 
-
 //the first byte of the vector is the msg type
 #define LOGIN_RESPONSE_CODE 1
 #define SIGNUP_RESPONSE_CODE 2
@@ -13,8 +12,8 @@
 #define GET_STATISTICS_RESPONSE_CODE 9
 #define CLOSE_ROOM_RESPONSE_CODE 10
 #define START_GAME_RESPONSE_CODE 11
-#define GET_ROOM_STATE_RESPONSE_CODE 12
-#define LEAVE_ROOM_RESPONSE_CODE 13
+#define GET_ROOM_STATE_CODE 12
+#define LEAVE_ROOM_CODE 13
 
 std::vector<unsigned char> intToByteVector(int num) {
 	std::vector<unsigned char> buffer(4);
@@ -222,7 +221,7 @@ std::vector<unsigned char> JsonResponsePacketSerializer::serializeStartGameRespo
 std::vector<unsigned char> JsonResponsePacketSerializer::serializeGetRoomStateResponse(GetRoomStateResponse getRoomStateResponse)
 {
 	std::vector<unsigned char> buffer;
-	buffer.push_back(GET_ROOM_STATE_RESPONSE_CODE);
+	buffer.push_back(GET_ROOM_STATE_CODE);
 	nlohmann::json jsonResponse = {
 		{"status",getRoomStateResponse.status},
 		{"hasGameBegun", (getRoomStateResponse.hasGameBegun ? 1 : 0)},
@@ -240,7 +239,7 @@ std::vector<unsigned char> JsonResponsePacketSerializer::serializeGetRoomStateRe
 std::vector<unsigned char> JsonResponsePacketSerializer::serializeLeaveRoomResponse(LeaveRoomResponse leaveRoomResponse)
 {
 	std::vector<unsigned char> buffer;
-	buffer.push_back(LEAVE_ROOM_RESPONSE_CODE);
+	buffer.push_back(LEAVE_ROOM_CODE);
 	nlohmann::json jsonResponse = {
 		{"status",leaveRoomResponse.status}
 	};
@@ -250,4 +249,3 @@ std::vector<unsigned char> JsonResponsePacketSerializer::serializeLeaveRoomRespo
 	for (unsigned char c : jsonString) buffer.push_back(c);
 	return buffer;
 }
-
