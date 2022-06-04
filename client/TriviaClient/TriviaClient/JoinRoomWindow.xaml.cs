@@ -43,22 +43,24 @@ namespace TriviaClient
             {
                 responseStructs.GetRoomResponse getRoomResponse = JsonConvert.DeserializeObject<responseStructs.GetRoomResponse>(strResponse);
                 string[] rooms = getRoomResponse.rooms.Split(',');
+
                 List<string> items = new List<string>();
-                foreach (string str in rooms)
-                {
-                    string[] parsedResponse = str.Split(':');
-                    string roomName = parsedResponse[0];
-                    string roomId = parsedResponse[1];
-                    string result = roomName + " id: " + roomId;
-                    items.Add(result);
-                }
-                if (items[0] == "no rooms available")
+
+                if (rooms[0] == "no rooms available")
                 {
                     this.errorLbl.Visibility = Visibility.Visible;
                     this.errorLbl.Text = "no rooms available";
                 }
                 else
                 {
+                    for (int i = 0; i < rooms.Length - 1; i++)
+                    {
+                        string[] parsedResponse = rooms[i].Split(':');
+                        string roomName = parsedResponse[0];
+                        string roomId = parsedResponse[1];
+                        string result = roomName + " id: " + roomId;
+                        items.Add(result);
+                    }
                     this.roomsListLstBx.ItemsSource = items;
                 }
             }
@@ -81,15 +83,14 @@ namespace TriviaClient
             string selectedRoomName = this.roomsListLstBx.SelectedItem.ToString();
             string parsedResponse = selectedRoomName.Split(':')[1];
             parsedResponse = parsedResponse.Substring(1);
-            int roomID = Int32.Parse(parsedResponse);
             requestStructs.JoinRoomRequest joinRoomRequest;
-            joinRoomRequest.roomId = roomID;
+            joinRoomRequest.roomId = parsedResponse;
             string json = JsonConvert.SerializeObject(joinRoomRequest);
             byte[] data = Encoding.ASCII.GetBytes(json);
             this.comm.Send(6, data);
             Tuple<int, byte[]> response = this.comm.Recieve();
             string strResponse = Encoding.ASCII.GetString(response.Item2);
-            if (response.Item1 == 6)
+            if (response.Item1 == 7)
             {
                 waitingRoom waitingroomwindow = new waitingRoom(this.comm);
                 this.Close();

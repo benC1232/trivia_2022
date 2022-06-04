@@ -64,7 +64,18 @@ namespace TriviaClient
 
         private void dispatcherTimer_Tick(object sender, EventArgs e)
         {
-            refresh();
+            try
+            {
+                refresh();
+            }
+            catch
+            {
+                this.timer.Stop();
+                MenuWindow menuWindow = new MenuWindow(this.comm);
+                this.Close();
+                menuWindow.Show();
+                this.Close();
+            }
         }
 
         private void Leave_Click(object sender, RoutedEventArgs e)

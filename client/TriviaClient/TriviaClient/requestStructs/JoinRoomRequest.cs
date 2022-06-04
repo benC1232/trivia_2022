@@ -8,6 +8,6 @@ namespace TriviaClient.requestStructs
 {
     internal struct JoinRoomRequest
     {
-        public int roomId;
+        public string roomId;
     }
 }
