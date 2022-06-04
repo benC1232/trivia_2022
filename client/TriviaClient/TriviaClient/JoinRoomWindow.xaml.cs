@@ -82,5 +82,14 @@ namespace TriviaClient
         {
             this.JoinRoomBtn.Content = "Join " + this.roomsListLstBx.SelectedItem.ToString();
         }
+
+        private void backToMenuBtn_Click(object sender, RoutedEventArgs e)
+        {
+            this.timer.Stop();
+            MenuWindow menuWindow = new MenuWindow(comm);
+            this.Close();
+            menuWindow.Show();
+
+        }
     }
 }
