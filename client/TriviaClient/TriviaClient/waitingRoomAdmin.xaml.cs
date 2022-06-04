@@ -26,6 +26,7 @@ namespace TriviaClient
 
         public waitingRoomAdmin(Communicator c)
         {
+            this.comm = c;
             InitializeComponent();
             this.errorLbl.Visibility = Visibility.Hidden;
             refresh();
