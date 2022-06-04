@@ -18,11 +18,11 @@ RequestResult RoomMemberRequestHandler::handleRequest(RequestInfo requestInfo)
 	RequestResult result;
 	if (requestInfo.id == GET_ROOM_STATE_CODE)
 	{
-		result = leaveRoom(requestInfo);
+		result = getRoomState(requestInfo);
 	}
 	else if (requestInfo.id == LEAVE_ROOM_CODE)
 	{
-		result = getRoomState(requestInfo);
+		result = leaveRoom(requestInfo);
 	}
 	else
 	{
@@ -53,6 +53,7 @@ RequestResult RoomMemberRequestHandler::getRoomState(RequestInfo requestInfo)
 	getRoomStateResponse.hasGameBegun = this->m_room->getData().isActive;
 	getRoomStateResponse.players = this->m_room->getAllUsers();
 	getRoomStateResponse.questionCount = this->m_room->getData().numOfQuestionsInGame;
+	getRoomStateResponse.answerTimeOut = this->m_room->getData().timePerQuestion;
 	result.buffer = JsonResponsePacketSerializer::serializeGetRoomStateResponse(getRoomStateResponse);
 	result.newHandler = this;
 	return result;

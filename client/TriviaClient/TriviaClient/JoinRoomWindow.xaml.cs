@@ -69,6 +69,7 @@ namespace TriviaClient
 
         private void JoinRoomBtn_Click(object sender, RoutedEventArgs e)
         {
+            this.timer.Stop();
             String selectedRoomName = this.roomsListLstBx.SelectedItem.ToString();
             this.errorLbl.Visibility = Visibility.Visible;
             timer.Stop();

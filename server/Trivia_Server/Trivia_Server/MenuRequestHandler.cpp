@@ -95,7 +95,7 @@ RequestResult MenuRequestHandler::joinRoom(RequestInfo requestInfo)
 		}
 	}
 	result.buffer = JsonResponsePacketSerializer::serializeJoinRoomResponse(num);
-	result.newHandler = this->m_requestHandlerFactory->createRoomMemberRequestHandler(this->m_user, this->m_roomManager->getRoom(joinRoomRequest.roomId));
+	result.newHandler = this->m_requestHandlerFactory->createRoomMemberRequestHandler(this->m_user, this->m_requestHandlerFactory->getRoomManager().getRoom(joinRoomRequest.roomId));
 	return result;
 }
 
@@ -113,7 +113,7 @@ RequestResult MenuRequestHandler::createRoom(RequestInfo requestInfo)
 	roomData.id = 0;
 	int id = this->m_requestHandlerFactory->getRoomManager().createRoom(m_user, roomData);
 	result.buffer = JsonResponsePacketSerializer::serializeCreateRoomResponse(num);
-	result.newHandler = this->m_requestHandlerFactory->createRoomMemberRequestHandler(this->m_user, this->m_roomManager->getRoom(id));
+	result.newHandler = this->m_requestHandlerFactory->createRoomAdminRequestHandler(this->m_user, this->m_requestHandlerFactory->getRoomManager().getRoom(id));
 	return result;
 }
 

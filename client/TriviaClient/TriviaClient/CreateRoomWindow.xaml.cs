@@ -50,6 +50,7 @@ namespace TriviaClient
             if (response.Item1 == 8)
             {
                 waitingRoomAdmin waitingroomwindow = new waitingRoomAdmin(this.comm);
+                this.Close();
                 waitingroomwindow.Show();
                 this.Close();
             }

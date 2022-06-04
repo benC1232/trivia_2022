@@ -64,6 +64,7 @@ RequestResult RoomAdminRequestHandler::getRoomState(RequestInfo requestInfo)
 	getRoomStateResponse.hasGameBegun = this->m_room->getData().isActive;
 	getRoomStateResponse.players = this->m_room->getAllUsers();
 	getRoomStateResponse.questionCount = this->m_room->getData().numOfQuestionsInGame;
+	getRoomStateResponse.answerTimeOut = this->m_room->getData().timePerQuestion;
 	result.buffer = JsonResponsePacketSerializer::serializeGetRoomStateResponse(getRoomStateResponse);
 	result.newHandler = this;
 	return result;

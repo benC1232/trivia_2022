@@ -32,6 +32,7 @@ namespace TriviaClient
             refresh();
             timer = new System.Windows.Threading.DispatcherTimer();
             timer.Tick += new EventHandler(dispatcherTimer_Tick);
+            //need to change it to 2 seconds
             timer.Interval = new TimeSpan(0, 0, 3);
             timer.Start();
         }
@@ -51,6 +52,8 @@ namespace TriviaClient
                 playerText = System.String.Join("\n", players);
                 playerText = "💻 admin -" + playerText;
                 this.PlayersTxtBlck.Text = playerText;
+                this.errorLbl.Visibility = Visibility.Visible;
+                this.errorLbl.Text = "THE TEXT IS SUPPOSED TO APPEAR DUMBASS";
                 //need to check if the game started and if it did go to the game
             }
             else if (response.Item1 == 3)
@@ -68,6 +71,7 @@ namespace TriviaClient
 
         private void Close_Click(object sender, RoutedEventArgs e)
         {
+            this.timer.Stop();
             byte[] arr = new byte[1];
             arr[0] = 1;
             this.comm.Send(10, arr);
@@ -90,6 +94,7 @@ namespace TriviaClient
 
         private void Start_Click(object sender, RoutedEventArgs e)
         {
+            this.timer.Stop();
             errorLbl.Visibility = Visibility.Visible;
             errorLbl.Text = "we didnt do this part lol";
         }

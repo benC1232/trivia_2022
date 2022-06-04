@@ -11,11 +11,11 @@
     </Window.Background>
     <StackPanel>
         <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
-            <Label Height="38"/>
+            <Label Height="38" />
             <Label HorizontalContentAlignment="Center" Content="Waiting Room" FontSize="80" FontFamily="{StaticResource AmaticSC}" VerticalContentAlignment="Center" Foreground="White" FontWeight="ExtraBold" Height="101" />
-            <Label Height="9"/>
+            <Label Height="9" />
             <Label HorizontalContentAlignment="Center" Content="Players:" FontSize="50" FontFamily="{StaticResource AmaticSC}" VerticalContentAlignment="Center" Foreground="White" FontWeight="ExtraBold" Height="68" />
-            <TextBox x:Name="PlayersTxtBlck" FontFamily="{StaticResource AmaticSC}" IsReadOnly="True" Background="Black" BorderBrush="White" VerticalScrollBarVisibility="Auto" BorderThickness="5" Height="297" HorizontalContentAlignment="Left" Width="719">
+            <TextBox x:Name="PlayersTxtBlck" FontFamily="{StaticResource AmaticSC}" IsReadOnly="True" Background="Black" Foreground="White" BorderBrush="White" VerticalScrollBarVisibility="Auto" BorderThickness="5" Height="297" HorizontalContentAlignment="Left" Width="719" FontSize="32">
                 <TextBox.Resources>
                     <Style TargetType="Border">
                         <Setter Property="CornerRadius" Value="15" />
@@ -23,16 +23,12 @@
                     <Style TargetType="ScrollBar">
                         <Setter Property="Background" Value="Black" />
                         <Setter Property="BorderBrush" Value="Black" />
-                        <Setter Property="Foreground" Value="White"/>
-
-
-
+                        <Setter Property="Foreground" Value="White" />
                     </Style>
                 </TextBox.Resources>
             </TextBox>
-            <Label Height="9"/>
+            <Label Height="9" />
             <Label HorizontalContentAlignment="Center" Content="💻 - admin" FontSize="20" FontFamily="{StaticResource AmaticSC}" VerticalContentAlignment="Center" Foreground="White" FontWeight="ExtraBold" Height="68" />
-
         </StackPanel>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="lEFT">
             <Label Width="31" Height="89" />

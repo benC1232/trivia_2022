@@ -69,6 +69,7 @@ namespace TriviaClient
 
         private void Leave_Click(object sender, RoutedEventArgs e)
         {
+            this.timer.Stop();
             byte[] arr = new byte[1];
             arr[0] = 1;
             this.comm.Send(13, arr);
