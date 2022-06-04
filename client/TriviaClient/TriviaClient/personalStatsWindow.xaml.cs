@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Newtonsoft.Json;
 
 namespace TriviaClient
 {
@@ -33,7 +34,9 @@ namespace TriviaClient
             string strResponse = Encoding.ASCII.GetString(response.Item2);
             if (response.Item1 == 9)
             {
-                string[] parsedResponse = strResponse.Split(',');
+                responseStructs.GetPersonalStatsResponse getPersonalStatsResponse = JsonConvert.DeserializeObject<responseStructs.GetPersonalStatsResponse>(strResponse);
+
+                string[] parsedResponse = getPersonalStatsResponse.stats.Split(',');
                 string avgTime = parsedResponse[0].Split(':')[1];
                 this.avgTimePerAnswerLbl.Content = avgTime;
                 string correctAnswers = parsedResponse[1].Split(':')[1];
