@@ -13,20 +13,20 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Newtonsoft.Json;
+
 namespace TriviaClient
 {
     /// <summary>
-    /// Interaction logic for waitingRoom.xaml
+    /// Interaction logic for waitingRoomAdmin.xaml
     /// </summary>
-    public partial class waitingRoom : Window
+    public partial class waitingRoomAdmin : Window
     {
+
         private Communicator comm;
         private DispatcherTimer timer;
 
-        public waitingRoom(Communicator c)
+        public waitingRoomAdmin(Communicator c)
         {
-            this.comm = c;
-            //💻 - paste it before the admin username
             InitializeComponent();
             this.errorLbl.Visibility = Visibility.Hidden;
             refresh();
@@ -35,8 +35,6 @@ namespace TriviaClient
             timer.Interval = new TimeSpan(0, 0, 3);
             timer.Start();
         }
-
-        
 
         private void refresh()
         {
@@ -48,7 +46,12 @@ namespace TriviaClient
             refresh();
         }
 
-        private void Leave_Click(object sender, RoutedEventArgs e)
+        private void Close_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Start_Click(object sender, RoutedEventArgs e)
         {
 
         }
