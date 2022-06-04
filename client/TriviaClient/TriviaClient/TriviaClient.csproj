@@ -73,6 +73,7 @@
     <Compile Include="responseStructs\ErrorResponse.cs" />
     <Compile Include="responseStructs\GetPersonalStatsResponse.cs" />
     <Compile Include="responseStructs\GetRoomResponse.cs" />
+    <Compile Include="responseStructs\GetRoomStateResponse.cs" />
     <Compile Include="responseStructs\HighScoreResponse.cs" />
     <Compile Include="waitingRoom.xaml.cs">
       <DependentUpon>waitingRoom.xaml</DependentUpon>
