@@ -19,7 +19,11 @@
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <Grid Margin="0,2">
-                            <TextBlock Foreground="White" Background="Black" Text="{Binding Title}" />
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="100" />
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Foreground="White" Background="Black" Text="{Binding}" />
                         </Grid>
                     </DataTemplate>
                 </ListBox.ItemTemplate>

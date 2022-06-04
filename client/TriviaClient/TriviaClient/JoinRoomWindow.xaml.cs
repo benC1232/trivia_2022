@@ -43,16 +43,9 @@ namespace TriviaClient
             {
                 responseStructs.GetRoomResponse getRoomResponse = JsonConvert.DeserializeObject<responseStructs.GetRoomResponse>(strResponse);
 
-                string[] strs = getRoomResponse.rooms.Split(',');
-                List<roomToJoin> items = new List<roomToJoin>();
-                foreach(string i in strs)
-                {
-                    roomToJoin r = new roomToJoin();
-                    r.Title = i;
-                    items.Add(r);
-                }
-
-                if (items[0].Title == "no rooms available")
+                List<string> items = new List<string>(getRoomResponse.rooms.Split(','));
+                
+                if (items[0] == "no rooms available")
                 {
                     this.errorLbl.Visibility = Visibility.Visible;
                     this.errorLbl.Text = "no rooms available";
