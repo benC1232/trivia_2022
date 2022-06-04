@@ -68,6 +68,7 @@
       <DependentUpon>personalStatsWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="requestStructs\CreateRoomRequest.cs" />
+    <Compile Include="requestStructs\JoinRoomRequest.cs" />
     <Compile Include="requestStructs\LoginRequest.cs" />
     <Compile Include="requestStructs\SignUpRequest.cs" />
     <Compile Include="responseStructs\ErrorResponse.cs" />

@@ -43,9 +43,15 @@ namespace TriviaClient
             {
                 responseStructs.GetRoomResponse getRoomResponse = JsonConvert.DeserializeObject<responseStructs.GetRoomResponse>(strResponse);
                 string[] rooms = getRoomResponse.rooms.Split(',');
-
-                List<string> items = new List<string>(getRoomResponse.rooms.Split(','));
-
+                List<string> items = new List<string>();
+                foreach (string str in rooms)
+                {
+                    string[] parsedResponse = str.Split(':');
+                    string roomName = parsedResponse[0];
+                    string roomId = parsedResponse[1];
+                    string result = roomName + " id: " + roomId;
+                    items.Add(result);
+                }
                 if (items[0] == "no rooms available")
                 {
                     this.errorLbl.Visibility = Visibility.Visible;
@@ -73,10 +79,28 @@ namespace TriviaClient
         {
             this.timer.Stop();
             string selectedRoomName = this.roomsListLstBx.SelectedItem.ToString();
-
-            waitingRoom waitingroomwindow = new waitingRoom(this.comm);
-            this.Close();
-            waitingroomwindow.Show();
+            string parsedResponse = selectedRoomName.Split(':')[1];
+            parsedResponse = parsedResponse.Substring(1);
+            int roomID = Int32.Parse(parsedResponse);
+            requestStructs.JoinRoomRequest joinRoomRequest;
+            joinRoomRequest.roomId = roomID;
+            string json = JsonConvert.SerializeObject(joinRoomRequest);
+            byte[] data = Encoding.ASCII.GetBytes(json);
+            this.comm.Send(6, data);
+            Tuple<int, byte[]> response = this.comm.Recieve();
+            string strResponse = Encoding.ASCII.GetString(response.Item2);
+            if (response.Item1 == 6)
+            {
+                waitingRoom waitingroomwindow = new waitingRoom(this.comm);
+                this.Close();
+                waitingroomwindow.Show();
+            }
+            else
+            {
+                responseStructs.ErrorResponse errorResponse = JsonConvert.DeserializeObject<responseStructs.ErrorResponse>(strResponse);
+                this.errorLbl.Visibility = Visibility.Visible;
+                this.errorLbl.Text = errorResponse.message;
+            }
         }
 
         private void roomsListLstBx_SelectionChanged(object sender, SelectionChangedEventArgs e)
