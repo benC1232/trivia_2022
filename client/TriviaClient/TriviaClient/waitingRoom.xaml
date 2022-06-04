@@ -28,7 +28,7 @@
                 </TextBox.Resources>
             </TextBox>
             <Label Height="9" />
-            <Label HorizontalContentAlignment="Center" Content="💻 - admin" FontSize="20" FontFamily="{StaticResource AmaticSC}" VerticalContentAlignment="Center" Foreground="White" FontWeight="ExtraBold" Height="68" />
+            <Label HorizontalContentAlignment="Center" Content="" FontSize="20" FontFamily="{StaticResource AmaticSC}" VerticalContentAlignment="Center" Foreground="White" FontWeight="ExtraBold" Height="68" />
         </StackPanel>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="lEFT">
             <Label Width="31" Height="89" />
