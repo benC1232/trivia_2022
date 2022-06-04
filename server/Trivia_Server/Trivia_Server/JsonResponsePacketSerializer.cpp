@@ -24,7 +24,7 @@ std::vector<unsigned char> intToByteVector(int num) {
 std::string RoomDataVecToString(std::vector<RoomData> roomData) {
 	std::string output = "";
 	for (auto room : roomData) {
-		output += room.name + ",";
+		output += room.name + ":" + std::to_string(room.id)+ ",";
 	}
 	return output;
 }
