@@ -23,7 +23,7 @@
                                 <ColumnDefinition Width="*" />
                                 <ColumnDefinition Width="100" />
                             </Grid.ColumnDefinitions>
-                            <TextBlock Foreground="White" Background="Black" Text="{Binding}" />
+                            <TextBlock FontSize ="32"  Foreground="White" Background="Black" Text="{Binding}" />
                         </Grid>
                     </DataTemplate>
                 </ListBox.ItemTemplate>

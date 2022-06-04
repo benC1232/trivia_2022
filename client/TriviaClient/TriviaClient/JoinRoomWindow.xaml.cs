@@ -42,9 +42,10 @@ namespace TriviaClient
             if (response.Item1 == 5)
             {
                 responseStructs.GetRoomResponse getRoomResponse = JsonConvert.DeserializeObject<responseStructs.GetRoomResponse>(strResponse);
+                string[] rooms = getRoomResponse.rooms.Split(',');
 
                 List<string> items = new List<string>(getRoomResponse.rooms.Split(','));
-                
+
                 if (items[0] == "no rooms available")
                 {
                     this.errorLbl.Visibility = Visibility.Visible;
@@ -71,9 +72,8 @@ namespace TriviaClient
         private void JoinRoomBtn_Click(object sender, RoutedEventArgs e)
         {
             this.timer.Stop();
-            String selectedRoomName = this.roomsListLstBx.SelectedItem.ToString();
-            this.errorLbl.Visibility = Visibility.Visible;
-            timer.Stop();
+            string selectedRoomName = this.roomsListLstBx.SelectedItem.ToString();
+
             waitingRoom waitingroomwindow = new waitingRoom(this.comm);
             this.Close();
             waitingroomwindow.Show();
@@ -90,7 +90,6 @@ namespace TriviaClient
             MenuWindow menuWindow = new MenuWindow(comm);
             this.Close();
             menuWindow.Show();
-
         }
     }
 }
