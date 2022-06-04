@@ -21,7 +21,6 @@ namespace TriviaClient
     /// </summary>
     public partial class waitingRoomAdmin : Window
     {
-
         private Communicator comm;
         private DispatcherTimer timer;
 
@@ -38,7 +37,27 @@ namespace TriviaClient
 
         private void refresh()
         {
-            //BackSide:
+            byte[] arr = new byte[1];
+            arr[0] = 1;
+            this.comm.Send(12, arr);
+            Tuple<int, byte[]> response = this.comm.Recieve();
+            string strResponse = Encoding.UTF8.GetString(response.Item2);
+            if (response.Item1 == 12)
+            {
+                responseStructs.GetRoomStateResponse roomState = JsonConvert.DeserializeObject<responseStructs.GetRoomStateResponse>(strResponse);
+                string[] players = roomState.players.Split(',');
+                string playerText = "";
+                playerText = System.String.Join("\n", players);
+                playerText = "💻 admin -" + playerText;
+                this.PlayersTxtBlck.Text = playerText;
+                //need to check if the game started and if it did go to the game
+            }
+            else if (response.Item1 == 3)
+            {
+                responseStructs.ErrorResponse errorResponse = JsonConvert.DeserializeObject<responseStructs.ErrorResponse>(strResponse);
+                this.errorLbl.Visibility = Visibility.Visible;
+                this.errorLbl.Text = errorResponse.message;
+            }
         }
 
         private void dispatcherTimer_Tick(object sender, EventArgs e)
@@ -48,12 +67,30 @@ namespace TriviaClient
 
         private void Close_Click(object sender, RoutedEventArgs e)
         {
-
+            byte[] arr = new byte[1];
+            arr[0] = 1;
+            this.comm.Send(10, arr);
+            Tuple<int, byte[]> response = this.comm.Recieve();
+            string strResponse = Encoding.UTF8.GetString(response.Item2);
+            if (response.Item1 == 10)
+            {
+                MenuWindow menuWindow = new MenuWindow(this.comm);
+                this.Close();
+                menuWindow.Show();
+                this.Close();
+            }
+            else if (response.Item1 == 3)
+            {
+                responseStructs.ErrorResponse errorResponse = JsonConvert.DeserializeObject<responseStructs.ErrorResponse>(strResponse);
+                this.errorLbl.Visibility = Visibility.Visible;
+                this.errorLbl.Text = errorResponse.message;
+            }
         }
 
         private void Start_Click(object sender, RoutedEventArgs e)
         {
-
+            errorLbl.Visibility = Visibility.Visible;
+            errorLbl.Text = "we didnt do this part lol";
         }
     }
 }

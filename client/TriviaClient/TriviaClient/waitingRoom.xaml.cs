@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Newtonsoft.Json;
+
 namespace TriviaClient
 {
     /// <summary>
@@ -36,11 +37,29 @@ namespace TriviaClient
             timer.Start();
         }
 
-        
-
         private void refresh()
         {
-            //BackSide:
+            byte[] arr = new byte[1];
+            arr[0] = 1;
+            this.comm.Send(12, arr);
+            Tuple<int, byte[]> response = this.comm.Recieve();
+            string strResponse = Encoding.UTF8.GetString(response.Item2);
+            if (response.Item1 == 12)
+            {
+                responseStructs.GetRoomStateResponse roomState = JsonConvert.DeserializeObject<responseStructs.GetRoomStateResponse>(strResponse);
+                string[] players = roomState.players.Split(',');
+                string playerText = "";
+                playerText = System.String.Join("\n", players);
+                playerText = "💻 admin -" + playerText;
+                this.PlayersTxtBlck.Text = playerText;
+                //need to check if the game started and if it did go to the game
+            }
+            else if (response.Item1 == 3)
+            {
+                responseStructs.ErrorResponse errorResponse = JsonConvert.DeserializeObject<responseStructs.ErrorResponse>(strResponse);
+                this.errorLbl.Visibility = Visibility.Visible;
+                this.errorLbl.Text = errorResponse.message;
+            }
         }
 
         private void dispatcherTimer_Tick(object sender, EventArgs e)
@@ -50,7 +69,24 @@ namespace TriviaClient
 
         private void Leave_Click(object sender, RoutedEventArgs e)
         {
-
+            byte[] arr = new byte[1];
+            arr[0] = 1;
+            this.comm.Send(13, arr);
+            Tuple<int, byte[]> response = this.comm.Recieve();
+            string strResponse = Encoding.UTF8.GetString(response.Item2);
+            if (response.Item1 == 13)
+            {
+                MenuWindow menuWindow = new MenuWindow(this.comm);
+                this.Close();
+                menuWindow.Show();
+                this.Close();
+            }
+            else if (response.Item1 == 3)
+            {
+                responseStructs.ErrorResponse errorResponse = JsonConvert.DeserializeObject<responseStructs.ErrorResponse>(strResponse);
+                this.errorLbl.Visibility = Visibility.Visible;
+                this.errorLbl.Text = errorResponse.message;
+            }
         }
     }
 }

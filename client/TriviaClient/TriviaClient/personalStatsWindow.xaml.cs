@@ -48,8 +48,9 @@ namespace TriviaClient
             }
             if (response.Item1 == 3)
             {
+                responseStructs.ErrorResponse errorResponse = JsonConvert.DeserializeObject<responseStructs.ErrorResponse>(strResponse);
                 this.errorLbl.Visibility = Visibility.Visible;
-                this.errorLbl.Text = strResponse;
+                this.errorLbl.Text = errorResponse.message;
             }
         }
 
