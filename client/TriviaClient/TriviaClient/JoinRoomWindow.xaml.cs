@@ -35,7 +35,6 @@ namespace TriviaClient
             timer.Tick += new EventHandler(dispatcherTimer_Tick);
             timer.Interval = new TimeSpan(0, 0, 3);
             timer.Start();
-            
         }
 
         private void refresh()
@@ -75,13 +74,14 @@ namespace TriviaClient
             refresh();
         }
 
-
         private void JoinRoomBtn_Click(object sender, RoutedEventArgs e)
         {
             String selectedRoomName = this.roomsListLstBx.SelectedItem.ToString();
             this.errorLbl.Visibility = Visibility.Visible;
             timer.Stop();
-            this.errorLbl.Text = "joining rooms hasnt been implemented yet";
+            waitingRoom waitingroomwindow = new waitingRoom(this.comm);
+            this.Close();
+            waitingroomwindow.Show();
         }
 
         private void roomsListLstBx_SelectionChanged(object sender, SelectionChangedEventArgs e)
