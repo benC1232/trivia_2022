@@ -52,8 +52,6 @@ namespace TriviaClient
                 playerText = System.String.Join("\n", players);
                 playerText = "💻 admin -" + playerText;
                 this.PlayersTxtBlck.Text = playerText;
-                this.errorLbl.Visibility = Visibility.Visible;
-                this.errorLbl.Text = "THE TEXT IS SUPPOSED TO APPEAR DUMBASS";
                 //need to check if the game started and if it did go to the game
             }
             else if (response.Item1 == 3)
