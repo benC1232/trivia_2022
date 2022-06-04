@@ -54,6 +54,6 @@ RequestResult RoomMemberRequestHandler::getRoomState(RequestInfo requestInfo)
 	getRoomStateResponse.players = this->m_room->getAllUsers();
 	getRoomStateResponse.questionCount = this->m_room->getData().numOfQuestionsInGame;
 	result.buffer = JsonResponsePacketSerializer::serializeGetRoomStateResponse(getRoomStateResponse);
-	//create a roomrequesthandler request here!!!
+	result.newHandler = this;
 	return result;
 }

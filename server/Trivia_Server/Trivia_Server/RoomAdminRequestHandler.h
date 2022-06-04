@@ -4,7 +4,8 @@
 #include "RoomManager.h"
 #include "RequestHandlerFactory.h"
 class RequestHandlerFactory;
-class RoomAdminRequestHandler
+class RoomAdminRequestHandler :
+	public IRequestHandler
 {
 public:
 	RoomAdminRequestHandler(Room* room, LoggedUser user, RoomManager* roomManager, RequestHandlerFactory* requestHandlerFactory);
