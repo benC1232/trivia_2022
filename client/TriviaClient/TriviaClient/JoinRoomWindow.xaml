@@ -9,32 +9,31 @@
     <Window.Background>
         <ImageBrush ImageSource="/Resources/bg.png" Stretch="Fill" />
     </Window.Background>
-    <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Width="722">
-        <Label Height="40" />
-        <!--room list label-->
-        <Label HorizontalContentAlignment="Center" Content="Rooms List:" FontSize="80" FontFamily="{StaticResource AmaticSC}" VerticalContentAlignment="Center" Foreground="White" FontWeight="ExtraBold" Height="103" />
-        <Label Height="35" />
-        <ListBox  x:Name="roomsListLstBx" FontFamily="{StaticResource AmaticSC}" Background="Black" BorderBrush="White" BorderThickness="5" Height="297" HorizontalContentAlignment="Left" SelectionChanged="roomsListLstBx_SelectionChanged">
-            <ListBox.ItemTemplate>
-                <DataTemplate>
-                    <Grid Margin="0,2">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="100" />
-                        </Grid.ColumnDefinitions>
-                        <TextBlock Text="{Binding Title}" />
-                        <ProgressBar Grid.Column="1" Minimum="0" Maximum="100" Value="{Binding Completion}" />
-                    </Grid>
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-            <ListBox.Resources>
-                <Style TargetType="Border">
-                    <Setter Property="CornerRadius" Value="15" />
-                </Style>
-            </ListBox.Resources>
-        </ListBox>
-        <Label Height="27" />
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+    <StackPanel>
+        <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Width="722">
+            <Label Height="40" />
+            <!--room list label-->
+            <Label HorizontalContentAlignment="Center" Content="Rooms List:" FontSize="80" FontFamily="{StaticResource AmaticSC}" VerticalContentAlignment="Center" Foreground="White" FontWeight="ExtraBold" Height="103" />
+            <Label Height="35" />
+            <ListBox  x:Name="roomsListLstBx" FontFamily="{StaticResource AmaticSC}" Background="Black" BorderBrush="White" BorderThickness="5" Height="297" HorizontalContentAlignment="Left" SelectionChanged="roomsListLstBx_SelectionChanged">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Margin="0,2">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="100" />
+                            </Grid.ColumnDefinitions>
+                            <TextBlock FontSize ="32"  Foreground="White" Background="Black" Text="{Binding}" />
+                        </Grid>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+                <ListBox.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="15" />
+                    </Style>
+                </ListBox.Resources>
+            </ListBox>
+            <Label Height="27" />
             <Button x:Name="JoinRoomBtn" Content="Join Room" FontSize="50" Click="JoinRoomBtn_Click" FontFamily="{StaticResource AmaticSC}" Background="black" BorderBrush="white" Foreground="White" FontWeight="Bold" BorderThickness="6" Height="77"  Width="710">
                 <Button.Resources>
                     <Style TargetType="Border">
@@ -43,7 +42,19 @@
                 </Button.Resources>
             </Button>
         </StackPanel>
-        <Label Height="10" />
-        <TextBlock x:Name="errorLbl" HorizontalAlignment="Center" Text ="there has been an error!" FontSize="40" FontFamily="{StaticResource AmaticSC}" Background="Transparent" Foreground="DarkRed" />
+        <StackPanel Orientation="Horizontal" Width="1312">
+            <Label Width="29" Height="89" />
+
+            <Button  x:Name="backToMenuBtn" Click="backToMenuBtn_Click"  Content="return" FontSize="40" FontFamily="{StaticResource AmaticSC}" Background="black" BorderBrush="white" Foreground="White" FontWeight="Bold" BorderThickness="6" Height="68"  Width="103">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="15" />
+                    </Style>
+                </Button.Resources>
+            </Button>
+            <Label Width="374" Height="84" />
+            <Label Height="10" />
+            <TextBlock x:Name="errorLbl" HorizontalAlignment="Center" Text ="there has been an error!" FontSize="40" FontFamily="{StaticResource AmaticSC}" Background="Transparent" Foreground="DarkRed" />
+        </StackPanel>
     </StackPanel>
 </Window>

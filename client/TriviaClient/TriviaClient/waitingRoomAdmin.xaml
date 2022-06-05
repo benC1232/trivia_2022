@@ -1,0 +1,56 @@
+﻿<Window x:Class="TriviaClient.waitingRoomAdmin"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TriviaClient"
+        mc:Ignorable="d"
+        Title="waitingRoomAdmin" Height="720" Width="1280">
+    <Window.Background>
+        <ImageBrush ImageSource="/Resources/bg.png" Stretch="Fill" />
+    </Window.Background>
+    <StackPanel>
+        <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
+            <Label Height="38" />
+            <Label HorizontalContentAlignment="Center" Content="Waiting Room" FontSize="80" FontFamily="{StaticResource AmaticSC}" VerticalContentAlignment="Center" Foreground="White" FontWeight="ExtraBold" Height="101" />
+            <Label Height="9" />
+            <Label HorizontalContentAlignment="Center" Content="Players:" FontSize="50" FontFamily="{StaticResource AmaticSC}" VerticalContentAlignment="Center" Foreground="White" FontWeight="ExtraBold" Height="68" />
+            <TextBox x:Name="PlayersTxtBlck" FontFamily="{StaticResource AmaticSC}" IsReadOnly="True" Background="Black" Foreground="White" BorderBrush="White" VerticalScrollBarVisibility="Auto" BorderThickness="5" Height="297" HorizontalContentAlignment="Left" Width="719" FontSize="32">
+                <TextBox.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="15" />
+                    </Style>
+                    <Style TargetType="ScrollBar">
+                        <Setter Property="Background" Value="Black" />
+                        <Setter Property="BorderBrush" Value="Black" />
+                        <Setter Property="Foreground" Value="White" />
+                    </Style>
+                </TextBox.Resources>
+            </TextBox>
+            <Label Height="9" />
+            <Label HorizontalContentAlignment="Center" Content="💻 - admin" FontSize="20" FontFamily="{StaticResource AmaticSC}" VerticalContentAlignment="Center" Foreground="White" FontWeight="ExtraBold" Height="68" />
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="lEFT">
+            <Label Width="31" Height="89" />
+
+            <Button  x:Name="Close" Click='Close_Click' Content="Close" FontSize="40" FontFamily="{StaticResource AmaticSC}" Background="black" BorderBrush="white" Foreground="White" FontWeight="Bold" BorderThickness="6" Height="68"  Width="103">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="15" />
+                    </Style>
+                </Button.Resources>
+            </Button>
+            <Label Width="362" Height="84" />
+            <TextBlock x:Name="errorLbl" Text ="there has been an error!" FontSize="40" FontFamily="{StaticResource AmaticSC}" Background="Transparent" Foreground="DarkRed" Width="289" />
+            <Label Width="361" Height="84" />
+
+            <Button  x:Name="Start" Click="Start_Click" Content="Start" FontSize="40" FontFamily="{StaticResource AmaticSC}" Background="black" BorderBrush="white" Foreground="White" FontWeight="Bold" BorderThickness="6" Height="68"  Width="103">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="15" />
+                    </Style>
+                </Button.Resources>
+            </Button>
+        </StackPanel>
+    </StackPanel>
+</Window>

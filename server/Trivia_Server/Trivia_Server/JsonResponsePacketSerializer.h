@@ -51,6 +51,27 @@ struct CreateRoomResponse {
 	unsigned int status;
 };
 
+struct CloseRoomResponse {
+	unsigned int status;
+};
+
+struct StartGameResponse
+{
+	unsigned int status;
+};
+
+struct GetRoomStateResponse {
+	unsigned int status;
+	bool hasGameBegun;
+	std::vector<std::string> players;
+	unsigned int questionCount;
+	unsigned int answerTimeOut;
+};
+
+struct LeaveRoomResponse {
+	unsigned int status;
+};
+
 class JsonResponsePacketSerializer {
 public:
 	static std::vector<unsigned char> serializeLoginResponse(struct LoginResponse loginResponse);
@@ -63,4 +84,8 @@ public:
 	static std::vector<unsigned char>  serializeCreateRoomResponse(struct CreateRoomResponse createRoomResponse);
 	static std::vector<unsigned char> serializeGetStatisticsResponse(struct GetPersonalStatsResponse getPresonalStatsResponse);
 	static std::vector<unsigned char> serializeGetHighScoreResponse(struct GetHighScoreRespnse getHighScoreResponse);
+	static std::vector<unsigned char> serializeCloseRoomResponse(struct CloseRoomResponse closeRoomResponse);
+	static std::vector<unsigned char> serializeStartGameResponse(struct StartGameResponse startGameResponse);
+	static std::vector<unsigned char> serializeGetRoomStateResponse(struct GetRoomStateResponse getRoomStateResponse);
+	static std::vector<unsigned char> serializeLeaveRoomResponse(struct LeaveRoomResponse leaveRoomResponse);
 };

@@ -68,12 +68,21 @@
       <DependentUpon>personalStatsWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="requestStructs\CreateRoomRequest.cs" />
+    <Compile Include="requestStructs\JoinRoomRequest.cs" />
     <Compile Include="requestStructs\LoginRequest.cs" />
     <Compile Include="requestStructs\SignUpRequest.cs" />
     <Compile Include="responseStructs\ErrorResponse.cs" />
     <Compile Include="responseStructs\GetPersonalStatsResponse.cs" />
     <Compile Include="responseStructs\GetRoomResponse.cs" />
+    <Compile Include="responseStructs\GetRoomStateResponse.cs" />
     <Compile Include="responseStructs\HighScoreResponse.cs" />
+    <Compile Include="roomToJoin.cs" />
+    <Compile Include="waitingRoom.xaml.cs">
+      <DependentUpon>waitingRoom.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="waitingRoomAdmin.xaml.cs">
+      <DependentUpon>waitingRoomAdmin.xaml</DependentUpon>
+    </Compile>
     <Page Include="CreateRoomWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -107,6 +116,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="personalStatsWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="waitingRoom.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="waitingRoomAdmin.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
