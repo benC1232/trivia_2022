@@ -95,3 +95,20 @@ CreateRoomRequest JsonRequestPacketDeserializer::deserializeCreateRoomRequest(st
 	}
 	return parsedData;
 }
+
+SubmitAnswerRequest JsonRequestPacketDeserializer::deserializeSubmitAnswerRequest(std::vector<unsigned char> buffer)
+{
+	std::string jsonString(buffer.begin() + JSON_OFFSET, buffer.end());
+	nlohmann::json jsonObject = nlohmann::json::parse(jsonString);
+	std::string answerId = jsonObject["answerId"];
+	SubmitAnswerRequest parsedData;
+	try
+	{
+		parsedData.answerId = atoi(answerId.c_str());
+	}
+	catch (...)
+	{
+		throw std::exception("answerId is not a number");
+	}
+	return parsedData;
+}
