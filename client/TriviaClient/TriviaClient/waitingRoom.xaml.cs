@@ -57,7 +57,7 @@ namespace TriviaClient
             else if (response.Item1 == 3)
             {
                 responseStructs.ErrorResponse errorResponse = JsonConvert.DeserializeObject<responseStructs.ErrorResponse>(strResponse);
-                if (errorResponse.message == "std::bad_alloc was thrown while handling request[room member request handler]")
+                if (errorResponse.message.CompareTo("std::bad_alloc was thrown while handling request [room member request handler]") == 0)
                 {
                     throw new Exception("room has been closed");
                 }
