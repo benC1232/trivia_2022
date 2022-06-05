@@ -48,13 +48,24 @@ RequestResult RoomMemberRequestHandler::leaveRoom(RequestInfo requestInfo)
 RequestResult RoomMemberRequestHandler::getRoomState(RequestInfo requestInfo)
 {
 	RequestResult result;
-	GetRoomStateResponse getRoomStateResponse;
-	getRoomStateResponse.status = GET_ROOM_STATE_CODE;
-	getRoomStateResponse.hasGameBegun = this->m_room->getData().isActive;
-	getRoomStateResponse.players = this->m_room->getAllUsers();
-	getRoomStateResponse.questionCount = this->m_room->getData().numOfQuestionsInGame;
-	getRoomStateResponse.answerTimeOut = this->m_room->getData().timePerQuestion;
-	result.buffer = JsonResponsePacketSerializer::serializeGetRoomStateResponse(getRoomStateResponse);
-	result.newHandler = this;
-	return result;
+	try
+	{
+		GetRoomStateResponse getRoomStateResponse;
+		getRoomStateResponse.status = GET_ROOM_STATE_CODE;
+		getRoomStateResponse.hasGameBegun = this->m_room->getData().isActive;
+		getRoomStateResponse.players = this->m_room->getAllUsers();
+		getRoomStateResponse.questionCount = this->m_room->getData().numOfQuestionsInGame;
+		getRoomStateResponse.answerTimeOut = this->m_room->getData().timePerQuestion;
+		result.buffer = JsonResponsePacketSerializer::serializeGetRoomStateResponse(getRoomStateResponse);
+		result.newHandler = this;
+		return result;
+	}
+	catch (std::bad_alloc e)
+	{
+		ErrorResponse num;
+		num.message = "std::bad_alloc was thrown while handling request [room member request handler]";
+		result.buffer = JsonResponsePacketSerializer::serializeErrorResponse(num);
+		result.newHandler = this->m_requestHandlerFactory->createMenuRequestHandler(this->m_user);
+		return result;
+	}
 }

@@ -57,8 +57,15 @@ namespace TriviaClient
             else if (response.Item1 == 3)
             {
                 responseStructs.ErrorResponse errorResponse = JsonConvert.DeserializeObject<responseStructs.ErrorResponse>(strResponse);
-                this.errorLbl.Visibility = Visibility.Visible;
-                this.errorLbl.Text = errorResponse.message;
+                if (errorResponse.message == "std::bad_alloc was thrown while handling request[room member request handler]")
+                {
+                    throw new Exception("room has been closed");
+                }
+                else
+                {
+                    this.errorLbl.Visibility = Visibility.Visible;
+                    this.errorLbl.Text = errorResponse.message;
+                }
             }
         }
 
@@ -71,6 +78,8 @@ namespace TriviaClient
             catch
             {
                 this.timer.Stop();
+                this.errorLbl.Visibility = Visibility.Visible;
+                this.errorLbl.Text = "room has been closed";
                 MenuWindow menuWindow = new MenuWindow(this.comm);
                 this.Close();
                 menuWindow.Show();

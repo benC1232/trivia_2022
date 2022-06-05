@@ -1,6 +1,6 @@
 #pragma once
 #include "IDatabase.h"
-//I dont know why this works, but dont remove one of the maps
+//I dont know why this works, but dont remove one of the maps because if you do the code wont run
 #include <map>
 #include <map>
 #include <list>
