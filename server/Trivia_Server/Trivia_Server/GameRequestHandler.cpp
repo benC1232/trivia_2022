@@ -88,4 +88,18 @@ RequestResult GameRequestHandler::getGameResults(RequestInfo requestInfo)
 
 RequestResult GameRequestHandler::leaveGame(RequestInfo requestInfo)
 {
+	RequestResult result;
+	if (this->m_game->getNumOfPlayers() == 1)
+	{
+		this->m_gameManager->deleteGame(*this->m_game);
+	}
+	else
+	{
+		this->m_game->removePlayer(this->m_loggedUser);
+	}
+	LeaveGameResponse response;
+	response.status = LEAVE_GAME_CODE;
+	result.buffer = JsonResponsePacketSerializer::serializeLeaveGameResponse(response);
+	result.newHandler = this->m_requestHandlerFactory->createMenuRequestHandler(this->m_loggedUser);
+	return result;
 }

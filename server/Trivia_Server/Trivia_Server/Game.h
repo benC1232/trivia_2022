@@ -14,7 +14,6 @@ typedef struct GameData {
 	unsigned int averageAnswerTime;
 } GameData;
 
-
 class Game
 {
 public:
@@ -25,8 +24,7 @@ public:
 	bool submitAnswer(LoggedUser user, std::string answer, int time);
 	void removePlayer(LoggedUser user);
 	std::vector<PlayerResults> getResults();
-	int getNumOfPlayer();
-	
+	int getNumOfPlayers();
 
 	//operator overload ==
 	bool operator==(const Game& other) const;
@@ -34,7 +32,4 @@ private:
 	std::vector<Question> m_questions;
 	std::map<LoggedUser, GameData> m_players;
 	//start time of the game
-	
-	
 };
-
