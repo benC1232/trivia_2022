@@ -100,15 +100,8 @@ SubmitAnswerRequest JsonRequestPacketDeserializer::deserializeSubmitAnswerReques
 {
 	std::string jsonString(buffer.begin() + JSON_OFFSET, buffer.end());
 	nlohmann::json jsonObject = nlohmann::json::parse(jsonString);
-	std::string answerId = jsonObject["answerId"];
+	std::string answer = jsonObject["answer"];
 	SubmitAnswerRequest parsedData;
-	try
-	{
-		parsedData.answerId = atoi(answerId.c_str());
-	}
-	catch (...)
-	{
-		throw std::exception("answerId is not a number");
-	}
+	parsedData.answer = answer;
 	return parsedData;
 }
