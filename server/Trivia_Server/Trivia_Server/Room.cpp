@@ -55,3 +55,8 @@ RoomData Room::getData()
 {
 	return this->m_metadata;
 }
+
+std::vector<LoggedUser> Room::getAllUsersVector()
+{
+	return this->m_users;
+}
