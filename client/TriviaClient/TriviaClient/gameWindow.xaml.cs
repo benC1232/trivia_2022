@@ -21,10 +21,27 @@ namespace TriviaClient
     /// </summary>
     public partial class gameWindow : Window
     {
-
+        private DispatcherTimer timer;
+        private int TotalSeconds;
         public gameWindow()
         {
             InitializeComponent();
+
+            this.timer = new DispatcherTimer();
+            this.timer.Interval = TimeSpan.FromSeconds(1);
+            timer.Tick += timer_Tick;
+            //remember to start the timer
+
+        }
+
+        void timer_Tick(object sender, EventArgs e)
+        {
+            this.countdown.Content = TotalSeconds - DateTime.Now.Second;
+            if (TotalSeconds - DateTime.Now.Second == 0)
+            {
+                //------------
+            }
+            
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
