@@ -73,6 +73,7 @@ RequestResult GameRequestHandler::submitAnswer(RequestInfo requestInfo)
 	response.status = SUBMIT_ANSWER_CODE;
 	response.isCorrect = this->m_game->submitAnswer(this->m_loggedUser, request.answer, request.responseTime);
 	result.buffer = JsonResponsePacketSerializer::serializeSubmitAnswerResponse(response);
+	return result;
 }
 
 RequestResult GameRequestHandler::getGameResults(RequestInfo requestInfo)
@@ -80,10 +81,26 @@ RequestResult GameRequestHandler::getGameResults(RequestInfo requestInfo)
 	RequestResult result;
 	GetGameResultsResponse response;
 	response.status = GET_GAME_RESULT_CODE;
-	response.results = this->m_game->
+	response.results = this->m_game->getResults();
+	result.buffer = JsonResponsePacketSerializer::serializeGetGameResultResponse(response);
+	result.newHandler = this;
+	return result;
 }
 
 RequestResult GameRequestHandler::leaveGame(RequestInfo requestInfo)
 {
-	return RequestResult();
+	RequestResult result;
+	if (this->m_game->getNumOfPlayers() == 1)
+	{
+		this->m_gameManager->deleteGame(*this->m_game);
+	}
+	else
+	{
+		this->m_game->removePlayer(this->m_loggedUser);
+	}
+	LeaveGameResponse response;
+	response.status = LEAVE_GAME_CODE;
+	result.buffer = JsonResponsePacketSerializer::serializeLeaveGameResponse(response);
+	result.newHandler = this->m_requestHandlerFactory->createMenuRequestHandler(this->m_loggedUser);
+	return result;
 }
