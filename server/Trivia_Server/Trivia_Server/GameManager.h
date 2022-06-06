@@ -13,10 +13,10 @@ private:
 	std::vector<Game> m_games;
 public:
 	GameManager() = default;
-	~GameManager() = default;
+	~GameManager();
 	GameManager(IDatabase* database, std::vector<Game> games);
 	Game createGame(Room room);
-	void deleteGame();
+	void deleteGame(Game game);
 
 	
 	
