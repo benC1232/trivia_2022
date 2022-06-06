@@ -19,6 +19,7 @@ private:
 	LoggedUser m_loggedUser;
 	RequestHandlerFactory* m_requestHandlerFactory;
 	Game* m_game;
+	int questionCount;
 	RequestResult getQuestion(RequestInfo requestInfo);
 	RequestResult submitAnswer(RequestInfo requestInfo);
 	RequestResult getGameResults(RequestInfo requestInfo);

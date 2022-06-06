@@ -9,6 +9,7 @@ GameRequestHandler::GameRequestHandler(GameManager* gameManager, LoggedUser logg
 	this->m_loggedUser = loggedUser;
 	this->m_requestHandlerFactory = requestHandlerFactory;
 	this->m_game = game;
+	this->questionCount = 0;
 }
 
 GameRequestHandler::~GameRequestHandler()
@@ -17,7 +18,7 @@ GameRequestHandler::~GameRequestHandler()
 
 bool GameRequestHandler::isRequestRelevant(RequestInfo requestInfo)
 {
-	return requestInfo.id == LEAVE_GAME_CODE || requestInfo.id == GET_QUESTION_CODE || requestInfo..id == SUBMIT_ANSWER_CODE || requestInfo.id == GET_GAME_RESULT_CODE;
+	return requestInfo.id == LEAVE_GAME_CODE || requestInfo.id == GET_QUESTION_CODE || requestInfo.id == SUBMIT_ANSWER_CODE || requestInfo.id == GET_GAME_RESULT_CODE;
 }
 
 RequestResult GameRequestHandler::handleRequest(RequestInfo requestInfo)
@@ -51,7 +52,11 @@ RequestResult GameRequestHandler::handleRequest(RequestInfo requestInfo)
 
 RequestResult GameRequestHandler::getQuestion(RequestInfo requestInfo)
 {
-	return RequestResult();
+	RequestResult result;
+	Question returnedQuestion = this->m_game->getQuestionForUser(this->m_loggedUser);
+	GetQuestionResponse response;
+	response.question = returnedQuestion.getQuestion();
+	std::map<>
 }
 
 RequestResult GameRequestHandler::submitAnswer(RequestInfo requestInfo)
