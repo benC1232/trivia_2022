@@ -56,17 +56,31 @@ RequestResult GameRequestHandler::getQuestion(RequestInfo requestInfo)
 	Question returnedQuestion = this->m_game->getQuestionForUser(this->m_loggedUser);
 	GetQuestionResponse response;
 	response.question = returnedQuestion.getQuestion();
-	std::map<>
+	std::vector<std::string> answers;
+	answers = returnedQuestion.getIncorrectAnswers();
+	answers.push_back(returnedQuestion.getCorrectAnswer());
+	response.answers = answers;
+	result.buffer = JsonResponsePacketSerializer::serializeGetQuestionResponse(response);
+	result.newHandler = this;
+	return result;
 }
 
 RequestResult GameRequestHandler::submitAnswer(RequestInfo requestInfo)
 {
-	return RequestResult();
+	RequestResult result;
+	SubmitAnswerRequest request = JsonRequestPacketDeserializer::deserializeSubmitAnswerRequest(requestInfo.buffer);
+	SubmitAnswerResponse response;
+	response.status = SUBMIT_ANSWER_CODE;
+	response.isCorrect = this->m_game->submitAnswer(this->m_loggedUser, request.answer, request.responseTime);
+	result.buffer = JsonResponsePacketSerializer::serializeSubmitAnswerResponse(response);
 }
 
 RequestResult GameRequestHandler::getGameResults(RequestInfo requestInfo)
 {
-	return RequestResult();
+	RequestResult result;
+	GetGameResultsResponse response;
+	response.status = GET_GAME_RESULT_CODE;
+	response.results = this->m_game->
 }
 
 RequestResult GameRequestHandler::leaveGame(RequestInfo requestInfo)
