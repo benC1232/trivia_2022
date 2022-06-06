@@ -63,6 +63,11 @@ std::vector<PlayerResults> Game::getResults()
 	return output;
 }
 
+int Game::getNumOfPlayer()
+{
+	return this->m_players.size();
+}
+
 bool Game::operator==(const Game& other) const
 {
 	return this->m_questions == other.m_questions && this->m_players == other.m_players;

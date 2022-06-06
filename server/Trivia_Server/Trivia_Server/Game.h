@@ -25,6 +25,7 @@ public:
 	bool submitAnswer(LoggedUser user, std::string answer, int time);
 	void removePlayer(LoggedUser user);
 	std::vector<PlayerResults> getResults();
+	int getNumOfPlayer();
 	
 
 	//operator overload ==
