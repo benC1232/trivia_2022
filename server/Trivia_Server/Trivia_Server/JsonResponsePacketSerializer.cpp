@@ -311,7 +311,7 @@ std::vector<unsigned char> JsonResponsePacketSerializer::serializeGetQuestionRes
 	nlohmann::json jsonResponse = {
 		{"status",getQuestionResponse.status},
 		{"question", getQuestionResponse.question},
-		{"answers", answerMapToJson(getQuestionResponse.answers)}
+		{"answers", stringVecToString(getQuestionResponse.answers)}
 	};
 	std::string jsonString = nlohmann::to_string(jsonResponse);
 	std::vector<unsigned char> lenBuff = intToByteVector(jsonString.length());

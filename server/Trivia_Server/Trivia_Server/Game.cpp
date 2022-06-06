@@ -26,17 +26,21 @@ Question Game::getQuestionForUser(LoggedUser user)
 	
 }
 
-void Game::submitAnswer(LoggedUser user, std::string answer, int time)
+bool Game::submitAnswer(LoggedUser user, std::string answer, int time)
 {
+	bool result;
 	if(this->m_players[user].currentQuestion.getCorrectAnswer() == answer)
 	{
 		this->m_players[user].correctAnswerCount++;
+		result = true;
 	}
 	else
 	{
 		this->m_players[user].wrongAnswerCount++;
+		result = false;
 	}
 	this->m_players[user].averageAnswerTime = (((this->m_players[user].averageAnswerTime * (this->m_players[user].correctAnswerCount + this->m_players[user].wrongAnswerCount) - 1 ) + time) / (this->m_players[user].correctAnswerCount + this->m_players[user].wrongAnswerCount));
+	return result;
 }
 
 void Game::removePlayer(LoggedUser user)
