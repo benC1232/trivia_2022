@@ -16,9 +16,6 @@ using Newtonsoft.Json;
 
 namespace TriviaClient
 {
-    /// <summary>
-    /// Interaction logic for waitingRoom.xaml
-    /// </summary>
     public partial class waitingRoom : Window
     {
         private Communicator comm;
