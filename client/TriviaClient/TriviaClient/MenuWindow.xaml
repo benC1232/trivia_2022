@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TriviaClient"
         mc:Ignorable="d"
+        ResizeMode="NoResize"
         Title="Menu" Height="720" Width="1280">
     <Window.Background>
         <ImageBrush ImageSource="/Resources/bg.png" Stretch="Fill" />
