@@ -88,7 +88,7 @@ struct GetQuestionResponse {
 
 struct SubmitAnswerResponse {
 	unsigned int status;
-	unsigned int correctAnswerId;
+	bool isCorrect;
 };
 
 typedef struct{

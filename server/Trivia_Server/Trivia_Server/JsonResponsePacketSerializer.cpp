@@ -294,7 +294,8 @@ std::vector<unsigned char> JsonResponsePacketSerializer::serializeSubmitAnswerRe
 	std::vector<unsigned char> buffer;
 	buffer.push_back(SUBMIT_ANSWER_RESPONSE);
 	nlohmann::json jsonResponse = {
-		{"status",submitAnswerResponse.status}
+		{"status",submitAnswerResponse.status},
+		{"isCorrect", submitAnswerResponse.isCorrect}
 	};
 	std::string jsonString = nlohmann::to_string(jsonResponse);
 	std::vector<unsigned char> lenBuff = intToByteVector(jsonString.length());
