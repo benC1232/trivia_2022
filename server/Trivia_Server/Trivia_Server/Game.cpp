@@ -48,6 +48,21 @@ void Game::removePlayer(LoggedUser user)
 	this->m_players.erase(user);
 }
 
+std::vector<PlayerResults> Game::getResults()
+{
+	auto output =  std::vector<PlayerResults>();
+	for (auto i = this->m_players.begin(); i != this->m_players.end(); ++i) {
+		PlayerResults result;
+		auto loggedusername = i->first;
+		result.username = loggedusername.getUsername();
+		result.correctAnswerCount = i->second.correctAnswerCount;
+		result.wrongAnswerCount = i->second.wrongAnswerCount;
+		result.averageAnswerTime = i->second.averageAnswerTime;
+		output.push_back(result);
+	}
+	return output;
+}
+
 bool Game::operator==(const Game& other) const
 {
 	return this->m_questions == other.m_questions && this->m_players == other.m_players;

@@ -3,6 +3,7 @@
 #include "Question.h"
 #include "IDatabase.h"
 #include "LoggedUser.h"
+#include "JsonResponsePacketSerializer.h"
 #include <vector>
 #include <map>
 
@@ -23,6 +24,8 @@ public:
 	Question getQuestionForUser(LoggedUser user);
 	bool submitAnswer(LoggedUser user, std::string answer, int time);
 	void removePlayer(LoggedUser user);
+	std::vector<PlayerResults> getResults();
+	
 
 	//operator overload ==
 	bool operator==(const Game& other) const;
