@@ -39,6 +39,7 @@ struct CreateRoomRequest
 struct SubmitAnswerRequest
 {
 	std::string answer;
+	unsigned int responseTime;
 };
 
 class JsonRequestPacketDeserializer

@@ -4,7 +4,7 @@
 #include "GameManager.h"
 #include "LoggedUser.h"
 #include "RequestHandlerFactory.h"
-
+class RequestHandlerFactory;
 class GameRequestHandler :
 	public IRequestHandler
 {

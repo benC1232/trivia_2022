@@ -101,7 +101,16 @@ SubmitAnswerRequest JsonRequestPacketDeserializer::deserializeSubmitAnswerReques
 	std::string jsonString(buffer.begin() + JSON_OFFSET, buffer.end());
 	nlohmann::json jsonObject = nlohmann::json::parse(jsonString);
 	std::string answer = jsonObject["answer"];
+	std::string responseTime = jsonObject["responseTime"];
 	SubmitAnswerRequest parsedData;
-	parsedData.answer = answer;
+	try
+	{
+		parsedData.answer = answer;
+		parsedData.responseTime = atoi(responseTime.c_str());
+	}
+	catch (...)
+	{
+		throw std::exception("responseTime is not a number");
+	}
 	return parsedData;
 }
