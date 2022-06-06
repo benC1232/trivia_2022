@@ -21,7 +21,7 @@ public:
 	Game(std::vector<Question> questions, std::map<LoggedUser, GameData> players);
 	~Game() = default;
 	Question getQuestionForUser(LoggedUser user);
-	void submitAnswer(LoggedUser user, std::string answer);
+	void submitAnswer(LoggedUser user, std::string answer, int time);
 	void removePlayer(LoggedUser user);
 
 	//operator overload ==
