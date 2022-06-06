@@ -80,10 +80,12 @@ RequestResult GameRequestHandler::getGameResults(RequestInfo requestInfo)
 	RequestResult result;
 	GetGameResultsResponse response;
 	response.status = GET_GAME_RESULT_CODE;
-	response.results = this->m_game->
+	response.results = this->m_game->getResults();
+	result.buffer = JsonResponsePacketSerializer::serializeGetGameResultResponse(response);
+	result.newHandler = this;
+	return result;
 }
 
 RequestResult GameRequestHandler::leaveGame(RequestInfo requestInfo)
 {
-	return RequestResult();
 }
