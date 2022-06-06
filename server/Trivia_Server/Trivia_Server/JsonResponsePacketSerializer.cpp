@@ -28,7 +28,7 @@ std::vector<unsigned char> intToByteVector(int num) {
 std::string RoomDataVecToString(std::vector<RoomData> roomData) {
 	std::string output = "";
 	for (auto room : roomData) {
-		output += room.name + ":" + std::to_string(room.id)+ ",";
+		output += room.name + ":" + std::to_string(room.id) + ",";
 	}
 	return output;
 }
@@ -49,16 +49,13 @@ std::string intVecToString(std::vector<unsigned int> ints) {
 	return output;
 }
 
-std::string 
-
-VecToString(std::vector<PlayerResults> pResults) {
+std::string playerResultsVecToString(std::vector<PlayerResults> pResults) {
 	std::string output = "";
 	for (auto result : pResults) {
-		output += result.username+":" + std::to_string(result.correctAnswerCount)+":"+ std::to_string(result.wrongAnswerCount)+":"+std::to_string(result.averageAnswerTime) + ",";
+		output += result.username + ":" + std::to_string(result.correctAnswerCount) + ":" + std::to_string(result.wrongAnswerCount) + ":" + std::to_string(result.averageAnswerTime) + ",";
 	}
 	return output;
 }
-
 
 nlohmann::json answerMapToJson(std::map<unsigned int, std::string> answers) {
 	nlohmann::json output;
@@ -67,7 +64,6 @@ nlohmann::json answerMapToJson(std::map<unsigned int, std::string> answers) {
 	}
 	return output;
 }
-
 
 std::vector<unsigned char> JsonResponsePacketSerializer::serializeLoginResponse(LoginResponse loginResponse)
 {
@@ -281,7 +277,6 @@ std::vector<unsigned char> JsonResponsePacketSerializer::serializeGetGameResultR
 	nlohmann::json jsonResponse = {
 		{"status",getGameResultResponse.status},
 		{"results", playerResultsVecToString(getGameResultResponse.results)}
-
 	};
 	std::string jsonString = nlohmann::to_string(jsonResponse);
 	std::vector<unsigned char> lenBuff = intToByteVector(jsonString.length());
@@ -289,7 +284,6 @@ std::vector<unsigned char> JsonResponsePacketSerializer::serializeGetGameResultR
 	for (unsigned char c : jsonString) buffer.push_back(c);
 	return buffer;
 }
-
 
 std::vector<unsigned char> JsonResponsePacketSerializer::serializeSubmitAnswerResponse(SubmitAnswerResponse submitAnswerResponse)
 {
@@ -335,5 +329,3 @@ std::vector<unsigned char> JsonResponsePacketSerializer::serializeLeaveGameRespo
 	for (unsigned char c : jsonString) buffer.push_back(c);
 	return buffer;
 }
-
-

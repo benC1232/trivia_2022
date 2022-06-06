@@ -88,12 +88,17 @@ RequestResult MenuRequestHandler::joinRoom(RequestInfo requestInfo)
 	JoinRoomResponse num;
 	num.status = JOIN_ROOM_REQUEST;
 	JoinRoomRequest joinRoomRequest = JsonRequestPacketDeserializer::deserializeJoinRoomRequest(requestInfo.buffer);
-	auto rooms = this->m_requestHandlerFactory->getRoomManager().getRooms();
-	this->m_requestHandlerFactory->getRoomManager().getRoom(joinRoomRequest.roomId)->addUser(this->m_user);
-
-	result.buffer = JsonResponsePacketSerializer::serializeJoinRoomResponse(num);
-	result.newHandler = this->m_requestHandlerFactory->createRoomMemberRequestHandler(this->m_user, this->m_requestHandlerFactory->getRoomManager().getRoom(joinRoomRequest.roomId));
-	return result;
+	if (this->m_roomManager->getRoom(joinRoomRequest.roomId)->getData().maxPlayers == this->m_roomManager->getRoom(joinRoomRequest.roomId)->getAllUsersVector().size())
+	{
+		throw std::exception("Room is full");
+	}
+	else
+	{
+		this->m_requestHandlerFactory->getRoomManager().getRoom(joinRoomRequest.roomId)->addUser(this->m_user);
+		result.buffer = JsonResponsePacketSerializer::serializeJoinRoomResponse(num);
+		result.newHandler = this->m_requestHandlerFactory->createRoomMemberRequestHandler(this->m_user, this->m_requestHandlerFactory->getRoomManager().getRoom(joinRoomRequest.roomId));
+		return result;
+	}
 }
 
 RequestResult MenuRequestHandler::createRoom(RequestInfo requestInfo)
@@ -139,7 +144,17 @@ RequestResult MenuRequestHandler::handleRequest(RequestInfo requestInfo)
 	}
 	else if (requestInfo.id == JOIN_ROOM_REQUEST)
 	{
-		result = joinRoom(requestInfo);
+		try
+		{
+			result = joinRoom(requestInfo);
+		}
+		catch (std::exception e)
+		{
+			ErrorResponse num;
+			num.message = "room is full";
+			result.buffer = JsonResponsePacketSerializer::serializeErrorResponse(num);
+			result.newHandler = this;
+		}
 	}
 	else if (requestInfo.id == CREATE_ROOM_REQUEST)
 	{
