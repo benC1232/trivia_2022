@@ -31,7 +31,15 @@ namespace TriviaClient
             this.timer = new DispatcherTimer();
             this.timer.Interval = TimeSpan.FromSeconds(1);
             timer.Tick += timer_Tick;
-            //add get game results
+            byte[] arr = new byte[1];
+            arr[0] = 1;
+            this.comm.Send(17, arr);
+            Tuple<int, byte[]> response = this.comm.Recieve();
+            if (response.Item1 == 17)
+            {
+                responseStructs.GetGameResultsResponse getGameResultsResponse = JsonConvert.DeserializeObject<responseStructs.GetGameResultsResponse>(Encoding.UTF8.GetString(response.Item2));
+                string[] players = getGameResultsResponse.results.Split(',');
+            }
         }
 
         private void timer_Tick(object sender, EventArgs e)
