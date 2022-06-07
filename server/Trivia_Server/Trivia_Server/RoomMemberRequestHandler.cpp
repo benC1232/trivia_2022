@@ -57,7 +57,14 @@ RequestResult RoomMemberRequestHandler::getRoomState(RequestInfo requestInfo)
 		getRoomStateResponse.questionCount = this->m_room->getData().numOfQuestionsInGame;
 		getRoomStateResponse.answerTimeOut = this->m_room->getData().timePerQuestion;
 		result.buffer = JsonResponsePacketSerializer::serializeGetRoomStateResponse(getRoomStateResponse);
-		result.newHandler = this;
+		if (this->m_room->getData().isActive)
+		{
+			result.newHandler = this->m_requestHandlerFactory->createGameRequestHandler(this->m_user);
+		}
+		else
+		{
+			result.newHandler = this;
+		}
 		return result;
 	}
 	catch (std::bad_alloc e)

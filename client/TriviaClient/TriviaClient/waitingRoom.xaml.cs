@@ -49,7 +49,12 @@ namespace TriviaClient
                 playerText = System.String.Join("\n", players);
                 playerText = "💻 admin -" + playerText;
                 this.PlayersTxtBlck.Text = playerText;
-                //need to check if the game started and if it did go to the game
+                if (roomState.hasGameBegun == 1)
+                {
+                    gameWindow GameWindow = new gameWindow(this.comm);
+                    this.Close();
+                    GameWindow.Show();
+                }
             }
             else if (response.Item1 == 3)
             {

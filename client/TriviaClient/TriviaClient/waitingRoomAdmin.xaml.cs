@@ -93,8 +93,22 @@ namespace TriviaClient
         private void Start_Click(object sender, RoutedEventArgs e)
         {
             this.timer.Stop();
-            errorLbl.Visibility = Visibility.Visible;
-            errorLbl.Text = "we didnt do this part lol";
+            byte[] arr = new byte[1];
+            arr[0] = 1;
+            this.comm.Send(11, arr);
+            Tuple<int, byte[]> response = this.comm.Recieve();
+            if (response.Item1 == 11)
+            {
+                gameWindow GameWindow = new gameWindow(this.comm);
+                this.Close();
+                GameWindow.Show();
+            }
+            else if (response.Item1 == 3)
+            {
+                responseStructs.ErrorResponse errorResponse = JsonConvert.DeserializeObject<responseStructs.ErrorResponse>(strResponse);
+                this.errorLbl.Visibility = Visibility.Visible;
+                this.errorLbl.Text = errorResponse.message;
+            }
         }
     }
 }

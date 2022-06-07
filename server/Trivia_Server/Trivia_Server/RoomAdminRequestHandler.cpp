@@ -52,7 +52,7 @@ RequestResult RoomAdminRequestHandler::closeRoom(RequestInfo requestInfo)
 
 RequestResult RoomAdminRequestHandler::startGame(RequestInfo requestInfo)
 {
-	//this is for 4.0.0
+	Game* game = this->m_requestHandlerFactory->getGameManager().createGame(*this->m_room);
 	return RequestResult();
 }
 
