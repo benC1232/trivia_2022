@@ -77,11 +77,14 @@
     <Compile Include="requestStructs\JoinRoomRequest.cs" />
     <Compile Include="requestStructs\LoginRequest.cs" />
     <Compile Include="requestStructs\SignUpRequest.cs" />
+    <Compile Include="requestStructs\SubmitAnswerRequest.cs" />
     <Compile Include="responseStructs\ErrorResponse.cs" />
     <Compile Include="responseStructs\GetPersonalStatsResponse.cs" />
+    <Compile Include="responseStructs\GetQuestionResponse.cs" />
     <Compile Include="responseStructs\GetRoomResponse.cs" />
     <Compile Include="responseStructs\GetRoomStateResponse.cs" />
     <Compile Include="responseStructs\HighScoreResponse.cs" />
+    <Compile Include="responseStructs\SubmitAnswerResponse.cs" />
     <Compile Include="roomToJoin.cs" />
     <Compile Include="waitingRoom.xaml.cs">
       <DependentUpon>waitingRoom.xaml</DependentUpon>

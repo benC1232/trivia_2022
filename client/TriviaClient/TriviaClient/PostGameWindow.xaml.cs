@@ -22,28 +22,28 @@ namespace TriviaClient
     public partial class PostGameWindow : Window
     {
         private DispatcherTimer timer;
+        private Communicator comm;
 
-        public PostGameWindow()
+        public PostGameWindow(Communicator c)
         {
+            this.comm = c;
             InitializeComponent();
             this.timer = new DispatcherTimer();
             this.timer.Interval = TimeSpan.FromSeconds(1);
             timer.Tick += timer_Tick;
         }
 
-        void timer_Tick(object sender, EventArgs e)
+        private void timer_Tick(object sender, EventArgs e)
         {
             this.countdown.Content = 30 - DateTime.Now.Second;
             if (DateTime.Now.Second == 30)
             {
                 //leave
             }
-
         }
 
         private void Leave_Click(object sender, RoutedEventArgs e)
         {
-
         }
     }
 }
