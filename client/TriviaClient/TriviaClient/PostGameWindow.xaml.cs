@@ -31,6 +31,7 @@ namespace TriviaClient
             this.timer = new DispatcherTimer();
             this.timer.Interval = TimeSpan.FromSeconds(1);
             timer.Tick += timer_Tick;
+            //add get game results
         }
 
         private void timer_Tick(object sender, EventArgs e)
@@ -38,11 +39,16 @@ namespace TriviaClient
             this.countdown.Content = 30 - DateTime.Now.Second;
             if (DateTime.Now.Second == 30)
             {
-                //leave
+                this.leave();
             }
         }
 
         private void Leave_Click(object sender, RoutedEventArgs e)
+        {
+            this.leave();
+        }
+
+        private void leave()
         {
             byte[] arr = new byte[1];
             arr[0] = 1;
