@@ -75,3 +75,8 @@ int Game::getNumOfPlayers()
 	return this->m_players.size();
 }
 
+bool Game::isInGame(LoggedUser user)
+{
+	return this->m_players.find(user) != this->m_players.end();
+}
+

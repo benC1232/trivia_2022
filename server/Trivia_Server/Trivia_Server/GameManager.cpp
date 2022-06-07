@@ -7,6 +7,7 @@ GameManager::GameManager(IDatabase* database)
 	this->m_games = std::vector<Game*>();
 }
 
+
 GameManager::~GameManager()
 {
 	delete this->m_database;
@@ -35,4 +36,15 @@ void GameManager::deleteGame(Game* game)
 	if (it != m_games.end()) {
 		m_games.erase(it);
 	}
+}
+
+Game* GameManager::getGame(LoggedUser user)
+{
+	for (auto game : m_games) {
+		if (game->isInGame(user)){
+			return game;
+		}
+	}
+	return nullptr;
+
 }

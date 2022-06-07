@@ -25,6 +25,7 @@ public:
 	void removePlayer(LoggedUser user);
 	std::vector<PlayerResults> getResults();
 	int getNumOfPlayers();
+	bool isInGame(LoggedUser user);
 
 private:
 	std::vector<Question> m_questions;
