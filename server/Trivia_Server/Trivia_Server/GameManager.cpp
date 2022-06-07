@@ -1,5 +1,5 @@
 #include "GameManager.h"
-
+#include <algorithm>
 
 
 GameManager::GameManager(IDatabase* database, std::vector<Game> games)
@@ -26,18 +26,15 @@ Game GameManager::createGame(Room room)
 		players->insert(std::pair<LoggedUser,GameData>(user,gd));
 	
 	}
-	auto g = Game(this->m_database->getQuestions(room.getData().numOfQuestionsInGame), *players);
+	auto g = new Game(this->m_database->getQuestions(room.getData().numOfQuestionsInGame), *players);
 	this->m_games.push_back(g);
 	return g;
 }
 
-void GameManager::deleteGame(Game game)
+void GameManager::deleteGame(Game* game)
 {
-	//remove game from vector
-	for (auto it = this->m_games.begin(); it != this->m_games.end(); it++) {
-		if (*it == game) {
-			this->m_games.erase(it);
-			break;
-		}
+	auto it = std::find(m_games.begin(), m_games.end(), game);
+	if (it != m_games.end()) {
+		m_games.erase(it);
 	}
 }

@@ -1,17 +1,27 @@
 #include "Game.h"
 
+
 Game::Game(std::vector<Question> questions, std::map<LoggedUser, GameData> players)
 {
+	Question q;
+	q.setQuestion("Err q");
+
 	this->m_questions = questions;
 	this->m_players = players;
 	for (auto p : this->m_players)
 	{
-		p.second.currentQuestion = this->m_questions[0];
+		p.second.currentQuestion = q;
 	}
 }
 
 Question Game::getQuestionForUser(LoggedUser user)
 {
+	Question q;
+	q.setQuestion("Err q");
+	if (this->m_players[user].currentQuestion.getQuestion() == q.getQuestion()) {
+		this->m_players[user].currentQuestion = this->m_questions[0];
+		return this->m_questions[0];
+	}
 	int idx = 0;
 	for (auto q : this->m_questions) {
 		if (q.getQuestion() == this->m_players[user].currentQuestion.getQuestion()) {
@@ -19,6 +29,7 @@ Question Game::getQuestionForUser(LoggedUser user)
 		}
 		idx++;
 	}
+	this->m_players[user].currentQuestion = this->m_questions[idx+1];
 	return this->m_questions[idx + 1];
 }
 
@@ -64,7 +75,3 @@ int Game::getNumOfPlayers()
 	return this->m_players.size();
 }
 
-bool Game::operator==(const Game& other) const
-{
-	return this->m_questions == other.m_questions && this->m_players == other.m_players;
-}
