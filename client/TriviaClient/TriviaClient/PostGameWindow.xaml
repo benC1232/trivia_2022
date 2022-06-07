@@ -10,7 +10,7 @@
     <Window.Background>
         <ImageBrush ImageSource="/Resources/bg.png" Stretch="Fill" />
     </Window.Background>
-    <StackPanel Margin="30">
+    <StackPanel Margin="10">
         <Grid>
             <Label x:Name="countdown"  FontSize="70" FontFamily="{StaticResource AmaticSC}" VerticalAlignment="Center" Background="Transparent" VerticalContentAlignment="Center" HorizontalAlignment="Left"  Foreground="White" FontWeight="Bold" BorderThickness="6" Content="Game Closes in 30s" Height="100" HorizontalContentAlignment="Center"  Width="406"/>
             <Button  x:Name="Leave" Click="Leave_Click"  Content="Leave" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="50" FontFamily="{StaticResource AmaticSC}" Background="black" BorderBrush="white" Foreground="White" FontWeight="Bold" BorderThickness="6"  Width="147" Margin="1073,0,0,0" Height="84">
@@ -24,8 +24,8 @@
         </Grid>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="40">
             <StackPanel Orientation="Vertical" Margin="10">
-                <Label HorizontalContentAlignment="Center" Content="Players:" FontSize="50" FontFamily="{StaticResource AmaticSC}" VerticalContentAlignment="Center" Foreground="White" FontWeight="ExtraBold" Height="68" />
-                <TextBox x:Name="PlayersTxtBlck" Foreground="White" FontSize="32" FontFamily="{StaticResource AmaticSC}" IsReadOnly="True" Background="Black" BorderBrush="White" VerticalScrollBarVisibility="Auto" BorderThickness="5" Height="297" HorizontalContentAlignment="Left" Width="505">
+                <Label HorizontalContentAlignment="Center" Content="Players:" FontSize="50" FontFamily="{StaticResource AmaticSC}" VerticalContentAlignment="Center" Foreground="White" FontWeight="ExtraBold" Height="74" />
+                <TextBox x:Name="PlayersTxtBlck" Foreground="White" FontSize="32" FontFamily="{StaticResource AmaticSC}" IsReadOnly="True" Background="Black" BorderBrush="White" VerticalScrollBarVisibility="Auto" BorderThickness="5" Height="297" HorizontalContentAlignment="Left" Width="762">
                     <TextBox.Resources>
                         <Style TargetType="Border">
                             <Setter Property="CornerRadius" Value="15" />
@@ -39,22 +39,6 @@
                 </TextBox>
             </StackPanel>
             <Label Width="20"/>
-            <StackPanel Orientation="Vertical"  Margin="10" Width="486">
-                <Label HorizontalContentAlignment="Center" Content="Results" FontSize="50" FontFamily="{StaticResource AmaticSC}" VerticalContentAlignment="Center" Foreground="White" FontWeight="ExtraBold" Height="68" />
-                <Label Height="28"/>
-                <StackPanel Orientation="Horizontal">
-                    <Grid>
-                        <Label Content="Average Time Per Answer: " HorizontalAlignment="Left" FontSize="40" FontFamily="{StaticResource AmaticSC}" VerticalContentAlignment="Center" Foreground="White" FontWeight="ExtraBold" Height="103" Width="475" />
-                        <Label  x:Name ="avgTimePerAnswerLbl"  HorizontalAlignment="Right" Content="0" FontSize="40" FontFamily="{StaticResource AmaticSC}" VerticalContentAlignment="Center" Foreground="White" FontWeight="ExtraBold" Height="103" Width="59" />
-                    </Grid>
-                </StackPanel>
-                <StackPanel Orientation="Horizontal">
-                    <Grid>
-                        <Label Content="Correct Answers: " HorizontalAlignment="Left" FontSize="40" FontFamily="{StaticResource AmaticSC}" VerticalContentAlignment="Center" Foreground="White" FontWeight="ExtraBold" Height="103" Width="475" />
-                        <Label  x:Name ="CorrectAnswerLbl"  HorizontalAlignment="Right" Content="0" FontSize="40" FontFamily="{StaticResource AmaticSC}" VerticalContentAlignment="Center" Foreground="White" FontWeight="ExtraBold" Height="103" Width="59" />
-                    </Grid>
-                </StackPanel>
-            </StackPanel>
         </StackPanel>
         <TextBlock x:Name="errorLbl" HorizontalAlignment="Center" Text ="there has been an error!" FontSize="40" FontFamily="{StaticResource AmaticSC}" Background="Transparent" Foreground="DarkRed" />
 
