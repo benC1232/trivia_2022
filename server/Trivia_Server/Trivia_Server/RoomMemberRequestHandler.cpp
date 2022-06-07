@@ -59,7 +59,8 @@ RequestResult RoomMemberRequestHandler::getRoomState(RequestInfo requestInfo)
 		result.buffer = JsonResponsePacketSerializer::serializeGetRoomStateResponse(getRoomStateResponse);
 		if (this->m_room->getData().isActive)
 		{
-			this->m_requestHandlerFactory->getGameManager().
+			Game* game = this->m_requestHandlerFactory->getGameManager().getGame(this->m_user);
+			result.newHandler = this->m_requestHandlerFactory->createGameRequestHandler(this->m_user, game);
 		}
 		else
 		{

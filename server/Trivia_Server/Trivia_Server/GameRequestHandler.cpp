@@ -92,7 +92,7 @@ RequestResult GameRequestHandler::leaveGame(RequestInfo requestInfo)
 	RequestResult result;
 	if (this->m_game->getNumOfPlayers() == 1)
 	{
-		this->m_gameManager->deleteGame(*this->m_game);
+		this->m_gameManager->deleteGame(this->m_game);
 	}
 	else
 	{
