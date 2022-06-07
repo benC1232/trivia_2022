@@ -14,7 +14,7 @@ private:
 public:
 	GameManager() = default;
 	~GameManager();
-	GameManager(IDatabase* database, std::vector<Game> games);
+	GameManager(IDatabase* database);
 	Game* createGame(Room room);
 	void deleteGame(Game* game);
 };

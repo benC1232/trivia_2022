@@ -1,10 +1,10 @@
 #include "GameManager.h"
 #include <algorithm>
 
-GameManager::GameManager(IDatabase* database, std::vector<Game> games)
+GameManager::GameManager(IDatabase* database)
 {
 	this->m_database = database;
-	this->m_games = games;
+	this->m_games = std::vector<Game*>();
 }
 
 GameManager::~GameManager()
