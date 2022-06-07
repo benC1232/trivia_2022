@@ -53,6 +53,7 @@ RequestResult RoomAdminRequestHandler::closeRoom(RequestInfo requestInfo)
 RequestResult RoomAdminRequestHandler::startGame(RequestInfo requestInfo)
 {
 	Game* game = this->m_requestHandlerFactory->getGameManager().createGame(*this->m_room);
+
 	return RequestResult();
 }
 
