@@ -52,9 +52,13 @@ RequestResult RoomAdminRequestHandler::closeRoom(RequestInfo requestInfo)
 
 RequestResult RoomAdminRequestHandler::startGame(RequestInfo requestInfo)
 {
+	RequestResult result;
 	Game* game = this->m_requestHandlerFactory->getGameManager().createGame(*this->m_room);
-
-	return RequestResult();
+	StartGameResponse startGameResponse;
+	startGameResponse.status = START_GAME_CODE;
+	result.buffer = JsonResponsePacketSerializer::serializeStartGameResponse(startGameResponse);
+	result.newHandler = this->m_requestHandlerFactory->createGameRequestHandler(this->m_user, game);
+	return result;
 }
 
 RequestResult RoomAdminRequestHandler::getRoomState(RequestInfo requestInfo)

@@ -59,7 +59,7 @@ RequestResult RoomMemberRequestHandler::getRoomState(RequestInfo requestInfo)
 		result.buffer = JsonResponsePacketSerializer::serializeGetRoomStateResponse(getRoomStateResponse);
 		if (this->m_room->getData().isActive)
 		{
-			result.newHandler = this->m_requestHandlerFactory->createGameRequestHandler(this->m_user);
+			this->m_requestHandlerFactory->getGameManager().
 		}
 		else
 		{
