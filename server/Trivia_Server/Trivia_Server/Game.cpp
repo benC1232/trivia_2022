@@ -60,8 +60,8 @@ std::vector<PlayerResults> Game::getResults()
 	auto output = std::vector<PlayerResults>();
 	for (auto i = this->m_players.begin(); i != this->m_players.end(); ++i) {
 		PlayerResults result;
-		auto loggedusername = i->first;
-		result.username = loggedusername.getUsername();
+		auto loggedUserName = i->first;
+		result.username = loggedUserName.getUsername();
 		result.correctAnswerCount = i->second.correctAnswerCount;
 		result.wrongAnswerCount = i->second.wrongAnswerCount;
 		result.averageAnswerTime = i->second.averageAnswerTime;

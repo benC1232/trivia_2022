@@ -6,7 +6,7 @@ public:
 	LoggedUser(std::string username);
 	LoggedUser() = default;
 
-	//< operator
+	// < operator
 	bool operator<(const LoggedUser& other) const;
 	bool operator>(const LoggedUser& other) const;
 
