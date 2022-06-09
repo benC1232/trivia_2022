@@ -33,7 +33,6 @@ namespace TriviaClient
             refresh();
             timer = new System.Windows.Threading.DispatcherTimer();
             timer.Tick += new EventHandler(dispatcherTimer_Tick);
-            //need to change it to 2 seconds
             timer.Interval = new TimeSpan(0, 0, 3);
             timer.Start();
         }
@@ -58,6 +57,7 @@ namespace TriviaClient
                 this.PlayersTxtBlck.Text = playerText;
                 if (roomState.hasGameBegun == 1)
                 {
+                    this.timer.Stop();
                     gameWindow GameWindow = new gameWindow(this.comm);
                     this.Close();
                     GameWindow.Show();

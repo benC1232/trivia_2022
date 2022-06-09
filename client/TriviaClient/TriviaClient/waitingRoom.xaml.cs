@@ -55,6 +55,7 @@ namespace TriviaClient
                 this.PlayersTxtBlck.Text = playerText;
                 if (roomState.hasGameBegun == 1)
                 {
+                    this.timer.Stop();
                     gameWindow GameWindow = new gameWindow(this.comm);
                     this.Close();
                     GameWindow.Show();
