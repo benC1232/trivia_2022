@@ -23,9 +23,13 @@ namespace TriviaClient
     {
         private DispatcherTimer timer;
         private Communicator comm;
+        private int secondsWasted;
 
         public PostGameWindow(Communicator c)
+
         {
+            this.secondsWasted = 0;
+            this.countdown.Content = 30;
             this.comm = c;
             InitializeComponent();
             this.timer = new DispatcherTimer();
@@ -44,8 +48,9 @@ namespace TriviaClient
 
         private void timer_Tick(object sender, EventArgs e)
         {
-            this.countdown.Content = 30 - DateTime.Now.Second;
-            if (DateTime.Now.Second == 30)
+            this.countdown.Content = Int32.Parse(this.countdown.Content.ToString()) - 1;
+            this.secondsWasted++;
+            if (this.secondsWasted == 30)
             {
                 this.leave();
             }
