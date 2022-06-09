@@ -32,17 +32,19 @@ namespace TriviaClient
             this.countdown.Content = 30;
             this.comm = c;
             InitializeComponent();
-            this.timer = new DispatcherTimer();
-            this.timer.Interval = TimeSpan.FromSeconds(1);
+            this.timer = new DispatcherTimer
+            {
+                Interval = TimeSpan.FromSeconds(1)
+            };
             timer.Tick += timer_Tick;
-            byte[] arr = new byte[1];
+            var arr = new byte[1];
             arr[0] = 1;
             this.comm.Send(17, arr);
-            Tuple<int, byte[]> response = this.comm.Recieve();
+            var response = this.comm.Recieve();
             if (response.Item1 == 17)
             {
-                responseStructs.GetGameResultsResponse getGameResultsResponse = JsonConvert.DeserializeObject<responseStructs.GetGameResultsResponse>(Encoding.UTF8.GetString(response.Item2));
-                string[] players = getGameResultsResponse.results.Split(',');
+                var getGameResultsResponse = JsonConvert.DeserializeObject<responseStructs.GetGameResultsResponse>(Encoding.UTF8.GetString(response.Item2));
+                var players = getGameResultsResponse.results.Split(',');
             }
         }
 
@@ -63,19 +65,19 @@ namespace TriviaClient
 
         private void leave()
         {
-            byte[] arr = new byte[1];
+            var arr = new byte[1];
             arr[0] = 1;
             this.comm.Send(14, arr);
-            Tuple<int, byte[]> response = this.comm.Recieve();
+            var response = this.comm.Recieve();
             if (response.Item1 == 14)
             {
-                MenuWindow menuWindow = new MenuWindow(this.comm);
+                var menuWindow = new MenuWindow(this.comm);
                 this.Close();
                 menuWindow.Show();
             }
             else if (response.Item1 == 3)
             {
-                responseStructs.ErrorResponse errResponse = JsonConvert.DeserializeObject<responseStructs.ErrorResponse>(Encoding.ASCII.GetString(response.Item2));
+                var errResponse = JsonConvert.DeserializeObject<responseStructs.ErrorResponse>(Encoding.ASCII.GetString(response.Item2));
                 this.errorLbl.Visibility = Visibility.Visible;
                 this.errorLbl.Text = errResponse.message;
             }
