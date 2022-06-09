@@ -23,7 +23,17 @@ RequestResult RoomAdminRequestHandler::handleRequest(RequestInfo requestInfo)
 	}
 	else if (requestInfo.id == START_GAME_CODE)
 	{
-		result = startGame(requestInfo);
+		try
+		{
+			result = startGame(requestInfo);
+		}
+		catch (std::exception& e)
+		{
+			ErrorResponse num;
+			num.message = e.what();
+			result.buffer = JsonResponsePacketSerializer::serializeErrorResponse(num);
+			result.newHandler = nullptr;
+		}
 	}
 	else if (requestInfo.id == GET_ROOM_STATE_CODE)
 	{
@@ -52,6 +62,10 @@ RequestResult RoomAdminRequestHandler::closeRoom(RequestInfo requestInfo)
 
 RequestResult RoomAdminRequestHandler::startGame(RequestInfo requestInfo)
 {
+	if (this->m_room->getAllUsers().size() == 0)
+	{
+		throw std::exception("cant start a game with one player");
+	}
 	RequestResult result;
 	Game* game = this->m_requestHandlerFactory->getGameManager().createGame(*this->m_room);
 	StartGameResponse startGameResponse;
