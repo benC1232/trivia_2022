@@ -86,6 +86,7 @@
     <Compile Include="responseStructs\GetRoomStateResponse.cs" />
     <Compile Include="responseStructs\HighScoreResponse.cs" />
     <Compile Include="responseStructs\SubmitAnswerResponse.cs" />
+    <Compile Include="roomStruct.cs" />
     <Compile Include="roomToJoin.cs" />
     <Compile Include="waitingRoom.xaml.cs">
       <DependentUpon>waitingRoom.xaml</DependentUpon>

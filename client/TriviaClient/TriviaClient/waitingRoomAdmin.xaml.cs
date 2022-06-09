@@ -23,6 +23,7 @@ namespace TriviaClient
     {
         private Communicator comm;
         private DispatcherTimer timer;
+        private roomStruct room;
 
         public waitingRoomAdmin(Communicator c)
         {
@@ -47,12 +48,20 @@ namespace TriviaClient
             if (response.Item1 == 12)
             {
                 responseStructs.GetRoomStateResponse roomState = JsonConvert.DeserializeObject<responseStructs.GetRoomStateResponse>(strResponse);
+                this.room.answerTimeout = roomState.answerTimeout;
+                this.room.hasGameBegun = roomState.hasGameBegun;
+                this.room.questionCount = roomState.questionCount;
                 string[] players = roomState.players.Split(',');
                 string playerText = "";
                 playerText = System.String.Join("\n", players);
                 playerText = "💻 admin -" + playerText;
                 this.PlayersTxtBlck.Text = playerText;
-                //need to check if the game started and if it did go to the game
+                if (roomState.hasGameBegun == 1)
+                {
+                    gameWindow GameWindow = new gameWindow(this.comm);
+                    this.Close();
+                    GameWindow.Show();
+                }
             }
             else if (response.Item1 == 3)
             {
