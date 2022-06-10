@@ -75,9 +75,11 @@ def add_questions_to_database(list_of_questions,db: str):
             print("skipping question: " + question_text)
             continue
         #get the correct answer
-        correct_answer = question['correct_answer']
+        correct_answer = question['correct_answer'].replace('&quot;','\"').replace('&#039;',"'")
         #get the wrong answers
         wrong_answers = question['incorrect_answers']
+        for i in range(len(wrong_answers)):
+            wrong_answers[i] = wrong_answers[i].replace('&quot;','\"').replace('&#039;',"'")
         #add the question to the database
         c.execute("INSERT INTO questions (question,correctanswer,wronganswer1,wronganswer2,wronganswer3) VALUES (?,?,?,?,?)",(question_text,correct_answer,wrong_answers[0],wrong_answers[1],wrong_answers[2]))
     #commit the changes
@@ -95,6 +97,5 @@ def main():
 
 if __name__ == "__main__":
     for i in range(40):
-        sleep(1)
         main()
         
