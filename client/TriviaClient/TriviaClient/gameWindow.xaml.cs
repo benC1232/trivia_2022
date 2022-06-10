@@ -32,10 +32,8 @@ namespace TriviaClient
         {
             InitializeComponent();
 
-            this.timer = new DispatcherTimer
-            {
-                Interval = TimeSpan.FromSeconds(room.answerTimeout)
-            };
+            this.timer = new DispatcherTimer();
+            this.timer.Interval = TimeSpan.FromSeconds(1);
             timer.Tick += timer_Tick;
             this.comm = c;
             this.correctAnswerCount = 0;

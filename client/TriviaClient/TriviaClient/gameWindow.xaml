@@ -36,7 +36,7 @@
             </StackPanel>
         </Grid>
         <Label Height="9"/>
-        <TextBox IsReadOnly="True" TextWrapping="WrapWithOverflow" x:Name="question" FontSize="60" FontFamily="{StaticResource AmaticSC}" Foreground="White" BorderThickness="0" FontWeight="Bold" Background="Transparent" Text="....Question...." Height="99" HorizontalContentAlignment="Center"  Width="1218"/>
+        <TextBox IsReadOnly="True" TextWrapping="WrapWithOverflow" x:Name="question" FontSize="50" FontFamily="{StaticResource AmaticSC}" Foreground="White" BorderThickness="0" FontWeight="Bold" Background="Transparent" Text="....Question...." Height="184" HorizontalContentAlignment="Center"  Width="1218"/>
         <Label Height="6"/>
         <StackPanel Orientation="Horizontal" Margin="10" VerticalAlignment="Center" HorizontalAlignment="Center">
             <Button x:Name="Answer1" Content="a1"  Click="Answer1_Click" FontSize="60" FontFamily="{StaticResource AmaticSC}" Background="black" BorderBrush="white" Foreground="White" FontWeight="Bold" BorderThickness="6" Height="96"  Width="500">
