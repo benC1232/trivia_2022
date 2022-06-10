@@ -54,6 +54,7 @@ namespace TriviaClient
                 submitAnswer("never gonna give you up");
                 if (!this.getQuestion())
                 {
+                    this.timer.Stop();
                     PostGameWindow postGameWindow = new PostGameWindow(this.comm);
                     this.Close();
                     postGameWindow.Show();
@@ -72,6 +73,7 @@ namespace TriviaClient
             await Task.Delay(2000);
             if (!this.getQuestion())
             {
+                this.timer.Stop();
                 var postGameWindow = new PostGameWindow(this.comm);
                 this.Close();
                 postGameWindow.Show();
@@ -91,6 +93,7 @@ namespace TriviaClient
             await Task.Delay(2000);
             if (!this.getQuestion())
             {
+                this.timer.Stop();
                 var postGameWindow = new PostGameWindow(this.comm);
                 this.Close();
                 postGameWindow.Show();
@@ -110,6 +113,7 @@ namespace TriviaClient
             await Task.Delay(2000);
             if (!this.getQuestion())
             {
+                this.timer.Stop();
                 PostGameWindow postGameWindow = new PostGameWindow(this.comm);
                 this.Close();
                 postGameWindow.Show();
@@ -129,6 +133,7 @@ namespace TriviaClient
             await Task.Delay(2000);
             if (!this.getQuestion())
             {
+                this.timer.Stop();
                 PostGameWindow postGameWindow = new PostGameWindow(this.comm);
                 this.Close();
                 postGameWindow.Show();
