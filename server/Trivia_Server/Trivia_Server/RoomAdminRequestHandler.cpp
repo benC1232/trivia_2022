@@ -66,6 +66,7 @@ RequestResult RoomAdminRequestHandler::startGame(RequestInfo requestInfo)
 	{
 		throw std::exception("cant start a game with one player");
 	}
+	this->m_requestHandlerFactory->getRoomManager().getRoom(this->m_room->getData().id)->setIsActive(true);
 	RequestResult result;
 	Game* game = this->m_requestHandlerFactory->getGameManager().createGame(*this->m_room);
 	StartGameResponse startGameResponse;

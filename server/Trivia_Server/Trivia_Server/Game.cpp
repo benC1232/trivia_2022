@@ -1,6 +1,5 @@
 #include "Game.h"
 
-
 Game::Game(std::vector<Question> questions, std::map<LoggedUser, GameData> players)
 {
 	Question q;
@@ -29,8 +28,8 @@ Question Game::getQuestionForUser(LoggedUser user)
 		}
 		idx++;
 	}
-	this->m_players[user].currentQuestion = this->m_questions[idx+1];
-	return this->m_questions[idx + 1];
+	this->m_players[user].currentQuestion = this->m_questions.at(idx + 1);
+	return this->m_questions.at(idx + 1);
 }
 
 bool Game::submitAnswer(LoggedUser user, std::string answer, int time)
@@ -79,4 +78,3 @@ bool Game::isInGame(LoggedUser user)
 {
 	return this->m_players.find(user) != this->m_players.end();
 }
-

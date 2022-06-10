@@ -60,3 +60,8 @@ std::vector<LoggedUser> Room::getAllUsersVector()
 {
 	return this->m_users;
 }
+
+void Room::setIsActive(bool isActive)
+{
+	this->m_metadata.isActive = isActive;
+}

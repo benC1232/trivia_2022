@@ -55,7 +55,7 @@ namespace TriviaClient
                 if (roomState.hasGameBegun)
                 {
                     this.timer.Stop();
-                    gameWindow GameWindow = new gameWindow(this.comm);
+                    gameWindow GameWindow = new gameWindow(this.comm, room);
                     this.Close();
                     GameWindow.Show();
                 }

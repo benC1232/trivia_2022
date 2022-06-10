@@ -28,21 +28,20 @@ namespace TriviaClient
         private int correctAnswerCount;
         private int questionsLeft;
 
-        public gameWindow(Communicator c)
+        public gameWindow(Communicator c, roomStruct room)
         {
             InitializeComponent();
 
             this.timer = new DispatcherTimer
             {
-                Interval = TimeSpan.FromSeconds(1)
+                Interval = TimeSpan.FromSeconds(room.answerTimeout)
             };
             timer.Tick += timer_Tick;
             this.comm = c;
             this.correctAnswerCount = 0;
             //does not need to be 0!!! needs to be the initial amount of question
-            this.questionsLeft = 0;
-
-            //remember to start the timer
+            this.questionsLeft = room.questionCount;
+            this.getQuestion();
         }
 
         private void timer_Tick(object sender, EventArgs e)
@@ -51,7 +50,13 @@ namespace TriviaClient
             this.countdown.Content = totalSeconds - this.secondsWasted;
             if (totalSeconds - this.secondsWasted == 0)
             {
-                //------------
+                submitAnswer("never gonna give you up");
+                if (!this.getQuestion())
+                {
+                    PostGameWindow postGameWindow = new PostGameWindow(this.comm);
+                    this.Close();
+                    postGameWindow.Show();
+                }
             }
         }
 
@@ -156,13 +161,13 @@ namespace TriviaClient
             request.answer = answer;
             request.responseTime = this.secondsWasted;
             this.secondsWasted = 0;
-            var json = JsonConvert.SerializeObject(request);
-            var data = Encoding.ASCII.GetBytes(json);
+            string json = JsonConvert.SerializeObject(request);
+            byte[] data = Encoding.ASCII.GetBytes(json);
             this.comm.Send(16, data);
-            var response = this.comm.Recieve();
+            Tuple<int, byte[]> response = this.comm.Recieve();
             if (response.Item1 == 16)
             {
-                var responseStruct = JsonConvert.DeserializeObject<responseStructs.SubmitAnswerResponse>(Encoding.ASCII.GetString(response.Item2));
+                responseStructs.SubmitAnswerResponse responseStruct = JsonConvert.DeserializeObject<responseStructs.SubmitAnswerResponse>(Encoding.ASCII.GetString(response.Item2));
                 if (responseStruct.isCorrect)
                 {
                     this.correctAnswerCount++;
@@ -172,7 +177,7 @@ namespace TriviaClient
             }
             else if (response.Item1 == 3)
             {
-                var errResponse = JsonConvert.DeserializeObject<responseStructs.ErrorResponse>(Encoding.ASCII.GetString(response.Item2));
+                responseStructs.ErrorResponse errResponse = JsonConvert.DeserializeObject<responseStructs.ErrorResponse>(Encoding.ASCII.GetString(response.Item2));
                 this.errorLbl.Visibility = Visibility.Visible;
                 this.errorLbl.Text = errResponse.message;
             }
@@ -181,19 +186,19 @@ namespace TriviaClient
 
         private bool getQuestion()
         {
-            var arr = new byte[1];
+            byte[] arr = new byte[1];
             arr[0] = 1;
             this.comm.Send(15, arr);
-            var response = this.comm.Recieve();
+            Tuple<int, byte[]> response = this.comm.Recieve();
             if (response.Item1 == 15)
             {
-                var responseStruct = JsonConvert.DeserializeObject<responseStructs.GetQuestionResponse>(Encoding.ASCII.GetString(response.Item2));
+                responseStructs.GetQuestionResponse responseStruct = JsonConvert.DeserializeObject<responseStructs.GetQuestionResponse>(Encoding.ASCII.GetString(response.Item2));
                 if (responseStruct.status == 0)
                 {
                     return false;
                 }
                 this.question.Text = responseStruct.question;
-                var answers = responseStruct.answers.Split(',');
+                string[] answers = responseStruct.answers.Split(',');
                 this.Answer1.Content = answers[0];
                 this.Answer2.Content = answers[1];
                 this.Answer3.Content = answers[2];
@@ -208,7 +213,7 @@ namespace TriviaClient
             }
             else if (response.Item1 == 3)
             {
-                var errResponse = JsonConvert.DeserializeObject<responseStructs.ErrorResponse>(Encoding.ASCII.GetString(response.Item2));
+                responseStructs.ErrorResponse errResponse = JsonConvert.DeserializeObject<responseStructs.ErrorResponse>(Encoding.ASCII.GetString(response.Item2));
                 this.errorLbl.Visibility = Visibility.Visible;
                 this.errorLbl.Text = errResponse.message;
             }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TriviaClient
 {
-    internal struct roomStruct
+    public struct roomStruct
     {
         public bool hasGameBegun;
         public int questionCount;

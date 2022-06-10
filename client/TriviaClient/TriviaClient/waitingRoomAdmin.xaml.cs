@@ -58,7 +58,7 @@ namespace TriviaClient
                 if (roomState.hasGameBegun)
                 {
                     this.timer.Stop();
-                    gameWindow GameWindow = new gameWindow(this.comm);
+                    gameWindow GameWindow = new gameWindow(this.comm, room);
                     this.Close();
                     GameWindow.Show();
                 }
@@ -108,7 +108,7 @@ namespace TriviaClient
             Tuple<int, byte[]> response = this.comm.Recieve();
             if (response.Item1 == 11)
             {
-                gameWindow GameWindow = new gameWindow(this.comm);
+                gameWindow GameWindow = new gameWindow(this.comm, room);
                 this.Close();
                 GameWindow.Show();
             }
