@@ -31,6 +31,7 @@ namespace TriviaClient
         public gameWindow(Communicator c, roomStruct room)
         {
             InitializeComponent();
+            this.errorLbl.Visibility = Visibility.Hidden;
 
             this.timer = new DispatcherTimer();
             this.timer.Interval = TimeSpan.FromSeconds(1);
@@ -39,6 +40,7 @@ namespace TriviaClient
             this.correctAnswerCount = 0;
             //does not need to be 0!!! needs to be the initial amount of question
             this.questionsLeft = room.questionCount;
+            this.qCount.Content = this.questionsLeft;
             this.getQuestion();
         }
 
