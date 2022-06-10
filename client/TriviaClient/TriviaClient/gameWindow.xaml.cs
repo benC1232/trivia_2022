@@ -41,6 +41,7 @@ namespace TriviaClient
             //does not need to be 0!!! needs to be the initial amount of question
             this.questionsLeft = room.questionCount;
             this.qCount.Content = this.questionsLeft;
+            this.totalSeconds = room.answerTimeout;
             this.getQuestion();
         }
 
