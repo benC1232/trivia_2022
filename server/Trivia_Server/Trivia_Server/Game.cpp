@@ -16,7 +16,7 @@ Game::Game(std::vector<Question> questions, std::map<LoggedUser, GameData> playe
 Question Game::getQuestionForUser(LoggedUser user)
 {
 	Question q;
-	q.setQuestion("Err q");
+	q.setQuestion("");
 	if (this->m_players.at(user).currentQuestion.getQuestion() == q.getQuestion()) {
 		this->m_players.at(user).currentQuestion = this->m_questions[0];
 		return this->m_questions[0];
