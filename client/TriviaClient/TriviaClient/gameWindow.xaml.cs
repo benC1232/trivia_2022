@@ -43,6 +43,7 @@ namespace TriviaClient
             this.qCount.Content = this.questionsLeft;
             this.totalSeconds = room.answerTimeout;
             this.getQuestion();
+            this.timer.Start();
         }
 
         private void timer_Tick(object sender, EventArgs e)

@@ -18,7 +18,7 @@ Question Game::getQuestionForUser(LoggedUser user)
 	Question q;
 	q.setQuestion("");
 	if (this->m_players.at(user).currentQuestion.getQuestion() == q.getQuestion()) {
-		this->m_players.at(user).currentQuestion = this->m_questions[0];
+		this->m_players.at(user).currentQuestion = this->m_questions.at(0);
 		return this->m_questions[0];
 	}
 	int idx = 0;

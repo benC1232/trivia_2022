@@ -7,7 +7,7 @@ std::string Question::getQuestion()
 
 std::string Question::getCorrectAnswer()
 {
-	return this->m_answers[0];
+	return this->m_answers.at(0);
 }
 
 std::vector<std::string> Question::getIncorrectAnswers()
