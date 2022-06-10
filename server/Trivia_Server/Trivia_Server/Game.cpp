@@ -17,19 +17,19 @@ Question Game::getQuestionForUser(LoggedUser user)
 {
 	Question q;
 	q.setQuestion("Err q");
-	if (this->m_players[user].currentQuestion.getQuestion() == q.getQuestion()) {
-		this->m_players[user].currentQuestion = this->m_questions[0];
+	if (this->m_players.at(user).currentQuestion.getQuestion() == q.getQuestion()) {
+		this->m_players.at(user).currentQuestion = this->m_questions[0];
 		return this->m_questions[0];
 	}
 	int idx = 0;
 	std::cout << "reached the loop somehow" << std::endl;
 	for (auto q : this->m_questions) {
-		if (q.getQuestion() == this->m_players[user].currentQuestion.getQuestion()) {
+		if (q.getQuestion() == m_players.at(user).currentQuestion.getQuestion()) {
 			break;
 		}
 		idx++;
 	}
-	this->m_players[user].currentQuestion = this->m_questions.at(idx + 1);
+	this->m_players.at(user).currentQuestion = this->m_questions.at(idx + 1);
 	return this->m_questions.at(idx + 1);
 }
 
