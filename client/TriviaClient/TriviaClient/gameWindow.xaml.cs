@@ -193,10 +193,6 @@ namespace TriviaClient
             if (response.Item1 == 15)
             {
                 responseStructs.GetQuestionResponse responseStruct = JsonConvert.DeserializeObject<responseStructs.GetQuestionResponse>(Encoding.ASCII.GetString(response.Item2));
-                if (responseStruct.status == 0)
-                {
-                    return false;
-                }
                 this.question.Text = responseStruct.question;
                 string[] answers = responseStruct.answers.Split(',');
                 this.Answer1.Content = answers[0];

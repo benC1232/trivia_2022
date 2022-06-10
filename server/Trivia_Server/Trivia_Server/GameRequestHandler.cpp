@@ -66,8 +66,12 @@ RequestResult GameRequestHandler::getQuestion(RequestInfo requestInfo)
 	}
 	catch (std::exception& e)
 	{
+		std::cout << e.what() << std::endl;
 		response.question = "";
 		std::vector<std::string> answers;
+		answers.push_back("");
+		answers.push_back("");
+		answers.push_back("");
 		answers.push_back("");
 		response.answers = answers;
 		response.status = 0;

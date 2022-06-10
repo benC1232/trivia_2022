@@ -16,7 +16,7 @@ Game::Game(std::vector<Question> questions, std::map<LoggedUser, GameData> playe
 Question Game::getQuestionForUser(LoggedUser user)
 {
 	Question q;
-	q.setQuestion("Err q");
+	q.setQuestion("");
 	if (this->m_players.at(user).currentQuestion.getQuestion() == q.getQuestion()) {
 		this->m_players.at(user).currentQuestion = this->m_questions[0];
 		return this->m_questions[0];
@@ -29,7 +29,10 @@ Question Game::getQuestionForUser(LoggedUser user)
 		}
 		idx++;
 	}
-	if (idx == this->m_questions.size()) throw(std::exception("no more questions"));
+	if (idx == this->m_questions.size())
+	{
+		throw(std::exception("no more questions"));
+	}
 	this->m_players.at(user).currentQuestion = this->m_questions.at(idx + 1);
 	return this->m_questions.at(idx + 1);
 }
