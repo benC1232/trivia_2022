@@ -70,6 +70,9 @@
     <ClCompile Include="StatisticsManager.cpp" />
     <ClCompile Include="WSAInitializer.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Trivia.sqlite" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
