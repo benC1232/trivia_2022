@@ -22,6 +22,7 @@ Question Game::getQuestionForUser(LoggedUser user)
 		return this->m_questions[0];
 	}
 	int idx = 0;
+	std::cout << "reached the loop somehow" << std::endl;
 	for (auto q : this->m_questions) {
 		if (q.getQuestion() == this->m_players[user].currentQuestion.getQuestion()) {
 			break;
