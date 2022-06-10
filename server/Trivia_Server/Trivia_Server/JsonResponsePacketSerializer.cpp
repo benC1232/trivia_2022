@@ -52,7 +52,7 @@ std::string intVecToString(std::vector<unsigned int> ints) {
 std::string playerResultsVecToString(std::vector<PlayerResults> pResults) {
 	std::string output = "";
 	for (auto result : pResults) {
-		output += result.username + ":" + std::to_string(result.correctAnswerCount) + ":" + std::to_string(result.wrongAnswerCount) + ":" + std::to_string(result.averageAnswerTime) + ",";
+		output += result.username + "|correct answers: " + std::to_string(result.correctAnswerCount) + "|wrong answers" + std::to_string(result.wrongAnswerCount) + "|average answer time" + std::to_string(result.averageAnswerTime) + ",";
 	}
 	return output;
 }

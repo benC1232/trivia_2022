@@ -28,15 +28,17 @@ namespace TriviaClient
         public PostGameWindow(Communicator c)
 
         {
-            this.secondsWasted = 0;
-            this.countdown.Content = 30;
-            this.comm = c;
             InitializeComponent();
+            this.errorLbl.Visibility = Visibility.Hidden;
+            this.secondsWasted = 0;
+            this.countdown.Content = 30.ToString();
+            this.comm = c;
             this.timer = new DispatcherTimer
             {
                 Interval = TimeSpan.FromSeconds(1)
             };
             timer.Tick += timer_Tick;
+            this.timer.Start();
             var arr = new byte[1];
             arr[0] = 1;
             this.comm.Send(17, arr);
@@ -44,7 +46,15 @@ namespace TriviaClient
             if (response.Item1 == 17)
             {
                 var getGameResultsResponse = JsonConvert.DeserializeObject<responseStructs.GetGameResultsResponse>(Encoding.UTF8.GetString(response.Item2));
-                var players = getGameResultsResponse.results.Split(',');
+                string[] players = getGameResultsResponse.results.Split(',');
+                List<string> items = new List<string>();
+
+                for (int i = 0; i < players.Length; i++)
+                {
+                    players[i] = i.ToString() + ". " + players[i];
+                }
+                string leaderboard = String.Join("\n", players);
+                this.PlayersTxtBlck.Text = leaderboard;
             }
         }
 
