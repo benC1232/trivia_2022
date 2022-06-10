@@ -52,14 +52,26 @@ RequestResult GameRequestHandler::handleRequest(RequestInfo requestInfo)
 
 RequestResult GameRequestHandler::getQuestion(RequestInfo requestInfo)
 {
-	RequestResult result;
-	Question returnedQuestion = this->m_requestHandlerFactory->getGameManager().getGame(this->m_loggedUser)->getQuestionForUser(this->m_loggedUser);
 	GetQuestionResponse response;
-	response.question = returnedQuestion.getQuestion();
-	std::vector<std::string> answers;
-	answers = returnedQuestion.getIncorrectAnswers();
-	answers.push_back(returnedQuestion.getCorrectAnswer());
-	response.answers = answers;
+	RequestResult result;
+	try
+	{
+		Question returnedQuestion = this->m_requestHandlerFactory->getGameManager().getGame(this->m_loggedUser)->getQuestionForUser(this->m_loggedUser);
+		response.question = returnedQuestion.getQuestion();
+		std::vector<std::string> answers;
+		answers = returnedQuestion.getIncorrectAnswers();
+		answers.push_back(returnedQuestion.getCorrectAnswer());
+		response.answers = answers;
+		response.status = 1;
+	}
+	catch (std::exception& e)
+	{
+		response.question = "";
+		std::vector<std::string> answers;
+		answers.push_back("");
+		response.answers = answers;
+		response.status = 0;
+	}
 	result.buffer = JsonResponsePacketSerializer::serializeGetQuestionResponse(response);
 	result.newHandler = this;
 	return result;
