@@ -68,7 +68,7 @@ def add_questions_to_database(list_of_questions,db: str):
     #loop over the list of questions and add them to the database
     for question in list_of_questions:
         #get the question
-        question_text = question['question'].replace('&quot;','"').replace('&#039;',"'")
+        question_text = question['question'].replace('&quot;','\"').replace('&#039;',"'")
         #check if the name of the question is already in the database if it is skip it
         c.execute("SELECT * FROM questions WHERE question = ?", (question_text,))
         if c.fetchone() is not None:
