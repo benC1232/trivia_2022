@@ -88,7 +88,7 @@ RequestResult MenuRequestHandler::joinRoom(RequestInfo requestInfo)
 	JoinRoomResponse num;
 	num.status = JOIN_ROOM_REQUEST;
 	JoinRoomRequest joinRoomRequest = JsonRequestPacketDeserializer::deserializeJoinRoomRequest(requestInfo.buffer);
-	if (this->m_roomManager->getRoom(joinRoomRequest.roomId)->getData().maxPlayers == this->m_requestHandlerFactory->getRoomManager().getRoom(joinRoomRequest.roomId)->getAllUsersVector().size())
+	if (this->m_requestHandlerFactory->getRoomManager().getRoom(joinRoomRequest.roomId)->getData().maxPlayers == this->m_requestHandlerFactory->getRoomManager().getRoom(joinRoomRequest.roomId)->getAllUsersVector().size())
 	{
 		throw std::exception("Room is full");
 	}
