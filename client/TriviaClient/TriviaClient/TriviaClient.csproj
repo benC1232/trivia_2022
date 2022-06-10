@@ -88,11 +88,11 @@
     <Compile Include="responseStructs\SubmitAnswerResponse.cs" />
     <Compile Include="roomStruct.cs" />
     <Compile Include="roomToJoin.cs" />
-    <Compile Include="waitingRoom.xaml.cs">
-      <DependentUpon>waitingRoom.xaml</DependentUpon>
+    <Compile Include="WaitingRoom.xaml.cs">
+      <DependentUpon>WaitingRoom.xaml</DependentUpon>
     </Compile>
-    <Compile Include="waitingRoomAdmin.xaml.cs">
-      <DependentUpon>waitingRoomAdmin.xaml</DependentUpon>
+    <Compile Include="WaitingRoomAdmin.xaml.cs">
+      <DependentUpon>WaitingRoomAdmin.xaml</DependentUpon>
     </Compile>
     <Page Include="CreateRoomWindow.xaml">
       <SubType>Designer</SubType>
@@ -138,11 +138,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="waitingRoom.xaml">
+    <Page Include="WaitingRoom.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="waitingRoomAdmin.xaml">
+    <Page Include="WaitingRoomAdmin.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

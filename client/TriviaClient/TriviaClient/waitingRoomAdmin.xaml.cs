@@ -19,13 +19,13 @@ namespace TriviaClient
     /// <summary>
     /// Interaction logic for waitingRoomAdmin.xaml
     /// </summary>
-    public partial class waitingRoomAdmin : Window
+    public partial class WaitingRoomAdmin : Window
     {
         private Communicator comm;
         private DispatcherTimer timer;
         private roomStruct room;
 
-        public waitingRoomAdmin(Communicator c)
+        public WaitingRoomAdmin(Communicator c)
         {
             this.comm = c;
             InitializeComponent();

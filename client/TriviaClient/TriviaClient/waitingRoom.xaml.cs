@@ -16,26 +16,26 @@ using Newtonsoft.Json;
 
 namespace TriviaClient
 {
-    public partial class waitingRoom : Window
+    public partial class WaitingRoom : Window
     {
         private Communicator comm;
         private DispatcherTimer timer;
         private roomStruct room;
 
-        public waitingRoom(Communicator c)
+        public WaitingRoom(Communicator c)
         {
             this.comm = c;
             //💻 - paste it before the admin username
             InitializeComponent();
             this.errorLbl.Visibility = Visibility.Hidden;
             timer = new System.Windows.Threading.DispatcherTimer();
-            timer.Tick += new EventHandler(dispatcherTimer_Tick);
+            timer.Tick += new EventHandler(DispatcherTimer_Tick);
             timer.Interval = new TimeSpan(0, 0, 3);
             timer.Start();
-            refresh();
+            Refresh();
         }
 
-        private void refresh()
+        private void Refresh()
         {
             byte[] arr = new byte[1];
             arr[0] = 1;
@@ -49,8 +49,7 @@ namespace TriviaClient
                 this.room.hasGameBegun = roomState.hasGameBegun;
                 this.room.questionCount = roomState.questionCount;
                 string[] players = roomState.players.Split(',');
-                string playerText = "";
-                playerText = System.String.Join("\n", players);
+                string playerText = System.String.Join("\n", players);
                 playerText = "💻 admin -" + playerText;
                 this.PlayersTxtBlck.Text = playerText;
                 if (roomState.hasGameBegun)
@@ -76,11 +75,11 @@ namespace TriviaClient
             }
         }
 
-        private void dispatcherTimer_Tick(object sender, EventArgs e)
+        private void DispatcherTimer_Tick(object sender, EventArgs e)
         {
             try
             {
-                refresh();
+                Refresh();
             }
             catch
             {

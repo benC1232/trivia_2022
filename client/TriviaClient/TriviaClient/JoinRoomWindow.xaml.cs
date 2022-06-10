@@ -92,7 +92,7 @@ namespace TriviaClient
             string strResponse = Encoding.ASCII.GetString(response.Item2);
             if (response.Item1 == 7)
             {
-                waitingRoom waitingroomwindow = new waitingRoom(this.comm);
+                WaitingRoom waitingroomwindow = new WaitingRoom(this.comm);
                 this.Close();
                 waitingroomwindow.Show();
             }
