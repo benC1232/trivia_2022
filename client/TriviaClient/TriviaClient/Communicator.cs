@@ -21,7 +21,7 @@ namespace TriviaClient
         public Communicator()
         {
             this.host = "127.0.0.1";
-            this.port = 6969;
+            this.port = 9898;
             this.connected = false;
         }
 
@@ -114,7 +114,7 @@ namespace TriviaClient
             //reverse the loop
             for (int i = 3; i > 0; i--)
             {
-                result += arr[startIndex + i] << (8 * (3-i));
+                result += arr[startIndex + i] << (8 * (3 - i));
             }
             return result;
         }

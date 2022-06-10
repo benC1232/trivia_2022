@@ -1,5 +1,5 @@
 #pragma once
-#define PORT 6969
+#define PORT 9898
 #pragma comment(lib, "Ws2_32.lib")
 #include <thread>
 #include <WinSock2.h>
