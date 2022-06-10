@@ -71,6 +71,10 @@ std::vector<PlayerResults> Game::getResults()
 		result.averageAnswerTime = i->second.averageAnswerTime;
 		output.push_back(result);
 	}
+
+	std::sort(output.begin(), output.end(), [](const PlayerResults& lhs, const PlayerResults& rhs) {
+		return lhs.correctAnswerCount > rhs.correctAnswerCount;
+		});
 	return output;
 }
 
