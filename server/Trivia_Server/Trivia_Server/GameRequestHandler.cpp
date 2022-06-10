@@ -89,6 +89,7 @@ RequestResult GameRequestHandler::submitAnswer(RequestInfo requestInfo)
 	response.status = SUBMIT_ANSWER_CODE;
 	response.isCorrect = this->m_game->submitAnswer(this->m_loggedUser, request.answer, request.responseTime);
 	result.buffer = JsonResponsePacketSerializer::serializeSubmitAnswerResponse(response);
+	result.newHandler = this;
 	return result;
 }
 

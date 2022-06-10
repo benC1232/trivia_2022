@@ -38,7 +38,7 @@ namespace TriviaClient
             timer.Tick += timer_Tick;
             this.comm = c;
             this.correctAnswerCount = 0;
-            //does not need to be 0!!! needs to be the initial amount of question
+            this.correctAnswers.Content = this.correctAnswerCount.ToString();
             this.questionsLeft = room.questionCount;
             this.qCount.Content = this.questionsLeft;
             this.totalSeconds = room.answerTimeout;
@@ -69,8 +69,18 @@ namespace TriviaClient
 
         private async void Answer1_Click(object sender, RoutedEventArgs e)
         {
-            this.Answer1.Background = submitAnswer(this.Answer1.Content.ToString()) ? new SolidColorBrush(Colors.Green) : new SolidColorBrush(Colors.Red);
-            await Task.Delay(2000);
+            if (submitAnswer(this.Answer1.Content.ToString()))
+            {
+                this.Answer1.Background = new SolidColorBrush(Colors.Green);
+            }
+            else
+            {
+                this.Answer1.Background = new SolidColorBrush(Colors.Red);
+            }
+            this.timer.Stop();
+            await Task.Delay(1000);
+            this.timer.Start();
+            this.Answer1.Background = new SolidColorBrush(Colors.Black);
             if (!this.getQuestion())
             {
                 this.timer.Stop();
@@ -90,7 +100,10 @@ namespace TriviaClient
             {
                 this.Answer2.Background = new SolidColorBrush(Colors.Red);
             }
-            await Task.Delay(2000);
+            this.timer.Stop();
+            await Task.Delay(1000);
+            this.timer.Start();
+            this.Answer2.Background = new SolidColorBrush(Colors.Black);
             if (!this.getQuestion())
             {
                 this.timer.Stop();
@@ -110,7 +123,11 @@ namespace TriviaClient
             {
                 this.Answer3.Background = new SolidColorBrush(Colors.Red);
             }
-            await Task.Delay(2000);
+
+            this.timer.Stop();
+            await Task.Delay(1000);
+            this.timer.Start();
+            this.Answer3.Background = new SolidColorBrush(Colors.Black);
             if (!this.getQuestion())
             {
                 this.timer.Stop();
@@ -130,7 +147,10 @@ namespace TriviaClient
             {
                 this.Answer4.Background = new SolidColorBrush(Colors.Red);
             }
-            await Task.Delay(2000);
+            this.timer.Stop();
+            await Task.Delay(1000);
+            this.timer.Start();
+            this.Answer4.Background = new SolidColorBrush(Colors.Black);
             if (!this.getQuestion())
             {
                 this.timer.Stop();
@@ -162,7 +182,6 @@ namespace TriviaClient
 
         private bool submitAnswer(string answer)
         {
-            this.timer.Stop();
             requestStructs.SubmitAnswerRequest request;
             request.answer = answer;
             request.responseTime = this.secondsWasted;
@@ -177,7 +196,7 @@ namespace TriviaClient
                 if (responseStruct.isCorrect)
                 {
                     this.correctAnswerCount++;
-                    this.correctAnswers.Content = this.correctAnswerCount;
+                    this.correctAnswers.Content = this.correctAnswerCount.ToString();
                 }
                 return responseStruct.isCorrect;
             }
@@ -210,7 +229,6 @@ namespace TriviaClient
                 this.questionsLeft--;
                 this.qCount.Content = this.questionsLeft;
 
-                this.timer.Start();
                 return responseStruct.status == 1;
             }
             else if (response.Item1 == 3)
