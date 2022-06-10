@@ -8,7 +8,7 @@ namespace TriviaClient
 {
     internal struct roomStruct
     {
-        public int hasGameBegun;
+        public bool hasGameBegun;
         public int questionCount;
         public int answerTimeout;
     }

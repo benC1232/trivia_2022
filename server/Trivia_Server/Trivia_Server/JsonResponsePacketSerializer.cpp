@@ -244,7 +244,7 @@ std::vector<unsigned char> JsonResponsePacketSerializer::serializeGetRoomStateRe
 	buffer.push_back(GET_ROOM_STATE_CODE);
 	nlohmann::json jsonResponse = {
 		{"status",getRoomStateResponse.status},
-		{"hasGameBegun", (getRoomStateResponse.hasGameBegun ? 1 : 0)},
+		{"hasGameBegun", getRoomStateResponse.hasGameBegun},
 		{"players", stringVecToString(getRoomStateResponse.players)},
 		{"questionCount", getRoomStateResponse.questionCount},
 		{"answerTimeOut", getRoomStateResponse.answerTimeOut}

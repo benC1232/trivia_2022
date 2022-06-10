@@ -30,11 +30,11 @@ namespace TriviaClient
             this.comm = c;
             InitializeComponent();
             this.errorLbl.Visibility = Visibility.Hidden;
-            refresh();
             timer = new System.Windows.Threading.DispatcherTimer();
             timer.Tick += new EventHandler(dispatcherTimer_Tick);
             timer.Interval = new TimeSpan(0, 0, 3);
             timer.Start();
+            refresh();
         }
 
         private void refresh()
@@ -55,7 +55,7 @@ namespace TriviaClient
                 playerText = System.String.Join("\n", players);
                 playerText = "💻 admin -" + playerText;
                 this.PlayersTxtBlck.Text = playerText;
-                if (roomState.hasGameBegun == 1)
+                if (roomState.hasGameBegun)
                 {
                     this.timer.Stop();
                     gameWindow GameWindow = new gameWindow(this.comm);
