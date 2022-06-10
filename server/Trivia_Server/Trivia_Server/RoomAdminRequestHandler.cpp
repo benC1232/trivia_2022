@@ -62,7 +62,7 @@ RequestResult RoomAdminRequestHandler::closeRoom(RequestInfo requestInfo)
 
 RequestResult RoomAdminRequestHandler::startGame(RequestInfo requestInfo)
 {
-	if (this->m_room->getAllUsers().size() == 0)
+	if (this->m_room->getAllUsers().size() == 1)
 	{
 		throw std::exception("cant start a game with one player");
 	}

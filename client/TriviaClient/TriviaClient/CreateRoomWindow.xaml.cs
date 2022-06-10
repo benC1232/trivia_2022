@@ -49,10 +49,9 @@ namespace TriviaClient
             string strResponse = Encoding.ASCII.GetString(response.Item2);
             if (response.Item1 == 8)
             {
-                WaitingRoomAdmin waitingroom = new WaitingRoomAdmin(this.comm);
-                
-                waitingroom.Show();
+                WaitingRoomAdmin room = new WaitingRoomAdmin(this.comm);
                 this.Close();
+                room.Show();
             }
             else if (response.Item1 == 3)
             {

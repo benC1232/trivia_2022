@@ -112,6 +112,7 @@ RequestResult MenuRequestHandler::createRoom(RequestInfo requestInfo)
 	roomData.maxPlayers = createRoomRequest.maxUsers;
 	roomData.name = createRoomRequest.roomName;
 	roomData.numOfQuestionsInGame = createRoomRequest.questionCount;
+	roomData.isActive = false;
 	roomData.id = 0;
 	int id = this->m_requestHandlerFactory->getRoomManager().createRoom(m_user, roomData);
 	result.buffer = JsonResponsePacketSerializer::serializeCreateRoomResponse(num);

@@ -10,7 +10,7 @@ struct RoomData
 	unsigned int maxPlayers;
 	unsigned int numOfQuestionsInGame;
 	unsigned int timePerQuestion;
-	unsigned int isActive;
+	bool isActive;
 };
 class Room
 {

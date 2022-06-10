@@ -22,7 +22,7 @@ void Question::setQuestion(std::string question)
 
 void Question::setCorrectAnswer(std::string correctAnswer)
 {
-	this->m_answers[0] = correctAnswer;
+	this->m_answers.push_back(correctAnswer);
 }
 
 void Question::setIncorrectAnswers(std::vector<std::string> incorrectAnswers)
