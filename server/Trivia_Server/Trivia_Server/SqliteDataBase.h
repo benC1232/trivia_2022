@@ -21,6 +21,7 @@ public:
 	int getNumOfPlayerGames(std::string username);
 	//why wasnt this in the uml?!?!?!?!?!
 	std::map<std::string, int> getHighScore();
+	void addStatistics(std::string username, int averageTime, int correctAnswers, int wrongAnswers);
 private:
 	sqlite3* _db;
 	void createTables();

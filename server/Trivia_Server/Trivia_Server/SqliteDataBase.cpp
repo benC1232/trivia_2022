@@ -80,6 +80,13 @@ void SqliteDataBase::addNewUser(std::string username, std::string password, std:
 	if (result != SQLITE_OK) {
 		throw std::exception(errMessage);
 	}
+	errMessage = nullptr;
+	query = "INSERT INTO statistics (username, averagetime, correctanswers, wrongasnwers, gamesnum) VALUES ('" + username + "', 0, 0, 0, 0)";
+	sqlStatement = query.c_str();
+	result = sqlite3_exec(this->_db, sqlStatement, nullptr, nullptr, &errMessage);
+	if (result != SQLITE_OK) {
+		throw std::exception(errMessage);
+	}
 }
 int questionsCallback(void* data, int argc, char** argv, char** azColName)
 {
@@ -234,6 +241,22 @@ std::map<std::string, int> SqliteDataBase::getHighScore()
 		throw std::exception(errMessage);
 	}
 	return highScore;
+}
+
+void SqliteDataBase::addStatistics(std::string username, int averageTime, int correctAnswers, int wrongAnswers)
+{
+	char* errMessage = nullptr;
+	std::string query = "UPDATE statistics"
+		"SET averagetime = (averagetime + " + std::to_string(averageTime) + ") / 2, "
+		"correctanswers = correctanswers + " + std::to_string(correctAnswers) + ","
+		"wronganswers = wronganswers + " + std::to_string(wrongAnswers) + ","
+		"gamesnum = gamesnum + 1"
+		"WHERE username = '" + username + "';";
+	const char* sqlStatement = query.c_str();
+	int result = sqlite3_exec(this->_db, sqlStatement, nullptr, nullptr, &errMessage);
+	if (result != SQLITE_OK) {
+		throw std::exception(errMessage);
+	}
 }
 
 void SqliteDataBase::createTables()
