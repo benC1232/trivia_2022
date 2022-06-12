@@ -105,7 +105,7 @@ namespace TriviaClient
                             this.UsernameTxt.Text = "";
                             this.PasswordTxt.Text = "";
                             this.EmailTxt.Text = "";
-
+                            this.comm.signoutFlag = true;
                             MenuWindow menu = new MenuWindow(this.comm);
                             this.Close();
                             menu.Show();
@@ -153,6 +153,7 @@ namespace TriviaClient
                             this.PasswordTxt.Text = "";
                             this.EmailTxt.Text = "";
 
+                            this.comm.signoutFlag = true;
                             MenuWindow menu = new MenuWindow(this.comm);
                             this.Close();
                             menu.Show();
@@ -166,6 +167,13 @@ namespace TriviaClient
                     }
                 }
             }
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            e.Cancel = true;
+            this.comm.Disconnect();
+            e.Cancel = false;
         }
     }
 }

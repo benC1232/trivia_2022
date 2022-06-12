@@ -63,11 +63,6 @@ namespace TriviaClient
             }
         }
 
-        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-            e.Cancel = true;
-        }
-
         private async void Answer1_Click(object sender, RoutedEventArgs e)
         {
             if (submitAnswer(this.Answer1.Content.ToString()))
@@ -169,6 +164,7 @@ namespace TriviaClient
             var response = this.comm.Recieve();
             if (response.Item1 == 14)
             {
+                this.comm.leaveRoomFlag = false;
                 var menuWindow = new MenuWindow(this.comm);
                 this.Close();
                 menuWindow.Show();
@@ -239,6 +235,13 @@ namespace TriviaClient
                 this.errorLbl.Text = errResponse.message;
             }
             return false;
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            e.Cancel = true;
+            this.comm.Disconnect();
+            e.Cancel = false;
         }
     }
 }

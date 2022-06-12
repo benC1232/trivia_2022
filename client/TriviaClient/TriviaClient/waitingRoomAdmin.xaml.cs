@@ -57,6 +57,8 @@ namespace TriviaClient
                 this.PlayersTxtBlck.Text = playerText;
                 if (roomState.hasGameBegun)
                 {
+                    this.comm.closeRoomFlag = false;
+                    this.comm.leaveGameFlag = true;
                     this.timer.Stop();
                     gameWindow GameWindow = new gameWindow(this.comm, room);
                     this.Close();
@@ -86,6 +88,7 @@ namespace TriviaClient
             string strResponse = Encoding.UTF8.GetString(response.Item2);
             if (response.Item1 == 10)
             {
+                this.comm.closeRoomFlag = false;
                 MenuWindow menuWindow = new MenuWindow(this.comm);
                 this.Close();
                 menuWindow.Show();
@@ -108,6 +111,8 @@ namespace TriviaClient
             Tuple<int, byte[]> response = this.comm.Recieve();
             if (response.Item1 == 11)
             {
+                this.comm.closeRoomFlag = false;
+                this.comm.leaveGameFlag = true;
                 gameWindow GameWindow = new gameWindow(this.comm, room);
                 this.Close();
                 GameWindow.Show();
@@ -118,6 +123,13 @@ namespace TriviaClient
                 this.errorLbl.Visibility = Visibility.Visible;
                 this.errorLbl.Text = errorResponse.message;
             }
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            e.Cancel = true;
+            this.comm.Disconnect();
+            e.Cancel = false;
         }
     }
 }

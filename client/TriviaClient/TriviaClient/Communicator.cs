@@ -17,6 +17,9 @@ namespace TriviaClient
         private string host;
         public bool connected;
         public bool signoutFlag;
+        public bool leaveRoomFlag;
+        public bool leaveGameFlag;
+        public bool closeRoomFlag;
 
         public Communicator()
         {
@@ -45,6 +48,25 @@ namespace TriviaClient
         {
             if (this.connected)
             {
+                if (this.leaveGameFlag)
+                {
+                    var arr = new byte[1];
+                    arr[0] = 1;
+                    this.Send(14, arr);
+                }
+                if (this.leaveRoomFlag)
+                {
+                    byte[] arr = new byte[1];
+                    arr[0] = 1;
+                    this.Send(13, arr);
+                }
+                if (this.closeRoomFlag)
+                {
+                    byte[] arr = new byte[1];
+                    arr[0] = 1;
+                    this.Send(10, arr);
+                }
+
                 if (this.signoutFlag)
                 {
                     byte[] arr = new byte[1];
@@ -105,13 +127,6 @@ namespace TriviaClient
         private int fourByteArrToInt(byte[] arr, int startIndex)
         {
             int result = 0;
-            //old loop that might not work
-            /*
-            for (int i = 0; i < 4; i++)
-            {
-                result += arr[startIndex + i] << (8 * i);
-            }*/
-            //reverse the loop
             for (int i = 3; i > 0; i--)
             {
                 result += arr[startIndex + i] << (8 * (3 - i));

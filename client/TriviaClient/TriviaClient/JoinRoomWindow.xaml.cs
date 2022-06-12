@@ -92,6 +92,7 @@ namespace TriviaClient
             string strResponse = Encoding.ASCII.GetString(response.Item2);
             if (response.Item1 == 7)
             {
+                this.comm.leaveRoomFlag = true;
                 WaitingRoom waitingroomwindow = new WaitingRoom(this.comm);
                 this.Close();
                 waitingroomwindow.Show();
@@ -115,6 +116,13 @@ namespace TriviaClient
             MenuWindow menuWindow = new MenuWindow(comm);
             this.Close();
             menuWindow.Show();
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            e.Cancel = true;
+            this.comm.Disconnect();
+            e.Cancel = false;
         }
     }
 }

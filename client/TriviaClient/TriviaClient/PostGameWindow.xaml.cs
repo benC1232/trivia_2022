@@ -81,6 +81,7 @@ namespace TriviaClient
             var response = this.comm.Recieve();
             if (response.Item1 == 14)
             {
+                this.comm.leaveGameFlag = false;
                 var menuWindow = new MenuWindow(this.comm);
                 this.Close();
                 menuWindow.Show();
@@ -91,6 +92,13 @@ namespace TriviaClient
                 this.errorLbl.Visibility = Visibility.Visible;
                 this.errorLbl.Text = errResponse.message;
             }
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            e.Cancel = true;
+            this.comm.Disconnect();
+            e.Cancel = false;
         }
     }
 }

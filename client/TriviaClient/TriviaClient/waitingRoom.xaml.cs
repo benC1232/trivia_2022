@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Newtonsoft.Json;
+using System.ComponentModel;
 
 namespace TriviaClient
 {
@@ -103,6 +104,8 @@ namespace TriviaClient
             string strResponse = Encoding.UTF8.GetString(response.Item2);
             if (response.Item1 == 13)
             {
+                this.comm.leaveRoomFlag = false;
+                this.comm.leaveGameFlag = true;
                 MenuWindow menuWindow = new MenuWindow(this.comm);
                 this.Close();
                 menuWindow.Show();
@@ -114,6 +117,13 @@ namespace TriviaClient
                 this.errorLbl.Visibility = Visibility.Visible;
                 this.errorLbl.Text = errorResponse.message;
             }
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            e.Cancel = true;
+            this.comm.Disconnect();
+            e.Cancel = false;
         }
     }
 }

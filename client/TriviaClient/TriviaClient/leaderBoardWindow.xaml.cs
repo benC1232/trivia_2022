@@ -76,5 +76,12 @@ namespace TriviaClient
             this.Close();
             menuWindow.Show();
         }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            e.Cancel = true;
+            this.comm.Disconnect();
+            e.Cancel = false;
+        }
     }
 }
