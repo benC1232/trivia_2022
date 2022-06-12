@@ -32,6 +32,7 @@ public:
 	StatisticsManager& getStatisticsManager();
 	RoomManager& getRoomManager();
 	GameManager& getGameManager();
+	IDatabase& getDatabase();
 
 private:
 	LoginManager* m_loginManager;

@@ -10,6 +10,7 @@ GameRequestHandler::GameRequestHandler(GameManager* gameManager, LoggedUser logg
 	this->m_requestHandlerFactory = requestHandlerFactory;
 	this->m_game = game;
 	this->questionCount = 0;
+	this->isFirstRequest = true;
 }
 
 GameRequestHandler::~GameRequestHandler()
@@ -99,6 +100,20 @@ RequestResult GameRequestHandler::getGameResults(RequestInfo requestInfo)
 	GetGameResultsResponse response;
 	response.status = GET_GAME_RESULT_CODE;
 	response.results = this->m_game->getResults();
+	int index = 0;
+	if (this->isFirstRequest)
+	{
+		this->isFirstRequest = false;
+		for (int i = 0; i < response.results.size(); i++)
+		{
+			if (response.results[i].username == this->m_loggedUser.getUsername())
+			{
+				index = i;
+				break;
+			}
+		}
+		this->m_requestHandlerFactory->getDatabase().addStatistics(response.results[index].username, response.results[index].averageAnswerTime, response.results[index].correctAnswerCount, response.results[index].wrongAnswerCount);
+	}
 	result.buffer = JsonResponsePacketSerializer::serializeGetGameResultResponse(response);
 	result.newHandler = this;
 	return result;

@@ -57,3 +57,8 @@ GameManager& RequestHandlerFactory::getGameManager()
 {
 	return *this->m_gameManager;
 }
+
+IDatabase& RequestHandlerFactory::getDatabase()
+{
+	return *this->m_database;
+}

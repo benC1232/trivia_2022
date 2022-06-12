@@ -24,4 +24,5 @@ private:
 	RequestResult submitAnswer(RequestInfo requestInfo);
 	RequestResult getGameResults(RequestInfo requestInfo);
 	RequestResult leaveGame(RequestInfo requestInfo);
+	bool isFirstRequest;
 };
