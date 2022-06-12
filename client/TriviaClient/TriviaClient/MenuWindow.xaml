@@ -49,7 +49,7 @@
                 </Button.Resources>
             </Button>
         </StackPanel>
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" >
             <Button  x:Name="QuitBtn" Click="QuitBtn_Click" Content="Quit" FontSize="40" FontFamily="{StaticResource AmaticSC}" Background="black" BorderBrush="white" Foreground="White" FontWeight="Bold" BorderThickness="6" Height="68"  Width="103">
                 <Button.Resources>
                     <Style TargetType="Border">
@@ -57,7 +57,14 @@
                     </Style>
                 </Button.Resources>
             </Button>
-            <Label Width="1152" Height="89" />
+            <Label Width="1024" Height="89" />
+            <Button  x:Name="addQuestionBtn" Click="AddQuestionBtn_OnClick"  Content="Add" FontSize="40" FontFamily="{StaticResource AmaticSC}" Background="black" BorderBrush="white" Foreground="White" FontWeight="Bold" BorderThickness="6" Height="68"  Width="103">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="15" />
+                    </Style>
+                </Button.Resources>
+            </Button>
         </StackPanel>
     </StackPanel>
 </Window>
