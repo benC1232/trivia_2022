@@ -24,6 +24,7 @@ public:
 	virtual int getNumOfPlayerGames(std::string username) = 0;
 	virtual std::map<std::string, int> getHighScore() = 0;
 	virtual void addStatistics(std::string username, int averageTime, int correctAnswers, int wrongAnswers) = 0;
+	virtual void addQuestion(Question question) = 0;
 private:
 	virtual void createTables() = 0;
 };

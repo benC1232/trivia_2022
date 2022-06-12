@@ -259,6 +259,17 @@ void SqliteDataBase::addStatistics(std::string username, int averageTime, int co
 	}
 }
 
+void SqliteDataBase::addQuestion(Question question)
+{
+	char* errMessage = nullptr;
+	std::string query = "INSERT INTO questions (question, correctanswer, wronganswer1,wronganswer2,wronganswer3) VALUES ('" + question.getQuestion() + "','" + question.getCorrectAnswer() + "','" + question.getIncorrectAnswers()[0] + "','" + question.getIncorrectAnswers()[1] + "','" + question.getIncorrectAnswers()[2] + "');";
+	const char* sqlStatement = query.c_str();
+	int result = sqlite3_exec(this->_db, sqlStatement, nullptr, nullptr, &errMessage);
+	if (result != SQLITE_OK) {
+		throw std::exception(errMessage);
+	}
+}
+
 void SqliteDataBase::createTables()
 {
 	std::cout << "creating tables" << std::endl;
