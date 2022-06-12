@@ -76,6 +76,7 @@
     <Compile Include="PostGameWindow.xaml.cs">
       <DependentUpon>PostGameWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="requestStructs\AddQuestionRequest.cs" />
     <Compile Include="requestStructs\CreateRoomRequest.cs" />
     <Compile Include="requestStructs\JoinRoomRequest.cs" />
     <Compile Include="requestStructs\LoginRequest.cs" />
