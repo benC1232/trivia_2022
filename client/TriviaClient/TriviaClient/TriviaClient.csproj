@@ -58,6 +58,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="addQuestionWindow.xaml.cs">
+      <DependentUpon>addQuestionWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="gameWindow.xaml.cs">
       <DependentUpon>gameWindow.xaml</DependentUpon>
     </Compile>
@@ -73,6 +76,7 @@
     <Compile Include="PostGameWindow.xaml.cs">
       <DependentUpon>PostGameWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="requestStructs\AddQuestionRequest.cs" />
     <Compile Include="requestStructs\CreateRoomRequest.cs" />
     <Compile Include="requestStructs\JoinRoomRequest.cs" />
     <Compile Include="requestStructs\LoginRequest.cs" />
@@ -94,6 +98,10 @@
     <Compile Include="WaitingRoomAdmin.xaml.cs">
       <DependentUpon>WaitingRoomAdmin.xaml</DependentUpon>
     </Compile>
+    <Page Include="addQuestionWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="CreateRoomWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
