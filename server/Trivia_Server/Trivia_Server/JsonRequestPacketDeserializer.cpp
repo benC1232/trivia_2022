@@ -114,3 +114,21 @@ SubmitAnswerRequest JsonRequestPacketDeserializer::deserializeSubmitAnswerReques
 	}
 	return parsedData;
 }
+
+AddQuestionRequest JsonRequestPacketDeserializer::deserializeAddQuestionRequest(std::vector<unsigned char> buffer)
+{
+	std::string jsonString(buffer.begin() + JSON_OFFSET, buffer.end());
+	nlohmann::json jsonObject = nlohmann::json::parse(jsonString);
+	std::string question = jsonObject["question"];
+	std::string correctAnswer = jsonObject["correctAnswer"];
+	std::string wrongAnswer1 = jsonObject["wrongAnswer1"];
+	std::string wrongAnswer2 = jsonObject["wrongAnswer2"];
+	std::string wrongAnswer3 = jsonObject["wrongAnswer3"];
+	AddQuestionRequest parsedData;
+	parsedData.question = question;
+	parsedData.correctAnswer = correctAnswer;
+	parsedData.wrongAnswer1 = wrongAnswer1;
+	parsedData.wrongAnswer2 = wrongAnswer2;
+	parsedData.wrongAnswer3 = wrongAnswer3;
+	return parsedData;
+}

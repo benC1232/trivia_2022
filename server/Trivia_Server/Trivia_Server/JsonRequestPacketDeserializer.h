@@ -28,6 +28,16 @@ struct JoinRoomRequest
 {
 	unsigned int roomId;
 };
+//add question request struct
+struct AddQuestionRequest
+{
+	std::string question;
+	std::string correctAnswer;
+	std::string wrongAnswer1;
+	std::string wrongAnswer2;
+	std::string wrongAnswer3;
+};
+
 //create room request struct
 struct CreateRoomRequest
 {
@@ -51,4 +61,5 @@ public:
 	static struct JoinRoomRequest deserializeJoinRoomRequest(std::vector<unsigned char> buffer);
 	static struct CreateRoomRequest deserializeCreateRoomRequest(std::vector<unsigned char> buffer);
 	static struct SubmitAnswerRequest deserializeSubmitAnswerRequest(std::vector<unsigned char> buffer);
+	static struct AddQuestionRequest deserializeAddQuestionRequest(std::vector<unsigned char> buffer);
 };
