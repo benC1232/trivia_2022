@@ -1,7 +1,7 @@
 #pragma once
 #include <map>
-#include "Room.h"
 #include "LoggedUser.h"
+#include "Room.h"
 class RoomManager
 {
 public:

@@ -1,4 +1,6 @@
 #include "Communicator.h"
+
+#include <thread>
 #define MESSAGE_SIZE 1024
 #define JSON_OFFSET 5
 #define SIGNOUT 8
