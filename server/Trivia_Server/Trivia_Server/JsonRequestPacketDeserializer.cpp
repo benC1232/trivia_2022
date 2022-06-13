@@ -103,12 +103,12 @@ SubmitAnswerRequest JsonRequestPacketDeserializer::deserializeSubmitAnswerReques
 	std::string jsonString(buffer.begin() + JSON_OFFSET, buffer.end());
 	nlohmann::json jsonObject = nlohmann::json::parse(jsonString);
 	const std::string answer = jsonObject["answer"];
-	const std::string responseTime = jsonObject["responseTime"];
+	int responseTime = jsonObject["responseTime"];
 	SubmitAnswerRequest parsedData;
 	try
 	{
 		parsedData.answer = answer;
-		parsedData.responseTime = std::atoi(responseTime.c_str());
+		parsedData.responseTime = responseTime;
 	}
 	catch (...)
 	{

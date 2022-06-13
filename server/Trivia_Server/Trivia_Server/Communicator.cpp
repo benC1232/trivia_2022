@@ -85,34 +85,26 @@ void Communicator::handleNewClient(SOCKET clientSocket)
 		jsonSize = getJsonSize(clientMessage);
 		buffer = msgToBuffer(clientMessage, jsonSize + JSON_OFFSET);
 
-		try {
-			request.id = static_cast<int>(buffer.at(0));
-			if (request.id == 8)
-			{
-				break;
-			}
-			request.receivalTime = std::time(nullptr);
-			request.buffer = buffer;
-		}
-		catch (std::exception& e)
+		try { request.id = static_cast<int>(buffer.at(0)); }
+		catch (...)
 		{
-			std::cout << e.what() << std::endl;
+			break;
+
+		}
+		if (request.id == 8)
+		{
 			break;
 		}
+		request.receivalTime = std::time(nullptr);
+		request.buffer = buffer;
+
 		if (handler == nullptr)
 		{
 			throw std::exception("handler is null!!!");
 		}
-		try
-		{
-			result = handler->handleRequest(request);
-			handler = result.newHandler;
-		}
-		catch (std::exception& e)
-		{
-			std::cout << e.what() << std::endl;
-			break;
-		}
+		result = handler->handleRequest(request);
+		handler = result.newHandler;
+
 		if (request.id != SIGNOUT)
 		{
 			response = bufferToMsg(result.buffer);
