@@ -67,7 +67,7 @@
                 </TextBox>
             </StackPanel>
 
-            <Label Height="101" />
+            <Label Height="92" />
 
             <Button x:Name="SubmitBtn" Click="SubmitBtn_Click"  FontSize="50" FontFamily="{StaticResource AmaticSC}" Background="black" BorderBrush="white" Foreground="White" FontWeight="Bold" BorderThickness="6" Content="Submit" Height="80"  Width="200" RenderTransformOrigin="0.518,2.362">
                 <Button.Resources>
