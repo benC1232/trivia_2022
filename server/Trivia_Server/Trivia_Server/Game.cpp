@@ -1,5 +1,8 @@
 #include "Game.h"
 
+#include <algorithm>
+#include <iostream>
+
 /*
  * the constructor for the game class
  * input:questions(std::vector<Question>),players(std::map<LoggedUser, GameData>)

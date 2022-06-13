@@ -1,7 +1,7 @@
 #include <iostream>
-#include "WSAInitializer.h"
-#include "Server.h"
 #include <string>
+#include "Server.h"
+#include "WSAInitializer.h"
 int main()
 {
 	//took this from week 13

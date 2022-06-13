@@ -1,4 +1,7 @@
 #include "SqliteDataBase.h"
+#include <io.h>
+#include <iostream>
+#include <ostream>
 #define TOP_PLAYER_AMOUNT 5
 SqliteDataBase::SqliteDataBase()
 {
@@ -16,6 +19,7 @@ SqliteDataBase::SqliteDataBase()
 
 SqliteDataBase::~SqliteDataBase()
 {
+	sqlite3_close(this->_db);
 	delete this->_db;
 }
 int userExistCallback(void* data, int argc, char** argv, char** azColName)

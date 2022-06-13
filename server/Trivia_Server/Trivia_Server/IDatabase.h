@@ -1,10 +1,7 @@
 #pragma once
+#include<map>
+#include<map>
 #include <string>
-#include "sqlite3.h"
-#include <io.h>
-#include <iostream>
-#include<map>
-#include<map>
 #include <vector>
 #include "Question.h"
 class IDatabase

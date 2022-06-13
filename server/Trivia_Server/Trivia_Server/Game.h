@@ -1,11 +1,9 @@
 #pragma once
-#include <chrono>
-#include "Question.h"
-#include "IDatabase.h"
-#include "LoggedUser.h"
-#include "JsonResponsePacketSerializer.h"
-#include <vector>
 #include <map>
+#include <vector>
+#include "JsonResponsePacketSerializer.h"
+#include "LoggedUser.h"
+#include "Question.h"
 
 typedef struct GameData {
 	Question currentQuestion;

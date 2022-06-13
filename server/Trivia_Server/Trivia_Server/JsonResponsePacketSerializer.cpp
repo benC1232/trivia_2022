@@ -1,5 +1,7 @@
 #include "JsonResponsePacketSerializer.h"
 
+#include "json.hpp"
+
 //the first byte of the vector is the msg type
 #define LOGIN_RESPONSE_CODE 1
 #define SIGNUP_RESPONSE_CODE 2
