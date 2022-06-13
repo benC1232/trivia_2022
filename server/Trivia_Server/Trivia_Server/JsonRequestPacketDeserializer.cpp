@@ -78,15 +78,15 @@ CreateRoomRequest JsonRequestPacketDeserializer::deserializeCreateRoomRequest(st
 	std::string jsonString(buffer.begin() + JSON_OFFSET, buffer.end());
 	nlohmann::json jsonObject = nlohmann::json::parse(jsonString);
 	std::string roomName = jsonObject["roomName"];
-	int maxUsers = jsonObject["maxUsers"];
-	int questionCount = jsonObject["questionCount"];
-	int answerTimeout = jsonObject["answerTimeout"];
+	std::string maxUsers = jsonObject["maxUsers"];
+	std::string questionCount = jsonObject["questionCount"];
+	std::string answerTimeout = jsonObject["answerTimeout"];
 	CreateRoomRequest parsedData;
 	try
 	{
-		parsedData.answerTimeout = answerTimeout;
-		parsedData.maxUsers = maxUsers;
-		parsedData.questionCount = questionCount;
+		parsedData.answerTimeout = atoi(answerTimeout.c_str());
+		parsedData.maxUsers = atoi(maxUsers.c_str());
+		parsedData.questionCount = atoi(questionCount.c_str());
 		parsedData.roomName = roomName;
 	}
 	catch (...)
@@ -101,12 +101,12 @@ SubmitAnswerRequest JsonRequestPacketDeserializer::deserializeSubmitAnswerReques
 	std::string jsonString(buffer.begin() + JSON_OFFSET, buffer.end());
 	nlohmann::json jsonObject = nlohmann::json::parse(jsonString);
 	std::string answer = jsonObject["answer"];
-	int responseTime = jsonObject["responseTime"];
+	std::string responseTime = jsonObject["responseTime"];
 	SubmitAnswerRequest parsedData;
 	try
 	{
 		parsedData.answer = answer;
-		parsedData.responseTime = responseTime;
+		parsedData.responseTime = atoi(responseTime.c_str());
 	}
 	catch (...)
 	{

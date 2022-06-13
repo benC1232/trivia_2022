@@ -48,7 +48,7 @@ void Communicator::bindAndListen()
 {
 	// this accepts the client and create a specific socket from server to this client
 // the process will not continue until a client connects to the server
-	SOCKET client_socket = accept(this->m_serverSocket, NULL, NULL);
+	SOCKET client_socket = accept(this->m_serverSocket, nullptr, nullptr);
 	if (client_socket == INVALID_SOCKET)
 		throw std::exception(__FUNCTION__);
 
