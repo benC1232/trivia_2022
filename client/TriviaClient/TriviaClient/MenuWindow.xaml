@@ -10,7 +10,7 @@
     <Window.Background>
         <ImageBrush ImageSource="/Resources/bg.png" Stretch="Fill" />
     </Window.Background>
-    <StackPanel HorizontalAlignment="Center">
+    <StackPanel HorizontalAlignment="Center" Width="1213">
         <Label Height="50"/>
         <Label HorizontalContentAlignment="Center" Content="TRIVIA" FontSize="80" FontFamily="{StaticResource AmaticSC}" Foreground="White" FontWeight="ExtraBold" Height="103" />
         <Label Height="243"/>
@@ -57,8 +57,8 @@
                     </Style>
                 </Button.Resources>
             </Button>
-            <Label Width="1024" Height="89" />
-            <Button  x:Name="addQuestionBtn" Click="AddQuestionBtn_OnClick"  Content="Add" FontSize="40" FontFamily="{StaticResource AmaticSC}" Background="black" BorderBrush="white" Foreground="White" FontWeight="Bold" BorderThickness="6" Height="68"  Width="103">
+            <Label Width="812" Height="89" />
+            <Button  x:Name="addQuestionBtn" Click="AddQuestionBtn_OnClick"  Content="Create a New Question" FontSize="40" FontFamily="{StaticResource AmaticSC}" Background="black" BorderBrush="white" Foreground="White" FontWeight="Bold" BorderThickness="6" Height="68"  Width="297">
                 <Button.Resources>
                     <Style TargetType="Border">
                         <Setter Property="CornerRadius" Value="15" />
