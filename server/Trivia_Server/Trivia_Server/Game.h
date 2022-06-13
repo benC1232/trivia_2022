@@ -30,5 +30,4 @@ public:
 private:
 	std::vector<Question> m_questions;
 	std::map<LoggedUser, GameData> m_players;
-	//start time of the game
 };

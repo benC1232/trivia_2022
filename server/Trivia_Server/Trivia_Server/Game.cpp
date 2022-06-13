@@ -101,7 +101,7 @@ std::vector<PlayerResults> Game::getResults()
 }
 
 
-//gett the number of players in the game
+//get the number of players in the game
 int Game::getNumOfPlayers() const
 {
 	return this->m_players.size();

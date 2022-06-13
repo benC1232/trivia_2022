@@ -1,6 +1,11 @@
 #include "GameManager.h"
 #include <algorithm>
 
+
+/*
+ * the constructor of the gameManager
+ * input: database (IDatabase*)
+ */
 GameManager::GameManager(IDatabase* database)
 {
 	this->m_database = database;
@@ -8,11 +13,17 @@ GameManager::GameManager(IDatabase* database)
 }
 
 
+
 GameManager::~GameManager()
 {
-	delete this->m_database;
+	delete this->m_database;  
 }
 
+/*
+ * a function that creates a game from a room and adds it to the room vector
+ * input: room (Room)
+ * output: game (Game*)
+ */
 Game* GameManager::createGame(Room room)
 {
 	auto players = new std::map<LoggedUser, GameData>();
@@ -29,6 +40,11 @@ Game* GameManager::createGame(Room room)
 	return g;
 }
 
+/*
+ * a function that deletes a game from the vector by its pointer
+ * input: game (Game*)
+ * output: none
+ */
 void GameManager::deleteGame(Game* game)
 {
 	auto it = std::find(m_games.begin(), m_games.end(), game);
@@ -37,6 +53,11 @@ void GameManager::deleteGame(Game* game)
 	}
 }
 
+/*
+ * a function that gets a game by the user that is playing in it
+ * input: user (LoggedUser)
+ * output: game (Game*)
+ */
 Game* GameManager::getGame(LoggedUser user)
 {
 	for (auto game : m_games) {
@@ -47,3 +68,4 @@ Game* GameManager::getGame(LoggedUser user)
 	return nullptr;
 
 }
+
