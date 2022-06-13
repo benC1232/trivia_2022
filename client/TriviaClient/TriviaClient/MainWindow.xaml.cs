@@ -202,13 +202,7 @@ namespace TriviaClient
             e.Cancel = false;
         }
 
-     
-        private void About_OnClick(object sender, RoutedEventArgs e)
-        {
-            About a = new About(this.comm);
-            this.Close();
-            a.Show();
-        }
+
 
         private void Secret_OnClick(object sender, RoutedEventArgs e)
         {
