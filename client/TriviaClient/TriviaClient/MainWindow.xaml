@@ -66,7 +66,7 @@
                 </TextBox>
             </StackPanel>
 
-            <Label Height="70" />
+            <Label Height="40" />
 
             <Button x:Name="SubmitBtn" Click="SubmitBtn_Click"  FontSize="50" FontFamily="{StaticResource AmaticSC}" Background="black" BorderBrush="white" Foreground="White" FontWeight="Bold" BorderThickness="6" Content="Submit" Height="80"  Width="200" RenderTransformOrigin="0.518,2.362">
                 <Button.Resources>
@@ -75,7 +75,15 @@
                     </Style>
                 </Button.Resources>
             </Button>
+            
         </StackPanel>
         <TextBlock x:Name="errorLbl" HorizontalAlignment="Center" Text ="there has been an error!" FontSize="40" FontFamily="{StaticResource AmaticSC}" Background="Transparent" Foreground="DarkRed" />
+        <Button x:Name="About" MouseDown="About_OnMouseDown" VerticalContentAlignment="Center"  FontSize="50" FontFamily="{StaticResource AmaticSC}" Background="black" BorderBrush="white" Foreground="White" FontWeight="Bold" BorderThickness="6" Content="?" Height="65"  Width="63" RenderTransformOrigin="0.518,2.362">
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="100" />
+                </Style>
+            </Button.Resources>
+        </Button>
     </StackPanel>
 </Window>
