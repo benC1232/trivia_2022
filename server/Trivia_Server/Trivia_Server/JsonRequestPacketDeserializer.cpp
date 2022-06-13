@@ -9,8 +9,8 @@ LoginRequest JsonRequestPacketDeserializer::deserializeLoginRequest(std::vector<
 {
 	std::string jsonString(buffer.begin() + JSON_OFFSET, buffer.end());
 	nlohmann::json jsonObject = nlohmann::json::parse(jsonString);
-	std::string username = jsonObject["username"];
-	std::string password = jsonObject["password"];
+	const std::string username = jsonObject["username"];
+	const std::string password = jsonObject["password"];
 	LoginRequest parsedData;
 	parsedData.password = password;
 	parsedData.username = username;
@@ -25,9 +25,9 @@ SignupRequest JsonRequestPacketDeserializer::deserializeSignupRequest(std::vecto
 {
 	std::string jsonString(buffer.begin() + JSON_OFFSET, buffer.end());
 	nlohmann::json jsonObject = nlohmann::json::parse(jsonString);
-	std::string username = jsonObject["username"];
-	std::string password = jsonObject["password"];
-	std::string email = jsonObject["email"];
+	const std::string username = jsonObject["username"];
+	const std::string password = jsonObject["password"];
+	const std::string email = jsonObject["email"];
 	SignupRequest parsedData;
 	parsedData.email = email;
 	parsedData.password = password;
@@ -43,7 +43,7 @@ GetPlayersInRoomRequest JsonRequestPacketDeserializer::deserializeGetPlayersRequ
 {
 	std::string jsonString(buffer.begin() + JSON_OFFSET, buffer.end());
 	nlohmann::json jsonObject = nlohmann::json::parse(jsonString);
-	std::string roomId = jsonObject["roomId"];
+	const std::string roomId = jsonObject["roomId"];
 	GetPlayersInRoomRequest parsedData;
 	try
 	{
@@ -60,7 +60,7 @@ JoinRoomRequest JsonRequestPacketDeserializer::deserializeJoinRoomRequest(std::v
 {
 	std::string jsonString(buffer.begin() + JSON_OFFSET, buffer.end());
 	nlohmann::json jsonObject = nlohmann::json::parse(jsonString);
-	std::string roomId = jsonObject["roomId"];
+	const std::string roomId = jsonObject["roomId"];
 	JoinRoomRequest parsedData;
 	try
 	{
@@ -77,10 +77,10 @@ CreateRoomRequest JsonRequestPacketDeserializer::deserializeCreateRoomRequest(st
 {
 	std::string jsonString(buffer.begin() + JSON_OFFSET, buffer.end());
 	nlohmann::json jsonObject = nlohmann::json::parse(jsonString);
-	std::string roomName = jsonObject["roomName"];
-	std::string maxUsers = jsonObject["maxUsers"];
-	std::string questionCount = jsonObject["questionCount"];
-	std::string answerTimeout = jsonObject["answerTimeout"];
+	const std::string roomName = jsonObject["roomName"];
+	const std::string maxUsers = jsonObject["maxUsers"];
+	const std::string questionCount = jsonObject["questionCount"];
+	const std::string answerTimeout = jsonObject["answerTimeout"];
 	CreateRoomRequest parsedData;
 	try
 	{
@@ -100,8 +100,8 @@ SubmitAnswerRequest JsonRequestPacketDeserializer::deserializeSubmitAnswerReques
 {
 	std::string jsonString(buffer.begin() + JSON_OFFSET, buffer.end());
 	nlohmann::json jsonObject = nlohmann::json::parse(jsonString);
-	std::string answer = jsonObject["answer"];
-	std::string responseTime = jsonObject["responseTime"];
+	const std::string answer = jsonObject["answer"];
+	const std::string responseTime = jsonObject["responseTime"];
 	SubmitAnswerRequest parsedData;
 	try
 	{

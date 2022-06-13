@@ -110,7 +110,7 @@ RequestResult GameRequestHandler::getQuestion()
 RequestResult GameRequestHandler::submitAnswer(const RequestInfo requestInfo)
 {
 	RequestResult result;
-	SubmitAnswerRequest request = JsonRequestPacketDeserializer::deserializeSubmitAnswerRequest(requestInfo.buffer);
+	const SubmitAnswerRequest request = JsonRequestPacketDeserializer::deserializeSubmitAnswerRequest(requestInfo.buffer);
 	SubmitAnswerResponse response;
 	response.status = SUBMIT_ANSWER_CODE;
 	response.isCorrect = this->m_game->submitAnswer(this->m_loggedUser, request.answer, request.responseTime);

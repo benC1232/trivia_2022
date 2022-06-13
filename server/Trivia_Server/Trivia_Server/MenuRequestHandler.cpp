@@ -35,7 +35,7 @@ RequestResult MenuRequestHandler::getRooms(RequestInfo requestInfo)
 	RequestResult result;
 	GetRoomResponse num;
 	num.status = GET_ROOMS_REQUEST;
-	auto rooms = this->m_requestHandlerFactory->getRoomManager().getRooms();
+	const auto rooms = this->m_requestHandlerFactory->getRoomManager().getRooms();
 	std::vector<RoomData> dataVector;
 	for (auto room : rooms) {
 		dataVector.push_back(room.getData());
@@ -50,8 +50,8 @@ RequestResult MenuRequestHandler::getPlayersInRoom(RequestInfo requestInfo)
 {
 	RequestResult result;
 	GetPlayersInRoomsResponse num;
-	GetPlayersInRoomRequest getPlayersInRoomsRequest = JsonRequestPacketDeserializer::deserializeGetPlayersRequest(requestInfo.buffer);
-	auto rooms = this->m_roomManager->getRooms();
+	const GetPlayersInRoomRequest getPlayersInRoomsRequest = JsonRequestPacketDeserializer::deserializeGetPlayersRequest(requestInfo.buffer);
+	const auto rooms = this->m_roomManager->getRooms();
 	for (auto room : rooms) {
 		if (getPlayersInRoomsRequest.roomId == room.getData().id) num.players = room.getAllUsers();
 	}
@@ -87,7 +87,7 @@ RequestResult MenuRequestHandler::joinRoom(RequestInfo requestInfo)
 	RequestResult result;
 	JoinRoomResponse num;
 	num.status = JOIN_ROOM_REQUEST;
-	JoinRoomRequest joinRoomRequest = JsonRequestPacketDeserializer::deserializeJoinRoomRequest(requestInfo.buffer);
+	const JoinRoomRequest joinRoomRequest = JsonRequestPacketDeserializer::deserializeJoinRoomRequest(requestInfo.buffer);
 	if (this->m_requestHandlerFactory->getRoomManager().getRoom(joinRoomRequest.roomId)->getData().maxPlayers == this->m_requestHandlerFactory->getRoomManager().getRoom(joinRoomRequest.roomId)->getAllUsersVector().size())
 	{
 		throw std::exception("Room is full");
@@ -106,7 +106,7 @@ RequestResult MenuRequestHandler::createRoom(RequestInfo requestInfo)
 	RequestResult result;
 	CreateRoomResponse num;
 	num.status = CREATE_ROOM_REQUEST;
-	CreateRoomRequest createRoomRequest = JsonRequestPacketDeserializer::deserializeCreateRoomRequest(requestInfo.buffer);
+	const CreateRoomRequest createRoomRequest = JsonRequestPacketDeserializer::deserializeCreateRoomRequest(requestInfo.buffer);
 	RoomData roomData;
 	roomData.timePerQuestion = createRoomRequest.answerTimeout;
 	roomData.maxPlayers = createRoomRequest.maxUsers;
@@ -114,7 +114,7 @@ RequestResult MenuRequestHandler::createRoom(RequestInfo requestInfo)
 	roomData.numOfQuestionsInGame = createRoomRequest.questionCount;
 	roomData.isActive = false;
 	roomData.id = 0;
-	int id = this->m_requestHandlerFactory->getRoomManager().createRoom(m_user, roomData);
+	const int id = this->m_requestHandlerFactory->getRoomManager().createRoom(m_user, roomData);
 	result.buffer = JsonResponsePacketSerializer::serializeCreateRoomResponse(num);
 	result.newHandler = this->m_requestHandlerFactory->createRoomAdminRequestHandler(this->m_user, this->m_requestHandlerFactory->getRoomManager().getRoom(id));
 	return result;

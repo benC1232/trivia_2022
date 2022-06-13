@@ -110,7 +110,7 @@ void Communicator::handleNewClient(SOCKET clientSocket)
 int Communicator::getJsonSize(char buffer[])
 {
 	//don't change!!!!!!!! it works!!!!!!!!
-	int size = (int)(buffer[1] << 24 | buffer[2] << 16 | buffer[3] << 8 | buffer[4]);
+	const int size = (int)(buffer[1] << 24 | buffer[2] << 16 | buffer[3] << 8 | buffer[4]);
 	return size;
 }
 

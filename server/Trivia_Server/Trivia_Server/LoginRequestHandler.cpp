@@ -51,7 +51,7 @@ RequestResult LoginRequestHandler::login(RequestInfo requestInfo)
 	RequestResult result;
 	LoginResponse num;
 	num.status = LOGIN_CODE;
-	LoginRequest loginRequest = JsonRequestPacketDeserializer::deserializeLoginRequest(requestInfo.buffer);
+	const LoginRequest loginRequest = JsonRequestPacketDeserializer::deserializeLoginRequest(requestInfo.buffer);
 	if (this->m_requestHandlerFactory->getLoginManager()->login(loginRequest.username, loginRequest.password)) {
 		result.newHandler = this->m_requestHandlerFactory->createMenuRequestHandler(LoggedUser(loginRequest.username));
 		result.buffer = JsonResponsePacketSerializer::serializeLoginResponse(num);
