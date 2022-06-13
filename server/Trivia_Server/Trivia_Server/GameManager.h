@@ -15,7 +15,7 @@ public:
 	GameManager() = default;
 	~GameManager();
 	GameManager(IDatabase* database);
-	Game* getGame(LoggedUser user);
+	Game* getGame(LoggedUser user) const;
 	Game* createGame(Room room);
 	void deleteGame(Game* game);
 };
