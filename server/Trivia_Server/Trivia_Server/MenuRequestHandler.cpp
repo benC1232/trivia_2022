@@ -120,6 +120,26 @@ RequestResult MenuRequestHandler::createRoom(RequestInfo requestInfo)
 	return result;
 }
 
+RequestResult MenuRequestHandler::addQuestion(RequestInfo requestInfo)
+{
+	RequestResult result;
+	AddQuestionResponse num;
+	num.status = ADD_QUESTION_REQUEST;
+	AddQuestionRequest addQuestionRequest = JsonRequestPacketDeserializer::deserializeAddQuestionRequest(requestInfo.buffer);
+	Question question;
+	question.setQuestion(addQuestionRequest.question);
+	question.setCorrectAnswer(addQuestionRequest.correctAnswer);
+	std::vector<std::string> wrongAnswers;
+	wrongAnswers.push_back(addQuestionRequest.wrongAnswer1);
+	wrongAnswers.push_back(addQuestionRequest.wrongAnswer2);
+	wrongAnswers.push_back(addQuestionRequest.wrongAnswer3);
+	question.setIncorrectAnswers(wrongAnswers);
+	this->m_requestHandlerFactory->getDatabase().addQuestion(question);
+	result.buffer = JsonResponsePacketSerializer::serializeAddQuestionResponse(num);
+	result.newHandler = this;
+	return result;
+}
+
 RequestResult MenuRequestHandler::handleRequest(RequestInfo requestInfo)
 {
 	RequestResult result;

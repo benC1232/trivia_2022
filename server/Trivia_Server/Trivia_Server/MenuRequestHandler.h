@@ -19,6 +19,7 @@ class RequestHandlerFactory;
 #define GET_STATISITCS_REQUEST 7
 #define LOGOUT_REQUEST 8
 #define HIGH_SCORE_GET 10
+#define ADD_QUESTION_CODE 42
 
 class MenuRequestHandler : public IRequestHandler
 {
@@ -34,6 +35,7 @@ public:
 	RequestResult getHighScore(RequestInfo requestInfo);
 	RequestResult joinRoom(RequestInfo requestInfo);
 	RequestResult createRoom(RequestInfo requestInfo);
+	RequestResult addQuestion(RequestInfo requestInfo);
 
 private:
 	LoggedUser m_user;
