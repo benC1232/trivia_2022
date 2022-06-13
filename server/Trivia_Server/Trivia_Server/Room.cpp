@@ -13,7 +13,8 @@ void Room::addUser(LoggedUser user)
 	}
 	else
 	{
-		throw std::exception("too many players in room number:" + std::to_string(this->m_metadata.id));
+		const std::string error = "too many players in room number : " + std::to_string(this->m_metadata.id);
+		throw std::exception(error.c_str());
 	}
 }
 
@@ -32,7 +33,8 @@ void Room::removeUser(LoggedUser user)
 	}
 	if (flag != 1)
 	{
-		throw std::exception("user not found in room number:" + std::to_string(this->m_metadata.id));
+		const std::string error = "user not found in room number : " + std::to_string(this->m_metadata.id);
+		throw std::exception(error.c_str());
 	}
 }
 
