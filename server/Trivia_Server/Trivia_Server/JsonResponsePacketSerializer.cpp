@@ -20,7 +20,6 @@
 #define GET_GAME_RESULT_RESPONSE 17
 #define ADD_QUESTION_RESPONSE 42
 
-
 using Buffer = std::vector<unsigned char>;
 /*
  * as function that converts an int into a vector of 4 bytes
@@ -34,7 +33,7 @@ Buffer intToByteVector(int num) {
 }
 
 /*
- * a function that cconverts a vector of room data to a string
+ * a function that converts a vector of room data to a string
  * input: roomData (std::vector<RoomData>)
  * output: string (std::string)
  */
@@ -103,11 +102,11 @@ Buffer JsonResponsePacketSerializer::serializeLoginResponse(LoginResponse loginR
 	return buffer;
 }
 
- /*
-  * a function that serialize a signup response by converting it to a vector of unsigned char, the first byte is the message code, the next 4 bytes are the length of the json string, and the rest is the json string.
-  * input: signupResponse (SignupResponse)
-  * output: vector of unsigned char (std::vector<unsigned char>)
-  */
+/*
+ * a function that serialize a sign up response by converting it to a vector of unsigned char, the first byte is the message code, the next 4 bytes are the length of the json string, and the rest is the json string.
+ * input: signupResponse (SignupResponse)
+ * output: vector of unsigned char (std::vector<unsigned char>)
+ */
 Buffer JsonResponsePacketSerializer::serializeSignupResponse(SignupResponse signupResponse)
 {
 	Buffer buffer;
@@ -120,11 +119,11 @@ Buffer JsonResponsePacketSerializer::serializeSignupResponse(SignupResponse sign
 	return buffer;
 }
 
- /*
-  * a function that serialize an error response by converting it to a vector of unsigned char, the first byte is the message code, the next 4 bytes are the length of the json string, and the rest is the json string.
-  * input: errorResponse (ErrorResponse)
-  * output: vector of unsigned char (std::vector<unsigned char>)
-  */
+/*
+ * a function that serialize an error response by converting it to a vector of unsigned char, the first byte is the message code, the next 4 bytes are the length of the json string, and the rest is the json string.
+ * input: errorResponse (ErrorResponse)
+ * output: vector of unsigned char (std::vector<unsigned char>)
+ */
 Buffer JsonResponsePacketSerializer::serializeErrorResponse(ErrorResponse errorResponse)
 {
 	Buffer buffer;
@@ -137,11 +136,11 @@ Buffer JsonResponsePacketSerializer::serializeErrorResponse(ErrorResponse errorR
 	return buffer;
 }
 
- /*
-  * a function that serialize a logout response by converting it to a vector of unsigned char, the first byte is the message code, the next 4 bytes are the length of the json string, and the rest is the json string.
-  * input: logoutResponse (LogoutResponse)
-  * output: vector of unsigned char (std::vector<unsigned char>)
-  */
+/*
+ * a function that serialize a logout response by converting it to a vector of unsigned char, the first byte is the message code, the next 4 bytes are the length of the json string, and the rest is the json string.
+ * input: logoutResponse (LogoutResponse)
+ * output: vector of unsigned char (std::vector<unsigned char>)
+ */
 Buffer JsonResponsePacketSerializer::serializeLogoutResponse(LogoutResponse logoutResponse)
 {
 	Buffer buffer;
@@ -154,12 +153,12 @@ Buffer JsonResponsePacketSerializer::serializeLogoutResponse(LogoutResponse logo
 	return buffer;
 }
 
- /*
-  * a function that serialize a get room response by converting it to a vector of unsigned char, the first byte is the message code, the next 4 bytes are the length of the json string, and the rest is the json string.
-  * the json string contains the status, and the rooms vector.
-  * input: getRoomResponse (GetRoomResponse)
-  * output: vector of unsigned char (std::vector<unsigned char>)
-  */
+/*
+ * a function that serialize a get room response by converting it to a vector of unsigned char, the first byte is the message code, the next 4 bytes are the length of the json string, and the rest is the json string.
+ * the json string contains the status, and the rooms vector.
+ * input: getRoomResponse (GetRoomResponse)
+ * output: vector of unsigned char (std::vector<unsigned char>)
+ */
 Buffer JsonResponsePacketSerializer::serializeGetRoomResponse(GetRoomResponse getRoomResponse)
 {
 	Buffer buffer;
@@ -186,12 +185,12 @@ Buffer JsonResponsePacketSerializer::serializeGetRoomResponse(GetRoomResponse ge
 	return buffer;
 }
 
- /*
-  * a function that serialize a get players in rooms response by converting it to a vector of unsigned char, the first byte is the message code, the next 4 bytes are the length of the json string, and the rest is the json string.
-  * the json string contains the rooms vector.
-  * input: getPlayersInRoomsResponse (GetPlayersInRoomsResponse)
-  * output: vector of unsigned char (std::vector<unsigned char>)
-  */
+/*
+ * a function that serialize a get players in rooms response by converting it to a vector of unsigned char, the first byte is the message code, the next 4 bytes are the length of the json string, and the rest is the json string.
+ * the json string contains the rooms vector.
+ * input: getPlayersInRoomsResponse (GetPlayersInRoomsResponse)
+ * output: vector of unsigned char (std::vector<unsigned char>)
+ */
 Buffer JsonResponsePacketSerializer::serializeGetPlayersInRoomsResponse(GetPlayersInRoomsResponse getPlayersInRoomsResponse)
 {
 	Buffer buffer;
@@ -206,12 +205,12 @@ Buffer JsonResponsePacketSerializer::serializeGetPlayersInRoomsResponse(GetPlaye
 	return buffer;
 }
 
- /*
-  * a function that serialize a join room response by converting it to a vector of unsigned char, the first byte is the message code, the next 4 bytes are the length of the json string, and the rest is the json string.
-  * the json string contains the status.
-  *	input: joinRoomResponse (JoinRoomResponse)
-  *	output: vector of unsigned char (std::vector<unsigned char>)
- */
+/*
+ * a function that serialize a join room response by converting it to a vector of unsigned char, the first byte is the message code, the next 4 bytes are the length of the json string, and the rest is the json string.
+ * the json string contains the status.
+ *	input: joinRoomResponse (JoinRoomResponse)
+ *	output: vector of unsigned char (std::vector<unsigned char>)
+*/
 Buffer JsonResponsePacketSerializer::serializeJoinRoomResponse(JoinRoomResponse joinRoomResponse)
 {
 	Buffer buffer;
@@ -245,12 +244,12 @@ Buffer JsonResponsePacketSerializer::serializeCreateRoomResponse(CreateRoomRespo
 	return buffer;
 }
 
- /*
-  * a function that serialize a get personal stats response by converting it to a vector of unsigned char, the first byte is the message code, the next 4 bytes are the length of the json string, and the rest is the json string.
-  * the json string contains the status, and the stats vector.
-  * input: getPersonalStatsResponse (GetPersonalStatsResponse)
-  * output: vector of unsigned char (std::vector<unsigned char>)
-  */
+/*
+ * a function that serialize a get personal stats response by converting it to a vector of unsigned char, the first byte is the message code, the next 4 bytes are the length of the json string, and the rest is the json string.
+ * the json string contains the status, and the stats vector.
+ * input: getPersonalStatsResponse (GetPersonalStatsResponse)
+ * output: vector of unsigned char (std::vector<unsigned char>)
+ */
 Buffer JsonResponsePacketSerializer::serializeGetStatisticsResponse(struct GetPersonalStatsResponse getPersonalStatsResponse)
 {
 	Buffer buffer;
@@ -266,12 +265,12 @@ Buffer JsonResponsePacketSerializer::serializeGetStatisticsResponse(struct GetPe
 	return buffer;
 }
 
- /*
-  * a function that serialize a get high score response by converting it to a vector of unsigned char, the first byte is the message code, the next 4 bytes are the length of the json string, and the rest is the json string.
-  * the json string contains the status, and the highscores vector.
-  * input: getHighScoreResponse (GetHighScoreResponse)
-  * output: vector of unsigned char (std::vector<unsigned char>)
-  */
+/*
+ * a function that serialize a get high score response by converting it to a vector of unsigned char, the first byte is the message code, the next 4 bytes are the length of the json string, and the rest is the json string.
+ * the json string contains the status, and the high scores vector.
+ * input: getHighScoreResponse (GetHighScoreResponse)
+ * output: vector of unsigned char (std::vector<unsigned char>)
+ */
 Buffer JsonResponsePacketSerializer::serializeGetHighScoreResponse(GetHighScoreRespnse getHighScoreResponse) {
 	Buffer buffer;
 	buffer.push_back(GET_STATISTICS_RESPONSE_CODE);
@@ -286,11 +285,11 @@ Buffer JsonResponsePacketSerializer::serializeGetHighScoreResponse(GetHighScoreR
 	return buffer;
 }
 
- /*
-  * a function that serialize a close room response by converting it to a vector of unsigned char, the first byte is the message code, the next 4 bytes are the length of the json string, and the rest is the json string.
-  * input: closeRoomResponse (CloseRoomResponse)
-  * output: vector of unsigned char (std::vector<unsigned char>)
-  */
+/*
+ * a function that serialize a close room response by converting it to a vector of unsigned char, the first byte is the message code, the next 4 bytes are the length of the json string, and the rest is the json string.
+ * input: closeRoomResponse (CloseRoomResponse)
+ * output: vector of unsigned char (std::vector<unsigned char>)
+ */
 Buffer JsonResponsePacketSerializer::serializeCloseRoomResponse(CloseRoomResponse closeRoomResponse)
 {
 	Buffer buffer;
@@ -305,11 +304,11 @@ Buffer JsonResponsePacketSerializer::serializeCloseRoomResponse(CloseRoomRespons
 	return buffer;
 }
 
- /*
-  * a function that serialize a start game response by converting it to a vector of unsigned char, the first byte is the message code, the next 4 bytes are the length of the json string, and the rest is the json string.
-  * input: startGameResponse (StartGameResponse)
-  * output: vector of unsigned char (std::vector<unsigned char>)
-  */
+/*
+ * a function that serialize a start game response by converting it to a vector of unsigned char, the first byte is the message code, the next 4 bytes are the length of the json string, and the rest is the json string.
+ * input: startGameResponse (StartGameResponse)
+ * output: vector of unsigned char (std::vector<unsigned char>)
+ */
 Buffer JsonResponsePacketSerializer::serializeStartGameResponse(StartGameResponse startGameResponse)
 {
 	Buffer buffer;
@@ -324,12 +323,12 @@ Buffer JsonResponsePacketSerializer::serializeStartGameResponse(StartGameRespons
 	return buffer;
 }
 
- /*
-  * a function that serialize a get room state response by converting it to a vector of unsigned char, the first byte is the message code, the next 4 bytes are the length of the json string, and the rest is the json string.
-  * the json string contains the status, hasGameBegun, players, questionCount, and answerTimeOut.
-  * input: getRoomStateResponse (GetRoomStateResponse)
-  * output: vector of unsigned char (std::vector<unsigned char>)
-  */
+/*
+ * a function that serialize a get room state response by converting it to a vector of unsigned char, the first byte is the message code, the next 4 bytes are the length of the json string, and the rest is the json string.
+ * the json string contains the status, hasGameBegun, players, questionCount, and answerTimeOut.
+ * input: getRoomStateResponse (GetRoomStateResponse)
+ * output: vector of unsigned char (std::vector<unsigned char>)
+ */
 Buffer JsonResponsePacketSerializer::serializeGetRoomStateResponse(GetRoomStateResponse getRoomStateResponse)
 {
 	Buffer buffer;
@@ -348,11 +347,11 @@ Buffer JsonResponsePacketSerializer::serializeGetRoomStateResponse(GetRoomStateR
 	return buffer;
 }
 
- /*
-  * a function that serialize a leave room response by converting it to a vector of unsigned char, the first byte is the message code, the next 4 bytes are the length of the json string, and the rest is the json string.
-  * input: leaveRoomResponse (LeaveRoomResponse)
-  * output: vector of unsigned char (std::vector<unsigned char>)
-  */
+/*
+ * a function that serialize a leave room response by converting it to a vector of unsigned char, the first byte is the message code, the next 4 bytes are the length of the json string, and the rest is the json string.
+ * input: leaveRoomResponse (LeaveRoomResponse)
+ * output: vector of unsigned char (std::vector<unsigned char>)
+ */
 Buffer JsonResponsePacketSerializer::serializeLeaveRoomResponse(LeaveRoomResponse leaveRoomResponse)
 {
 	Buffer buffer;
@@ -367,12 +366,12 @@ Buffer JsonResponsePacketSerializer::serializeLeaveRoomResponse(LeaveRoomRespons
 	return buffer;
 }
 
- /*
-  * a function that serialize a get game result response by converting it to a vector of unsigned char, the first byte is the message code, the next 4 bytes are the length of the json string, and the rest is the json string.
-  * the json string contains the status, and the results vector.
-  * input: getGameResultResponse (GetGameResultsResponse)
-  * output: vector of unsigned char (std::vector<unsigned char>)
-  */
+/*
+ * a function that serialize a get game result response by converting it to a vector of unsigned char, the first byte is the message code, the next 4 bytes are the length of the json string, and the rest is the json string.
+ * the json string contains the status, and the results vector.
+ * input: getGameResultResponse (GetGameResultsResponse)
+ * output: vector of unsigned char (std::vector<unsigned char>)
+ */
 Buffer JsonResponsePacketSerializer::serializeGetGameResultResponse(GetGameResultsResponse getGameResultResponse)
 {
 	Buffer buffer;
@@ -388,12 +387,12 @@ Buffer JsonResponsePacketSerializer::serializeGetGameResultResponse(GetGameResul
 	return buffer;
 }
 
- /*
-  * a function that serialize a submit answer response by converting it to a vector of unsigned char, the first byte is the message code, the next 4 bytes are the length of the json string, and the rest is the json string.
-  * the json string contains the status, and the isCorrect boolean.
-  * input: submitAnswerResponse (SubmitAnswerResponse)
-  * output: vector of unsigned char (std::vector<unsigned char>)
-  */
+/*
+ * a function that serialize a submit answer response by converting it to a vector of unsigned char, the first byte is the message code, the next 4 bytes are the length of the json string, and the rest is the json string.
+ * the json string contains the status, and the isCorrect boolean.
+ * input: submitAnswerResponse (SubmitAnswerResponse)
+ * output: vector of unsigned char (std::vector<unsigned char>)
+ */
 Buffer JsonResponsePacketSerializer::serializeSubmitAnswerResponse(SubmitAnswerResponse submitAnswerResponse)
 {
 	Buffer buffer;
@@ -409,12 +408,12 @@ Buffer JsonResponsePacketSerializer::serializeSubmitAnswerResponse(SubmitAnswerR
 	return buffer;
 }
 
- /*
-  * a function that serialize a get question response by converting it to a vector of unsigned char, the first byte is the message code, the next 4 bytes are the length of the json string, and the rest is the json string.
-  * the json string contains the status, question, and answers vector.
-  * input: getQuestionResponse (GetQuestionResponse)
-  * output: vector of unsigned char (std::vector<unsigned char>)
-  */
+/*
+ * a function that serialize a get question response by converting it to a vector of unsigned char, the first byte is the message code, the next 4 bytes are the length of the json string, and the rest is the json string.
+ * the json string contains the status, question, and answers vector.
+ * input: getQuestionResponse (GetQuestionResponse)
+ * output: vector of unsigned char (std::vector<unsigned char>)
+ */
 Buffer JsonResponsePacketSerializer::serializeGetQuestionResponse(GetQuestionResponse getQuestionResponse)
 {
 	Buffer buffer;
@@ -431,11 +430,11 @@ Buffer JsonResponsePacketSerializer::serializeGetQuestionResponse(GetQuestionRes
 	return buffer;
 }
 
- /*
-  * a function that serialize a leave game response by converting it to a vector of unsigned char, the first byte is the message code, the next 4 bytes are the length of the json string, and the rest is the json string.
-  * input: leaveGameResponse (LeaveGameResponse)
-  * output: vector of unsigned char (std::vector<unsigned char>)
-  */
+/*
+ * a function that serialize a leave game response by converting it to a vector of unsigned char, the first byte is the message code, the next 4 bytes are the length of the json string, and the rest is the json string.
+ * input: leaveGameResponse (LeaveGameResponse)
+ * output: vector of unsigned char (std::vector<unsigned char>)
+ */
 Buffer JsonResponsePacketSerializer::serializeLeaveGameResponse(LeaveGameResponse leaveGameResponse)
 {
 	Buffer buffer;
@@ -449,7 +448,6 @@ Buffer JsonResponsePacketSerializer::serializeLeaveGameResponse(LeaveGameRespons
 	for (unsigned char c : jsonString) buffer.push_back(c);
 	return buffer;
 }
-
 
 /*
  * a function that serialize add question response by converting it to a vector of unsigned char, the first byte is the message code, the next 4 bytes are the length of the json string, and the rest is the json string.

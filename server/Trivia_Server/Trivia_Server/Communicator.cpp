@@ -75,7 +75,7 @@ void Communicator::handleNewClient(SOCKET clientSocket)
 		{
 			if (this->m_clients[clientSocket] == nullptr)
 			{
-				throw std::exception("request hander is null!!!");
+				throw std::exception("request handler is null!!!");
 			}
 			recv(clientSocket, clientMessage, MESSAGE_SIZE, 0);
 			jsonSize = getJsonSize(clientMessage);
@@ -107,7 +107,7 @@ void Communicator::handleNewClient(SOCKET clientSocket)
 
 int Communicator::getJsonSize(char buffer[])
 {
-	//dont change!!!!!!!! it works!!!!!!!!
+	//don't change!!!!!!!! it works!!!!!!!!
 	int size = (int)(buffer[1] << 24 | buffer[2] << 16 | buffer[3] << 8 | buffer[4]);
 	return size;
 }

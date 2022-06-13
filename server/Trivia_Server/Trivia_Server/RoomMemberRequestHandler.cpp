@@ -27,7 +27,7 @@ RequestResult RoomMemberRequestHandler::handleRequest(RequestInfo requestInfo)
 	else
 	{
 		ErrorResponse num;
-		num.message = "error while handling request [room member request handler has recived a wrong code]";
+		num.message = "error while handling request [room member request handler has received a wrong code]";
 		result.buffer = JsonResponsePacketSerializer::serializeErrorResponse(num);
 		result.newHandler = nullptr;
 	}

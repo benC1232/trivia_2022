@@ -1,6 +1,6 @@
 #pragma once
 #include "IDatabase.h"
-//I dont know why this works, but dont remove one of the maps because if you do the code wont run
+//I don't know why this works, but dont remove one of the maps because if you do the code wont run
 #include <map>
 #include <map>
 #include <list>
@@ -19,7 +19,7 @@ public:
 	int getNumOfCorrectAnswers(std::string username);
 	int getNumOfTotalAnswers(std::string username);
 	int getNumOfPlayerGames(std::string username);
-	//why wasnt this in the uml?!?!?!?!?!
+	//why wasn't this in the uml?!?!?!?!?!
 	std::map<std::string, int> getHighScore();
 	void addStatistics(std::string username, int averageTime, int correctAnswers, int wrongAnswers)override;
 	void addQuestion(Question question)override;

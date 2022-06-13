@@ -42,7 +42,7 @@ RequestResult RoomAdminRequestHandler::handleRequest(RequestInfo requestInfo)
 	else
 	{
 		ErrorResponse num;
-		num.message = "error while handling request [room admin request handler has recived a wrong code]";
+		num.message = "error while handling request [room admin request handler has received a wrong code]";
 		result.buffer = JsonResponsePacketSerializer::serializeErrorResponse(num);
 		result.newHandler = nullptr;
 	}
