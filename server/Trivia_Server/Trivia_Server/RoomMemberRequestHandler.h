@@ -9,8 +9,8 @@ class RoomMemberRequestHandler :
 {
 public:
 	RoomMemberRequestHandler(Room* room, LoggedUser user, RoomManager* roomManager, RequestHandlerFactory* requestHandlerFactory);
-	bool isRequestRelevant(RequestInfo requestInfo);
-	RequestResult handleRequest(RequestInfo requestInfo);
+	bool isRequestRelevant(RequestInfo requestInfo)override;
+	RequestResult handleRequest(RequestInfo requestInfo)override;
 private:
 
 	Room* m_room;

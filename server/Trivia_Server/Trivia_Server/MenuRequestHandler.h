@@ -26,8 +26,8 @@ class MenuRequestHandler : public IRequestHandler
 public:
 	MenuRequestHandler(LoggedUser loggedUser, RoomManager* roomManager, StatisticsManager* statisticsManager, RequestHandlerFactory* requestHandlerFactory);
 	~MenuRequestHandler();
-	bool isRequestRelevant(RequestInfo requestInfo);
-	RequestResult handleRequest(RequestInfo requestInfo);
+	bool isRequestRelevant(RequestInfo requestInfo)override;
+	RequestResult handleRequest(RequestInfo requestInfo)override;
 	RequestResult signout(RequestInfo requestInfo);
 	RequestResult getRooms(RequestInfo requestInfo);
 	RequestResult getPlayersInRoom(RequestInfo requestInfo);
