@@ -19,7 +19,7 @@ class GameRequestHandler;
 class RequestHandlerFactory
 {
 public:
-	RequestHandlerFactory();
+	RequestHandlerFactory() = default;
 	RequestHandlerFactory(IDatabase* db);
 	~RequestHandlerFactory();
 	LoginRequestHandler* createLoginRequestHandler();

@@ -14,7 +14,7 @@ class LoginRequestHandler :
 public:
 	LoginRequestHandler() = default;
 	LoginRequestHandler(RequestHandlerFactory* requestHandlerFactory);
-	~LoginRequestHandler();
+	~LoginRequestHandler() override;
 	bool isRequestRelevant(RequestInfo request) override;
 	RequestResult handleRequest(RequestInfo request) override;
 private:
