@@ -22,6 +22,7 @@ namespace TriviaClient
         public addQuestionWindow(Communicator c)
         {
             InitializeComponent();
+            this.comm = c;
         }
 
         private void CreateBtn_OnClick(object sender, RoutedEventArgs e)
@@ -41,13 +42,28 @@ namespace TriviaClient
                 addQuestionRequest.wrongAnswer3 = this.WrongAnswer3.Text;
                 string json = JsonConvert.SerializeObject(addQuestionRequest);
                 byte[] data = Encoding.ASCII.GetBytes(json);
-                this.comm.Send(1, data);
+                this.comm.Send(42, data);
                 Tuple<int, byte[]> response = this.comm.Recieve();
+                if (response.Item1 == 42)
+                {
+                    var menuWindow = new MenuWindow(this.comm);
+                    this.Close();
+                    menuWindow.Show();
+                }
+                else if (response.Item1 == 3)
+                {
+                    var errResponse = JsonConvert.DeserializeObject<responseStructs.ErrorResponse>(Encoding.ASCII.GetString(response.Item2));
+                    this.errorLbl.Visibility = Visibility.Visible;
+                    this.errorLbl.Text = errResponse.message;
+                }
             }
         }
 
         private void BackToMenuBtn_OnClick(object sender, RoutedEventArgs e)
         {
+            var menuWindow = new MenuWindow(this.comm);
+            this.Close();
+            menuWindow.Show();
         }
     }
 }
