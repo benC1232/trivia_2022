@@ -2,7 +2,6 @@
 #include <io.h>
 #include <iostream>
 #include <ostream>
-#define TOP_PLAYER_AMOUNT 5
 SqliteDataBase::SqliteDataBase()
 {
 	const std::string dbFileName = "Trivia.sqlite";

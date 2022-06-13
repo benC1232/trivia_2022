@@ -181,7 +181,7 @@ RequestResult MenuRequestHandler::handleRequest(RequestInfo requestInfo)
 	{
 		result = createRoom(requestInfo);
 	}
-	else if (requestInfo.id = ADD_QUESTION_CODE)
+	else if (requestInfo.id == ADD_QUESTION_CODE)
 	{
 		result = addQuestion(requestInfo);
 	}

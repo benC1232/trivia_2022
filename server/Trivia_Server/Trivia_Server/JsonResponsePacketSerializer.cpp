@@ -96,7 +96,7 @@ Buffer JsonResponsePacketSerializer::serializeLoginResponse(LoginResponse loginR
 {
 	Buffer buffer;
 	buffer.push_back(LOGIN_RESPONSE_CODE);
-	const nlohmann::json jsonResponse = { {"status", "" + loginResponse.status} };
+	const nlohmann::json jsonResponse = { {"status", "" + std::to_string(loginResponse.status)} };
 	const std::string jsonString = nlohmann::to_string(jsonResponse);
 	Buffer lenBuff = intToByteVector(jsonString.length());
 	buffer.insert(buffer.end(), lenBuff.begin(), lenBuff.end());
@@ -113,7 +113,7 @@ Buffer JsonResponsePacketSerializer::serializeSignupResponse(SignupResponse sign
 {
 	Buffer buffer;
 	buffer.push_back(SIGNUP_RESPONSE_CODE);
-	const nlohmann::json jsonResponse = { {"status", "" + signupResponse.status} };
+	const nlohmann::json jsonResponse = { {"status", "" + std::to_string(signupResponse.status)} };
 	const std::string jsonString = nlohmann::to_string(jsonResponse);
 	Buffer lenBuff = intToByteVector(jsonString.length());
 	buffer.insert(buffer.end(), lenBuff.begin(), lenBuff.end());
@@ -147,7 +147,7 @@ Buffer JsonResponsePacketSerializer::serializeLogoutResponse(LogoutResponse logo
 {
 	Buffer buffer;
 	buffer.push_back(LOGOUT_RESPONSE_CODE);
-	const nlohmann::json jsonResponse = { {"status", "" + logoutResponse.status} };
+	const nlohmann::json jsonResponse = { {"status", "" + std::to_string(logoutResponse.status)} };
 	const std::string jsonString = nlohmann::to_string(jsonResponse);
 	Buffer lenBuff = intToByteVector(jsonString.length());
 	buffer.insert(buffer.end(), lenBuff.begin(), lenBuff.end());
