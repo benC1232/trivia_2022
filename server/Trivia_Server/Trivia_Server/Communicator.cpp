@@ -80,16 +80,17 @@ void Communicator::handleNewClient(SOCKET clientSocket)
 		if (this->m_clients[clientSocket] == nullptr)
 		{
 			throw std::exception("request handler is null!!!");
+			break;
 		}
 		recv(clientSocket, clientMessage, MESSAGE_SIZE, 0);
 		jsonSize = getJsonSize(clientMessage);
 		buffer = msgToBuffer(clientMessage, jsonSize + JSON_OFFSET);
 
 		try { request.id = static_cast<int>(buffer.at(0)); }
-		catch (...)
+		catch (std::exception &e)
 		{
+			std::cout << e.what() << std::endl;
 			break;
-
 		}
 		if (request.id == 8)
 		{

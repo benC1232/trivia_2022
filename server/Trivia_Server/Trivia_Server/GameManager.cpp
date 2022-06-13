@@ -23,7 +23,7 @@ GameManager::~GameManager()
  */
 Game* GameManager::createGame(Room room)
 {
-	const auto players = new std::map<LoggedUser, GameData>();
+	auto players = new std::map<LoggedUser, GameData>();
 	for (auto user : room.getAllUsersVector())
 	{
 		GameData gd;

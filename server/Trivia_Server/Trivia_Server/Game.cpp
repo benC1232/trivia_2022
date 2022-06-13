@@ -9,6 +9,7 @@
  */
 Game::Game(std::vector<Question> questions, std::map<LoggedUser, GameData> players)
 {
+	std::cout << "i made a game" << std::endl;
 	Question q;
 	q.setQuestion("Err q");
 
@@ -36,7 +37,6 @@ Question Game::getQuestionForUser(LoggedUser user)
 		return this->m_questions[0];
 	}
 	int idx = 0;
-	std::cout << "reached the loop somehow" << std::endl;
 	for (auto question : this->m_questions)
 	{
 		if (question.getQuestion() == m_players.at(user).currentQuestion.getQuestion())

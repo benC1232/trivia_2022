@@ -32,7 +32,7 @@ namespace TriviaClient
             comm.Send(10, data);
             Tuple<int, byte[]> response = this.comm.Recieve();
             string strResponse = Encoding.ASCII.GetString(response.Item2);
-            if (response.Item1 == 10)
+            if (response.Item1 == 9)
             {
                 responseStructs.HighScoreResponse highScoresResponse = JsonConvert.DeserializeObject<responseStructs.HighScoreResponse>(strResponse);
                 string[] splitted = highScoresResponse.highscores.Split(',');
