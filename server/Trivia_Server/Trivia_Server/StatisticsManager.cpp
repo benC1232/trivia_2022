@@ -1,11 +1,21 @@
 #include "StatisticsManager.h"
 
+/*
+ * statistics manager constructor
+ * input: db (IDatabse*)
+ */
 StatisticsManager::StatisticsManager(IDatabase* db): m_database(db) {}
 
 StatisticsManager::~StatisticsManager()
 {
+	delete m_database;
 }
 
+/*
+ * a function to get the high score of the game by accessing the database to find the players with the highest score
+ * input: none
+ * output: vector of strings containing the name and score of the players with the highest score (std::vector<std::string>)
+ */
 std::vector<std::string> StatisticsManager::getHighScore()
 {
 	std::vector<std::string> stats;
@@ -17,6 +27,13 @@ std::vector<std::string> StatisticsManager::getHighScore()
 	return stats;
 
 }
+
+/*
+ * a function to get the personal statistics of a certin player by accessing the database to find the players with the highest score
+ * the statistics that are returned are: number of correct answers, number of total answers, number of games played, average answer time
+ * input: username (std::string)
+ * output: vector of strings containing the name and score of the players with the highest score (std::vector<std::string>)
+ */
 
 std::vector<std::string> StatisticsManager::getUserStatistics(std::string username)
 {

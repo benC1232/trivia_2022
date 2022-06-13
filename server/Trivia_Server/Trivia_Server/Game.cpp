@@ -1,5 +1,9 @@
 #include "Game.h"
 
+/*
+ * the constructor for the game class
+ * input:questions(std::vector<Question>),players(std::map<LoggedUser, GameData>)
+ */
 Game::Game(std::vector<Question> questions, std::map<LoggedUser, GameData> players)
 {
 	Question q;
@@ -13,6 +17,14 @@ Game::Game(std::vector<Question> questions, std::map<LoggedUser, GameData> playe
 	}
 }
 
+
+
+ /*
+  * a function that returns the next question for a user - LoggedUser
+  * input: user(LoggedUser)
+  * output the next question in the question vector (Question)
+  *
+  */
 Question Game::getQuestionForUser(LoggedUser user)
 {
 	Question q;
@@ -37,6 +49,11 @@ Question Game::getQuestionForUser(LoggedUser user)
 	return this->m_questions.at(idx + 1);
 }
 
+/*
+ * a function that makes the user to submit his answer
+ * input: user(LoggedUser), answer(std::string), time(int)
+ * output: true if the answer is correct, false if not
+ */
 bool Game::submitAnswer(LoggedUser user, std::string answer, int time)
 {
 	bool result;
@@ -54,6 +71,11 @@ bool Game::submitAnswer(LoggedUser user, std::string answer, int time)
 	return result;
 }
 
+/*
+ * removes a player
+ * input: user(LoggedUser)
+ * output: none
+ */
 void Game::removePlayer(LoggedUser user)
 {
 	this->m_players.erase(user);
@@ -78,11 +100,14 @@ std::vector<PlayerResults> Game::getResults()
 	return output;
 }
 
-int Game::getNumOfPlayers()
+
+//gett the number of players in the game
+int Game::getNumOfPlayers() const
 {
 	return this->m_players.size();
 }
 
+// returns true if the user is in the game
 bool Game::isInGame(LoggedUser user)
 {
 	return this->m_players.find(user) != this->m_players.end();
