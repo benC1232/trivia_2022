@@ -52,12 +52,12 @@ namespace TriviaClient
             this.countdown.Content = totalSeconds - this.secondsWasted;
             if (totalSeconds - this.secondsWasted <= 5)
             {
-                this.countdown.Foreground = Brushes.Red;
+                this.countdown.Foreground = new SolidColorBrush(Colors.Red);
             }
             if (totalSeconds - this.secondsWasted == 0)
             {
                 submitAnswer("never gonna give you up");
-                this.countdown.Foreground = Brushes.White;
+                this.countdown.Foreground = new SolidColorBrush(Colors.White);
                 if (!this.getQuestion())
                 {
                     this.timer.Stop();
