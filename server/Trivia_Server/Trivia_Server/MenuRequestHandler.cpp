@@ -1,8 +1,8 @@
 #include "MenuRequestHandler.h"
 
 MenuRequestHandler::MenuRequestHandler(LoggedUser loggedUser, RoomManager* roomManager,
-                                       StatisticsManager* statisticsManager,
-                                       RequestHandlerFactory* requestHandlerFactory) : m_user(loggedUser),
+	StatisticsManager* statisticsManager,
+	RequestHandlerFactory* requestHandlerFactory) : m_user(loggedUser),
 	m_roomManager(m_roomManager), m_statisticsManager(statisticsManager), m_requestHandlerFactory(requestHandlerFactory)
 {
 }
@@ -19,7 +19,8 @@ bool MenuRequestHandler::isRequestRelevant(RequestInfo requestInfo)
 		requestInfo.id == JOIN_ROOM_REQUEST ||
 		requestInfo.id == GET_STATISTICS_REQUEST ||
 		requestInfo.id == LOGOUT_REQUEST ||
-		requestInfo.id == HIGH_SCORE_GET;
+		requestInfo.id == HIGH_SCORE_GET ||
+		requestInfo.id == ADD_QUESTION_CODE;
 }
 
 RequestResult MenuRequestHandler::signout(RequestInfo requestInfo)
