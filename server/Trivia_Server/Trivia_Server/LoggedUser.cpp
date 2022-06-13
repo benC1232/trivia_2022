@@ -12,8 +12,12 @@ bool LoggedUser::operator<(const LoggedUser& other) const
 
 bool LoggedUser::operator>(const LoggedUser& other)const
 {
-
 	return  (this->m_username.length() > other.m_username.length());
+}
+
+bool LoggedUser::operator==(const LoggedUser& other) const
+{
+	return (this->m_username == other.m_username);
 }
 
 std::string LoggedUser::getUsername()

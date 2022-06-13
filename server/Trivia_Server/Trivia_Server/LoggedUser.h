@@ -9,6 +9,7 @@ public:
 	// < operator
 	bool operator<(const LoggedUser& other) const;
 	bool operator>(const LoggedUser& other) const;
+	bool operator==(const LoggedUser& other) const;
 
 	std::string getUsername();
 private:
