@@ -133,6 +133,7 @@ int questionsCallback(void* data, int argc, char** argv, char** azColName)
 std::vector<Question> SqliteDataBase::getQuestions(int numOfQuestions)
 {
 	char* errMessage = nullptr;
+	std::cout << "numOfQuestions: " << numOfQuestions << std::endl;
 	const std::string query = "SELECT * FROM Questions ORDER BY RANDOM() LIMIT " + std::to_string(numOfQuestions) + ";";
 	const char* sqlStatement = query.c_str();
 	std::vector<Question> questions;
@@ -141,6 +142,7 @@ std::vector<Question> SqliteDataBase::getQuestions(int numOfQuestions)
 	{
 		throw std::exception(errMessage);
 	}
+	std::cout << "got questions" << std::endl;
 	return questions;
 }
 
@@ -283,11 +285,11 @@ std::map<std::string, int> SqliteDataBase::getHighScore()
 void SqliteDataBase::addStatistics(std::string username, int averageTime, int correctAnswers, int wrongAnswers)
 {
 	char* errMessage = nullptr;
-	const std::string query = "UPDATE statistics"
+	const std::string query = "UPDATE statistics "
 		"SET averagetime = (averagetime + " + std::to_string(averageTime) + ") / 2, "
 		"correctanswers = correctanswers + " + std::to_string(correctAnswers) + ","
 		"wronganswers = wronganswers + " + std::to_string(wrongAnswers) + ","
-		"gamesnum = gamesnum + 1"
+		"gamesnum = gamesnum + 1 "
 		"WHERE username = '" + username + "';";
 	const char* sqlStatement = query.c_str();
 	const int result = sqlite3_exec(this->_db, sqlStatement, nullptr, nullptr, &errMessage);

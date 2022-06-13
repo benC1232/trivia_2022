@@ -9,6 +9,7 @@
  */
 Game::Game(std::vector<Question> questions, std::map<LoggedUser, GameData> players)
 {
+	std::cout << "i made a game" << std::endl;
 	Question q;
 	q.setQuestion("Err q");
 
@@ -30,14 +31,16 @@ Question Game::getQuestionForUser(LoggedUser user)
 {
 	Question q;
 	q.setQuestion("");
-	if (this->m_players.at(user).currentQuestion.getQuestion() == q.getQuestion()) {
+	if (this->m_players.at(user).currentQuestion.getQuestion() == q.getQuestion())
+	{
 		this->m_players.at(user).currentQuestion = this->m_questions.at(0);
 		return this->m_questions[0];
 	}
 	int idx = 0;
-	std::cout << "reached the loop somehow" << std::endl;
-	for (auto q : this->m_questions) {
-		if (q.getQuestion() == m_players.at(user).currentQuestion.getQuestion()) {
+	for (auto question : this->m_questions)
+	{
+		if (question.getQuestion() == m_players.at(user).currentQuestion.getQuestion())
+		{
 			break;
 		}
 		idx++;
@@ -49,7 +52,6 @@ Question Game::getQuestionForUser(LoggedUser user)
 	this->m_players.at(user).currentQuestion = this->m_questions.at(idx + 1);
 	return this->m_questions.at(idx + 1);
 }
-
 
 /*
  * a function that makes the user to submit his answer
