@@ -3,6 +3,11 @@
 #define GET_QUESTION_CODE 15
 #define SUBMIT_ANSWER_CODE 16
 #define GET_GAME_RESULT_CODE 17
+
+/*
+ * the constructor of the gameRequestHandler class
+ * input: gameManager(GameManager*), loggedUser(LoggedUser), requestHandlerFactory(RequestHandlerFactory*), game(Game*)
+ */
 GameRequestHandler::GameRequestHandler(GameManager* gameManager, LoggedUser loggedUser, RequestHandlerFactory* requestHandlerFactory, Game* game)
 {
 	this->m_gameManager = gameManager;
@@ -15,23 +20,36 @@ GameRequestHandler::GameRequestHandler(GameManager* gameManager, LoggedUser logg
 
 GameRequestHandler::~GameRequestHandler()
 {
+	delete this->m_gameManager;
+	delete this->m_requestHandlerFactory;
+	delete this->m_game;
 }
 
+/*
+ * a function that finds if a request is relevant to the game
+ * input: requestInfo(RequestInfo)
+ * output: true if the request is relevant, false otherwise
+ */
 bool GameRequestHandler::isRequestRelevant(RequestInfo requestInfo)
 {
 	return requestInfo.id == LEAVE_GAME_CODE || requestInfo.id == GET_QUESTION_CODE || requestInfo.id == SUBMIT_ANSWER_CODE || requestInfo.id == GET_GAME_RESULT_CODE;
 }
 
+/*
+ * a function that handles all of the requests that are relevant to the game
+ * input: requestInfo(RequestInfo)
+ * output: RequestResult
+ */
 RequestResult GameRequestHandler::handleRequest(RequestInfo requestInfo)
 {
 	RequestResult result;
 	if (requestInfo.id == LEAVE_GAME_CODE)
 	{
-		result = leaveGame(requestInfo);
+		result = leaveGame();
 	}
 	else if (requestInfo.id == GET_QUESTION_CODE)
 	{
-		result = getQuestion(requestInfo);
+		result = getQuestion();
 	}
 	else if (requestInfo.id == SUBMIT_ANSWER_CODE)
 	{
@@ -39,19 +57,23 @@ RequestResult GameRequestHandler::handleRequest(RequestInfo requestInfo)
 	}
 	else if (requestInfo.id == GET_GAME_RESULT_CODE)
 	{
-		result = getGameResults(requestInfo);
+		result = getGameResults();
 	}
 	else
 	{
 		ErrorResponse num;
-		num.message = "error while handling request [room admin request handler has recived a wrong code]";
+		num.message = "error while handling request [room admin request handler has received a wrong code]";
 		result.buffer = JsonResponsePacketSerializer::serializeErrorResponse(num);
 		result.newHandler = nullptr;
 	}
 	return result;
 }
 
-RequestResult GameRequestHandler::getQuestion(RequestInfo requestInfo)
+/*
+ * a function that handles the get question request
+ * output: RequestResult
+ */
+RequestResult GameRequestHandler::getQuestion()
 {
 	GetQuestionResponse response;
 	RequestResult result;
@@ -82,7 +104,12 @@ RequestResult GameRequestHandler::getQuestion(RequestInfo requestInfo)
 	return result;
 }
 
-RequestResult GameRequestHandler::submitAnswer(RequestInfo requestInfo)
+
+/*
+ * a function that handles the submit answer request
+ * output: RequestResult
+ */
+RequestResult GameRequestHandler::submitAnswer(const RequestInfo requestInfo)
 {
 	RequestResult result;
 	SubmitAnswerRequest request = JsonRequestPacketDeserializer::deserializeSubmitAnswerRequest(requestInfo.buffer);
@@ -94,7 +121,11 @@ RequestResult GameRequestHandler::submitAnswer(RequestInfo requestInfo)
 	return result;
 }
 
-RequestResult GameRequestHandler::getGameResults(RequestInfo requestInfo)
+/*
+ * a function that handles the get game results request
+ * output: RequestResult
+ */
+RequestResult GameRequestHandler::getGameResults()
 {
 	RequestResult result;
 	GetGameResultsResponse response;
@@ -119,7 +150,11 @@ RequestResult GameRequestHandler::getGameResults(RequestInfo requestInfo)
 	return result;
 }
 
-RequestResult GameRequestHandler::leaveGame(RequestInfo requestInfo)
+/*
+ * a function that handles the leave game request
+ * output: RequestResult
+ */
+RequestResult GameRequestHandler::leaveGame() const
 {
 	RequestResult result;
 	if (this->m_game->getNumOfPlayers() == 1)

@@ -58,7 +58,7 @@ void GameManager::deleteGame(Game* game)
  * input: user (LoggedUser)
  * output: game (Game*)
  */
-Game* GameManager::getGame(LoggedUser user)
+Game* GameManager::getGame(LoggedUser user) const
 {
 	for (auto game : m_games) {
 		if (game->isInGame(user)){

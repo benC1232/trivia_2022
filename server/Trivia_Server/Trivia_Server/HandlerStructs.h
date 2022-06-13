@@ -4,6 +4,8 @@
 #include "IRequestHandler.h"
 //הכלה מעגלית שלקחה לי 4 שעות מהחיים
 class IRequestHandler;
+
+
 struct RequestResult
 {
 	std::vector<unsigned char> buffer;

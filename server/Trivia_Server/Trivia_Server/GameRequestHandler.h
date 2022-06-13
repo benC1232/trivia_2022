@@ -10,9 +10,9 @@ class GameRequestHandler :
 {
 public:
 	GameRequestHandler(GameManager* gameManager, LoggedUser loggedUser, RequestHandlerFactory* requestHandlerFactory, Game* game);
-	~GameRequestHandler();
-	bool isRequestRelevant(RequestInfo requestInfo);
-	RequestResult handleRequest(RequestInfo requestInfo);
+	virtual ~GameRequestHandler();
+	bool isRequestRelevant(RequestInfo requestInfo) override;
+	RequestResult handleRequest(RequestInfo requestInfo) override;
 
 private:
 	GameManager* m_gameManager;
@@ -20,9 +20,9 @@ private:
 	RequestHandlerFactory* m_requestHandlerFactory;
 	Game* m_game;
 	int questionCount;
-	RequestResult getQuestion(RequestInfo requestInfo);
+	RequestResult getQuestion();
 	RequestResult submitAnswer(RequestInfo requestInfo);
-	RequestResult getGameResults(RequestInfo requestInfo);
-	RequestResult leaveGame(RequestInfo requestInfo);
+	RequestResult getGameResults();
+	RequestResult leaveGame() const;
 	bool isFirstRequest;
 };

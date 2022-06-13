@@ -10,6 +10,7 @@
 class IDatabase
 {
 public:
+	virtual ~IDatabase() = default;
 	IDatabase() = default;
 	//users function
 	virtual bool doesUserExist(std::string username) = 0;

@@ -9,9 +9,9 @@
 
 typedef struct GameData {
 	Question currentQuestion;
-	unsigned int correctAnswerCount;
-	unsigned int wrongAnswerCount;
-	unsigned int averageAnswerTime;
+	unsigned int correctAnswerCount{};
+	unsigned int wrongAnswerCount{};
+	unsigned int averageAnswerTime{};
 } GameData;
 
 class Game
