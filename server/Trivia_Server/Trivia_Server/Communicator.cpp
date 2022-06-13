@@ -81,7 +81,7 @@ void Communicator::handleNewClient(SOCKET clientSocket)
 			jsonSize = getJsonSize(clientMessage);
 			buffer = msgToBuffer(clientMessage, jsonSize + JSON_OFFSET);
 			request.id = int(buffer[0]);
-			request.receivalTime = std::time(0);
+			request.receivalTime = std::time(nullptr);
 			request.buffer = buffer;
 			result = handler->handleRequest(request);
 			handler = result.newHandler;

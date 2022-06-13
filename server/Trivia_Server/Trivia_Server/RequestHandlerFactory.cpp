@@ -18,7 +18,7 @@ LoginRequestHandler* RequestHandlerFactory::createLoginRequestHandler()
 	return new LoginRequestHandler(this);
 }
 
-LoginManager* RequestHandlerFactory::getLoginManager()
+LoginManager* RequestHandlerFactory::getLoginManager() const
 {
 	return this->m_loginManager;
 }
@@ -43,22 +43,22 @@ GameRequestHandler* RequestHandlerFactory::createGameRequestHandler(LoggedUser u
 	return new GameRequestHandler(this->m_gameManager, user, this, game);
 }
 
-StatisticsManager& RequestHandlerFactory::getStatisticsManager()
+StatisticsManager& RequestHandlerFactory::getStatisticsManager() const
 {
 	return *this->m_statisticsManager;
 }
 
-RoomManager& RequestHandlerFactory::getRoomManager()
+RoomManager& RequestHandlerFactory::getRoomManager() const
 {
 	return *this->m_roomManager;
 }
 
-GameManager& RequestHandlerFactory::getGameManager()
+GameManager& RequestHandlerFactory::getGameManager() const
 {
 	return *this->m_gameManager;
 }
 
-IDatabase& RequestHandlerFactory::getDatabase()
+IDatabase& RequestHandlerFactory::getDatabase() const
 {
 	return *this->m_database;
 }

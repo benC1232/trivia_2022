@@ -17,7 +17,7 @@ private:
 	LoggedUser m_user;
 	RoomManager* m_roomManager;
 	RequestHandlerFactory* m_requestHandlerFactory;
-	RequestResult closeRoom(RequestInfo requestInfo);
-	RequestResult startGame(RequestInfo requestInfo);
+	RequestResult closeRoom(RequestInfo requestInfo) const;
+	RequestResult startGame(RequestInfo requestInfo) const;
 	RequestResult getRoomState(RequestInfo requestInfo);
 };

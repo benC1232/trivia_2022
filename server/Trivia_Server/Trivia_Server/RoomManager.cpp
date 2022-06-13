@@ -14,7 +14,7 @@ RoomManager::~RoomManager()
 	delete this->rooms;
 }
 
-int RoomManager::createRoom(LoggedUser user, RoomData data)
+int RoomManager::createRoom(LoggedUser user, RoomData data) const
 {
 	data.id = this->rooms->size() + 1;
 	Room* room = new Room(data);
@@ -23,18 +23,18 @@ int RoomManager::createRoom(LoggedUser user, RoomData data)
 	return room->getData().id;
 }
 
-void RoomManager::deleteRoom(int id)
+void RoomManager::deleteRoom(int id) const
 {
 	delete this->rooms->find(id)->second;
 	this->rooms->erase(id);
 }
 
-unsigned int RoomManager::getRoomState(int id)
+unsigned int RoomManager::getRoomState(int id) const
 {
 	return this->rooms->find(id)->second->getIsActive();
 }
 
-std::vector<Room> RoomManager::getRooms()
+std::vector<Room> RoomManager::getRooms() const
 {
 	std::vector<Room> rooms;
 	for (auto it = this->rooms->begin(); it != this->rooms->end(); it++)
@@ -44,7 +44,7 @@ std::vector<Room> RoomManager::getRooms()
 	return rooms;
 }
 
-Room* RoomManager::getRoom(int id)
+Room* RoomManager::getRoom(int id) const
 {
 	return this->rooms->find(id)->second;
 }

@@ -17,5 +17,5 @@ public:
 	GameManager(IDatabase* database);
 	Game* getGame(LoggedUser user) const;
 	Game* createGame(Room room);
-	void deleteGame(Game* game);
+	void deleteGame(const Game* game);
 };

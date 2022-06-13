@@ -42,7 +42,7 @@ Game* GameManager::createGame(Room room)
  * input: game (Game*)
  * output: none
  */
-void GameManager::deleteGame(Game* game)
+void GameManager::deleteGame(const Game* game)
 {
 	const auto it = std::find(m_games.begin(), m_games.end(), game);
 	if (it != m_games.end()) {

@@ -23,16 +23,16 @@ public:
 	RequestHandlerFactory(IDatabase* db);
 	~RequestHandlerFactory();
 	LoginRequestHandler* createLoginRequestHandler();
-	LoginManager* getLoginManager();
+	LoginManager* getLoginManager() const;
 	MenuRequestHandler* createMenuRequestHandler(LoggedUser user);
 	RoomAdminRequestHandler* createRoomAdminRequestHandler(LoggedUser user, Room* room);
 	RoomMemberRequestHandler* createRoomMemberRequestHandler(LoggedUser user, Room* room);
 	GameRequestHandler* createGameRequestHandler(LoggedUser user, Game* game);
 
-	StatisticsManager& getStatisticsManager();
-	RoomManager& getRoomManager();
-	GameManager& getGameManager();
-	IDatabase& getDatabase();
+	StatisticsManager& getStatisticsManager() const;
+	RoomManager& getRoomManager() const;
+	GameManager& getGameManager() const;
+	IDatabase& getDatabase() const;
 
 private:
 	LoginManager* m_loginManager;

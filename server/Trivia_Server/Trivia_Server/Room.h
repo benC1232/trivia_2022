@@ -19,8 +19,8 @@ public:
 	Room(RoomData data);
 	void addUser(LoggedUser user);
 	void removeUser(LoggedUser user);
-	std::vector<std::string> getAllUsers();
-	unsigned int getIsActive();
+	std::vector<std::string> getAllUsers() const;
+	unsigned int getIsActive() const;
 	RoomData getData();
 	std::vector<LoggedUser> getAllUsersVector();
 	void setIsActive(bool isActive);

@@ -34,7 +34,7 @@ RequestResult RoomMemberRequestHandler::handleRequest(RequestInfo requestInfo)
 	return result;
 }
 
-RequestResult RoomMemberRequestHandler::leaveRoom(RequestInfo requestInfo)
+RequestResult RoomMemberRequestHandler::leaveRoom(RequestInfo requestInfo) const
 {
 	RequestResult result;
 	this->m_room->removeUser(this->m_user);

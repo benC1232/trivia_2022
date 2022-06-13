@@ -36,7 +36,7 @@ void Room::removeUser(LoggedUser user)
 	}
 }
 
-std::vector<std::string> Room::getAllUsers()
+std::vector<std::string> Room::getAllUsers() const
 {
 	std::vector<std::string> returnedValue;
 	for (auto name : this->m_users)
@@ -46,7 +46,7 @@ std::vector<std::string> Room::getAllUsers()
 	return returnedValue;
 }
 
-unsigned int Room::getIsActive()
+unsigned int Room::getIsActive() const
 {
 	return this->m_metadata.isActive;
 }

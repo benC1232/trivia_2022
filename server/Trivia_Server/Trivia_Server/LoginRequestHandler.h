@@ -19,6 +19,6 @@ public:
 	RequestResult handleRequest(RequestInfo request) override;
 private:
 	RequestHandlerFactory* m_requestHandlerFactory;
-	RequestResult login(RequestInfo requestInfo);
+	RequestResult login(RequestInfo requestInfo) const;
 	RequestResult signup(RequestInfo requestInfo);
 };

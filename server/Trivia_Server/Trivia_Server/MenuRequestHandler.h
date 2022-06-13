@@ -29,12 +29,12 @@ public:
 	bool isRequestRelevant(RequestInfo requestInfo) override;
 	RequestResult handleRequest(RequestInfo requestInfo) override;
 	RequestResult signout(RequestInfo requestInfo);
-	RequestResult getRooms(RequestInfo requestInfo);
-	RequestResult getPlayersInRoom(RequestInfo requestInfo);
+	RequestResult getRooms(RequestInfo requestInfo) const;
+	RequestResult getPlayersInRoom(RequestInfo requestInfo) const;
 	RequestResult getPersonStats(RequestInfo requestInfo);
-	RequestResult getHighScore(RequestInfo requestInfo);
-	RequestResult joinRoom(RequestInfo requestInfo);
-	RequestResult createRoom(RequestInfo requestInfo);
+	RequestResult getHighScore(RequestInfo requestInfo) const;
+	RequestResult joinRoom(RequestInfo requestInfo) const;
+	RequestResult createRoom(RequestInfo requestInfo) const;
 	RequestResult addQuestion(RequestInfo requestInfo);
 
 private:

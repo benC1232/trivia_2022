@@ -46,7 +46,7 @@ RequestResult LoginRequestHandler::handleRequest(RequestInfo request)
 	return result;
 }
 
-RequestResult LoginRequestHandler::login(RequestInfo requestInfo)
+RequestResult LoginRequestHandler::login(RequestInfo requestInfo) const
 {
 	RequestResult result;
 	LoginResponse num;

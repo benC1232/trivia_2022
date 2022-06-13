@@ -16,7 +16,7 @@ StatisticsManager::~StatisticsManager()
  * input: none
  * output: vector of strings containing the name and score of the players with the highest score (std::vector<std::string>)
  */
-std::vector<std::string> StatisticsManager::getHighScore()
+std::vector<std::string> StatisticsManager::getHighScore() const
 {
 	std::vector<std::string> stats;
 	const auto res = this->m_database->getHighScore();
@@ -34,7 +34,7 @@ std::vector<std::string> StatisticsManager::getHighScore()
  * output: vector of strings containing the name and score of the players with the highest score (std::vector<std::string>)
  */
 
-std::vector<std::string> StatisticsManager::getUserStatistics(std::string username)
+std::vector<std::string> StatisticsManager::getUserStatistics(std::string username) const
 {
 	std::vector<std::string> stats;
 	stats.push_back("Number Of Correct Answers: " + std::to_string(m_database->getNumOfCorrectAnswers(username)));

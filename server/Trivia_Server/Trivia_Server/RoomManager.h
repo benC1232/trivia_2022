@@ -8,11 +8,11 @@ public:
 	RoomManager();
 	~RoomManager();
 
-	int createRoom(LoggedUser user, RoomData data);
-	void deleteRoom(int id);
-	unsigned int getRoomState(int id);
-	std::vector<Room> getRooms();
-	Room* getRoom(int id);
+	int createRoom(LoggedUser user, RoomData data) const;
+	void deleteRoom(int id) const;
+	unsigned int getRoomState(int id) const;
+	std::vector<Room> getRooms() const;
+	Room* getRoom(int id) const;
 
 private:
 	std::map<int, Room*>* rooms;

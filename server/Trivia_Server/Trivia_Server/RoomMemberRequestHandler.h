@@ -17,6 +17,6 @@ private:
 	LoggedUser m_user;
 	RoomManager* m_roomManager;
 	RequestHandlerFactory* m_requestHandlerFactory;
-	RequestResult leaveRoom(RequestInfo requestInfo);
+	RequestResult leaveRoom(RequestInfo requestInfo) const;
 	RequestResult getRoomState(RequestInfo requestInfo);
 };

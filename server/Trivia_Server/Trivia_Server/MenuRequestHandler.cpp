@@ -30,7 +30,7 @@ RequestResult MenuRequestHandler::signout(RequestInfo requestInfo)
 	return result;
 }
 
-RequestResult MenuRequestHandler::getRooms(RequestInfo requestInfo)
+RequestResult MenuRequestHandler::getRooms(RequestInfo requestInfo) const
 {
 	RequestResult result;
 	GetRoomResponse num;
@@ -46,7 +46,7 @@ RequestResult MenuRequestHandler::getRooms(RequestInfo requestInfo)
 	return result;
 }
 
-RequestResult MenuRequestHandler::getPlayersInRoom(RequestInfo requestInfo)
+RequestResult MenuRequestHandler::getPlayersInRoom(RequestInfo requestInfo) const
 {
 	RequestResult result;
 	GetPlayersInRoomsResponse num;
@@ -71,7 +71,7 @@ RequestResult MenuRequestHandler::getPersonStats(RequestInfo requestInfo)
 	return result;
 }
 
-RequestResult MenuRequestHandler::getHighScore(RequestInfo requestInfo)
+RequestResult MenuRequestHandler::getHighScore(RequestInfo requestInfo) const
 {
 	RequestResult result;
 	GetHighScoreRespnse num;
@@ -82,7 +82,7 @@ RequestResult MenuRequestHandler::getHighScore(RequestInfo requestInfo)
 	return result;
 }
 
-RequestResult MenuRequestHandler::joinRoom(RequestInfo requestInfo)
+RequestResult MenuRequestHandler::joinRoom(RequestInfo requestInfo) const
 {
 	RequestResult result;
 	JoinRoomResponse num;
@@ -101,7 +101,7 @@ RequestResult MenuRequestHandler::joinRoom(RequestInfo requestInfo)
 	}
 }
 
-RequestResult MenuRequestHandler::createRoom(RequestInfo requestInfo)
+RequestResult MenuRequestHandler::createRoom(RequestInfo requestInfo) const
 {
 	RequestResult result;
 	CreateRoomResponse num;

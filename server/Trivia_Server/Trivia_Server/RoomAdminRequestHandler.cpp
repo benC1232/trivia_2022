@@ -49,7 +49,7 @@ RequestResult RoomAdminRequestHandler::handleRequest(RequestInfo requestInfo)
 	return result;
 }
 
-RequestResult RoomAdminRequestHandler::closeRoom(RequestInfo requestInfo)
+RequestResult RoomAdminRequestHandler::closeRoom(RequestInfo requestInfo) const
 {
 	this->m_requestHandlerFactory->getRoomManager().deleteRoom(this->m_room->getData().id);
 	RequestResult result;
@@ -60,7 +60,7 @@ RequestResult RoomAdminRequestHandler::closeRoom(RequestInfo requestInfo)
 	return result;
 }
 
-RequestResult RoomAdminRequestHandler::startGame(RequestInfo requestInfo)
+RequestResult RoomAdminRequestHandler::startGame(RequestInfo requestInfo) const
 {
 	if (this->m_room->getAllUsers().size() == 1)
 	{
