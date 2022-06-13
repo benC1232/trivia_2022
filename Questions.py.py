@@ -93,11 +93,12 @@ def main():
     #convert the json to a list
     data = json_to_list(json_file)
     #add the questions to the database "\server\Trivia_Server\Trivia_Server\Trivia.sqlite"
-    add_questions_to_database(data, "Trivia.sqlite")
+    add_questions_to_database(data, "./server/Trivia_Server/Trivia_Server/Trivia.sqlite")
     
 
 if __name__ == "__main__":
     for i in range(40):
         sleep(1)
+        print("searching for messages")
         main()
         

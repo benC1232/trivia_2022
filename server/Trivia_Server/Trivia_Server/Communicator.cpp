@@ -86,7 +86,7 @@ void Communicator::handleNewClient(SOCKET clientSocket)
 
 		try {
 			request.id = static_cast<int>(buffer.at(0));
-			if(request.id == 8)
+			if (request.id == 8)
 			{
 				break;
 			}
@@ -102,8 +102,15 @@ void Communicator::handleNewClient(SOCKET clientSocket)
 		{
 			throw std::exception("handler is null!!!");
 		}
-		result = handler->handleRequest(request);
-		handler = result.newHandler;
+		try
+		{
+			result = handler->handleRequest(request);
+			handler = result.newHandler;
+		}
+		catch (...)
+		{
+			break;
+		}
 		if (request.id != SIGNOUT)
 		{
 			response = bufferToMsg(result.buffer);
