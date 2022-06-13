@@ -47,7 +47,7 @@ GetPlayersInRoomRequest JsonRequestPacketDeserializer::deserializeGetPlayersRequ
 	GetPlayersInRoomRequest parsedData;
 	try
 	{
-		parsedData.roomId = atoi(roomId.c_str());
+		parsedData.roomId = std::atoi(roomId.c_str());
 	}
 	catch (...)
 	{
@@ -64,7 +64,7 @@ JoinRoomRequest JsonRequestPacketDeserializer::deserializeJoinRoomRequest(std::v
 	JoinRoomRequest parsedData;
 	try
 	{
-		parsedData.roomId = atoi(roomId.c_str());
+		parsedData.roomId = std::atoi(roomId.c_str());
 	}
 	catch (...)
 	{
@@ -84,9 +84,9 @@ CreateRoomRequest JsonRequestPacketDeserializer::deserializeCreateRoomRequest(st
 	CreateRoomRequest parsedData;
 	try
 	{
-		parsedData.answerTimeout = atoi(answerTimeout.c_str());
-		parsedData.maxUsers = atoi(maxUsers.c_str());
-		parsedData.questionCount = atoi(questionCount.c_str());
+		parsedData.answerTimeout = std::atoi(answerTimeout.c_str());
+		parsedData.maxUsers = std::atoi(maxUsers.c_str());
+		parsedData.questionCount = std::atoi(questionCount.c_str());
 		parsedData.roomName = roomName;
 	}
 	catch (...)
@@ -106,7 +106,7 @@ SubmitAnswerRequest JsonRequestPacketDeserializer::deserializeSubmitAnswerReques
 	try
 	{
 		parsedData.answer = answer;
-		parsedData.responseTime = atoi(responseTime.c_str());
+		parsedData.responseTime = std::atoi(responseTime.c_str());
 	}
 	catch (...)
 	{

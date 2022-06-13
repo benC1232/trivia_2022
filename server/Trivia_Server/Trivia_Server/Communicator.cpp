@@ -69,7 +69,7 @@ void Communicator::handleNewClient(SOCKET clientSocket)
 		RequestInfo request;
 		RequestResult result;
 		char clientMessage[MESSAGE_SIZE];
-		int jsonSize = 0;
+		int jsonSize;
 		std::vector<unsigned char> buffer;
 		char* response;
 		int responseSize;

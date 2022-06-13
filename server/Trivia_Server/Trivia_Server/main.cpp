@@ -21,7 +21,6 @@ int main()
 	{
 		std::cout << "an exception has been thrown: " << e.what() << std::endl;
 		delete server;
-		exit(1);
 	}
 	return 0;
 }

@@ -159,7 +159,7 @@ int correctAnswersCallback(void* data, int argc, char** argv, char** azColName)
 	}
 	else
 	{
-		*(int*)data = atoi(argv[0]);
+		*(int*)data = std::atoi(argv[0]);
 	}
 	return 0;
 }
@@ -183,7 +183,7 @@ int totalAnswersCallback(void* data, int argc, char** argv, char** azColName)
 	}
 	else
 	{
-		*(int*)data = atoi(argv[0]);
+		*(int*)data = std::atoi(argv[0]);
 	}
 	return 0;
 }
@@ -207,7 +207,7 @@ int gameAmountCallback(void* data, int argc, char** argv, char** azColName)
 	}
 	else
 	{
-		*(int*)data = atoi(argv[0]);
+		*(int*)data = std::atoi(argv[0]);
 	}
 	return 0;
 }
@@ -228,7 +228,7 @@ int highScoreCallback(void* data, int argc, char** argv, char** azColName)
 	for (int i = 0; i < argc; i++)
 	{
 		if (azColName[i] == std::string("username")) {
-			((std::map<std::string, int>*)data)->insert(std::pair<std::string, int>(argv[i], atoi(argv[i + 1]) * 5));
+			((std::map<std::string, int>*)data)->insert(std::pair<std::string, int>(argv[i], std::atoi(argv[i + 1]) * 5));
 		}
 	}
 	return 0;
