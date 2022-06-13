@@ -11,11 +11,10 @@ LoginManager::~LoginManager()
 
 bool LoginManager::login(std::string username, std::string password)
 {
-	bool isExist = db->doesUserExist(username);
-	bool passwordMatch = db->doesPasswordMatch(username, password);
-	if (db->doesUserExist(username) && db->doesPasswordMatch(username, password))
+	LoggedUser user = LoggedUser(username);
+	bool isLogged = std::find(this->m_loggedUsers.begin(), this->m_loggedUsers.end(), user) != this->m_loggedUsers.end();
+	if (isLogged && db->doesUserExist(username) && db->doesPasswordMatch(username, password))
 	{
-		LoggedUser user = LoggedUser(username);
 		this->m_loggedUsers.push_back(user);
 		return true;
 	}

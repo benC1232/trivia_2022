@@ -1,5 +1,5 @@
 #include "LoginRequestHandler.h"
-
+#include <regex>
 #define LOGIN_CODE 1
 #define SIGN_IN_CODE 2
 #define ERROR_CODE 3
@@ -24,7 +24,17 @@ RequestResult LoginRequestHandler::handleRequest(RequestInfo request)
 	//sign up
 	else if (request.id == SIGN_IN_CODE)
 	{
-		result = signup(request);
+		try
+		{
+			result = signup(request);
+		}
+		catch (std::exception& e)
+		{
+			ErrorResponse num;
+			num.message = e.what();
+			result.buffer = JsonResponsePacketSerializer::serializeErrorResponse(num);
+			result.newHandler = this;
+		}
 	}
 	else
 	{
@@ -62,6 +72,14 @@ RequestResult LoginRequestHandler::signup(RequestInfo requestInfo)
 	SignupResponse num;
 	num.status = SIGN_IN_CODE;
 	SignupRequest signupRequest = JsonRequestPacketDeserializer::deserializeSignupRequest(requestInfo.buffer);
+	// checking if the fields are valid with regex
+	std::regex usernameRegex("^[a-zA-Z0-9_]+$");
+	std::regex passwordRegex("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*]).{8,}$");
+	std::regex emailRegex("^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,4}$");
+	if (std::regex_match(signupRequest.username, usernameRegex) && std::regex_match(signupRequest.password, passwordRegex) && std::regex_match(signupRequest.email, emailRegex))
+	{
+		throw std::exception("invalid username or password or email");
+	}
 	if (this->m_requestHandlerFactory->getLoginManager()->signup(signupRequest.username, signupRequest.password, signupRequest.email)) {
 		result.newHandler = this->m_requestHandlerFactory->createMenuRequestHandler(LoggedUser(signupRequest.username));
 		result.buffer = JsonResponsePacketSerializer::serializeSignupResponse(num);
