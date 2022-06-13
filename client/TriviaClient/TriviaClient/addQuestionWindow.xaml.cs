@@ -15,9 +15,6 @@ using Newtonsoft.Json;
 
 namespace TriviaClient
 {
-    /// <summary>
-    /// Interaction logic for addQuestionWindow.xaml
-    /// </summary>
     public partial class addQuestionWindow : Window
     {
         private Communicator comm;
