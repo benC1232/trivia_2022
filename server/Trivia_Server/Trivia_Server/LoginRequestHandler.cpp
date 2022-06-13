@@ -89,7 +89,7 @@ RequestResult LoginRequestHandler::signup(RequestInfo requestInfo)
 		throw std::exception("invalid username or password or email");
 	}
 	if (this->m_requestHandlerFactory->getLoginManager()->signup(signupRequest.username, signupRequest.password,
-	                                                             signupRequest.email))
+		signupRequest.email))
 	{
 		result.newHandler = this->m_requestHandlerFactory->createMenuRequestHandler(LoggedUser(signupRequest.username));
 		result.buffer = JsonResponsePacketSerializer::serializeSignupResponse(num);

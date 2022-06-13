@@ -80,15 +80,15 @@ CreateRoomRequest JsonRequestPacketDeserializer::deserializeCreateRoomRequest(st
 	std::string jsonString(buffer.begin() + JSON_OFFSET, buffer.end());
 	nlohmann::json jsonObject = nlohmann::json::parse(jsonString);
 	const std::string roomName = jsonObject["roomName"];
-	const std::string maxUsers = jsonObject["maxUsers"];
-	const std::string questionCount = jsonObject["questionCount"];
-	const std::string answerTimeout = jsonObject["answerTimeout"];
+	int maxUsers = jsonObject["maxUsers"];
+	int questionCount = jsonObject["questionCount"];
+	int answerTimeout = jsonObject["answerTimeout"];
 	CreateRoomRequest parsedData;
 	try
 	{
-		parsedData.answerTimeout = std::atoi(answerTimeout.c_str());
-		parsedData.maxUsers = std::atoi(maxUsers.c_str());
-		parsedData.questionCount = std::atoi(questionCount.c_str());
+		parsedData.answerTimeout = answerTimeout;
+		parsedData.maxUsers = maxUsers;
+		parsedData.questionCount = questionCount;
 		parsedData.roomName = roomName;
 	}
 	catch (...)

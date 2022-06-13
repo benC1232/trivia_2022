@@ -94,7 +94,7 @@ void SqliteDataBase::addNewUser(std::string username, std::string password, std:
 		throw std::exception(errMessage);
 	}
 	errMessage = nullptr;
-	query = "INSERT INTO statistics (username, averagetime, correctanswers, wrongasnwers, gamesnum) VALUES ('" +
+	query = "INSERT INTO statistics (username, averagetime, correctanswers, wronganswers, gamesnum) VALUES ('" +
 		username + "', 0, 0, 0, 0)";
 	sqlStatement = query.c_str();
 	result = sqlite3_exec(this->_db, sqlStatement, nullptr, nullptr, &errMessage);
