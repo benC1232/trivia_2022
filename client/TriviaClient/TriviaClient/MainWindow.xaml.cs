@@ -202,12 +202,19 @@ namespace TriviaClient
             e.Cancel = false;
         }
 
-        private void About_OnMouseDown(object sender, MouseButtonEventArgs e)
+     
+        private void About_OnClick(object sender, RoutedEventArgs e)
         {
-            if (e.ClickCount == 1)
-            {
-                About a = new About(this.comm);
-            }
+            About a = new About(this.comm);
+            this.Close();
+            a.Show();
+        }
+
+        private void Secret_OnClick(object sender, RoutedEventArgs e)
+        {
+            var uri = "https://www.youtube.com/watch?v=dQw4w9WgXcQ";
+            var psi = new System.Diagnostics.ProcessStartInfo("cmd", "/c start " + uri);
+            System.Diagnostics.Process.Start(psi);
         }
     }
 }    

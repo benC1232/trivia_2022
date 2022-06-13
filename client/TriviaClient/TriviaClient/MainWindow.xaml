@@ -11,9 +11,10 @@
         <ImageBrush ImageSource="/Resources/bg.png" Stretch="Fill" />
     </Window.Background>
     <StackPanel>
-        <Label x:Name="aboutLbl" Padding="45" HorizontalAlignment="Center" Foreground="White"
+        <Button x:Name ="secret" Click="Secret_OnClick" Height="15" BorderThickness="0" Opacity="0"></Button>
+        <Label x:Name="aboutLbl" Padding="20" HorizontalAlignment="Center" Foreground="White"
                Content="Welcome To The Trivia Game"
-               FontSize="50" FontFamily="{StaticResource AmaticSC}" />
+               FontSize="50" FontFamily="{StaticResource AmaticSC}" Height="111" />
         <StackPanel HorizontalAlignment="Center" Margin="1">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                 <Button x:Name="LogInBtn" Click="LogInBtn_Click" FontSize="50" FontFamily="{StaticResource AmaticSC}" Background="black" BorderBrush="white" Foreground="White" FontWeight="Bold" BorderThickness="6" Content="Log In" Height="80"  Width="200">
@@ -66,7 +67,7 @@
                 </TextBox>
             </StackPanel>
 
-            <Label Height="40" />
+            <Label Height="20" />
 
             <Button x:Name="SubmitBtn" Click="SubmitBtn_Click"  FontSize="50" FontFamily="{StaticResource AmaticSC}" Background="black" BorderBrush="white" Foreground="White" FontWeight="Bold" BorderThickness="6" Content="Submit" Height="80"  Width="200" RenderTransformOrigin="0.518,2.362">
                 <Button.Resources>
@@ -75,15 +76,17 @@
                     </Style>
                 </Button.Resources>
             </Button>
-            
+
         </StackPanel>
-        <TextBlock x:Name="errorLbl" HorizontalAlignment="Center" Text ="there has been an error!" FontSize="40" FontFamily="{StaticResource AmaticSC}" Background="Transparent" Foreground="DarkRed" />
-        <Button x:Name="About" MouseDown="About_OnMouseDown" VerticalContentAlignment="Center"  FontSize="50" FontFamily="{StaticResource AmaticSC}" Background="black" BorderBrush="white" Foreground="White" FontWeight="Bold" BorderThickness="6" Content="?" Height="65"  Width="63" RenderTransformOrigin="0.518,2.362">
+        <Label Height="16"/>
+        <Button x:Name="About" Click="About_OnClick" VerticalContentAlignment="Center"  FontSize="20" FontFamily="{StaticResource AmaticSC}" Background="black" BorderBrush="white" Foreground="White" FontWeight="Bold" BorderThickness="6" Content="?" Height="43"  Width="43" RenderTransformOrigin="0.518,2.362">
             <Button.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="100" />
                 </Style>
             </Button.Resources>
         </Button>
+        <TextBlock x:Name="errorLbl" HorizontalAlignment="Center" Text ="there has been an error!" FontSize="40" FontFamily="{StaticResource AmaticSC}" Background="Transparent" Foreground="DarkRed" />
+
     </StackPanel>
 </Window>

@@ -24,7 +24,7 @@
             find a game, play, and win, and create your own questions.
 
         </TextBlock>
-        <Label Height="" Height="178"></Label>
+        <Label Height="178"></Label>
         <Button  HorizontalAlignment="Left" x:Name="backToMenuBtn" Click="BackToMenuBtn_OnClick"  Content="return" FontSize="40" FontFamily="{StaticResource AmaticSC}" Background="black" BorderBrush="white" Foreground="White" FontWeight="Bold" BorderThickness="6" Height="68"  Width="103">
             <Button.Resources>
                 <Style TargetType="Border">
