@@ -17,14 +17,12 @@ Game::Game(std::vector<Question> questions, std::map<LoggedUser, GameData> playe
 	}
 }
 
-
-
- /*
-  * a function that returns the next question for a user - LoggedUser
-  * input: user(LoggedUser)
-  * output the next question in the question vector (Question)
-  *
-  */
+/*
+ * a function that returns the next question for a user - LoggedUser
+ * input: user(LoggedUser)
+ * output the next question in the question vector (Question)
+ *
+ */
 Question Game::getQuestionForUser(LoggedUser user)
 {
 	Question q;
@@ -35,8 +33,8 @@ Question Game::getQuestionForUser(LoggedUser user)
 	}
 	int idx = 0;
 	std::cout << "reached the loop somehow" << std::endl;
-	for (auto q : this->m_questions) {
-		if (q.getQuestion() == m_players.at(user).currentQuestion.getQuestion()) {
+	for (auto question : this->m_questions) {
+		if (question.getQuestion() == m_players.at(user).currentQuestion.getQuestion()) {
 			break;
 		}
 		idx++;
@@ -99,7 +97,6 @@ std::vector<PlayerResults> Game::getResults()
 		});
 	return output;
 }
-
 
 //get the number of players in the game
 int Game::getNumOfPlayers() const
