@@ -9,7 +9,7 @@
 #include "Room.h"
 #define START_OF_JSON_SECTION 5
 
-
+using Buffer = std::vector<unsigned char>;
 
 struct LoginResponse {
 	unsigned int status;
@@ -105,22 +105,22 @@ struct GetGameResultsResponse {
 
 class JsonResponsePacketSerializer {
 public:
-	static std::vector<unsigned char> serializeLoginResponse(struct LoginResponse loginResponse);
-	static std::vector<unsigned char> serializeSignupResponse(struct SignupResponse signupResponse);
-	static std::vector<unsigned char> serializeErrorResponse(struct ErrorResponse errorResponse);
-	static std::vector<unsigned char> serializeLogoutResponse(struct LogoutResponse logoutResponse);
-	static std::vector<unsigned char> serializeGetRoomResponse(struct GetRoomResponse getRoomResponse);
-	static std::vector<unsigned char> serializeGetPlayersInRoomsResponse(struct GetPlayersInRoomsResponse getPlayersInRoomsResponse);
-	static std::vector<unsigned char> serializeJoinRoomResponse(struct JoinRoomResponse joinRoomResponse);
-	static std::vector<unsigned char> serializeCreateRoomResponse(struct CreateRoomResponse createRoomResponse);
-	static std::vector<unsigned char> serializeGetStatisticsResponse(struct GetPersonalStatsResponse getPresonalStatsResponse);
-	static std::vector<unsigned char> serializeGetHighScoreResponse(struct GetHighScoreRespnse getHighScoreResponse);
-	static std::vector<unsigned char> serializeCloseRoomResponse(struct CloseRoomResponse closeRoomResponse);
-	static std::vector<unsigned char> serializeStartGameResponse(struct StartGameResponse startGameResponse);
-	static std::vector<unsigned char> serializeGetRoomStateResponse(struct GetRoomStateResponse getRoomStateResponse);
-	static std::vector<unsigned char> serializeLeaveRoomResponse(struct LeaveRoomResponse leaveRoomResponse);
-	static std::vector<unsigned char> serializeGetGameResultResponse(struct GetGameResultsResponse getGameResultResponse);
-	static std::vector<unsigned char> serializeSubmitAnswerResponse(struct SubmitAnswerResponse submitAnswerResponse);
-	static std::vector<unsigned char> serializeGetQuestionResponse(struct GetQuestionResponse getQuestionResponse);
-	static std::vector<unsigned char> serializeLeaveGameResponse(struct LeaveGameResponse leaveGameResponse);
+	static Buffer serializeLoginResponse(struct LoginResponse loginResponse);
+	static Buffer serializeSignupResponse(struct SignupResponse signupResponse);
+	static Buffer serializeErrorResponse(struct ErrorResponse errorResponse);
+	static Buffer serializeLogoutResponse(struct LogoutResponse logoutResponse);
+	static Buffer serializeGetRoomResponse(struct GetRoomResponse getRoomResponse);
+	static Buffer serializeGetPlayersInRoomsResponse(struct GetPlayersInRoomsResponse getPlayersInRoomsResponse);
+	static Buffer serializeJoinRoomResponse(struct JoinRoomResponse joinRoomResponse);
+	static Buffer serializeCreateRoomResponse(struct CreateRoomResponse createRoomResponse);
+	static Buffer serializeGetStatisticsResponse(struct GetPersonalStatsResponse getPresonalStatsResponse);
+	static Buffer serializeGetHighScoreResponse(struct GetHighScoreRespnse getHighScoreResponse);
+	static Buffer serializeCloseRoomResponse(struct CloseRoomResponse closeRoomResponse);
+	static Buffer serializeStartGameResponse(struct StartGameResponse startGameResponse);
+	static Buffer serializeGetRoomStateResponse(struct GetRoomStateResponse getRoomStateResponse);
+	static Buffer serializeLeaveRoomResponse(struct LeaveRoomResponse leaveRoomResponse);
+	static Buffer serializeGetGameResultResponse(struct GetGameResultsResponse getGameResultResponse);
+	static Buffer serializeSubmitAnswerResponse(struct SubmitAnswerResponse submitAnswerResponse);
+	static Buffer serializeGetQuestionResponse(struct GetQuestionResponse getQuestionResponse);
+	static Buffer serializeLeaveGameResponse(struct LeaveGameResponse leaveGameResponse);
 };
