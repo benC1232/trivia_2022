@@ -85,7 +85,12 @@ void Communicator::handleNewClient(SOCKET clientSocket)
 		jsonSize = getJsonSize(clientMessage);
 		buffer = msgToBuffer(clientMessage, jsonSize + JSON_OFFSET);
 
-		request.id = static_cast<int>(buffer.at(0));
+		try { request.id = static_cast<int>(buffer.at(0)); }
+		catch (...)
+		{
+			break;
+
+		}
 		if (request.id == 8)
 		{
 			break;
