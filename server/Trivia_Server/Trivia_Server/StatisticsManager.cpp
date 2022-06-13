@@ -19,7 +19,7 @@ StatisticsManager::~StatisticsManager()
 std::vector<std::string> StatisticsManager::getHighScore()
 {
 	std::vector<std::string> stats;
-	auto res = this->m_database->getHighScore();
+	const auto res = this->m_database->getHighScore();
 	for (auto& row : res)
 	{
 		stats.push_back(row.first + ": " + std::to_string(row.second));

@@ -65,7 +65,7 @@ std::string stringVecToString(std::vector<std::string> strings) {
  */
 std::string intVecToString(std::vector<unsigned int> ints) {
 	std::string output = "";
-	for (auto int_ : ints) {
+	for (const auto int_ : ints) {
 		output += std::to_string(int_) + ",";
 	}
 	return output;
@@ -94,8 +94,8 @@ Buffer JsonResponsePacketSerializer::serializeLoginResponse(LoginResponse loginR
 {
 	Buffer buffer;
 	buffer.push_back(LOGIN_RESPONSE_CODE);
-	nlohmann::json jsonResponse = { {"status", "" + loginResponse.status} };
-	std::string jsonString = nlohmann::to_string(jsonResponse);
+	const nlohmann::json jsonResponse = { {"status", "" + loginResponse.status} };
+	const std::string jsonString = nlohmann::to_string(jsonResponse);
 	Buffer lenBuff = intToByteVector(jsonString.length());
 	buffer.insert(buffer.end(), lenBuff.begin(), lenBuff.end());
 	for (unsigned char c : jsonString) buffer.push_back(c);
@@ -111,8 +111,8 @@ Buffer JsonResponsePacketSerializer::serializeSignupResponse(SignupResponse sign
 {
 	Buffer buffer;
 	buffer.push_back(SIGNUP_RESPONSE_CODE);
-	nlohmann::json jsonResponse = { {"status", "" + signupResponse.status} };
-	std::string jsonString = nlohmann::to_string(jsonResponse);
+	const nlohmann::json jsonResponse = { {"status", "" + signupResponse.status} };
+	const std::string jsonString = nlohmann::to_string(jsonResponse);
 	Buffer lenBuff = intToByteVector(jsonString.length());
 	buffer.insert(buffer.end(), lenBuff.begin(), lenBuff.end());
 	for (unsigned char c : jsonString) buffer.push_back(c);
@@ -128,8 +128,8 @@ Buffer JsonResponsePacketSerializer::serializeErrorResponse(ErrorResponse errorR
 {
 	Buffer buffer;
 	buffer.push_back(ERROR_RESPONSE_CODE);
-	nlohmann::json jsonResponse = { {"message","" + errorResponse.message} };
-	std::string jsonString = nlohmann::to_string(jsonResponse);
+	const nlohmann::json jsonResponse = { {"message","" + errorResponse.message} };
+	const std::string jsonString = nlohmann::to_string(jsonResponse);
 	Buffer lenBuff = intToByteVector(jsonString.length());
 	buffer.insert(buffer.end(), lenBuff.begin(), lenBuff.end());
 	for (unsigned char c : jsonString) buffer.push_back(c);
@@ -145,8 +145,8 @@ Buffer JsonResponsePacketSerializer::serializeLogoutResponse(LogoutResponse logo
 {
 	Buffer buffer;
 	buffer.push_back(LOGOUT_RESPONSE_CODE);
-	nlohmann::json jsonResponse = { {"status", "" + logoutResponse.status} };
-	std::string jsonString = nlohmann::to_string(jsonResponse);
+	const nlohmann::json jsonResponse = { {"status", "" + logoutResponse.status} };
+	const std::string jsonString = nlohmann::to_string(jsonResponse);
 	Buffer lenBuff = intToByteVector(jsonString.length());
 	buffer.insert(buffer.end(), lenBuff.begin(), lenBuff.end());
 	for (unsigned char c : jsonString) buffer.push_back(c);
@@ -178,7 +178,7 @@ Buffer JsonResponsePacketSerializer::serializeGetRoomResponse(GetRoomResponse ge
 			{"rooms",  RoomDataVecToString(getRoomResponse.rooms)}
 		};
 	}
-	std::string jsonString = nlohmann::to_string(jsonResponse);
+	const std::string jsonString = nlohmann::to_string(jsonResponse);
 	Buffer lenBuff = intToByteVector(jsonString.length());
 	buffer.insert(buffer.end(), lenBuff.begin(), lenBuff.end());
 	for (unsigned char c : jsonString) buffer.push_back(c);
@@ -195,10 +195,10 @@ Buffer JsonResponsePacketSerializer::serializeGetPlayersInRoomsResponse(GetPlaye
 {
 	Buffer buffer;
 	buffer.push_back(GET_PLAYERS_IN_ROOMS_RESPONSE_CODE);
-	nlohmann::json jsonResponse = {
+	const nlohmann::json jsonResponse = {
 		{"rooms",stringVecToString(getPlayersInRoomsResponse.players)}
 	};
-	std::string jsonString = nlohmann::to_string(jsonResponse);
+	const std::string jsonString = nlohmann::to_string(jsonResponse);
 	Buffer lenBuff = intToByteVector(jsonString.length());
 	buffer.insert(buffer.end(), lenBuff.begin(), lenBuff.end());
 	for (unsigned char c : jsonString) buffer.push_back(c);
@@ -215,10 +215,10 @@ Buffer JsonResponsePacketSerializer::serializeJoinRoomResponse(JoinRoomResponse 
 {
 	Buffer buffer;
 	buffer.push_back(JOIN_ROOM_RESPONSE_CODE);
-	nlohmann::json jsonResponse = {
+	const nlohmann::json jsonResponse = {
 		{"status",joinRoomResponse.status}
 	};
-	std::string jsonString = nlohmann::to_string(jsonResponse);
+	const std::string jsonString = nlohmann::to_string(jsonResponse);
 	Buffer lenBuff = intToByteVector(jsonString.length());
 	buffer.insert(buffer.end(), lenBuff.begin(), lenBuff.end());
 	for (unsigned char c : jsonString) buffer.push_back(c);
@@ -234,10 +234,10 @@ Buffer JsonResponsePacketSerializer::serializeCreateRoomResponse(CreateRoomRespo
 {
 	Buffer buffer;
 	buffer.push_back(CREATE_ROOM_RESPONSE_CODE);
-	nlohmann::json jsonResponse = {
+	const nlohmann::json jsonResponse = {
 		{"status",createRoomResponse.status}
 	};
-	std::string jsonString = nlohmann::to_string(jsonResponse);
+	const std::string jsonString = nlohmann::to_string(jsonResponse);
 	Buffer lenBuff = intToByteVector(jsonString.length());
 	buffer.insert(buffer.end(), lenBuff.begin(), lenBuff.end());
 	for (unsigned char c : jsonString) buffer.push_back(c);
@@ -254,11 +254,11 @@ Buffer JsonResponsePacketSerializer::serializeGetStatisticsResponse(struct GetPe
 {
 	Buffer buffer;
 	buffer.push_back(GET_STATISTICS_RESPONSE_CODE);
-	nlohmann::json jsonResponse = {
+	const nlohmann::json jsonResponse = {
 		{"status",getPersonalStatsResponse.status},
 		{"stats",stringVecToString(getPersonalStatsResponse.statistics)}
 	};
-	std::string jsonString = nlohmann::to_string(jsonResponse);
+	const std::string jsonString = nlohmann::to_string(jsonResponse);
 	Buffer lenBuff = intToByteVector(jsonString.length());
 	buffer.insert(buffer.end(), lenBuff.begin(), lenBuff.end());
 	for (unsigned char c : jsonString) buffer.push_back(c);
@@ -274,11 +274,11 @@ Buffer JsonResponsePacketSerializer::serializeGetStatisticsResponse(struct GetPe
 Buffer JsonResponsePacketSerializer::serializeGetHighScoreResponse(GetHighScoreRespnse getHighScoreResponse) {
 	Buffer buffer;
 	buffer.push_back(GET_STATISTICS_RESPONSE_CODE);
-	nlohmann::json jsonResponse = {
+	const nlohmann::json jsonResponse = {
 		{"status",getHighScoreResponse.status},
 		{"highscores",stringVecToString(getHighScoreResponse.statistics)}
 	};
-	std::string jsonString = nlohmann::to_string(jsonResponse);
+	const std::string jsonString = nlohmann::to_string(jsonResponse);
 	Buffer lenBuff = intToByteVector(jsonString.length());
 	buffer.insert(buffer.end(), lenBuff.begin(), lenBuff.end());
 	for (unsigned char c : jsonString) buffer.push_back(c);
@@ -294,10 +294,10 @@ Buffer JsonResponsePacketSerializer::serializeCloseRoomResponse(CloseRoomRespons
 {
 	Buffer buffer;
 	buffer.push_back(CLOSE_ROOM_RESPONSE_CODE);
-	nlohmann::json jsonResponse = {
+	const nlohmann::json jsonResponse = {
 		{"status",closeRoomResponse.status}
 	};
-	std::string jsonString = nlohmann::to_string(jsonResponse);
+	const std::string jsonString = nlohmann::to_string(jsonResponse);
 	Buffer lenBuff = intToByteVector(jsonString.length());
 	buffer.insert(buffer.end(), lenBuff.begin(), lenBuff.end());
 	for (unsigned char c : jsonString) buffer.push_back(c);
@@ -313,10 +313,10 @@ Buffer JsonResponsePacketSerializer::serializeStartGameResponse(StartGameRespons
 {
 	Buffer buffer;
 	buffer.push_back(START_GAME_RESPONSE_CODE);
-	nlohmann::json jsonResponse = {
+	const nlohmann::json jsonResponse = {
 		{"status",startGameResponse.status}
 	};
-	std::string jsonString = nlohmann::to_string(jsonResponse);
+	const std::string jsonString = nlohmann::to_string(jsonResponse);
 	Buffer lenBuff = intToByteVector(jsonString.length());
 	buffer.insert(buffer.end(), lenBuff.begin(), lenBuff.end());
 	for (unsigned char c : jsonString) buffer.push_back(c);
@@ -333,14 +333,14 @@ Buffer JsonResponsePacketSerializer::serializeGetRoomStateResponse(GetRoomStateR
 {
 	Buffer buffer;
 	buffer.push_back(GET_ROOM_STATE_CODE);
-	nlohmann::json jsonResponse = {
+	const nlohmann::json jsonResponse = {
 		{"status",getRoomStateResponse.status},
 		{"hasGameBegun", getRoomStateResponse.hasGameBegun},
 		{"players", stringVecToString(getRoomStateResponse.players)},
 		{"questionCount", getRoomStateResponse.questionCount},
 		{"answerTimeOut", getRoomStateResponse.answerTimeOut}
 	};
-	std::string jsonString = nlohmann::to_string(jsonResponse);
+	const std::string jsonString = nlohmann::to_string(jsonResponse);
 	Buffer lenBuff = intToByteVector(jsonString.length());
 	buffer.insert(buffer.end(), lenBuff.begin(), lenBuff.end());
 	for (unsigned char c : jsonString) buffer.push_back(c);
@@ -356,10 +356,10 @@ Buffer JsonResponsePacketSerializer::serializeLeaveRoomResponse(LeaveRoomRespons
 {
 	Buffer buffer;
 	buffer.push_back(LEAVE_ROOM_CODE);
-	nlohmann::json jsonResponse = {
+	const nlohmann::json jsonResponse = {
 		{"status",leaveRoomResponse.status}
 	};
-	std::string jsonString = nlohmann::to_string(jsonResponse);
+	const std::string jsonString = nlohmann::to_string(jsonResponse);
 	Buffer lenBuff = intToByteVector(jsonString.length());
 	buffer.insert(buffer.end(), lenBuff.begin(), lenBuff.end());
 	for (unsigned char c : jsonString) buffer.push_back(c);
@@ -376,11 +376,11 @@ Buffer JsonResponsePacketSerializer::serializeGetGameResultResponse(GetGameResul
 {
 	Buffer buffer;
 	buffer.push_back(GET_GAME_RESULT_RESPONSE);
-	nlohmann::json jsonResponse = {
+	const nlohmann::json jsonResponse = {
 		{"status",getGameResultResponse.status},
 		{"results", playerResultsVecToString(getGameResultResponse.results)}
 	};
-	std::string jsonString = nlohmann::to_string(jsonResponse);
+	const std::string jsonString = nlohmann::to_string(jsonResponse);
 	Buffer lenBuff = intToByteVector(jsonString.length());
 	buffer.insert(buffer.end(), lenBuff.begin(), lenBuff.end());
 	for (unsigned char c : jsonString) buffer.push_back(c);
@@ -397,11 +397,11 @@ Buffer JsonResponsePacketSerializer::serializeSubmitAnswerResponse(SubmitAnswerR
 {
 	Buffer buffer;
 	buffer.push_back(SUBMIT_ANSWER_RESPONSE);
-	nlohmann::json jsonResponse = {
+	const nlohmann::json jsonResponse = {
 		{"status",submitAnswerResponse.status},
 		{"isCorrect", submitAnswerResponse.isCorrect}
 	};
-	std::string jsonString = nlohmann::to_string(jsonResponse);
+	const std::string jsonString = nlohmann::to_string(jsonResponse);
 	Buffer lenBuff = intToByteVector(jsonString.length());
 	buffer.insert(buffer.end(), lenBuff.begin(), lenBuff.end());
 	for (unsigned char c : jsonString) buffer.push_back(c);
@@ -418,12 +418,12 @@ Buffer JsonResponsePacketSerializer::serializeGetQuestionResponse(GetQuestionRes
 {
 	Buffer buffer;
 	buffer.push_back(GET_QUESTION_RESPONSE);
-	nlohmann::json jsonResponse = {
+	const nlohmann::json jsonResponse = {
 		{"status",getQuestionResponse.status},
 		{"question", getQuestionResponse.question},
 		{"answers", stringVecToString(getQuestionResponse.answers)}
 	};
-	std::string jsonString = nlohmann::to_string(jsonResponse);
+	const std::string jsonString = nlohmann::to_string(jsonResponse);
 	Buffer lenBuff = intToByteVector(jsonString.length());
 	buffer.insert(buffer.end(), lenBuff.begin(), lenBuff.end());
 	for (unsigned char c : jsonString) buffer.push_back(c);
@@ -439,10 +439,10 @@ Buffer JsonResponsePacketSerializer::serializeLeaveGameResponse(LeaveGameRespons
 {
 	Buffer buffer;
 	buffer.push_back(LEAVE_GAME_RESPONSE);
-	nlohmann::json jsonResponse = {
+	const nlohmann::json jsonResponse = {
 		{"status",leaveGameResponse.status}
 	};
-	std::string jsonString = nlohmann::to_string(jsonResponse);
+	const std::string jsonString = nlohmann::to_string(jsonResponse);
 	Buffer lenBuff = intToByteVector(jsonString.length());
 	buffer.insert(buffer.end(), lenBuff.begin(), lenBuff.end());
 	for (unsigned char c : jsonString) buffer.push_back(c);
@@ -458,10 +458,10 @@ Buffer JsonResponsePacketSerializer::serializeAddQuestionResponse(AddQuestionRes
 {
 	Buffer buffer;
 	buffer.push_back(ADD_QUESTION_RESPONSE);
-	nlohmann::json jsonResponse = {
+	const nlohmann::json jsonResponse = {
 		{"status",addQuestionResponse.status}
 	};
-	std::string jsonString = nlohmann::to_string(jsonResponse);
+	const std::string jsonString = nlohmann::to_string(jsonResponse);
 	Buffer lenBuff = intToByteVector(jsonString.length());
 	buffer.insert(buffer.end(), lenBuff.begin(), lenBuff.end());
 	for (unsigned char c : jsonString) buffer.push_back(c);
