@@ -124,7 +124,7 @@ RequestResult MenuRequestHandler::addQuestion(RequestInfo requestInfo)
 {
 	RequestResult result;
 	AddQuestionResponse num;
-	num.status = ADD_QUESTION_REQUEST;
+	num.status = ADD_QUESTION_CODE;
 	AddQuestionRequest addQuestionRequest = JsonRequestPacketDeserializer::deserializeAddQuestionRequest(requestInfo.buffer);
 	Question question;
 	question.setQuestion(addQuestionRequest.question);
@@ -180,6 +180,10 @@ RequestResult MenuRequestHandler::handleRequest(RequestInfo requestInfo)
 	else if (requestInfo.id == CREATE_ROOM_REQUEST)
 	{
 		result = createRoom(requestInfo);
+	}
+	else if (requestInfo.id = ADD_QUESTION_CODE)
+	{
+		result = addQuestion(requestInfo);
 	}
 	else
 	{
