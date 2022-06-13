@@ -12,7 +12,7 @@
     </Window.Background>
     <StackPanel>
         <Label x:Name="aboutLbl" Padding="45" HorizontalAlignment="Center" Foreground="White"
-               Content="Welcome To The Trivia Game. GUI inspired by the hit game amongus"
+               Content="Welcome To The Trivia Game"
                FontSize="50" FontFamily="{StaticResource AmaticSC}" />
         <StackPanel HorizontalAlignment="Center" Margin="1">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
