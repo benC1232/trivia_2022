@@ -18,6 +18,7 @@
 #define GET_QUESTION_RESPONSE 15
 #define SUBMIT_ANSWER_RESPONSE 16
 #define GET_GAME_RESULT_RESPONSE 17
+#define ADD_QUESTION_RESPONSE 42
 
 
 using Buffer = std::vector<unsigned char>;
@@ -247,16 +248,16 @@ Buffer JsonResponsePacketSerializer::serializeCreateRoomResponse(CreateRoomRespo
  /*
   * a function that serialize a get personal stats response by converting it to a vector of unsigned char, the first byte is the message code, the next 4 bytes are the length of the json string, and the rest is the json string.
   * the json string contains the status, and the stats vector.
-  * input: getPresonalStatsResponse (GetPersonalStatsResponse)
+  * input: getPersonalStatsResponse (GetPersonalStatsResponse)
   * output: vector of unsigned char (std::vector<unsigned char>)
   */
-Buffer JsonResponsePacketSerializer::serializeGetStatisticsResponse(struct GetPersonalStatsResponse getPresonalStatsResponse)
+Buffer JsonResponsePacketSerializer::serializeGetStatisticsResponse(struct GetPersonalStatsResponse getPersonalStatsResponse)
 {
 	Buffer buffer;
 	buffer.push_back(GET_STATISTICS_RESPONSE_CODE);
 	nlohmann::json jsonResponse = {
-		{"status",getPresonalStatsResponse.status},
-		{"stats",stringVecToString(getPresonalStatsResponse.statistics)}
+		{"status",getPersonalStatsResponse.status},
+		{"stats",stringVecToString(getPersonalStatsResponse.statistics)}
 	};
 	std::string jsonString = nlohmann::to_string(jsonResponse);
 	Buffer lenBuff = intToByteVector(jsonString.length());
@@ -441,6 +442,26 @@ Buffer JsonResponsePacketSerializer::serializeLeaveGameResponse(LeaveGameRespons
 	buffer.push_back(LEAVE_GAME_RESPONSE);
 	nlohmann::json jsonResponse = {
 		{"status",leaveGameResponse.status}
+	};
+	std::string jsonString = nlohmann::to_string(jsonResponse);
+	Buffer lenBuff = intToByteVector(jsonString.length());
+	buffer.insert(buffer.end(), lenBuff.begin(), lenBuff.end());
+	for (unsigned char c : jsonString) buffer.push_back(c);
+	return buffer;
+}
+
+
+/*
+ * a function that serialize add question response by converting it to a vector of unsigned char, the first byte is the message code, the next 4 bytes are the length of the json string, and the rest is the json string.
+ * input: addQuestionResponse (AddQuestionResponse)
+ * output: vector of unsigned char (std::vector<unsigned char>)
+ */
+Buffer JsonResponsePacketSerializer::serializeAddQuestionResponse(AddQuestionResponse addQuestionResponse)
+{
+	Buffer buffer;
+	buffer.push_back(ADD_QUESTION_RESPONSE);
+	nlohmann::json jsonResponse = {
+		{"status",addQuestionResponse.status}
 	};
 	std::string jsonString = nlohmann::to_string(jsonResponse);
 	Buffer lenBuff = intToByteVector(jsonString.length());

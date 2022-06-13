@@ -103,6 +103,11 @@ struct GetGameResultsResponse {
 	std::vector<PlayerResults> results;
 };
 
+struct AddQuestionResponse
+{
+	unsigned int status;
+};
+
 class JsonResponsePacketSerializer {
 public:
 	static Buffer serializeLoginResponse(struct LoginResponse loginResponse);
@@ -113,7 +118,7 @@ public:
 	static Buffer serializeGetPlayersInRoomsResponse(struct GetPlayersInRoomsResponse getPlayersInRoomsResponse);
 	static Buffer serializeJoinRoomResponse(struct JoinRoomResponse joinRoomResponse);
 	static Buffer serializeCreateRoomResponse(struct CreateRoomResponse createRoomResponse);
-	static Buffer serializeGetStatisticsResponse(struct GetPersonalStatsResponse getPresonalStatsResponse);
+	static Buffer serializeGetStatisticsResponse(struct GetPersonalStatsResponse getPersonalStatsResponse);
 	static Buffer serializeGetHighScoreResponse(struct GetHighScoreRespnse getHighScoreResponse);
 	static Buffer serializeCloseRoomResponse(struct CloseRoomResponse closeRoomResponse);
 	static Buffer serializeStartGameResponse(struct StartGameResponse startGameResponse);
@@ -123,4 +128,5 @@ public:
 	static Buffer serializeSubmitAnswerResponse(struct SubmitAnswerResponse submitAnswerResponse);
 	static Buffer serializeGetQuestionResponse(struct GetQuestionResponse getQuestionResponse);
 	static Buffer serializeLeaveGameResponse(struct LeaveGameResponse leaveGameResponse);
+	static Buffer serializeAddQuestionResponse(struct AddQuestionResponse addQuestionResponse);
 };
