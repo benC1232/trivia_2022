@@ -2,7 +2,7 @@
 
 #include <thread>
 #include <exception>
-#define MESSAGE_SIZE 1024
+#define MESSAGE_SIZE 2048
 #define JSON_OFFSET 5
 #define SIGNOUT 8
 
@@ -94,7 +94,7 @@ void Communicator::handleNewClient(SOCKET clientSocket)
 			request.receivalTime = std::time(nullptr);
 			request.buffer = buffer;
 		}
-		catch (std::exception & e)
+		catch (std::exception& e)
 		{
 			std::cout << e.what() << std::endl;
 			break;
@@ -108,8 +108,9 @@ void Communicator::handleNewClient(SOCKET clientSocket)
 			result = handler->handleRequest(request);
 			handler = result.newHandler;
 		}
-		catch (...)
+		catch (std::exception& e)
 		{
+			std::cout << e.what() << std::endl;
 			break;
 		}
 		if (request.id != SIGNOUT)
