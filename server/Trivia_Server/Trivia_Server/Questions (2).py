@@ -4,7 +4,7 @@ import sys
 #import sqlite
 import sqlite3
 from time import sleep
-count = 0
+
 json_file = "questions.json"
 
 #download the json file from the link https://opentdb.com/api.php?amount=50&type=multiple
@@ -72,9 +72,7 @@ def add_questions_to_database(list_of_questions,db: str):
         #check if the name of the question is already in the database if it is skip it
         c.execute("SELECT * FROM questions WHERE question = ?", (question_text,))
         if c.fetchone() is not None:
-            global count
-            count=count+1
-            print("skipping question: " + question_text + "\nthis is the " +str(count)+" question skipped")
+            print("skipping question: " + question_text)
             continue
         #get the correct answer
         correct_answer = question['correct_answer']
@@ -93,12 +91,10 @@ def main():
     #convert the json to a list
     data = json_to_list(json_file)
     #add the questions to the database "\server\Trivia_Server\Trivia_Server\Trivia.sqlite"
-    add_questions_to_database(data, "./server/Trivia_Server/Trivia_Server/Trivia.sqlite")
-    
+    add_questions_to_database(data, "Trivia.sqlite")
 
 if __name__ == "__main__":
     for i in range(40):
         sleep(1)
-        print("searching for messages")
         main()
-        
+   
