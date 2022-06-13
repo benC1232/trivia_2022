@@ -1,13 +1,16 @@
 #include "RoomMemberRequestHandler.h"
 #define GET_ROOM_STATE_CODE 12
 #define LEAVE_ROOM_CODE 13
-RoomMemberRequestHandler::RoomMemberRequestHandler(Room* room, LoggedUser user, RoomManager* roomManager, RequestHandlerFactory* requestHandlerFactory)
+
+RoomMemberRequestHandler::RoomMemberRequestHandler(Room* room, LoggedUser user, RoomManager* roomManager,
+                                                   RequestHandlerFactory* requestHandlerFactory)
 {
 	this->m_room = room;
 	this->m_user = user;
 	this->m_roomManager = roomManager;
 	this->m_requestHandlerFactory = requestHandlerFactory;
 }
+
 bool RoomMemberRequestHandler::isRequestRelevant(RequestInfo requestInfo)
 {
 	return requestInfo.id == GET_ROOM_STATE_CODE || requestInfo.id == LEAVE_ROOM_CODE;

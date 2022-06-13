@@ -4,6 +4,7 @@
 #define MESSAGE_SIZE 1024
 #define JSON_OFFSET 5
 #define SIGNOUT 8
+
 Communicator::Communicator(RequestHandlerFactory* factory)
 {
 	//copied this code from week 13
@@ -22,11 +23,11 @@ Communicator::~Communicator()
 
 void Communicator::startHandleRequests()
 {
-	struct sockaddr_in sa = { 0 };
+	struct sockaddr_in sa = {0};
 
 	sa.sin_port = htons(PORT); // port that server will listen for
-	sa.sin_family = AF_INET;   // must be AF_INET
-	sa.sin_addr.s_addr = INADDR_ANY;    // when there are few ip's for the machine. We will use always "INADDR_ANY"
+	sa.sin_family = AF_INET; // must be AF_INET
+	sa.sin_addr.s_addr = INADDR_ANY; // when there are few ip's for the machine. We will use always "INADDR_ANY"
 
 	// Connects between the socket and the configuration (port and etc..)
 	if (bind(this->m_serverSocket, (struct sockaddr*)&sa, sizeof(sa)) == SOCKET_ERROR)
@@ -49,7 +50,7 @@ void Communicator::startHandleRequests()
 void Communicator::bindAndListen()
 {
 	// this accepts the client and create a specific socket from server to this client
-// the process will not continue until a client connects to the server
+	// the process will not continue until a client connects to the server
 	SOCKET client_socket = accept(this->m_serverSocket, nullptr, nullptr);
 	if (client_socket == INVALID_SOCKET)
 		throw std::exception(__FUNCTION__);
@@ -63,7 +64,7 @@ void Communicator::bindAndListen()
 void Communicator::handleNewClient(SOCKET clientSocket)
 {
 	IRequestHandler* handler = this->m_handlerFactory->createLoginRequestHandler();
-	this->m_clients.insert({ clientSocket, handler });
+	this->m_clients.insert({clientSocket, handler});
 	try
 	{
 		RequestInfo request;
@@ -82,7 +83,7 @@ void Communicator::handleNewClient(SOCKET clientSocket)
 			recv(clientSocket, clientMessage, MESSAGE_SIZE, 0);
 			jsonSize = getJsonSize(clientMessage);
 			buffer = msgToBuffer(clientMessage, jsonSize + JSON_OFFSET);
-			request.id = int(buffer[0]);
+			request.id = static_cast<int>(buffer[0]);
 			request.receivalTime = std::time(nullptr);
 			request.buffer = buffer;
 			result = handler->handleRequest(request);
@@ -110,7 +111,7 @@ void Communicator::handleNewClient(SOCKET clientSocket)
 int Communicator::getJsonSize(char buffer[])
 {
 	//don't change!!!!!!!! it works!!!!!!!!
-	const int size = (int)(buffer[1] << 24 | buffer[2] << 16 | buffer[3] << 8 | buffer[4]);
+	const int size = buffer[1] << 24 | buffer[2] << 16 | buffer[3] << 8 | buffer[4];
 	return size;
 }
 

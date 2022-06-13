@@ -7,7 +7,7 @@ RoomManager::RoomManager()
 
 RoomManager::~RoomManager()
 {
-	for (std::map<int, Room*>::iterator it = this->rooms->begin(); it != this->rooms->end(); it++)
+	for (std::map<int, Room*>::iterator it = this->rooms->begin(); it != this->rooms->end(); ++it)
 	{
 		delete it->second;
 	}
@@ -19,7 +19,7 @@ int RoomManager::createRoom(LoggedUser user, RoomData data) const
 	data.id = this->rooms->size() + 1;
 	Room* room = new Room(data);
 	room->addUser(user);
-	this->rooms->insert({ data.id,room });
+	this->rooms->insert({data.id, room});
 	return room->getData().id;
 }
 
@@ -37,7 +37,7 @@ unsigned int RoomManager::getRoomState(int id) const
 std::vector<Room> RoomManager::getRooms() const
 {
 	std::vector<Room> rooms;
-	for (auto it = this->rooms->begin(); it != this->rooms->end(); it++)
+	for (auto it = this->rooms->begin(); it != this->rooms->end(); ++it)
 	{
 		rooms.push_back(it->second->getData());
 	}

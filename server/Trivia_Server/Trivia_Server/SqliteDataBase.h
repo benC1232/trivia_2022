@@ -23,8 +23,8 @@ public:
 	int getNumOfPlayerGames(std::string username) override;
 	//why wasn't this in the uml?!?!?!?!?!
 	std::map<std::string, int> getHighScore() override;
-	void addStatistics(std::string username, int averageTime, int correctAnswers, int wrongAnswers)override;
-	void addQuestion(Question question)override;
+	void addStatistics(std::string username, int averageTime, int correctAnswers, int wrongAnswers) override;
+	void addQuestion(Question question) override;
 private:
 	sqlite3* _db;
 	void createTables() override;

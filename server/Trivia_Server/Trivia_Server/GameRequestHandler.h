@@ -5,14 +5,16 @@
 #include "LoggedUser.h"
 #include "RequestHandlerFactory.h"
 class RequestHandlerFactory;
+
 class GameRequestHandler :
 	public IRequestHandler
 {
 public:
-	GameRequestHandler(GameManager* gameManager, LoggedUser loggedUser, RequestHandlerFactory* requestHandlerFactory, Game* game);
-	virtual ~GameRequestHandler();
-	bool isRequestRelevant(RequestInfo requestInfo)override;
-	RequestResult handleRequest(RequestInfo requestInfo)override;
+	GameRequestHandler(GameManager* gameManager, LoggedUser loggedUser, RequestHandlerFactory* requestHandlerFactory,
+	                   Game* game);
+	~GameRequestHandler() override;
+	bool isRequestRelevant(RequestInfo requestInfo) override;
+	RequestResult handleRequest(RequestInfo requestInfo) override;
 
 private:
 	GameManager* m_gameManager;

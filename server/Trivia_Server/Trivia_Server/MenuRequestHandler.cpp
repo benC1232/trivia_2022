@@ -1,6 +1,11 @@
 #include "MenuRequestHandler.h"
 
-MenuRequestHandler::MenuRequestHandler(LoggedUser loggedUser, RoomManager* roomManager, StatisticsManager* statisticsManager, RequestHandlerFactory* requestHandlerFactory) : m_user(loggedUser), m_roomManager(m_roomManager), m_statisticsManager(statisticsManager), m_requestHandlerFactory(requestHandlerFactory) {}
+MenuRequestHandler::MenuRequestHandler(LoggedUser loggedUser, RoomManager* roomManager,
+                                       StatisticsManager* statisticsManager,
+                                       RequestHandlerFactory* requestHandlerFactory) : m_user(loggedUser),
+	m_roomManager(m_roomManager), m_statisticsManager(statisticsManager), m_requestHandlerFactory(requestHandlerFactory)
+{
+}
 
 MenuRequestHandler::~MenuRequestHandler()
 {
@@ -37,7 +42,8 @@ RequestResult MenuRequestHandler::getRooms(RequestInfo requestInfo) const
 	num.status = GET_ROOMS_REQUEST;
 	const auto rooms = this->m_requestHandlerFactory->getRoomManager().getRooms();
 	std::vector<RoomData> dataVector;
-	for (auto room : rooms) {
+	for (auto room : rooms)
+	{
 		dataVector.push_back(room.getData());
 	}
 	num.rooms = dataVector;
@@ -50,9 +56,11 @@ RequestResult MenuRequestHandler::getPlayersInRoom(RequestInfo requestInfo) cons
 {
 	RequestResult result;
 	GetPlayersInRoomsResponse num;
-	const GetPlayersInRoomRequest getPlayersInRoomsRequest = JsonRequestPacketDeserializer::deserializeGetPlayersRequest(requestInfo.buffer);
+	const GetPlayersInRoomRequest getPlayersInRoomsRequest =
+		JsonRequestPacketDeserializer::deserializeGetPlayersRequest(requestInfo.buffer);
 	const auto rooms = this->m_roomManager->getRooms();
-	for (auto room : rooms) {
+	for (auto room : rooms)
+	{
 		if (getPlayersInRoomsRequest.roomId == room.getData().id) num.players = room.getAllUsers();
 	}
 	result.buffer = JsonResponsePacketSerializer::serializeGetPlayersInRoomsResponse(num);
@@ -87,18 +95,18 @@ RequestResult MenuRequestHandler::joinRoom(RequestInfo requestInfo) const
 	RequestResult result;
 	JoinRoomResponse num;
 	num.status = JOIN_ROOM_REQUEST;
-	const JoinRoomRequest joinRoomRequest = JsonRequestPacketDeserializer::deserializeJoinRoomRequest(requestInfo.buffer);
-	if (this->m_requestHandlerFactory->getRoomManager().getRoom(joinRoomRequest.roomId)->getData().maxPlayers == this->m_requestHandlerFactory->getRoomManager().getRoom(joinRoomRequest.roomId)->getAllUsersVector().size())
+	const JoinRoomRequest joinRoomRequest = JsonRequestPacketDeserializer::deserializeJoinRoomRequest(
+		requestInfo.buffer);
+	if (this->m_requestHandlerFactory->getRoomManager().getRoom(joinRoomRequest.roomId)->getData().maxPlayers == this->
+		m_requestHandlerFactory->getRoomManager().getRoom(joinRoomRequest.roomId)->getAllUsersVector().size())
 	{
 		throw std::exception("Room is full");
 	}
-	else
-	{
-		this->m_requestHandlerFactory->getRoomManager().getRoom(joinRoomRequest.roomId)->addUser(this->m_user);
-		result.buffer = JsonResponsePacketSerializer::serializeJoinRoomResponse(num);
-		result.newHandler = this->m_requestHandlerFactory->createRoomMemberRequestHandler(this->m_user, this->m_requestHandlerFactory->getRoomManager().getRoom(joinRoomRequest.roomId));
-		return result;
-	}
+	this->m_requestHandlerFactory->getRoomManager().getRoom(joinRoomRequest.roomId)->addUser(this->m_user);
+	result.buffer = JsonResponsePacketSerializer::serializeJoinRoomResponse(num);
+	result.newHandler = this->m_requestHandlerFactory->createRoomMemberRequestHandler(
+		this->m_user, this->m_requestHandlerFactory->getRoomManager().getRoom(joinRoomRequest.roomId));
+	return result;
 }
 
 RequestResult MenuRequestHandler::createRoom(RequestInfo requestInfo) const
@@ -106,7 +114,8 @@ RequestResult MenuRequestHandler::createRoom(RequestInfo requestInfo) const
 	RequestResult result;
 	CreateRoomResponse num;
 	num.status = CREATE_ROOM_REQUEST;
-	const CreateRoomRequest createRoomRequest = JsonRequestPacketDeserializer::deserializeCreateRoomRequest(requestInfo.buffer);
+	const CreateRoomRequest createRoomRequest = JsonRequestPacketDeserializer::deserializeCreateRoomRequest(
+		requestInfo.buffer);
 	RoomData roomData;
 	roomData.timePerQuestion = createRoomRequest.answerTimeout;
 	roomData.maxPlayers = createRoomRequest.maxUsers;
@@ -116,7 +125,8 @@ RequestResult MenuRequestHandler::createRoom(RequestInfo requestInfo) const
 	roomData.id = 0;
 	const int id = this->m_requestHandlerFactory->getRoomManager().createRoom(m_user, roomData);
 	result.buffer = JsonResponsePacketSerializer::serializeCreateRoomResponse(num);
-	result.newHandler = this->m_requestHandlerFactory->createRoomAdminRequestHandler(this->m_user, this->m_requestHandlerFactory->getRoomManager().getRoom(id));
+	result.newHandler = this->m_requestHandlerFactory->createRoomAdminRequestHandler(
+		this->m_user, this->m_requestHandlerFactory->getRoomManager().getRoom(id));
 	return result;
 }
 
@@ -125,7 +135,8 @@ RequestResult MenuRequestHandler::addQuestion(RequestInfo requestInfo)
 	RequestResult result;
 	AddQuestionResponse num;
 	num.status = ADD_QUESTION_CODE;
-	AddQuestionRequest addQuestionRequest = JsonRequestPacketDeserializer::deserializeAddQuestionRequest(requestInfo.buffer);
+	AddQuestionRequest addQuestionRequest = JsonRequestPacketDeserializer::deserializeAddQuestionRequest(
+		requestInfo.buffer);
 	Question question;
 	question.setQuestion(addQuestionRequest.question);
 	question.setCorrectAnswer(addQuestionRequest.correctAnswer);

@@ -16,6 +16,7 @@ LoginRequest JsonRequestPacketDeserializer::deserializeLoginRequest(std::vector<
 	parsedData.username = username;
 	return parsedData;
 }
+
 /*
 function parses the json part of a packet and returns the content of the fields
 input: vector of unsigned chars (bytes) representing the json string
@@ -34,6 +35,7 @@ SignupRequest JsonRequestPacketDeserializer::deserializeSignupRequest(std::vecto
 	parsedData.username = username;
 	return parsedData;
 }
+
 /*
 * function parses the json part of a packet and returns the content of the fields
 * input: vector of unsigned chars (bytes) representing the json string

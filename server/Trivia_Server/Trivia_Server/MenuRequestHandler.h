@@ -23,7 +23,8 @@ class RequestHandlerFactory;
 class MenuRequestHandler : public IRequestHandler
 {
 public:
-	MenuRequestHandler(LoggedUser loggedUser, RoomManager* roomManager, StatisticsManager* statisticsManager, RequestHandlerFactory* requestHandlerFactory);
+	MenuRequestHandler(LoggedUser loggedUser, RoomManager* roomManager, StatisticsManager* statisticsManager,
+	                   RequestHandlerFactory* requestHandlerFactory);
 	~MenuRequestHandler() override;
 	bool isRequestRelevant(RequestInfo requestInfo) override;
 	RequestResult handleRequest(RequestInfo requestInfo) override;

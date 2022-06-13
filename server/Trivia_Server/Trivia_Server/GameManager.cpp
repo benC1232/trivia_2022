@@ -24,7 +24,8 @@ GameManager::~GameManager()
 Game* GameManager::createGame(Room room)
 {
 	const auto players = new std::map<LoggedUser, GameData>();
-	for (auto user : room.getAllUsersVector()) {
+	for (auto user : room.getAllUsersVector())
+	{
 		GameData gd;
 		gd.currentQuestion = Question();
 		gd.correctAnswerCount = 0;
@@ -45,7 +46,8 @@ Game* GameManager::createGame(Room room)
 void GameManager::deleteGame(const Game* game)
 {
 	const auto it = std::find(m_games.begin(), m_games.end(), game);
-	if (it != m_games.end()) {
+	if (it != m_games.end())
+	{
 		m_games.erase(it);
 	}
 }
@@ -57,8 +59,10 @@ void GameManager::deleteGame(const Game* game)
  */
 Game* GameManager::getGame(LoggedUser user) const
 {
-	for (const auto game : m_games) {
-		if (game->isInGame(user)) {
+	for (const auto game : m_games)
+	{
+		if (game->isInGame(user))
+		{
 			return game;
 		}
 	}

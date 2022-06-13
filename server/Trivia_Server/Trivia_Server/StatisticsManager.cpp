@@ -4,7 +4,9 @@
  * statistics manager constructor
  * input: db (IDatabase*)
  */
-StatisticsManager::StatisticsManager(IDatabase* db) : m_database(db) {}
+StatisticsManager::StatisticsManager(IDatabase* db) : m_database(db)
+{
+}
 
 StatisticsManager::~StatisticsManager()
 {

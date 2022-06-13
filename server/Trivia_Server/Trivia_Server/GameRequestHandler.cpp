@@ -8,7 +8,8 @@
  * the constructor of the gameRequestHandler class
  * input: gameManager(GameManager*), loggedUser(LoggedUser), requestHandlerFactory(RequestHandlerFactory*), game(Game*)
  */
-GameRequestHandler::GameRequestHandler(GameManager* gameManager, LoggedUser loggedUser, RequestHandlerFactory* requestHandlerFactory, Game* game)
+GameRequestHandler::GameRequestHandler(GameManager* gameManager, LoggedUser loggedUser,
+                                       RequestHandlerFactory* requestHandlerFactory, Game* game)
 {
 	this->m_gameManager = gameManager;
 	this->m_loggedUser = loggedUser;
@@ -32,7 +33,8 @@ GameRequestHandler::~GameRequestHandler()
  */
 bool GameRequestHandler::isRequestRelevant(RequestInfo requestInfo)
 {
-	return requestInfo.id == LEAVE_GAME_CODE || requestInfo.id == GET_QUESTION_CODE || requestInfo.id == SUBMIT_ANSWER_CODE || requestInfo.id == GET_GAME_RESULT_CODE;
+	return requestInfo.id == LEAVE_GAME_CODE || requestInfo.id == GET_QUESTION_CODE || requestInfo.id ==
+		SUBMIT_ANSWER_CODE || requestInfo.id == GET_GAME_RESULT_CODE;
 }
 
 /*
@@ -79,7 +81,8 @@ RequestResult GameRequestHandler::getQuestion()
 	RequestResult result;
 	try
 	{
-		Question returnedQuestion = this->m_requestHandlerFactory->getGameManager().getGame(this->m_loggedUser)->getQuestionForUser(this->m_loggedUser);
+		Question returnedQuestion = this->m_requestHandlerFactory->getGameManager().getGame(this->m_loggedUser)->
+		                                  getQuestionForUser(this->m_loggedUser);
 		response.question = returnedQuestion.getQuestion();
 		std::vector<std::string> answers = returnedQuestion.getIncorrectAnswers();
 		answers.push_back(returnedQuestion.getCorrectAnswer());
@@ -110,7 +113,8 @@ RequestResult GameRequestHandler::getQuestion()
 RequestResult GameRequestHandler::submitAnswer(const RequestInfo requestInfo)
 {
 	RequestResult result;
-	const SubmitAnswerRequest request = JsonRequestPacketDeserializer::deserializeSubmitAnswerRequest(requestInfo.buffer);
+	const SubmitAnswerRequest request = JsonRequestPacketDeserializer::deserializeSubmitAnswerRequest(
+		requestInfo.buffer);
 	SubmitAnswerResponse response;
 	response.status = SUBMIT_ANSWER_CODE;
 	response.isCorrect = this->m_game->submitAnswer(this->m_loggedUser, request.answer, request.responseTime);
@@ -141,7 +145,10 @@ RequestResult GameRequestHandler::getGameResults()
 				break;
 			}
 		}
-		this->m_requestHandlerFactory->getDatabase().addStatistics(response.results[index].username, response.results[index].averageAnswerTime, response.results[index].correctAnswerCount, response.results[index].wrongAnswerCount);
+		this->m_requestHandlerFactory->getDatabase().addStatistics(response.results[index].username,
+		                                                           response.results[index].averageAnswerTime,
+		                                                           response.results[index].correctAnswerCount,
+		                                                           response.results[index].wrongAnswerCount);
 	}
 	result.buffer = JsonResponsePacketSerializer::serializeGetGameResultResponse(response);
 	result.newHandler = this;

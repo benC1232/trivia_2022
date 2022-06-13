@@ -2,6 +2,7 @@
 #include <string>
 #include <vector>
 #include "LoggedUser.h"
+
 //room data struct
 struct RoomData
 {
@@ -12,6 +13,7 @@ struct RoomData
 	unsigned int timePerQuestion;
 	bool isActive;
 };
+
 class Room
 {
 public:

@@ -5,12 +5,13 @@
 #include "LoggedUser.h"
 #include "Question.h"
 
-typedef struct GameData {
+using GameData = struct GameData
+{
 	Question currentQuestion;
 	unsigned int correctAnswerCount{};
 	unsigned int wrongAnswerCount{};
 	unsigned int averageAnswerTime{};
-} GameData;
+};
 
 class Game
 {

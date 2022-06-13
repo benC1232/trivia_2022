@@ -2,16 +2,20 @@
 #define CLOSE_ROOM_CODE 10
 #define START_GAME_CODE 11
 #define GET_ROOM_STATE_CODE 12
-RoomAdminRequestHandler::RoomAdminRequestHandler(Room* room, LoggedUser user, RoomManager* roomManager, RequestHandlerFactory* requestHandlerFactory)
+
+RoomAdminRequestHandler::RoomAdminRequestHandler(Room* room, LoggedUser user, RoomManager* roomManager,
+                                                 RequestHandlerFactory* requestHandlerFactory)
 {
 	this->m_room = room;
 	this->m_user = user;
 	this->m_roomManager = roomManager;
 	this->m_requestHandlerFactory = requestHandlerFactory;
 }
+
 bool RoomAdminRequestHandler::isRequestRelevant(RequestInfo requestInfo)
 {
-	return requestInfo.id == CLOSE_ROOM_CODE || requestInfo.id == START_GAME_CODE || requestInfo.id == GET_ROOM_STATE_CODE;
+	return requestInfo.id == CLOSE_ROOM_CODE || requestInfo.id == START_GAME_CODE || requestInfo.id ==
+		GET_ROOM_STATE_CODE;
 }
 
 RequestResult RoomAdminRequestHandler::handleRequest(RequestInfo requestInfo)

@@ -15,6 +15,6 @@ public:
 	void run();
 private:
 	Communicator* m_communicator;
-	RequestHandlerFactory *m_requestHandlerFactory;
+	RequestHandlerFactory* m_requestHandlerFactory;
 	IDatabase* m_database;
 };

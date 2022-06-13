@@ -30,14 +30,17 @@ Question Game::getQuestionForUser(LoggedUser user)
 {
 	Question q;
 	q.setQuestion("");
-	if (this->m_players.at(user).currentQuestion.getQuestion() == q.getQuestion()) {
+	if (this->m_players.at(user).currentQuestion.getQuestion() == q.getQuestion())
+	{
 		this->m_players.at(user).currentQuestion = this->m_questions.at(0);
 		return this->m_questions[0];
 	}
 	int idx = 0;
 	std::cout << "reached the loop somehow" << std::endl;
-	for (auto question : this->m_questions) {
-		if (question.getQuestion() == m_players.at(user).currentQuestion.getQuestion()) {
+	for (auto question : this->m_questions)
+	{
+		if (question.getQuestion() == m_players.at(user).currentQuestion.getQuestion())
+		{
 			break;
 		}
 		idx++;
@@ -68,7 +71,9 @@ bool Game::submitAnswer(LoggedUser user, std::string answer, int time)
 		this->m_players[user].wrongAnswerCount++;
 		result = false;
 	}
-	this->m_players[user].averageAnswerTime = (((this->m_players[user].averageAnswerTime * (this->m_players[user].correctAnswerCount + this->m_players[user].wrongAnswerCount) - 1) + time) / (this->m_players[user].correctAnswerCount + this->m_players[user].wrongAnswerCount));
+	this->m_players[user].averageAnswerTime = (((this->m_players[user].averageAnswerTime * (this->m_players[user].
+		correctAnswerCount + this->m_players[user].wrongAnswerCount) - 1) + time) / (this->m_players[user].
+			correctAnswerCount + this->m_players[user].wrongAnswerCount));
 	return result;
 }
 
@@ -85,7 +90,8 @@ void Game::removePlayer(LoggedUser user)
 std::vector<PlayerResults> Game::getResults()
 {
 	auto output = std::vector<PlayerResults>();
-	for (auto i = this->m_players.begin(); i != this->m_players.end(); ++i) {
+	for (auto i = this->m_players.begin(); i != this->m_players.end(); ++i)
+	{
 		PlayerResults result;
 		auto loggedUserName = i->first;
 		result.username = loggedUserName.getUsername();
@@ -95,8 +101,9 @@ std::vector<PlayerResults> Game::getResults()
 		output.push_back(result);
 	}
 
-	std::sort(output.begin(), output.end(), [](const PlayerResults& lhs, const PlayerResults& rhs) {
-		return lhs.correctAnswerCount > rhs.correctAnswerCount;
+	std::sort(output.begin(), output.end(), [](const PlayerResults& lhs, const PlayerResults& rhs)
+		{
+			return lhs.correctAnswerCount > rhs.correctAnswerCount;
 		});
 	return output;
 }

@@ -6,50 +6,61 @@
 
 using Buffer = std::vector<unsigned char>;
 
-struct LoginResponse {
+struct LoginResponse
+{
 	unsigned int status;
 };
 
-struct SignupResponse {
+struct SignupResponse
+{
 	unsigned int status;
 };
 
-struct ErrorResponse {
+struct ErrorResponse
+{
 	std::string message;
 };
 
-struct LogoutResponse {
+struct LogoutResponse
+{
 	unsigned int status;
 };
 
-struct GetRoomResponse {
+struct GetRoomResponse
+{
 	unsigned int status;
 	std::vector<RoomData> rooms;
 };
 
-struct GetPlayersInRoomsResponse {
+struct GetPlayersInRoomsResponse
+{
 	std::vector<std::string> players;
 };
 
-struct GetHighScoreRespnse {
+struct GetHighScoreRespnse
+{
 	unsigned int status;
 	std::vector<std::string> statistics;
 };
 
-struct GetPersonalStatsResponse {
+struct GetPersonalStatsResponse
+{
 	unsigned int status;
 	std::vector<std::string> statistics;
 };
 
-struct JoinRoomResponse {
+struct JoinRoomResponse
+{
 	unsigned int status;
 };
 
-struct CreateRoomResponse {
+struct CreateRoomResponse
+{
 	unsigned int status;
 };
 
-struct CloseRoomResponse {
+struct CloseRoomResponse
+{
 	unsigned int status;
 };
 
@@ -58,7 +69,8 @@ struct StartGameResponse
 	unsigned int status;
 };
 
-struct GetRoomStateResponse {
+struct GetRoomStateResponse
+{
 	unsigned int status;
 	bool hasGameBegun;
 	std::vector<std::string> players;
@@ -66,34 +78,39 @@ struct GetRoomStateResponse {
 	unsigned int answerTimeOut;
 };
 
-struct LeaveRoomResponse {
+struct LeaveRoomResponse
+{
 	unsigned int status;
 };
 
-struct LeaveGameResponse {
+struct LeaveGameResponse
+{
 	unsigned int status;
 };
 
-struct GetQuestionResponse {
+struct GetQuestionResponse
+{
 	unsigned int status;
 	std::string question;
 	std::vector<std::string> answers;
-
 };
 
-struct SubmitAnswerResponse {
+struct SubmitAnswerResponse
+{
 	unsigned int status;
 	bool isCorrect;
 };
 
-typedef struct{
+using PlayerResults = struct
+{
 	std::string username;
 	unsigned int correctAnswerCount;
 	unsigned int wrongAnswerCount;
 	unsigned int averageAnswerTime;
-} PlayerResults ;
+};
 
-struct GetGameResultsResponse {
+struct GetGameResultsResponse
+{
 	unsigned int status;
 	std::vector<PlayerResults> results;
 };
@@ -103,7 +120,8 @@ struct AddQuestionResponse
 	unsigned int status;
 };
 
-class JsonResponsePacketSerializer {
+class JsonResponsePacketSerializer
+{
 public:
 	static Buffer serializeLoginResponse(struct LoginResponse loginResponse);
 	static Buffer serializeSignupResponse(struct SignupResponse signupResponse);

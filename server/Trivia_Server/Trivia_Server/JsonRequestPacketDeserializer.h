@@ -11,6 +11,7 @@ struct LoginRequest
 	std::string password;
 	std::string username;
 };
+
 //signup request struct
 struct SignupRequest
 {
@@ -18,16 +19,19 @@ struct SignupRequest
 	std::string password;
 	std::string email;
 };
+
 //get players in room request struct
 struct GetPlayersInRoomRequest
 {
 	unsigned int roomId;
 };
+
 //join room request struct
 struct JoinRoomRequest
 {
 	unsigned int roomId;
 };
+
 //add question request struct
 struct AddQuestionRequest
 {
@@ -46,6 +50,7 @@ struct CreateRoomRequest
 	unsigned int answerTimeout;
 	unsigned int questionCount;
 };
+
 struct SubmitAnswerRequest
 {
 	std::string answer;
