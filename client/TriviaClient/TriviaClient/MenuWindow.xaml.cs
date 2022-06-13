@@ -64,6 +64,9 @@ namespace TriviaClient
 
         private void AddQuestionBtn_OnClick(object sender, RoutedEventArgs e)
         {
+            addQuestionWindow addQuestion = new addQuestionWindow(this.comm);
+            this.Close();
+            addQuestion.Show();
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
