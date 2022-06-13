@@ -81,8 +81,7 @@ RequestResult GameRequestHandler::getQuestion()
 	{
 		Question returnedQuestion = this->m_requestHandlerFactory->getGameManager().getGame(this->m_loggedUser)->getQuestionForUser(this->m_loggedUser);
 		response.question = returnedQuestion.getQuestion();
-		std::vector<std::string> answers;
-		answers = returnedQuestion.getIncorrectAnswers();
+		std::vector<std::string> answers = returnedQuestion.getIncorrectAnswers();
 		answers.push_back(returnedQuestion.getCorrectAnswer());
 		response.answers = answers;
 		response.status = 1;
@@ -103,7 +102,6 @@ RequestResult GameRequestHandler::getQuestion()
 	result.newHandler = this;
 	return result;
 }
-
 
 /*
  * a function that handles the submit answer request

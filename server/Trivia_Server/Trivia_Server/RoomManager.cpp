@@ -7,8 +7,7 @@ RoomManager::RoomManager()
 
 RoomManager::~RoomManager()
 {
-	std::map<int, Room*>::iterator it;
-	for (it = this->rooms->begin(); it != this->rooms->end(); it++)
+	for (std::map<int, Room*>::iterator it = this->rooms->begin(); it != this->rooms->end(); it++)
 	{
 		delete it->second;
 	}
