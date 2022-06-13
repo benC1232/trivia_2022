@@ -12,7 +12,7 @@ bool MenuRequestHandler::isRequestRelevant(RequestInfo requestInfo)
 		requestInfo.id == GET_ROOMS_REQUEST ||
 		requestInfo.id == GET_PLAYERS_IN_ROOM_REQUEST ||
 		requestInfo.id == JOIN_ROOM_REQUEST ||
-		requestInfo.id == GET_STATISITCS_REQUEST ||
+		requestInfo.id == GET_STATISTICS_REQUEST ||
 		requestInfo.id == LOGOUT_REQUEST ||
 		requestInfo.id == HIGH_SCORE_GET;
 }
@@ -64,7 +64,7 @@ RequestResult MenuRequestHandler::getPersonStats(RequestInfo requestInfo)
 {
 	RequestResult result;
 	GetPersonalStatsResponse num;
-	num.status = GET_STATISITCS_REQUEST;
+	num.status = GET_STATISTICS_REQUEST;
 	num.statistics = this->m_statisticsManager->getUserStatistics(m_user.getUsername());
 	result.buffer = JsonResponsePacketSerializer::serializeGetStatisticsResponse(num);
 	result.newHandler = m_requestHandlerFactory->createMenuRequestHandler(this->m_user);
@@ -155,7 +155,7 @@ RequestResult MenuRequestHandler::handleRequest(RequestInfo requestInfo)
 	{
 		result = getPlayersInRoom(requestInfo);
 	}
-	else if (requestInfo.id == GET_STATISITCS_REQUEST)
+	else if (requestInfo.id == GET_STATISTICS_REQUEST)
 	{
 		result = getPersonStats(requestInfo);
 	}
