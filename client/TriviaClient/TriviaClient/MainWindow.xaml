@@ -12,7 +12,7 @@
     </Window.Background>
     <StackPanel>
         <Button x:Name ="secret" Click="Secret_OnClick" Height="15" BorderThickness="0" Opacity="0"></Button>
-        <Label x:Name="aboutLbl" Padding="20" HorizontalAlignment="Center" Foreground="White"
+        <Label x:Name="aboutLbl" Padding="20" HorizontalAlignment="Center" Foreground="AliceBlue"
                Content="Welcome To The Trivia Game"
                FontSize="50" FontFamily="{StaticResource AmaticSC}" Height="111" />
         <StackPanel HorizontalAlignment="Center" Margin="1">

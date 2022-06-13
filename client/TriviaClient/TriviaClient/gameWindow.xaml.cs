@@ -50,9 +50,14 @@ namespace TriviaClient
         {
             this.secondsWasted++;
             this.countdown.Content = totalSeconds - this.secondsWasted;
+            if (totalSeconds - this.secondsWasted <= 5)
+            {
+                this.countdown.Foreground = Brushes.Red;
+            }
             if (totalSeconds - this.secondsWasted == 0)
             {
                 submitAnswer("never gonna give you up");
+                this.countdown.Foreground = Brushes.White;
                 if (!this.getQuestion())
                 {
                     this.timer.Stop();
