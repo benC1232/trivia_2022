@@ -39,6 +39,11 @@ namespace TriviaClient
             };
             timer.Tick += timer_Tick;
             this.timer.Start();
+            this.refresh();
+        }
+
+        private void refresh()
+        {
             var arr = new byte[1];
             arr[0] = 1;
             this.comm.Send(17, arr);
@@ -62,6 +67,11 @@ namespace TriviaClient
         {
             this.countdown.Content = Int32.Parse(this.countdown.Content.ToString()) - 1;
             this.secondsWasted++;
+            if ((secondsWasted)%3==0)
+            {
+                this.refresh();
+                
+            }
             if (this.secondsWasted == 30)
             {
                 this.leave();
