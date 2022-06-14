@@ -86,6 +86,13 @@ RequestResult MenuRequestHandler::getHighScore(RequestInfo requestInfo) const
 	GetHighScoreRespnse num;
 	num.status = HIGH_SCORE_GET;
 	num.statistics = this->m_statisticsManager->getHighScore();
+	std::sort(num.statistics.begin(), num.statistics.end(), [](const std::string& a, const std::string& b) {
+		std::size_t found = a.find(": ");
+		int aScore = std::stoi(a.substr(found + 2));
+		found = b.find(": ");
+		int bScore = std::stoi(b.substr(found + 2));
+		return aScore > bScore;
+		});
 	result.buffer = JsonResponsePacketSerializer::serializeGetHighScoreResponse(num);
 	result.newHandler = m_requestHandlerFactory->createMenuRequestHandler(this->m_user);
 	return result;
