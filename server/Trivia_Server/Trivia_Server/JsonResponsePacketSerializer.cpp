@@ -20,7 +20,7 @@
 #define GET_QUESTION_RESPONSE 15
 #define SUBMIT_ANSWER_RESPONSE 16
 #define GET_GAME_RESULT_RESPONSE 17
-#define ADD_QUESTION_RESPONSE 42
+#define ADD_QUESTION_RESPONSE 20
 
 using Buffer = std::vector<unsigned char>;
 /*

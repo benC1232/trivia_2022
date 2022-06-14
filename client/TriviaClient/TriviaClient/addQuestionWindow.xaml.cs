@@ -23,6 +23,7 @@ namespace TriviaClient
         {
             InitializeComponent();
             this.comm = c;
+            this.errorLbl.Visibility = Visibility.Hidden;
         }
 
         private void CreateBtn_OnClick(object sender, RoutedEventArgs e)
@@ -42,9 +43,9 @@ namespace TriviaClient
                 addQuestionRequest.wrongAnswer3 = this.WrongAnswer3.Text;
                 string json = JsonConvert.SerializeObject(addQuestionRequest);
                 byte[] data = Encoding.ASCII.GetBytes(json);
-                this.comm.Send(42, data);
+                this.comm.Send(20, data);
                 Tuple<int, byte[]> response = this.comm.Recieve();
-                if (response.Item1 == 42)
+                if (response.Item1 == 20)
                 {
                     var menuWindow = new MenuWindow(this.comm);
                     this.Close();
