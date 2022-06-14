@@ -4,7 +4,7 @@
 #define GET_ROOM_STATE_CODE 12
 
 RoomAdminRequestHandler::RoomAdminRequestHandler(Room* room, LoggedUser user, RoomManager* roomManager,
-                                                 RequestHandlerFactory* requestHandlerFactory)
+	RequestHandlerFactory* requestHandlerFactory)
 {
 	this->m_room = room;
 	this->m_user = user;
@@ -17,7 +17,11 @@ bool RoomAdminRequestHandler::isRequestRelevant(RequestInfo requestInfo)
 	return requestInfo.id == CLOSE_ROOM_CODE || requestInfo.id == START_GAME_CODE || requestInfo.id ==
 		GET_ROOM_STATE_CODE;
 }
-
+/*
+* function handles the requests that this part of the state machine is responsible for
+* input: request - the request that is being handled
+* output: the response that is being sent to the client
+*/
 RequestResult RoomAdminRequestHandler::handleRequest(RequestInfo requestInfo)
 {
 	RequestResult result;
@@ -52,7 +56,11 @@ RequestResult RoomAdminRequestHandler::handleRequest(RequestInfo requestInfo)
 	}
 	return result;
 }
-
+/*
+* function closes the room
+* input: request - the request that is being handled
+* output: the response that is being sent to the client
+*/
 RequestResult RoomAdminRequestHandler::closeRoom(RequestInfo requestInfo) const
 {
 	this->m_requestHandlerFactory->getRoomManager().deleteRoom(this->m_room->getData().id);
@@ -63,7 +71,11 @@ RequestResult RoomAdminRequestHandler::closeRoom(RequestInfo requestInfo) const
 	result.newHandler = this->m_requestHandlerFactory->createMenuRequestHandler(this->m_user);
 	return result;
 }
-
+/*
+* function starts the game
+* input: request - the request that is being handled
+* output: the response that is being sent to the client
+*/
 RequestResult RoomAdminRequestHandler::startGame(RequestInfo requestInfo) const
 {
 	if (this->m_room->getAllUsers().size() == 1)
@@ -79,7 +91,11 @@ RequestResult RoomAdminRequestHandler::startGame(RequestInfo requestInfo) const
 	result.newHandler = this->m_requestHandlerFactory->createGameRequestHandler(this->m_user, game);
 	return result;
 }
-
+/*
+* function gets the state of the room
+* input: request - the request that is being handled
+* output: the response that is being sent to the client
+*/
 RequestResult RoomAdminRequestHandler::getRoomState(RequestInfo requestInfo)
 {
 	RequestResult result;

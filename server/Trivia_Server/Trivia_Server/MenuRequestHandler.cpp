@@ -22,7 +22,11 @@ bool MenuRequestHandler::isRequestRelevant(RequestInfo requestInfo)
 		requestInfo.id == HIGH_SCORE_GET ||
 		requestInfo.id == ADD_QUESTION_CODE;
 }
-
+/*
+* function that handles the signout request
+* input: requestInfo - the request info
+* output: the response to the request
+*/
 RequestResult MenuRequestHandler::signout(RequestInfo requestInfo)
 {
 	RequestResult result;
@@ -35,7 +39,11 @@ RequestResult MenuRequestHandler::signout(RequestInfo requestInfo)
 	result.buffer = JsonResponsePacketSerializer::serializeLogoutResponse(num);
 	return result;
 }
-
+/*
+* function that handles the get rooms request
+* input: requestInfo - the request info
+* output: the response to the request
+*/
 RequestResult MenuRequestHandler::getRooms(RequestInfo requestInfo) const
 {
 	RequestResult result;
@@ -52,7 +60,11 @@ RequestResult MenuRequestHandler::getRooms(RequestInfo requestInfo) const
 	result.buffer = JsonResponsePacketSerializer::serializeGetRoomResponse(num);
 	return result;
 }
-
+/*
+* function that handles the get players in room request
+* input: requestInfo - the request info
+* output: the response to the request
+*/
 RequestResult MenuRequestHandler::getPlayersInRoom(RequestInfo requestInfo) const
 {
 	RequestResult result;
@@ -68,7 +80,11 @@ RequestResult MenuRequestHandler::getPlayersInRoom(RequestInfo requestInfo) cons
 	result.newHandler = m_requestHandlerFactory->createMenuRequestHandler(this->m_user);
 	return result;
 }
-
+/*
+* function that handles the personal stats request
+* input: requestInfo - the request info
+* output: the response to the request
+*/
 RequestResult MenuRequestHandler::getPersonStats(RequestInfo requestInfo)
 {
 	RequestResult result;
@@ -79,7 +95,11 @@ RequestResult MenuRequestHandler::getPersonStats(RequestInfo requestInfo)
 	result.newHandler = m_requestHandlerFactory->createMenuRequestHandler(this->m_user);
 	return result;
 }
-
+/*
+* function that handles the high score request
+* input: requestInfo - the request info
+* output: the response to the request
+*/
 RequestResult MenuRequestHandler::getHighScore(RequestInfo requestInfo) const
 {
 	RequestResult result;
@@ -97,7 +117,11 @@ RequestResult MenuRequestHandler::getHighScore(RequestInfo requestInfo) const
 	result.newHandler = m_requestHandlerFactory->createMenuRequestHandler(this->m_user);
 	return result;
 }
-
+/*
+* function that handles the join room request
+* input: requestInfo - the request info
+* output: the response to the request
+*/
 RequestResult MenuRequestHandler::joinRoom(RequestInfo requestInfo) const
 {
 	RequestResult result;
@@ -116,7 +140,11 @@ RequestResult MenuRequestHandler::joinRoom(RequestInfo requestInfo) const
 		this->m_user, this->m_requestHandlerFactory->getRoomManager().getRoom(joinRoomRequest.roomId));
 	return result;
 }
-
+/*
+* function that handles the create room request
+* input: requestInfo - the request info
+* output: the response to the request
+*/
 RequestResult MenuRequestHandler::createRoom(RequestInfo requestInfo) const
 {
 	RequestResult result;
@@ -137,7 +165,11 @@ RequestResult MenuRequestHandler::createRoom(RequestInfo requestInfo) const
 		this->m_user, this->m_requestHandlerFactory->getRoomManager().getRoom(id));
 	return result;
 }
-
+/*
+* function handles the add question request
+* input: requestInfo - the request info
+* output: the response to the request
+*/
 RequestResult MenuRequestHandler::addQuestion(RequestInfo requestInfo)
 {
 	RequestResult result;
@@ -159,6 +191,11 @@ RequestResult MenuRequestHandler::addQuestion(RequestInfo requestInfo)
 	return result;
 }
 
+/*
+* function handles the requests that this part of the state machine is responsible for
+* input: request - the request that is being handled
+* output: the response that is being sent to the client
+*/
 RequestResult MenuRequestHandler::handleRequest(RequestInfo requestInfo)
 {
 	RequestResult result;

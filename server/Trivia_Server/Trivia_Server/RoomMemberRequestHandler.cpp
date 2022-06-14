@@ -3,7 +3,7 @@
 #define LEAVE_ROOM_CODE 13
 
 RoomMemberRequestHandler::RoomMemberRequestHandler(Room* room, LoggedUser user, RoomManager* roomManager,
-                                                   RequestHandlerFactory* requestHandlerFactory)
+	RequestHandlerFactory* requestHandlerFactory)
 {
 	this->m_room = room;
 	this->m_user = user;
@@ -15,7 +15,11 @@ bool RoomMemberRequestHandler::isRequestRelevant(RequestInfo requestInfo)
 {
 	return requestInfo.id == GET_ROOM_STATE_CODE || requestInfo.id == LEAVE_ROOM_CODE;
 }
-
+/*
+* function handles the requests that this part of the state machine is responsible for
+* input: request - the request that is being handled
+* output: the response that is being sent to the client
+*/
 RequestResult RoomMemberRequestHandler::handleRequest(RequestInfo requestInfo)
 {
 	RequestResult result;
@@ -36,7 +40,11 @@ RequestResult RoomMemberRequestHandler::handleRequest(RequestInfo requestInfo)
 	}
 	return result;
 }
-
+/*
+* function handles the request that the client sent to leave the room
+* input: request - the request that is being handled
+* output: the response that is being sent to the client
+*/
 RequestResult RoomMemberRequestHandler::leaveRoom(RequestInfo requestInfo) const
 {
 	RequestResult result;
@@ -47,7 +55,11 @@ RequestResult RoomMemberRequestHandler::leaveRoom(RequestInfo requestInfo) const
 	result.newHandler = this->m_requestHandlerFactory->createMenuRequestHandler(this->m_user);
 	return result;
 }
-
+/*
+* function handles the request that the client sent to get the room state
+* input: request - the request that is being handled
+* output: the response that is being sent to the client
+*/
 RequestResult RoomMemberRequestHandler::getRoomState(RequestInfo requestInfo)
 {
 	RequestResult result;
