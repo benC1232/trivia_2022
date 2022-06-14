@@ -32,7 +32,7 @@ namespace TriviaClient
             comm.Send(10, data);
             Tuple<int, byte[]> response = this.comm.Recieve();
             string strResponse = Encoding.ASCII.GetString(response.Item2);
-            if (response.Item1 == 10)
+            if (response.Item1 == 9)
             {
                 responseStructs.HighScoreResponse highScoresResponse = JsonConvert.DeserializeObject<responseStructs.HighScoreResponse>(strResponse);
                 string[] splitted = highScoresResponse.highscores.Split(',');
@@ -75,6 +75,13 @@ namespace TriviaClient
             MenuWindow menuWindow = new MenuWindow(comm);
             this.Close();
             menuWindow.Show();
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            e.Cancel = true;
+            this.comm.Disconnect();
+            e.Cancel = false;
         }
     }
 }

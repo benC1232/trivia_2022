@@ -1,7 +1,11 @@
 #include "Communicator.h"
-#define MESSAGE_SIZE 1024
+
+#include <thread>
+#include <exception>
+#define MESSAGE_SIZE 2048
 #define JSON_OFFSET 5
 #define SIGNOUT 8
+
 Communicator::Communicator(RequestHandlerFactory* factory)
 {
 	//copied this code from week 13
@@ -23,8 +27,8 @@ void Communicator::startHandleRequests()
 	struct sockaddr_in sa = { 0 };
 
 	sa.sin_port = htons(PORT); // port that server will listen for
-	sa.sin_family = AF_INET;   // must be AF_INET
-	sa.sin_addr.s_addr = INADDR_ANY;    // when there are few ip's for the machine. We will use always "INADDR_ANY"
+	sa.sin_family = AF_INET; // must be AF_INET
+	sa.sin_addr.s_addr = INADDR_ANY; // when there are few ip's for the machine. We will use always "INADDR_ANY"
 
 	// Connects between the socket and the configuration (port and etc..)
 	if (bind(this->m_serverSocket, (struct sockaddr*)&sa, sizeof(sa)) == SOCKET_ERROR)
@@ -47,8 +51,8 @@ void Communicator::startHandleRequests()
 void Communicator::bindAndListen()
 {
 	// this accepts the client and create a specific socket from server to this client
-// the process will not continue until a client connects to the server
-	SOCKET client_socket = accept(this->m_serverSocket, NULL, NULL);
+	// the process will not continue until a client connects to the server
+	SOCKET client_socket = accept(this->m_serverSocket, nullptr, nullptr);
 	if (client_socket == INVALID_SOCKET)
 		throw std::exception(__FUNCTION__);
 
@@ -62,72 +66,75 @@ void Communicator::handleNewClient(SOCKET clientSocket)
 {
 	IRequestHandler* handler = this->m_handlerFactory->createLoginRequestHandler();
 	this->m_clients.insert({ clientSocket, handler });
-	try
+	//try
+	//{
+	RequestInfo request;
+	RequestResult result;
+	char clientMessage[MESSAGE_SIZE];
+	int jsonSize;
+	std::vector<unsigned char> buffer;
+	char* response;
+	int responseSize;
+	while (request.id != SIGNOUT)
 	{
-		RequestInfo request;
-		RequestResult result;
-		char clientMessage[MESSAGE_SIZE];
-		int jsonSize = 0;
-		std::vector<unsigned char> buffer;
-		char* response;
-		int responseSize;
-		while (request.id != SIGNOUT)
+		if (this->m_clients[clientSocket] == nullptr)
 		{
-			if (this->m_clients[clientSocket] == nullptr)
-			{
-				throw std::exception("request hander is null!!!");
-			}
-			recv(clientSocket, clientMessage, MESSAGE_SIZE, 0);
-			jsonSize = getJsonSize(clientMessage);
-			buffer = msgToBuffer(clientMessage, jsonSize + JSON_OFFSET);
-			request.id = int(buffer[0]);
-			request.receivalTime = std::time(0);
-			request.buffer = buffer;
-			result = handler->handleRequest(request);
-			handler = result.newHandler;
-			if (request.id != SIGNOUT)
-			{
-				response = bufferToMsg(result.buffer);
-				responseSize = result.buffer.size();
-				send(clientSocket, response, responseSize, 0);
-				delete response;
-			}
+			throw std::exception("request handler is null!!!");
+			break;
 		}
-		this->m_clients.erase(clientSocket);
-		closesocket(clientSocket);
-		std::cout << "socket closed successfully" << std::endl;
-		//old code
-		/*
-		char clientMessage[MESSAGE_SIZE];
+		//receiving message
 		recv(clientSocket, clientMessage, MESSAGE_SIZE, 0);
-		int jsonSize = getJsonSize(clientMessage);
-		std::vector<unsigned char> buffer = msgToBuffer(clientMessage, jsonSize + JSON_OFFSET);
-		RequestInfo request;
-		request.id = int(buffer[0]);
-		request.receivalTime = std::time(0);
+		jsonSize = getJsonSize(clientMessage);
+		buffer = msgToBuffer(clientMessage, jsonSize + JSON_OFFSET);
+		//checking for empty message
+		try { request.id = static_cast<int>(buffer.at(0)); }
+		catch (std::exception& e)
+		{
+			std::cout << e.what() << std::endl;
+			break;
+		}
+		if (request.id == 8)
+		{
+			break;
+		}
+		request.receivalTime = std::time(nullptr);
 		request.buffer = buffer;
-		RequestResult result = handler->handleRequest(request);
-		char* response = bufferToMsg(result.buffer);
-		int responseSize = result.buffer.size();
-		send(clientSocket, response, responseSize, 0);
-		delete response;
-		this->m_clients.erase(clientSocket);
-		closesocket(clientSocket);
-		std::cout << "socket closed successfully" << std::endl;
-		*/
+
+		if (handler == nullptr)
+		{
+			throw std::exception("handler is null!!!");
+		}
+		result = handler->handleRequest(request);
+		handler = result.newHandler;
+
+		if (request.id != SIGNOUT)
+		{
+			response = bufferToMsg(result.buffer);
+			responseSize = result.buffer.size();
+			send(clientSocket, response, responseSize, 0);
+			delete response;
+		}
+		else
+		{
+			break;
+		}
 	}
-	catch (const std::exception& e)
+	this->m_clients.erase(clientSocket);
+	closesocket(clientSocket);
+	std::cout << "socket closed successfully" << std::endl;
+	//}
+	/*catch (const std::exception& e)
 	{
 		std::cout << e.what() << std::endl;
 		this->m_clients.erase(clientSocket);
 		closesocket(clientSocket);
-	}
+	}*/
 }
 
 int Communicator::getJsonSize(char buffer[])
 {
-	//dont change!!!!!!!! it works!!!!!!!!
-	int size = (int)(buffer[1] << 24 | buffer[2] << 16 | buffer[3] << 8 | buffer[4]);
+	//don't change!!!!!!!! it works!!!!!!!!
+	const int size = buffer[1] << 24 | buffer[2] << 16 | buffer[3] << 8 | buffer[4];
 	return size;
 }
 

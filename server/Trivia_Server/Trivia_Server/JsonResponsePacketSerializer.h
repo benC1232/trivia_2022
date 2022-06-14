@@ -1,57 +1,66 @@
 #pragma once
-#include "json.hpp"
 #include <string>
 #include <vector>
-#include<bitset>
-#include <iomanip>
-#include <sstream>
 #include "Room.h"
 #define START_OF_JSON_SECTION 5
 
-struct LoginResponse {
+using Buffer = std::vector<unsigned char>;
+
+struct LoginResponse
+{
 	unsigned int status;
 };
 
-struct SignupResponse {
+struct SignupResponse
+{
 	unsigned int status;
 };
 
-struct ErrorResponse {
+struct ErrorResponse
+{
 	std::string message;
 };
 
-struct LogoutResponse {
+struct LogoutResponse
+{
 	unsigned int status;
 };
 
-struct GetRoomResponse {
+struct GetRoomResponse
+{
 	unsigned int status;
 	std::vector<RoomData> rooms;
 };
 
-struct GetPlayersInRoomsResponse {
+struct GetPlayersInRoomsResponse
+{
 	std::vector<std::string> players;
 };
 
-struct GetHighScoreRespnse {
+struct GetHighScoreRespnse
+{
 	unsigned int status;
 	std::vector<std::string> statistics;
 };
 
-struct GetPersonalStatsResponse {
+struct GetPersonalStatsResponse
+{
 	unsigned int status;
 	std::vector<std::string> statistics;
 };
 
-struct JoinRoomResponse {
+struct JoinRoomResponse
+{
 	unsigned int status;
 };
 
-struct CreateRoomResponse {
+struct CreateRoomResponse
+{
 	unsigned int status;
 };
 
-struct CloseRoomResponse {
+struct CloseRoomResponse
+{
 	unsigned int status;
 };
 
@@ -60,7 +69,8 @@ struct StartGameResponse
 	unsigned int status;
 };
 
-struct GetRoomStateResponse {
+struct GetRoomStateResponse
+{
 	unsigned int status;
 	bool hasGameBegun;
 	std::vector<std::string> players;
@@ -68,24 +78,69 @@ struct GetRoomStateResponse {
 	unsigned int answerTimeOut;
 };
 
-struct LeaveRoomResponse {
+struct LeaveRoomResponse
+{
 	unsigned int status;
 };
 
-class JsonResponsePacketSerializer {
+struct LeaveGameResponse
+{
+	unsigned int status;
+};
+
+struct GetQuestionResponse
+{
+	unsigned int status;
+	std::string question;
+	std::vector<std::string> answers;
+};
+
+struct SubmitAnswerResponse
+{
+	unsigned int status;
+	bool isCorrect;
+};
+
+
+typedef struct PlayerResults
+{
+	std::string username;
+	unsigned int correctAnswerCount;
+	unsigned int wrongAnswerCount;
+	unsigned int averageAnswerTime;
+}PlayerResults;
+
+struct GetGameResultsResponse
+{
+	unsigned int status;
+	std::vector<PlayerResults> results;
+};
+
+struct AddQuestionResponse
+{
+	unsigned int status;
+};
+
+class JsonResponsePacketSerializer
+{
 public:
-	static std::vector<unsigned char> serializeLoginResponse(struct LoginResponse loginResponse);
-	static std::vector<unsigned char> serializeSignupResponse(struct SignupResponse signupResponse);
-	static std::vector<unsigned char> serializeErrorResponse(struct ErrorResponse errorResponse);
-	static std::vector<unsigned char> serializeLogoutResponse(struct LogoutResponse logoutResponse);
-	static std::vector<unsigned char> serializeGetRoomResponse(struct GetRoomResponse getRoomResponse);
-	static std::vector<unsigned char> serializeGetPlayersInRoomsResponse(struct GetPlayersInRoomsResponse getPlayersInRoomsResponse);
-	static std::vector<unsigned char>  serializeJoinRoomResponse(struct JoinRoomResponse joinRoomResponse);
-	static std::vector<unsigned char>  serializeCreateRoomResponse(struct CreateRoomResponse createRoomResponse);
-	static std::vector<unsigned char> serializeGetStatisticsResponse(struct GetPersonalStatsResponse getPresonalStatsResponse);
-	static std::vector<unsigned char> serializeGetHighScoreResponse(struct GetHighScoreRespnse getHighScoreResponse);
-	static std::vector<unsigned char> serializeCloseRoomResponse(struct CloseRoomResponse closeRoomResponse);
-	static std::vector<unsigned char> serializeStartGameResponse(struct StartGameResponse startGameResponse);
-	static std::vector<unsigned char> serializeGetRoomStateResponse(struct GetRoomStateResponse getRoomStateResponse);
-	static std::vector<unsigned char> serializeLeaveRoomResponse(struct LeaveRoomResponse leaveRoomResponse);
+	static Buffer serializeLoginResponse(struct LoginResponse loginResponse);
+	static Buffer serializeSignupResponse(struct SignupResponse signupResponse);
+	static Buffer serializeErrorResponse(struct ErrorResponse errorResponse);
+	static Buffer serializeLogoutResponse(struct LogoutResponse logoutResponse);
+	static Buffer serializeGetRoomResponse(struct GetRoomResponse getRoomResponse);
+	static Buffer serializeGetPlayersInRoomsResponse(struct GetPlayersInRoomsResponse getPlayersInRoomsResponse);
+	static Buffer serializeJoinRoomResponse(struct JoinRoomResponse joinRoomResponse);
+	static Buffer serializeCreateRoomResponse(struct CreateRoomResponse createRoomResponse);
+	static Buffer serializeGetStatisticsResponse(struct GetPersonalStatsResponse getPersonalStatsResponse);
+	static Buffer serializeGetHighScoreResponse(struct GetHighScoreRespnse getHighScoreResponse);
+	static Buffer serializeCloseRoomResponse(struct CloseRoomResponse closeRoomResponse);
+	static Buffer serializeStartGameResponse(struct StartGameResponse startGameResponse);
+	static Buffer serializeGetRoomStateResponse(struct GetRoomStateResponse getRoomStateResponse);
+	static Buffer serializeLeaveRoomResponse(struct LeaveRoomResponse leaveRoomResponse);
+	static Buffer serializeGetGameResultResponse(struct GetGameResultsResponse getGameResultResponse);
+	static Buffer serializeSubmitAnswerResponse(struct SubmitAnswerResponse submitAnswerResponse);
+	static Buffer serializeGetQuestionResponse(struct GetQuestionResponse getQuestionResponse);
+	static Buffer serializeLeaveGameResponse(struct LeaveGameResponse leaveGameResponse);
+	static Buffer serializeAddQuestionResponse(struct AddQuestionResponse addQuestionResponse);
 };

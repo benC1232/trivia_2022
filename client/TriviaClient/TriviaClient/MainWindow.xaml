@@ -5,15 +5,16 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TriviaClient"
         mc:Ignorable="d"
-
+        ResizeMode="NoResize"
         Title="SignUp/Login Screen" Height="720" Width="1280">
     <Window.Background>
         <ImageBrush ImageSource="/Resources/bg.png" Stretch="Fill" />
     </Window.Background>
     <StackPanel>
-        <Label x:Name="aboutLbl" Padding="45" HorizontalAlignment="Center" Foreground="White"
-               Content="Welcome To The Trivia Game. GUI inspired by the hit game amongus"
-               FontSize="50" FontFamily="{StaticResource AmaticSC}" />
+        <Button x:Name ="secret" Click="Secret_OnClick" Height="15" BorderThickness="0" Opacity="0"></Button>
+        <Label x:Name="aboutLbl" Padding="20" HorizontalAlignment="Center" Foreground="AliceBlue"
+               Content="Welcome To The Trivia Game"
+               FontSize="50" FontFamily="{StaticResource AmaticSC}" Height="111" />
         <StackPanel HorizontalAlignment="Center" Margin="1">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                 <Button x:Name="LogInBtn" Click="LogInBtn_Click" FontSize="50" FontFamily="{StaticResource AmaticSC}" Background="black" BorderBrush="white" Foreground="White" FontWeight="Bold" BorderThickness="6" Content="Log In" Height="80"  Width="200">
@@ -66,7 +67,7 @@
                 </TextBox>
             </StackPanel>
 
-            <Label Height="70" />
+            <Label Height="92" />
 
             <Button x:Name="SubmitBtn" Click="SubmitBtn_Click"  FontSize="50" FontFamily="{StaticResource AmaticSC}" Background="black" BorderBrush="white" Foreground="White" FontWeight="Bold" BorderThickness="6" Content="Submit" Height="80"  Width="200" RenderTransformOrigin="0.518,2.362">
                 <Button.Resources>
@@ -75,7 +76,10 @@
                     </Style>
                 </Button.Resources>
             </Button>
+
         </StackPanel>
+        <Label Height="16"/>
         <TextBlock x:Name="errorLbl" HorizontalAlignment="Center" Text ="there has been an error!" FontSize="40" FontFamily="{StaticResource AmaticSC}" Background="Transparent" Foreground="DarkRed" />
+
     </StackPanel>
 </Window>

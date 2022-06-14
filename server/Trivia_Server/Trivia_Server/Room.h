@@ -2,6 +2,7 @@
 #include <string>
 #include <vector>
 #include "LoggedUser.h"
+
 //room data struct
 struct RoomData
 {
@@ -10,8 +11,9 @@ struct RoomData
 	unsigned int maxPlayers;
 	unsigned int numOfQuestionsInGame;
 	unsigned int timePerQuestion;
-	unsigned int isActive;
+	bool isActive;
 };
+
 class Room
 {
 public:
@@ -19,10 +21,12 @@ public:
 	Room(RoomData data);
 	void addUser(LoggedUser user);
 	void removeUser(LoggedUser user);
-	std::vector<std::string> getAllUsers();
-	unsigned int getIsActive();
+	std::vector<std::string> getAllUsers() const;
+	unsigned int getIsActive() const;
 	RoomData getData();
+	std::vector<LoggedUser> getAllUsersVector();
+	void setIsActive(bool isActive);
+	std::vector<LoggedUser> m_users;
 private:
 	RoomData m_metadata;
-	std::vector<LoggedUser> m_users;
 };

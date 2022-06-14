@@ -1,7 +1,8 @@
 #include <iostream>
-#include "WSAInitializer.h"
-#include "Server.h"
 #include <string>
+#include "Server.h"
+#include "WSAInitializer.h"
+
 int main()
 {
 	//took this from week 13
@@ -21,7 +22,6 @@ int main()
 	{
 		std::cout << "an exception has been thrown: " << e.what() << std::endl;
 		delete server;
-		exit(1);
 	}
 	return 0;
 }

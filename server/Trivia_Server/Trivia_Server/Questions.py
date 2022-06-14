@@ -68,16 +68,19 @@ def add_questions_to_database(list_of_questions,db: str):
     #loop over the list of questions and add them to the database
     for question in list_of_questions:
         #get the question
-        question_text = question['question'].replace('&quot;','"').replace('&#039;',"'")
+        question_text = question['question'].replace("'", "").replace("\"","/").replace("&#039;","").replace("&quot;","").replace("&amp;","&").replace("&eacute;","e")
+    
         #check if the name of the question is already in the database if it is skip it
-        c.execute("SELECT * FROM questions WHERE question = ?", (question_text,))
+        c.execute("SELECT * FROM questions WHERE question = ?", (question['question'],))
         if c.fetchone() is not None:
             print("skipping question: " + question_text)
             continue
         #get the correct answer
-        correct_answer = question['correct_answer']
+        correct_answer = question['correct_answer'].replace("'", "").replace("\"","/").replace("&#039;","").replace("&quot;","").replace("&amp;","&").replace("&eacute;","e")
         #get the wrong answers
         wrong_answers = question['incorrect_answers']
+        for i in range(len(wrong_answers)):
+            wrong_answers[i] = wrong_answers[i].replace("'", "").replace("\"","/").replace("&#039;","").replace("&quot;","").replace("&amp;","&").replace("&eacute;","e")
         #add the question to the database
         c.execute("INSERT INTO questions (question,correctanswer,wronganswer1,wronganswer2,wronganswer3) VALUES (?,?,?,?,?)",(question_text,correct_answer,wrong_answers[0],wrong_answers[1],wrong_answers[2]))
     #commit the changes
@@ -91,9 +94,9 @@ def main():
     #convert the json to a list
     data = json_to_list(json_file)
     #add the questions to the database "\server\Trivia_Server\Trivia_Server\Trivia.sqlite"
-    add_questions_to_database(data, "/server/Trivia_Server/Trivia_Server/Trivia.sqlite")
+    add_questions_to_database(data, "Trivia.sqlite")
 
 if __name__ == "__main__":
-    for i in range(40):
+    for i in range(50):
         main()
-        
+   

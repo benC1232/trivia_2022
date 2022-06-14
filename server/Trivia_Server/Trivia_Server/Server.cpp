@@ -1,5 +1,7 @@
 #include "Server.h"
 
+#include <thread>
+
 Server::Server()
 {
 	this->m_database = new SqliteDataBase();

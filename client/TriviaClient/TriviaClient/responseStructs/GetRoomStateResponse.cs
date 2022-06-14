@@ -9,7 +9,7 @@ namespace TriviaClient.responseStructs
     internal struct GetRoomStateResponse
     {
         public int status;
-        public int hasGameBegun;
+        public bool hasGameBegun;
         public string players;
         public int questionCount;
         public int answerTimeout;

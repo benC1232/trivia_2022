@@ -44,7 +44,7 @@ namespace TriviaClient
                 string totalAnswers = parsedResponse[2].Split(':')[1];
                 this.NumOfAnswersLbl.Content = totalAnswers;
                 string gameNum = parsedResponse[3].Split(':')[1];
-                this.NumOfGamesLbl.Content = gameNum;
+                this.NumOfGamesLbl.Content = Int32.Parse(gameNum).ToString();
             }
             if (response.Item1 == 3)
             {
@@ -59,6 +59,13 @@ namespace TriviaClient
             MenuWindow menuWindow = new MenuWindow(this.comm);
             this.Close();
             menuWindow.Show();
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            e.Cancel = true;
+            this.comm.Disconnect();
+            e.Cancel = false;
         }
     }
 }

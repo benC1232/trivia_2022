@@ -46,6 +46,26 @@ namespace TriviaClient
             }
         }
 
+        public MainWindow(Communicator c)
+        {
+            InitializeComponent();
+            this.comm = c;
+            this.UsernamePanel.Visibility = Visibility.Hidden;
+            this.PasswordPanel.Visibility = Visibility.Hidden;
+            this.EmailPanel.Visibility = Visibility.Hidden;
+            this.errorLbl.Visibility = Visibility.Hidden;
+            try
+            {
+                comm.Connect();
+            }
+            catch (Exception e)
+            {
+                this.errorLbl.Visibility = Visibility.Visible;
+                this.errorLbl.Text = e.Message;
+                return;
+            }
+        }
+
         private void LogInBtn_Click(object sender, RoutedEventArgs e)
         {
             this.login = true;
@@ -91,10 +111,13 @@ namespace TriviaClient
                         Tuple<int, byte[]> response = comm.Recieve();
                         if (response.Item1 == 3)
                         {
-                            responseStructs.ErrorResponse errResponse = JsonConvert.DeserializeObject<responseStructs.ErrorResponse>(Encoding.ASCII.GetString(response.Item2));
+                            responseStructs.ErrorResponse errResponse =
+                                JsonConvert.DeserializeObject<responseStructs.ErrorResponse>(
+                                    Encoding.ASCII.GetString(response.Item2));
                             this.errorLbl.Visibility = Visibility.Visible;
                             this.errorLbl.Text = errResponse.message;
                         }
+
                         if (response.Item1 == 1)
                         {
                             //login success
@@ -105,7 +128,7 @@ namespace TriviaClient
                             this.UsernameTxt.Text = "";
                             this.PasswordTxt.Text = "";
                             this.EmailTxt.Text = "";
-
+                            this.comm.signoutFlag = true;
                             MenuWindow menu = new MenuWindow(this.comm);
                             this.Close();
                             menu.Show();
@@ -138,7 +161,9 @@ namespace TriviaClient
                         Tuple<int, byte[]> response = comm.Recieve();
                         if (response.Item1 == 3)
                         {
-                            responseStructs.ErrorResponse errResponse = JsonConvert.DeserializeObject<responseStructs.ErrorResponse>(Encoding.ASCII.GetString(response.Item2));
+                            responseStructs.ErrorResponse errResponse =
+                                JsonConvert.DeserializeObject<responseStructs.ErrorResponse>(
+                                    Encoding.ASCII.GetString(response.Item2));
                             this.errorLbl.Visibility = Visibility.Visible;
                             this.errorLbl.Text = errResponse.message;
                         }
@@ -153,6 +178,7 @@ namespace TriviaClient
                             this.PasswordTxt.Text = "";
                             this.EmailTxt.Text = "";
 
+                            this.comm.signoutFlag = true;
                             MenuWindow menu = new MenuWindow(this.comm);
                             this.Close();
                             menu.Show();
@@ -167,5 +193,22 @@ namespace TriviaClient
                 }
             }
         }
+
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            e.Cancel = true;
+            this.comm.Disconnect();
+            e.Cancel = false;
+        }
+
+
+
+        private void Secret_OnClick(object sender, RoutedEventArgs e)
+        {
+            var uri = "https://www.youtube.com/watch?v=dQw4w9WgXcQ";
+            var psi = new System.Diagnostics.ProcessStartInfo("cmd", "/c start " + uri);
+            System.Diagnostics.Process.Start(psi);
+        }
     }
-}
+}    

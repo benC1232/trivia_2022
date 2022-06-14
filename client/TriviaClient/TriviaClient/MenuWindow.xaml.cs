@@ -61,5 +61,19 @@ namespace TriviaClient
             this.Close();
             leaderBoardWindow.Show();
         }
+
+        private void AddQuestionBtn_OnClick(object sender, RoutedEventArgs e)
+        {
+            addQuestionWindow addQuestion = new addQuestionWindow(this.comm);
+            this.Close();
+            addQuestion.Show();
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            e.Cancel = true;
+            this.comm.Disconnect();
+            e.Cancel = false;
+        }
     }
 }

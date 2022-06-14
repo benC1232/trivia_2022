@@ -1,18 +1,25 @@
 #include "RoomMemberRequestHandler.h"
 #define GET_ROOM_STATE_CODE 12
 #define LEAVE_ROOM_CODE 13
-RoomMemberRequestHandler::RoomMemberRequestHandler(Room* room, LoggedUser user, RoomManager* roomManager, RequestHandlerFactory* requestHandlerFactory)
+
+RoomMemberRequestHandler::RoomMemberRequestHandler(Room* room, LoggedUser user, RoomManager* roomManager,
+	RequestHandlerFactory* requestHandlerFactory)
 {
 	this->m_room = room;
 	this->m_user = user;
 	this->m_roomManager = roomManager;
 	this->m_requestHandlerFactory = requestHandlerFactory;
 }
+
 bool RoomMemberRequestHandler::isRequestRelevant(RequestInfo requestInfo)
 {
 	return requestInfo.id == GET_ROOM_STATE_CODE || requestInfo.id == LEAVE_ROOM_CODE;
 }
-
+/*
+* function handles the requests that this part of the state machine is responsible for
+* input: request - the request that is being handled
+* output: the response that is being sent to the client
+*/
 RequestResult RoomMemberRequestHandler::handleRequest(RequestInfo requestInfo)
 {
 	RequestResult result;
@@ -27,14 +34,18 @@ RequestResult RoomMemberRequestHandler::handleRequest(RequestInfo requestInfo)
 	else
 	{
 		ErrorResponse num;
-		num.message = "error while handling request [room member request handler has recived a wrong code]";
+		num.message = "error while handling request [room member request handler has received a wrong code]";
 		result.buffer = JsonResponsePacketSerializer::serializeErrorResponse(num);
 		result.newHandler = nullptr;
 	}
 	return result;
 }
-
-RequestResult RoomMemberRequestHandler::leaveRoom(RequestInfo requestInfo)
+/*
+* function handles the request that the client sent to leave the room
+* input: request - the request that is being handled
+* output: the response that is being sent to the client
+*/
+RequestResult RoomMemberRequestHandler::leaveRoom(RequestInfo requestInfo) const
 {
 	RequestResult result;
 	this->m_room->removeUser(this->m_user);
@@ -44,7 +55,11 @@ RequestResult RoomMemberRequestHandler::leaveRoom(RequestInfo requestInfo)
 	result.newHandler = this->m_requestHandlerFactory->createMenuRequestHandler(this->m_user);
 	return result;
 }
-
+/*
+* function handles the request that the client sent to get the room state
+* input: request - the request that is being handled
+* output: the response that is being sent to the client
+*/
 RequestResult RoomMemberRequestHandler::getRoomState(RequestInfo requestInfo)
 {
 	RequestResult result;
@@ -57,7 +72,15 @@ RequestResult RoomMemberRequestHandler::getRoomState(RequestInfo requestInfo)
 		getRoomStateResponse.questionCount = this->m_room->getData().numOfQuestionsInGame;
 		getRoomStateResponse.answerTimeOut = this->m_room->getData().timePerQuestion;
 		result.buffer = JsonResponsePacketSerializer::serializeGetRoomStateResponse(getRoomStateResponse);
-		result.newHandler = this;
+		if (this->m_room->getData().isActive)
+		{
+			Game* game = this->m_requestHandlerFactory->getGameManager().getGame(this->m_user);
+			result.newHandler = this->m_requestHandlerFactory->createGameRequestHandler(this->m_user, game);
+		}
+		else
+		{
+			result.newHandler = this;
+		}
 		return result;
 	}
 	catch (std::bad_alloc e)

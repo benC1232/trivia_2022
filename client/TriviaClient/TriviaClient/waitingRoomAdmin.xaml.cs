@@ -19,22 +19,22 @@ namespace TriviaClient
     /// <summary>
     /// Interaction logic for waitingRoomAdmin.xaml
     /// </summary>
-    public partial class waitingRoomAdmin : Window
+    public partial class WaitingRoomAdmin : Window
     {
         private Communicator comm;
         private DispatcherTimer timer;
+        private roomStruct room;
 
-        public waitingRoomAdmin(Communicator c)
+        public WaitingRoomAdmin(Communicator c)
         {
             this.comm = c;
             InitializeComponent();
             this.errorLbl.Visibility = Visibility.Hidden;
-            refresh();
             timer = new System.Windows.Threading.DispatcherTimer();
             timer.Tick += new EventHandler(dispatcherTimer_Tick);
-            //need to change it to 2 seconds
             timer.Interval = new TimeSpan(0, 0, 3);
             timer.Start();
+            refresh();
         }
 
         private void refresh()
@@ -47,12 +47,23 @@ namespace TriviaClient
             if (response.Item1 == 12)
             {
                 responseStructs.GetRoomStateResponse roomState = JsonConvert.DeserializeObject<responseStructs.GetRoomStateResponse>(strResponse);
+                this.room.answerTimeout = roomState.answerTimeout;
+                this.room.hasGameBegun = roomState.hasGameBegun;
+                this.room.questionCount = roomState.questionCount;
                 string[] players = roomState.players.Split(',');
                 string playerText = "";
                 playerText = System.String.Join("\n", players);
                 playerText = "💻 admin -" + playerText;
                 this.PlayersTxtBlck.Text = playerText;
-                //need to check if the game started and if it did go to the game
+                if (roomState.hasGameBegun)
+                {
+                    this.comm.closeRoomFlag = false;
+                    this.comm.leaveGameFlag = true;
+                    this.timer.Stop();
+                    gameWindow GameWindow = new gameWindow(this.comm, room);
+                    this.Close();
+                    GameWindow.Show();
+                }
             }
             else if (response.Item1 == 3)
             {
@@ -77,6 +88,7 @@ namespace TriviaClient
             string strResponse = Encoding.UTF8.GetString(response.Item2);
             if (response.Item1 == 10)
             {
+                this.comm.closeRoomFlag = false;
                 MenuWindow menuWindow = new MenuWindow(this.comm);
                 this.Close();
                 menuWindow.Show();
@@ -93,8 +105,31 @@ namespace TriviaClient
         private void Start_Click(object sender, RoutedEventArgs e)
         {
             this.timer.Stop();
-            errorLbl.Visibility = Visibility.Visible;
-            errorLbl.Text = "we didnt do this part lol";
+            byte[] arr = new byte[1];
+            arr[0] = 1;
+            this.comm.Send(11, arr);
+            Tuple<int, byte[]> response = this.comm.Recieve();
+            if (response.Item1 == 11)
+            {
+                this.comm.closeRoomFlag = false;
+                this.comm.leaveGameFlag = true;
+                gameWindow GameWindow = new gameWindow(this.comm, room);
+                this.Close();
+                GameWindow.Show();
+            }
+            else if (response.Item1 == 3)
+            {
+                responseStructs.ErrorResponse errorResponse = JsonConvert.DeserializeObject<responseStructs.ErrorResponse>(Encoding.UTF8.GetString(response.Item2));
+                this.errorLbl.Visibility = Visibility.Visible;
+                this.errorLbl.Text = errorResponse.message;
+            }
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            e.Cancel = true;
+            this.comm.Disconnect();
+            e.Cancel = false;
         }
     }
 }

@@ -1,15 +1,12 @@
 #pragma once
-#define PORT 6969
+#define PORT 9898
 #pragma comment(lib, "Ws2_32.lib")
-#include <thread>
-#include <WinSock2.h>
 #include <map>
+#include <WinSock2.h>
 #include "IRequestHandler.h"
-#include "RequestHandlerFactory.h"
-#include <iostream>
-#include <exception>
 #include "LoginRequestHandler.h"
-#include "IDatabase.h"
+#include "RequestHandlerFactory.h"
+
 class Communicator
 {
 public:

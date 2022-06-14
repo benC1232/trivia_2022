@@ -2,18 +2,26 @@
 #define CLOSE_ROOM_CODE 10
 #define START_GAME_CODE 11
 #define GET_ROOM_STATE_CODE 12
-RoomAdminRequestHandler::RoomAdminRequestHandler(Room* room, LoggedUser user, RoomManager* roomManager, RequestHandlerFactory* requestHandlerFactory)
+
+RoomAdminRequestHandler::RoomAdminRequestHandler(Room* room, LoggedUser user, RoomManager* roomManager,
+	RequestHandlerFactory* requestHandlerFactory)
 {
 	this->m_room = room;
 	this->m_user = user;
 	this->m_roomManager = roomManager;
 	this->m_requestHandlerFactory = requestHandlerFactory;
 }
+
 bool RoomAdminRequestHandler::isRequestRelevant(RequestInfo requestInfo)
 {
-	return requestInfo.id == CLOSE_ROOM_CODE || requestInfo.id == START_GAME_CODE || requestInfo.id == GET_ROOM_STATE_CODE;
+	return requestInfo.id == CLOSE_ROOM_CODE || requestInfo.id == START_GAME_CODE || requestInfo.id ==
+		GET_ROOM_STATE_CODE;
 }
-
+/*
+* function handles the requests that this part of the state machine is responsible for
+* input: request - the request that is being handled
+* output: the response that is being sent to the client
+*/
 RequestResult RoomAdminRequestHandler::handleRequest(RequestInfo requestInfo)
 {
 	RequestResult result;
@@ -23,7 +31,17 @@ RequestResult RoomAdminRequestHandler::handleRequest(RequestInfo requestInfo)
 	}
 	else if (requestInfo.id == START_GAME_CODE)
 	{
-		result = startGame(requestInfo);
+		try
+		{
+			result = startGame(requestInfo);
+		}
+		catch (std::exception& e)
+		{
+			ErrorResponse num;
+			num.message = e.what();
+			result.buffer = JsonResponsePacketSerializer::serializeErrorResponse(num);
+			result.newHandler = nullptr;
+		}
 	}
 	else if (requestInfo.id == GET_ROOM_STATE_CODE)
 	{
@@ -32,14 +50,18 @@ RequestResult RoomAdminRequestHandler::handleRequest(RequestInfo requestInfo)
 	else
 	{
 		ErrorResponse num;
-		num.message = "error while handling request [room admin request handler has recived a wrong code]";
+		num.message = "error while handling request [room admin request handler has received a wrong code]";
 		result.buffer = JsonResponsePacketSerializer::serializeErrorResponse(num);
 		result.newHandler = nullptr;
 	}
 	return result;
 }
-
-RequestResult RoomAdminRequestHandler::closeRoom(RequestInfo requestInfo)
+/*
+* function closes the room
+* input: request - the request that is being handled
+* output: the response that is being sent to the client
+*/
+RequestResult RoomAdminRequestHandler::closeRoom(RequestInfo requestInfo) const
 {
 	this->m_requestHandlerFactory->getRoomManager().deleteRoom(this->m_room->getData().id);
 	RequestResult result;
@@ -49,13 +71,31 @@ RequestResult RoomAdminRequestHandler::closeRoom(RequestInfo requestInfo)
 	result.newHandler = this->m_requestHandlerFactory->createMenuRequestHandler(this->m_user);
 	return result;
 }
-
-RequestResult RoomAdminRequestHandler::startGame(RequestInfo requestInfo)
+/*
+* function starts the game
+* input: request - the request that is being handled
+* output: the response that is being sent to the client
+*/
+RequestResult RoomAdminRequestHandler::startGame(RequestInfo requestInfo) const
 {
-	//this is for 4.0.0
-	return RequestResult();
+	if (this->m_room->getAllUsers().size() == 1)
+	{
+		throw std::exception("cant start a game with one player");
+	}
+	this->m_requestHandlerFactory->getRoomManager().getRoom(this->m_room->getData().id)->setIsActive(true);
+	RequestResult result;
+	Game* game = this->m_requestHandlerFactory->getGameManager().createGame(*this->m_room);
+	StartGameResponse startGameResponse;
+	startGameResponse.status = START_GAME_CODE;
+	result.buffer = JsonResponsePacketSerializer::serializeStartGameResponse(startGameResponse);
+	result.newHandler = this->m_requestHandlerFactory->createGameRequestHandler(this->m_user, game);
+	return result;
 }
-
+/*
+* function gets the state of the room
+* input: request - the request that is being handled
+* output: the response that is being sent to the client
+*/
 RequestResult RoomAdminRequestHandler::getRoomState(RequestInfo requestInfo)
 {
 	RequestResult result;

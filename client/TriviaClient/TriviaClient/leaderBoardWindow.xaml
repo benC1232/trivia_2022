@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TriviaClient"
+        ResizeMode="NoResize"
         mc:Ignorable="d"
         Title="leaderBoardWindow" Height="720" Width="1280">
     <Window.Background>
@@ -12,17 +13,17 @@
     <StackPanel>
         <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
         <Label Height="38"/>
-        <Label HorizontalContentAlignment="Center" Content="Leader Board" FontSize="80" FontFamily="{StaticResource AmaticSC}" VerticalContentAlignment="Center" Foreground="White" FontWeight="ExtraBold" Height="101" />
+            <Label HorizontalContentAlignment="Center" Content="👑 Leader Board 👑" FontSize="80" FontFamily="{StaticResource AmaticSC}" VerticalContentAlignment="Center" Foreground="White" FontWeight="ExtraBold" Height="101" />
         <TextBlock VerticalAlignment="Top" HorizontalAlignment="Center"  >
-            <Label x:Name="first" Content="1." FontSize="50" FontFamily="{StaticResource AmaticSC}" VerticalContentAlignment="Center" Foreground="White" FontWeight="ExtraBold" Height="90"/>
+            <Label x:Name="first" Content="1." FontSize="50" FontFamily="{StaticResource AmaticSC}" VerticalContentAlignment="Center" Foreground="Gold"  FontWeight="ExtraBold" Height="90"/>
             <LineBreak/>
-            <Label x:Name="second" Content="2." FontSize="50" FontFamily="{StaticResource AmaticSC}" VerticalContentAlignment="Center" Foreground="White" FontWeight="ExtraBold" Height="90"/>
+            <Label x:Name="second" Content="2." FontSize="50" FontFamily="{StaticResource AmaticSC}" VerticalContentAlignment="Center" Foreground="Silver" FontWeight="ExtraBold" Height="90"/>
             <LineBreak/>
-            <Label x:Name="third" Content="3." FontSize="50" FontFamily="{StaticResource AmaticSC}" VerticalContentAlignment="Center" Foreground="White" FontWeight="ExtraBold" Height="90"/>
+            <Label x:Name="third" Content="3." FontSize="50" FontFamily="{StaticResource AmaticSC}" VerticalContentAlignment="Center" Foreground="Chocolate"  FontWeight="ExtraBold" Height="90"/>
             <LineBreak/>
-            <Label x:Name="fourth" Content="4." FontSize="50" FontFamily="{StaticResource AmaticSC}" VerticalContentAlignment="Center" Foreground="White" FontWeight="ExtraBold" Height="90"/>
+            <Label x:Name="fourth" Content="4." FontSize="50" FontFamily="{StaticResource AmaticSC}" VerticalContentAlignment="Center" Foreground="LightBlue" FontWeight="ExtraBold" Height="90"/>
             <LineBreak/>
-            <Label x:Name="fifth" Content="5." FontSize="50" FontFamily="{StaticResource AmaticSC}" VerticalContentAlignment="Center" Foreground="White" FontWeight="ExtraBold" Height="103"/>
+            <Label x:Name="fifth" Content="5." FontSize="50" FontFamily="{StaticResource AmaticSC}" VerticalContentAlignment="Center" Foreground="LightBlue" FontWeight="ExtraBold" Height="103"/>
 
 
 

@@ -5,11 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TriviaClient"
         mc:Ignorable="d"
+        ResizeMode="NoResize"
         Title="Menu" Height="720" Width="1280">
     <Window.Background>
         <ImageBrush ImageSource="/Resources/bg.png" Stretch="Fill" />
     </Window.Background>
-    <StackPanel HorizontalAlignment="Center">
+    <StackPanel HorizontalAlignment="Center" Width="1213">
         <Label Height="50"/>
         <Label HorizontalContentAlignment="Center" Content="TRIVIA" FontSize="80" FontFamily="{StaticResource AmaticSC}" Foreground="White" FontWeight="ExtraBold" Height="103" />
         <Label Height="243"/>
@@ -48,7 +49,7 @@
                 </Button.Resources>
             </Button>
         </StackPanel>
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" >
             <Button  x:Name="QuitBtn" Click="QuitBtn_Click" Content="Quit" FontSize="40" FontFamily="{StaticResource AmaticSC}" Background="black" BorderBrush="white" Foreground="White" FontWeight="Bold" BorderThickness="6" Height="68"  Width="103">
                 <Button.Resources>
                     <Style TargetType="Border">
@@ -56,7 +57,14 @@
                     </Style>
                 </Button.Resources>
             </Button>
-            <Label Width="1152" Height="89" />
+            <Label Width="812" Height="89" />
+            <Button  x:Name="addQuestionBtn" Click="AddQuestionBtn_OnClick"  Content="Create a New Question" FontSize="40" FontFamily="{StaticResource AmaticSC}" Background="black" BorderBrush="white" Foreground="White" FontWeight="Bold" BorderThickness="6" Height="68"  Width="297">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="15" />
+                    </Style>
+                </Button.Resources>
+            </Button>
         </StackPanel>
     </StackPanel>
 </Window>
