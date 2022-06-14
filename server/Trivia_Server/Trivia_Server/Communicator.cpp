@@ -82,12 +82,13 @@ void Communicator::handleNewClient(SOCKET clientSocket)
 			throw std::exception("request handler is null!!!");
 			break;
 		}
+		//receiving message
 		recv(clientSocket, clientMessage, MESSAGE_SIZE, 0);
 		jsonSize = getJsonSize(clientMessage);
 		buffer = msgToBuffer(clientMessage, jsonSize + JSON_OFFSET);
-
+		//checking for empty message
 		try { request.id = static_cast<int>(buffer.at(0)); }
-		catch (std::exception &e)
+		catch (std::exception& e)
 		{
 			std::cout << e.what() << std::endl;
 			break;
@@ -112,6 +113,10 @@ void Communicator::handleNewClient(SOCKET clientSocket)
 			responseSize = result.buffer.size();
 			send(clientSocket, response, responseSize, 0);
 			delete response;
+		}
+		else
+		{
+			break;
 		}
 	}
 	this->m_clients.erase(clientSocket);

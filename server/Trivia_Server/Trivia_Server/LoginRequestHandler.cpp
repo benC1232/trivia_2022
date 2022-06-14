@@ -17,7 +17,11 @@ bool LoginRequestHandler::isRequestRelevant(RequestInfo request)
 {
 	return request.id == LOGIN_CODE || request.id == SIGN_IN_CODE;
 }
-
+/*
+* function handles the requests that this part of the state machine is responsible for
+* input: request - the request that is being handled
+* output: the response that is being sent to the client
+*/
 RequestResult LoginRequestHandler::handleRequest(RequestInfo request)
 {
 	RequestResult result;
@@ -50,7 +54,11 @@ RequestResult LoginRequestHandler::handleRequest(RequestInfo request)
 	}
 	return result;
 }
-
+/*
+* function handles the login request
+* input: requestInfo - the request info
+* output: the request result
+*/
 RequestResult LoginRequestHandler::login(RequestInfo requestInfo) const
 {
 	RequestResult result;
@@ -72,7 +80,11 @@ RequestResult LoginRequestHandler::login(RequestInfo requestInfo) const
 	}
 	return result;
 }
-
+/*
+* function handles the sign up request
+* input: requestInfo - the request info
+* output: the request result
+*/
 RequestResult LoginRequestHandler::signup(RequestInfo requestInfo)
 {
 	RequestResult result;

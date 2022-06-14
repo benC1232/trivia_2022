@@ -57,7 +57,11 @@ GetPlayersInRoomRequest JsonRequestPacketDeserializer::deserializeGetPlayersRequ
 	}
 	return parsedData;
 }
-
+/*
+function parses the json part of a packet and returns the content of the fields
+input: vector of unsigned chars (bytes) representing the json string
+output: the content of the fields in the json
+*/
 JoinRoomRequest JsonRequestPacketDeserializer::deserializeJoinRoomRequest(std::vector<unsigned char> buffer)
 {
 	std::string jsonString(buffer.begin() + JSON_OFFSET, buffer.end());
@@ -74,7 +78,11 @@ JoinRoomRequest JsonRequestPacketDeserializer::deserializeJoinRoomRequest(std::v
 	}
 	return parsedData;
 }
-
+/*
+function parses the json part of a packet and returns the content of the fields
+input: vector of unsigned chars (bytes) representing the json string
+output: the content of the fields in the json
+*/
 CreateRoomRequest JsonRequestPacketDeserializer::deserializeCreateRoomRequest(std::vector<unsigned char> buffer)
 {
 	std::string jsonString(buffer.begin() + JSON_OFFSET, buffer.end());
@@ -97,7 +105,11 @@ CreateRoomRequest JsonRequestPacketDeserializer::deserializeCreateRoomRequest(st
 	}
 	return parsedData;
 }
-
+/*
+function parses the json part of a packet and returns the content of the fields
+input: vector of unsigned chars (bytes) representing the json string
+output: the content of the fields in the json
+*/
 SubmitAnswerRequest JsonRequestPacketDeserializer::deserializeSubmitAnswerRequest(std::vector<unsigned char> buffer)
 {
 	std::string jsonString(buffer.begin() + JSON_OFFSET, buffer.end());
@@ -116,7 +128,11 @@ SubmitAnswerRequest JsonRequestPacketDeserializer::deserializeSubmitAnswerReques
 	}
 	return parsedData;
 }
-
+/*
+function parses the json part of a packet and returns the content of the fields
+input: vector of unsigned chars (bytes) representing the json string
+output: the content of the fields in the json
+*/
 AddQuestionRequest JsonRequestPacketDeserializer::deserializeAddQuestionRequest(std::vector<unsigned char> buffer)
 {
 	std::string jsonString(buffer.begin() + JSON_OFFSET, buffer.end());
