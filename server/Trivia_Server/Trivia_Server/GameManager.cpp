@@ -26,14 +26,16 @@ Game* GameManager::createGame(Room room)
 	auto players = std::map<LoggedUser, GameData>();
 	for (auto& user : room.getAllUsersVector())
 	{
-		GameData gd;
-		gd.currentQuestion = Question();
-		gd.correctAnswerCount = 0;
-		gd.wrongAnswerCount = 0;
+		GameData gd{
+			Question{},
+			0,
+			0,
+			0,
+		};
 		gd.averageAnswerTime = 0;
 		players.insert(std::map<LoggedUser, GameData>::value_type(user, gd));
 	}
-	auto g = new Game(this->m_database->getQuestions(room.getData().numOfQuestionsInGame), players);
+	Game* g = new Game(this->m_database->getQuestions(room.getData().numOfQuestionsInGame), players);
 	this->m_games.push_back(g);
 	return g;
 }
