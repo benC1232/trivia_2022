@@ -26,7 +26,7 @@ public:
 	RoomData getData();
 	std::vector<LoggedUser> getAllUsersVector();
 	void setIsActive(bool isActive);
+	std::vector<LoggedUser> m_users;
 private:
 	RoomData m_metadata;
-	std::vector<LoggedUser> m_users;
 };

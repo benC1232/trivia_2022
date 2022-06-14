@@ -23,17 +23,17 @@ GameManager::~GameManager()
  */
 Game* GameManager::createGame(Room room)
 {
-	auto players = new std::map<LoggedUser, GameData>();
-	for (auto user : room.getAllUsersVector())
+	auto players = std::map<LoggedUser, GameData>();
+	for (auto& user : room.getAllUsersVector())
 	{
 		GameData gd;
 		gd.currentQuestion = Question();
 		gd.correctAnswerCount = 0;
 		gd.wrongAnswerCount = 0;
 		gd.averageAnswerTime = 0;
-		players->insert(std::pair<LoggedUser, GameData>(user, gd));
+		players.insert(std::map<LoggedUser, GameData>::value_type(user, gd));
 	}
-	const auto g = new Game(this->m_database->getQuestions(room.getData().numOfQuestionsInGame), *players);
+	auto g = new Game(this->m_database->getQuestions(room.getData().numOfQuestionsInGame), players);
 	this->m_games.push_back(g);
 	return g;
 }
@@ -57,7 +57,7 @@ void GameManager::deleteGame(const Game* game)
  * input: user (LoggedUser)
  * output: game (Game*)
  */
-Game* GameManager::getGame(LoggedUser user) const
+Game* GameManager::getGame(LoggedUser user)
 {
 	for (const auto game : m_games)
 	{
