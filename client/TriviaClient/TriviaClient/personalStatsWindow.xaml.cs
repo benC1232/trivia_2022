@@ -44,7 +44,7 @@ namespace TriviaClient
                 string totalAnswers = parsedResponse[2].Split(':')[1];
                 this.NumOfAnswersLbl.Content = totalAnswers;
                 string gameNum = parsedResponse[3].Split(':')[1];
-                this.NumOfGamesLbl.Content = Int32.Parse(gameNum).ToString();
+                this.NumOfGamesLbl.Content = Int32.Parse(gameNum.Split('.')[0]).ToString();
             }
             if (response.Item1 == 3)
             {
