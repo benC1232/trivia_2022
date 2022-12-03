@@ -1,4 +1,4 @@
-# Trivia_Ori_Meiri_Ben_Carmon_2022
+# Trivia_2022
 
 Trivia project 
 
